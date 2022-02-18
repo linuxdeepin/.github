@@ -1,0 +1,10 @@
+name: Call jenkins-bridge
+on:
+  pull_request_target:
+    types: [opened, synchronize]
+
+jobs:
+  check_job:
+    uses: linuxdeepin/.github/.github/workflows/jenkins-bridge.yml@main
+    secrets:
+      BridgeToken: ${{ secrets.BridgeToken }}
