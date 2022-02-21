@@ -5,6 +5,8 @@ on:
 
 jobs:
   job:
+    # limit push on linuxdeepin/.github master branch
+    if: github.repository == 'linuxdeepin/.github' && github.ref == 'refs/heads/master'
     name: organization-manager
     runs-on: ubuntu-latest
     steps:
