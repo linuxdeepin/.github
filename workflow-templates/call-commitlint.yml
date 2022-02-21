@@ -1,0 +1,7 @@
+name: Call commitlint
+on:
+  pull_request_target:
+
+jobs:
+  check_job:
+    uses: linuxdeepin/.github/.github/workflows/commitlint.yml@main
