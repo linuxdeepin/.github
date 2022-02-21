@@ -12,7 +12,7 @@ jobs:
 
       - name: Download commitlint config teamplate
         run: |
-          wget https://raw.githubusercontent.com/linuxdeepin/.github/master/commitlint.config.js \
+          wget https://raw.githubusercontent.com/linuxdeepin/.github/master/commitlint/commitlint.config.js \
             -O ./commitlint.config.js
 
       - uses: wagoid/commitlint-github-action@v4
