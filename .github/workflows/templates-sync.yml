@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - ".github/workflows/templates-sync.yml"
-      - "repos/**"
-      - "workflow-templates/**"
+      - "repos/**.json"
+      - "workflow-templates/**.yml"
   workflow_dispatch:
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         uses: tj-actions/changed-files@v16
         with:
           separator: " "
-          files: repos/**
+          files: repos/**.json
       - name: Sync changed configs
         uses: linuxdeepin/action-sync@main
         if: steps.changed-configs.outputs.any_changed == 'true'
@@ -41,7 +41,7 @@ jobs:
         with:
           separator: " "
           files: |
-            workflow-templates/**
+            workflow-templates/**.yml
             .github/workflows/templates-sync.yml
       - name: Get all configs
         id: all-configs
