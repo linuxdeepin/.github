@@ -1,0 +1,17 @@
+name: organization-manager
+on:
+  push:
+    paths: ["organization.yaml", ".github/workflows/org-mgr.yml"]
+
+jobs:
+  job:
+    name: organization-manager
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: linuxdeepin/action-organization-manager@v0.0.3
+        with:
+          app_id: 174141
+          installation_id: 23463138
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          config_file: organization.yaml
