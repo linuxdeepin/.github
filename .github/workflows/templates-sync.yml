@@ -1,0 +1,61 @@
+name: Workflow templates sync
+on:
+  push:
+    paths:
+      - ".github/workflows/templates-sync.yml"
+      - "repos/**"
+      - "workflow-templates/**"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    # limit push on linuxdeepin/.github master branch
+    if: github.repository == 'linuxdeepin/.github' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # Incremental sync when config changed
+      - name: Get changed configs
+        id: changed-configs
+        uses: tj-actions/changed-files@v16
+        with:
+          separator: " "
+          files: repos/**
+      - name: Sync changed configs
+        uses: linuxdeepin/action-sync@main
+        if: steps.changed-configs.outputs.any_changed == 'true'
+        with:
+          app_id: 174141
+          installation_id: 23463138
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          files: "${{ steps.changed-configs.outputs.all_changed_files }}"
+          message: "chore: Sync by ${{ github.event.head_commit.url }}"
+
+      # Full sync when file changed or workflow_dispatch event
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v16
+        with:
+          separator: " "
+          files: |
+            workflow-templates/**
+            .github/workflows/templates-sync.yml
+      - name: Get all configs
+        id: all-configs
+        if: steps.changed-files.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          all_configs=`find repos -type f | xargs`
+          echo all configs $all_configs
+          echo "::set-output name=ALL_CONFIGS::$all_configs"
+      - name: Sync changed files
+        uses: linuxdeepin/action-sync@main
+        if: steps.changed-files.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
+        with:
+          app_id: 174141
+          installation_id: 23463138
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          files: "${{ steps.all-configs.outputs.ALL_CONFIGS }}"
+          message: "chore: Sync by ${{ github.event.head_commit.url }}"
