@@ -1,7 +1,7 @@
 name: organization-manager
 on:
   push:
-    paths: ["organization.yaml", ".github/workflows/org-mgr.yml"]
+    paths: ["organization.yaml", ".github/workflows/organization-manager.yml"]
 
 jobs:
   job:
