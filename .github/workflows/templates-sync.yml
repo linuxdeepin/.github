@@ -47,7 +47,7 @@ jobs:
         id: all-configs
         if: steps.changed-files.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
         run: |
-          all_configs=`find repos -type f | xargs`
+          all_configs=`find repos -type f | grep json`
           echo all configs $all_configs
           echo "::set-output name=ALL_CONFIGS::$all_configs"
       - name: Sync changed files
