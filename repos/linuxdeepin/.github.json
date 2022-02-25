@@ -1,0 +1,7 @@
+[
+  {
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/.github/.github/workflows/call-commitlint.yml",
+    "branches": ["master"]
+  }
+]
