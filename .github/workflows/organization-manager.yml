@@ -3,6 +3,10 @@ on:
   push:
     paths: ["organization.yaml", ".github/workflows/organization-manager.yml"]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   job:
     # limit push on linuxdeepin/.github master branch
