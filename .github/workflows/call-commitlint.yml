@@ -8,4 +8,4 @@ concurrency:
 
 jobs:
   check_job:
-    uses: peeweep/.github/.github/workflows/commitlint.yml@backport-call-commintlint
+    uses: linuxdeepin/.github/.github/workflows/commitlint.yml@master
