@@ -2,12 +2,19 @@ name: commitlint
 on:
   pull_request_target:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   commitlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Fetch code
+        uses: actions/checkout@v2
         with:
+          # ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.ref }}
           fetch-depth: 0
 
       - name: Download commitlint config teamplate
@@ -15,6 +22,7 @@ jobs:
           wget https://raw.githubusercontent.com/linuxdeepin/.github/master/commitlint/commitlint.config.js \
             -O ./commitlint.config.js
 
-      - uses: wagoid/commitlint-github-action@v4
+      - name: CommitLint
+        uses: wagoid/commitlint-github-action@v4
         with:
           configFile: "./commitlint.config.js"
