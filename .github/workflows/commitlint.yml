@@ -1,10 +1,6 @@
 name: commitlint
 on:
-  pull_request_target:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  workflow_call:
 
 jobs:
   commitlint:
