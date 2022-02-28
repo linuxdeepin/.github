@@ -1,12 +1,14 @@
 name: commitlint
 on:
-  workflow_call:
+  pull_request_target:
 
 jobs:
   commitlint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Download commitlint config teamplate
         run: |
