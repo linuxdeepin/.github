@@ -27,7 +27,8 @@ jobs:
         uses: tj-actions/changed-files@v16
         with:
           separator: " "
-          files: repos/**.json
+          files: |
+            repos/linuxdeepin/*.json
       - name: Sync changed configs
         uses: linuxdeepin/action-sync@main
         if: steps.changed-configs.outputs.any_changed == 'true'
@@ -45,7 +46,7 @@ jobs:
         with:
           separator: " "
           files: |
-            workflow-templates/**.yml
+            workflow-templates/*.yml
             .github/workflows/templates-sync.yml
       - name: Get all configs
         id: all-configs
