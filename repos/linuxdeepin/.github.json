@@ -3,5 +3,10 @@
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/.github/.github/workflows/call-commitlint.yml",
     "branches": ["master"]
+  },
+  {
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/.github/.github/workflows/backup-to-gitlab.yml",
+    "branches": ["master"]
   }
 ]
