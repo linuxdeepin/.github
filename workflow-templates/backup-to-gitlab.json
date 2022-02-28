@@ -1,0 +1,4 @@
+{
+  "name": "backup to gitlab",
+  "description": "Backup this repository to deepin internal gitlab service"
+}
