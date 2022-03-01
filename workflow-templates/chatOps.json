@@ -1,4 +1,4 @@
 {
   "name": "ChatOps workflow",
-  "description": "ChatOps workflow."
+  "description": "ChatOps workflow could review pr and merge."
 }
