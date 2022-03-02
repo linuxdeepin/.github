@@ -8,5 +8,10 @@
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/.github/.github/workflows/backup-to-gitlab.yml",
     "branches": ["master"]
+  },
+  {
+    "src": "workflow-templates/chatOps.yml",
+    "dest": "linuxdeepin/.github/.github/workflows/chatOps.yml",
+    "branches": ["master"]
   }
 ]
