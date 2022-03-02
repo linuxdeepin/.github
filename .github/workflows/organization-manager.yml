@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: linuxdeepin/action-organization-manager@v0.0.5
+      - uses: linuxdeepin/action-organization-manager@v0.0.6
         with:
           app_id: 174141
           installation_id: 23463138
