@@ -7,9 +7,9 @@ concurrency:
 
 jobs:
   backup-to-gitlab:
+    if: github.repository_owner == 'linuxdeepin'
     name: backup-to-gitlab
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'linuxdeepin'
     steps:
       - uses: actions/checkout@v2
         with:
