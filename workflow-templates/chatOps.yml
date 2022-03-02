@@ -54,7 +54,7 @@ jobs:
 
       - name: "approve"
         uses: actions/github-script@v5
-        if: contains(github.event.comment.body, '/+2') || contains(github.event.comment.body, '/approe')
+        if: contains(github.event.comment.body, '/+1') || contains(github.event.comment.body, '/approe')
         with:
           script: |
             if(context.payload.sender.id == context.payload.issue.user.id){
@@ -64,7 +64,7 @@ jobs:
                 repo: context.repo.repo,
                 body: 'Permission denied'
               })
-              // return
+              return
             }
             await github.rest.issues.addLabels({
               issue_number: context.issue.number,
@@ -87,7 +87,7 @@ jobs:
                 repo: context.repo.repo,
                 body: 'Permission denied'
               })
-              // return
+              return
             }
 
             const pull = await github.rest.pulls.get({
@@ -95,24 +95,24 @@ jobs:
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
             })
-            console.log(pull)
+
             if( pull.data.mergeable_state != "clean" ){
-                if(context.payload.sender.id != context.payload.issue.user.id){
+              if(context.payload.sender.id != context.payload.issue.user.id){
                   await github.rest.issues.createComment({
                     issue_number: context.issue.number,
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     body: pull.data.mergeable_state
                   })
-                return
-            }
+                  return
+              }
             }
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'merge'
+              body: 'merged'
             })
             await github.rest.pulls.merge({
               owner: context.repo.owner,
