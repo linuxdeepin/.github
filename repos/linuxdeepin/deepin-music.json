@@ -1,0 +1,18 @@
+[
+  {
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/deepin-music/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/deepin-music/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "src": "workflow-templates/chatOps.yml",
+    "dest": "linuxdeepin/deepin-music/.github/workflows/chatOps.yml"
+  },
+  {
+    "src": "workflow-templates/cppcheck.yml",
+    "dest": "linuxdeepin/deepin-music/.github/workflows/cppcheck.yml"
+  }
+]
