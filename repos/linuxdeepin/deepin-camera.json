@@ -14,5 +14,9 @@
   {
     "src": "workflow-templates/cppcheck.yml",
     "dest": "linuxdeepin/deepin-camera/.github/workflows/cppcheck.yml"
+  },
+  {
+    "src": "workflow-templates/call-jenkins-bridge.yml",
+    "dest": "linuxdeepin/deepin-camera/.github/workflows/call-jenkins-bridge.yml"
   }
 ]
