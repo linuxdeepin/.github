@@ -14,5 +14,9 @@
   {
     "src": "workflow-templates/cppcheck.yml",
     "dest": "linuxdeepin/deepin-music/.github/workflows/cppcheck.yml"
+  },
+  {
+    "src": "workflow-templates/call-jenkins-bridge.yml",
+    "dest": "linuxdeepin/deepin-music/.github/workflows/call-jenkins-bridge.yml"
   }
 ]
