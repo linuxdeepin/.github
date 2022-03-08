@@ -1,6 +1,7 @@
 organization: linuxdeepin
 settings:
-  - repositories: ["deepin-camera", "deepin-music", "deepin-manual"]
+  - repositories:
+      ["deepin-camera", "deepin-music", "deepin-manual", "deepin-gtk-theme"]
     features:
       issues:
         enable: false
