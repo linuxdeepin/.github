@@ -1,0 +1,22 @@
+[
+  {
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/deepin-gtk-theme/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/deepin-gtk-theme/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "src": "workflow-templates/chatOps.yml",
+    "dest": "linuxdeepin/deepin-gtk-theme/.github/workflows/chatOps.yml"
+  },
+  {
+    "src": "workflow-templates/cppcheck.yml",
+    "dest": "linuxdeepin/deepin-gtk-theme/.github/workflows/cppcheck.yml"
+  },
+  {
+    "src": "workflow-templates/call-jenkins-bridge.yml",
+    "dest": "linuxdeepin/deepin-gtk-theme/.github/workflows/call-jenkins-bridge.yml"
+  }
+]
