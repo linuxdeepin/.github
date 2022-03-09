@@ -1,12 +1,15 @@
 organization: linuxdeepin
 settings:
   - repositories:
-      ["deepin-camera", "deepin-music", "deepin-manual", "deepin-gtk-theme"]
+      - deepin-camera
+      - deepin-music
+      - deepin-manual
+      - deepin-gtk-theme
     features:
       issues:
-        enable: false
-      wiki:
         enable: true
+      allow_merge_commit:
+        enable: false
     branches:
       master:
         dismiss_stale_reviews: true
