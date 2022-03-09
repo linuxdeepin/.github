@@ -7,7 +7,7 @@ settings:
       - deepin-gtk-theme
     features:
       issues:
-        enable: true
+        enable: false
       allow_merge_commit:
         enable: false
     branches:
