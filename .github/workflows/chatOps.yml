@@ -1,6 +1,7 @@
 name: chatOps
 on:
-  workflow_call:
+  issue_comment:
+    types: [created]
 
 jobs:
   chatopt:
