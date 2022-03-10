@@ -11,7 +11,6 @@
   },
   {
     "delete": true,
-    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
     "src": "workflow-templates/chatOps.yml",
     "dest": "linuxdeepin/deepin-manual/.github/workflows/chatOps.yml"
   },
@@ -27,7 +26,6 @@
   },
   {
     "delete": true,
-    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
     "src": "workflow-templates/call-jenkins-bridge.yml",
     "dest": "linuxdeepin/deepin-manual/.github/workflows/call-jenkins-bridge.yml"
   },

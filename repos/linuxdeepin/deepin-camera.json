@@ -10,7 +10,6 @@
     "dest": "linuxdeepin/deepin-camera/.github/workflows/call-commitlint.yml"
   },
   {
-    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
     "delete": true,
     "src": "workflow-templates/chatOps.yml",
     "dest": "linuxdeepin/deepin-camera/.github/workflows/chatOps.yml"
@@ -26,7 +25,6 @@
     "dest": "linuxdeepin/deepin-camera/.github/workflows/cppcheck.yml"
   },
   {
-    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
     "delete": true,
     "src": "workflow-templates/call-jenkins-bridge.yml",
     "dest": "linuxdeepin/deepin-camera/.github/workflows/call-jenkins-bridge.yml"
