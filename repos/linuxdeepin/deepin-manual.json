@@ -21,7 +21,12 @@
     "dest": "linuxdeepin/deepin-manual/.github/workflows/cppcheck.yml"
   },
   {
+    "delete": true,
     "src": "workflow-templates/call-jenkins-bridge.yml",
     "dest": "linuxdeepin/deepin-manual/.github/workflows/call-jenkins-bridge.yml"
+  },
+  {
+    "src": "workflow-templates/call-build-deb.yml",
+    "dest": "linuxdeepin/deepin-manual/.github/workflows/call-build-deb.yml"
   }
 ]
