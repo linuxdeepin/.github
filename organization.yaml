@@ -6,6 +6,7 @@ settings:
       - deepin-manual
       - deepin-gtk-theme
       - qt5platform-plugins
+      - deepin-font-manager
     features:
       issues:
         enable: false
