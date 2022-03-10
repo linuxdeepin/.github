@@ -5,6 +5,7 @@ settings:
       - deepin-music
       - deepin-manual
       - deepin-gtk-theme
+      - qt5platform-plugins
     features:
       issues:
         enable: false
