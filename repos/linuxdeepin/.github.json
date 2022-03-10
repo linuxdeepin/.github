@@ -10,8 +10,14 @@
     "branches": ["master"]
   },
   {
+    "delete": true,
     "src": "workflow-templates/chatOps.yml",
     "dest": "linuxdeepin/.github/.github/workflows/chatOps.yml",
+    "branches": ["master"]
+  },
+  {
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/.github/.github/workflows/call-chatOps.yml",
     "branches": ["master"]
   }
 ]

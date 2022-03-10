@@ -8,8 +8,13 @@
     "dest": "linuxdeepin/deepin-camera/.github/workflows/call-commitlint.yml"
   },
   {
+    "delete": true,
     "src": "workflow-templates/chatOps.yml",
     "dest": "linuxdeepin/deepin-camera/.github/workflows/chatOps.yml"
+  },
+  {
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/deepin-camera/.github/workflows/call-chatOps.yml"
   },
   {
     "src": "workflow-templates/cppcheck.yml",
