@@ -1,4 +1,4 @@
 {
-  "name": "Call jenkins-bridge workflow",
+  "name": "Call build-deb workflow",
   "description": "Workflow for Jenkins tasks that trigger package build checks."
 }

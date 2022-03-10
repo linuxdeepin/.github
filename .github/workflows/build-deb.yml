@@ -1,4 +1,4 @@
-name: jenkins bridge
+name: build deb
 on:
   workflow_call:
     secrets:

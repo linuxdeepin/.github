@@ -16,9 +16,13 @@
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/deepin-gtk-theme/.github/workflows/call-chatOps.yml"
   },
-
   {
+    "delete": true,
     "src": "workflow-templates/call-jenkins-bridge.yml",
     "dest": "linuxdeepin/deepin-gtk-theme/.github/workflows/call-jenkins-bridge.yml"
+  },
+  {
+    "src": "workflow-templates/call-build-deb.yml",
+    "dest": "linuxdeepin/deepin-gtk-theme/.github/workflows/call-build-deb.yml"
   }
 ]
