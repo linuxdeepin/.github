@@ -7,15 +7,6 @@ jobs:
     if: contains(github.event.comment.html_url, '/pull/')
     runs-on: [ubuntu-latest]
     steps:
-      - run: export
-      - uses: actions/github-script@v5
-        with:
-          script: |
-            console.log(context)
-            console.log(context.payload.issue.user)
-            console.log(context.payload.issue.labels)
-            console.log(context.payload.issue.pull_request)
-
       - name: assign
         uses: actions/github-script@v5
         if: contains(github.event.comment.body, '/assign')
@@ -84,13 +75,20 @@ jobs:
         with:
           script: |
             if(context.payload.sender.id != context.payload.issue.user.id){
-              await github.rest.issues.createComment({
-                issue_number: context.issue.number,
+              const permission = await github.request(`GET /repos/${context.repo.owner}/${context.repo.repo}/collaborators/${context.payload.sender.id}/permission`, {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: 'Permission denied'
+                username: context.payload.sender.id,
               })
-              return
+              if(!["admin","maintain","write"].includes(permission.data.permission)){
+                await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: 'Permission denied'
+                })
+                return
+              }
             }
 
             const pull = await github.rest.pulls.get({
@@ -111,15 +109,15 @@ jobs:
               }
             }
 
-            await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'merged'
-            })
             await github.rest.pulls.merge({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
               merge_method: 'rebase'
             });
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'merged'
+            })
