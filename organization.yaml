@@ -8,6 +8,10 @@ settings:
       - qt5platform-plugins
       - deepin-font-manager
       - dtkcommon
+      - dtkcore
+      - dtkwidget
+      - dtkgui
+      - qt5integration
     features:
       issues:
         enable: false

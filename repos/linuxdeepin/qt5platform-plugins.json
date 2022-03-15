@@ -1,26 +1,26 @@
 [
   {
-    "branches": ["master", "dev/.+", "maintain/.+"],
+    "branches": ["master"],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/qt5platform-plugins/.github/workflows/backup-to-gitlab.yml"
   },
   {
-    "branches": ["master", "dev/.+", "maintain/.+"],
+    "branches": ["master"],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/qt5platform-plugins/.github/workflows/call-commitlint.yml"
   },
   {
-    "branches": ["master", "dev/.+", "maintain/.+"],
+    "branches": ["master"],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/qt5platform-plugins/.github/workflows/call-chatOps.yml"
   },
   {
-    "branches": ["master", "dev/.+", "maintain/.+"],
+    "branches": ["master"],
     "src": "workflow-templates/cppcheck.yml",
     "dest": "linuxdeepin/qt5platform-plugins/.github/workflows/cppcheck.yml"
   },
   {
-    "branches": ["master", "dev/.+", "maintain/.+"],
+    "branches": ["master"],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/qt5platform-plugins/.github/workflows/call-build-deb.yml"
   }
