@@ -1,4 +1,5 @@
 # .github
+
 The github tools
 
 ## 同步模板文件
@@ -8,3 +9,29 @@ The github tools
 ## 开关仓库功能
 
 开启或关闭仓库功能, 如 wiki/project/issue, 可以修改 organization.yaml, [文档](https://github.com/linuxdeepin/action-organization-manager)
+
+## 静态代码检查
+
+开启或关闭仓库功能, 如 wiki/project/issue, 可以修改 organization.yaml, [文档](https://github.com/linuxdeepin/action-cppcheck)
+
+## 工作流模板
+
+### backup-to-gitlab
+
+备份仓库到gitee和内网的gitlab
+
+### call-build-deb
+
+编译构建检查
+
+### call-chatOps
+
+合并机器人
+
+### call-commitlint
+
+commit信息检查
+
+### cppcheck
+
+cpp代码静态检查
