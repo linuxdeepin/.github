@@ -1,0 +1,11 @@
+name: Backup all repos to gitee on a schedule
+on:
+  schedule:
+    - cron: "0 21 * * *"
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: bash ".github/workflows/backup-all-repos-to-gitee.bash" linuxdeepin ${{ secrets.GITEE_SYNC_TOKEN }}
