@@ -2,6 +2,7 @@ name: Backup all repos to gitee on a schedule
 on:
   schedule:
     - cron: "0 21 * * *"
+  workflow_dispatch:
 
 jobs:
   backup:
