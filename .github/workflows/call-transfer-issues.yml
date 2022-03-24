@@ -1,0 +1,10 @@
+name: Transfer Issues
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  call:
+    uses: linuxdeepin/.github/.github/workflows/transfer-issues-func.yml@master
+    secrets:
+      APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
