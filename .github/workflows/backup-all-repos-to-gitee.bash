@@ -24,7 +24,7 @@ for repo in $(cat repos_*.json | jq '.[] | .name '| xargs -i echo {});do
 	# create repo
 	curl -X POST --header 'Content-Type: application/json;charset=UTF-8' "https://gitee.com/api/v5/enterprises/$owner/repos" -d '{"private": 1,"access_token":"'"$token"'","name":"'"$repo"'","description":"'"$description"'","homepage":"'"$homepage"'","has_issues":"false","has_wiki":"false","can_comment":"false"}' || true
 	# setting repo
-	curl -X PATCH --header 'Content-Type: application/json;charset=UTF-8' "https://gitee.com/api/v5/repos/$owner/$repo" -d '{"private": 1,"access_token":"'"$token"'","name":"'"$repo"'","description":"'"$description"'","homepage":"'"$homepage"'","has_issues":"false","has_wiki":"false","can_comment":"false","private":"true","pull_requests_enabled":"false"}'
+	curl -X PATCH --header 'Content-Type: application/json;charset=UTF-8' "https://gitee.com/api/v5/repos/$owner/$repo" -d '{"access_token":"'"$token"'","name":"'"$repo"'","description":"'"$description"'","homepage":"'"$homepage"'","has_issues":"false","has_wiki":"false","can_comment":"false","private":"false","pull_requests_enabled":"false"}'
 	# push repo
 	git remote set-url origin https://myml:$token@gitee.com/$owner/${repo}.git
 	git push -f --all --prune origin
