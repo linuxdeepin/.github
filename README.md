@@ -10,6 +10,10 @@ The github tools
 
 开启或关闭仓库功能, 如 wiki/project/issue, 可以修改 organization.yaml, [文档](https://github.com/linuxdeepin/action-organization-manager)
 
+## 团队
+
+添加成员, 添加关联的仓库、项目并修改权限,可以修改 teams.yaml, [文档](https://github.com/linuxdeepin/action-teams-manager)
+
 ## 静态代码检查
 
 开启或关闭仓库功能, 如 wiki/project/issue, 可以修改 organization.yaml, [文档](https://github.com/linuxdeepin/action-cppcheck)
