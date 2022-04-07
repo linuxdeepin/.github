@@ -1,0 +1,24 @@
+name: Teams Manager
+on:
+  push:
+    paths:
+      - ".github/workflows/teams-manager.yml"
+      - "teams.yaml"
+  workflow_dispatch:
+
+jobs:
+  update-teams:
+    if: github.ref_name == 'master' && github.repository == 'linuxdeepin/.github'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: update teams
+        uses: linuxdeepin/action-teams-manager@master
+        with:
+          app_id: 174141
+          installationId: 23463138
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          config_file: teams.yaml
+          generate_yaml: true
+          update_teams: false
