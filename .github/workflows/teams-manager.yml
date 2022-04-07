@@ -20,5 +20,13 @@ jobs:
           installationId: 23463138
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
           config_file: teams.yaml
+
+      - name: generate teams.yaml
+        uses: linuxdeepin/action-teams-manager@master
+        with:
+          app_id: 174141
+          installationId: 23463138
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          config_file: teams.yaml
           generate_yaml: true
           update_teams: false

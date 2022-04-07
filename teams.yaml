@@ -1,0 +1,130 @@
+teams:
+  - name: Admins
+    members:
+      - zccrs
+  - name: DDE-member
+    parent_team: Projects
+    members:
+      - justforlxz
+      - zccrs
+      - tsic404
+  - name: deepin
+    members:
+      - peeweep
+      - felixonmars
+      - BLumia
+      - justforlxz
+      - myml
+      - wineee
+      - babyfengfjx
+      - Zeno-sole
+      - ClayStan
+      - yxsos
+      - tsic404
+      - SuperEffie
+      - meiyixiang
+      - deepin-mq
+      - yx288
+      - vivianxf
+      - luodeepin
+      - janeaaaa
+    repositories_permissions:
+      maintain:
+        - open-source-students
+      push:
+        - developer-center
+      triage:
+        - action-teams-manager
+  - name: deepin-camera
+    parent_team: Maintainers
+    members:
+      - zccrs
+      - lzwind
+    repositories_permissions:
+      maintain:
+        - deepin-camera
+      triage:
+        - action-teams-manager
+  - name: deepin-font-manager
+    parent_team: Maintainers
+    members:
+      - zccrs
+      - LiuLibang
+    repositories_permissions:
+      maintain:
+        - deepin-font-manager
+      triage:
+        - action-teams-manager
+  - name: deepin-manual
+    parent_team: Maintainers
+    members:
+      - zccrs
+      - zhangkai749
+      - HuiHui97520
+    repositories_permissions:
+      maintain:
+        - deepin-manual
+      triage:
+        - action-teams-manager
+  - name: deepin-music
+    parent_team: Maintainers
+    members:
+      - zccrs
+      - lzwind
+    repositories_permissions:
+      maintain:
+        - deepin-music
+      triage:
+        - action-teams-manager
+  - name: Designer
+    members:
+      - shule1987
+    repositories_permissions:
+      pull:
+        - deepin-gtk-theme
+        - deepin-icon-theme
+  - name: DTK
+    parent_team: Maintainers
+    members:
+      - zccrs
+      - kegechen
+    repositories_permissions:
+      maintain:
+        - dtkcommon
+        - dtkcore
+        - dtkdeclarative
+        - dtkgui
+        - dtkwidget
+        - qt5integration
+        - qt5platform-plugins
+      triage:
+        - action-teams-manager
+  - name: DTK-member
+    parent_team: Projects
+    members:
+      - zccrs
+      - "18202781743"
+      - zzxyb
+      - cccccccb
+    repositories_permissions:
+      triage:
+        - dtkdeclarative
+  - name: Maintainers
+    members:
+      - zccrs
+      - kegechen
+      - zhangkai749
+      - HuiHui97520
+      - LiuLibang
+      - lzwind
+    repositories_permissions:
+      triage:
+        - action-teams-manager
+  - name: Projects
+    members:
+      - justforlxz
+      - zccrs
+      - "18202781743"
+      - tsic404
+      - zzxyb
+      - cccccccb
