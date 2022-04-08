@@ -2,6 +2,9 @@ teams:
   - name: Admins
     members:
       - zccrs
+    repositories_permissions:
+      maintain:
+        - "*"
   - name: DDE-member
     parent_team: Projects
     members:
