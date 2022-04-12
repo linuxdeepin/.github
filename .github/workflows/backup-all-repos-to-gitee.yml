@@ -6,6 +6,7 @@ on:
 
 jobs:
   backup:
+    if: github.repository_owner == 'linuxdeepin'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
