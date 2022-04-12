@@ -57,5 +57,5 @@ module.exports = {
     },
   ],
   helpUrl:
-    "\nCommit 信息规范: https://github.com/linuxdeepin/developer-center/wiki/Commit%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83\nCommit Information standard en: https://github.com/linuxdeepin/developer-center/wiki/Commit-Information-standard-en",
+    "\nCommit 信息规范: https://github.com/linuxdeepin/developer-center/wiki/Commit-%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E8%A7%84%E8%8C%83\nCommit Information standard en: https://github.com/linuxdeepin/developer-center/wiki/Commit-Information-standard-en",
 };
