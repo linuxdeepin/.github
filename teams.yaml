@@ -53,6 +53,7 @@ teams:
     members:
       - zccrs
       - LiuLibang
+      - HuiHui97520
     repositories_permissions:
       maintain:
         - deepin-font-manager
