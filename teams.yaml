@@ -182,5 +182,3 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-anything
-      triage:
-        - action-teams-manager
