@@ -174,3 +174,13 @@ teams:
       - alivezhy
       - ariZhou
       - peeweep
+  - name: deepin-anything
+    parent_team: Maintainers
+    members:
+      - re2zero
+      - wangrong1069
+    repositories_permissions:
+      maintain:
+        - deepin-anything
+      triage:
+        - action-teams-manager
