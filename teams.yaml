@@ -182,3 +182,24 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-anything
+  - name: dde-file-manager
+    parent_team: Maintainers
+    members:
+      - lvwujun
+    repositories_permissions:
+      maintain:
+        - dde-file-manager
+  - name: udisks2-qt5
+    parent_team: Maintainers
+    members:
+      - lvwujun
+    repositories_permissions:
+      maintain:
+        - udisks2-qt5
+  - name: gio-qt
+    parent_team: Maintainers
+    members:
+      - lvwujun
+    repositories_permissions:
+      maintain:
+        - gio-qt
