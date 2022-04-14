@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: BUG Report | 缺陷报告
+    url: https://github.com/linuxdeepin/developer-center/issues/new/choose
+    about: Please create bug reports to the issue board in our developer-center repo.
+  - name: Feature Request | 特性请求
+    url: https://github.com/linuxdeepin/developer-center/discussions
+    about: Please create feature requests to the discussion board in our developer-center repo.
+  - name: General Discussion & Questions | 常规讨论与问答
+    url: https://github.com/linuxdeepin/developer-center/discussions/categories/q-a-%E9%97%AE%E7%AD%94%E6%9D%BF%E5%9D%97
+    about: Please use the discussion board in our developer-center repo.
