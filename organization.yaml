@@ -12,6 +12,9 @@ settings:
       - dtkwidget
       - dtkgui
       - qt5integration
+      - deepin-anything
+      - gio-qt
+      - udisks2-qt5
     features:
       issues:
         enable: false
