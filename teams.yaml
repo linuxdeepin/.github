@@ -211,3 +211,24 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-system-monitor
+- name: deepin-face
+    parent_team: Maintainers
+    members:
+      - zccrs
+      - kegechen
+      - robertkill
+    repositories_permissions:
+      maintain:
+        - deepin-face
+        - seetaface-tracker
+        - seetaface-tennis
+        - seetaface-recognizer
+        - seetaface-quality-assessor
+        - seetaface-pose-estimation
+        - seetaface-open-role-zoo
+        - seetaface-models
+        - seetaface-landmarker
+        - seetaface-boxes
+        - seetaface-authorize
+        - seetaface-anti-spoofing-x
+        - seetaface-age-predictor
