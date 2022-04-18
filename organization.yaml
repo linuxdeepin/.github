@@ -13,6 +13,7 @@ settings:
       - dtkgui
       - qt5integration
       - deepin-anything
+      - deepin-system-monitor
       - gio-qt
       - udisks2-qt5
     features:
