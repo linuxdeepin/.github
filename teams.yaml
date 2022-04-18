@@ -204,3 +204,10 @@ teams:
     repositories_permissions:
       maintain:
         - gio-qt
+  - name: deepin-system-monitor
+    parent_team: Maintainers
+    members:
+      - RiskVirusPro
+    repositories_permissions:
+      maintain:
+        - deepin-system-monitor
