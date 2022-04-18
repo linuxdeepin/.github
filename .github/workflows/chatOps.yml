@@ -48,7 +48,7 @@ jobs:
 
       - name: "approve"
         uses: actions/github-script@v5
-        if: contains(github.event.comment.body, '/+1') || contains(github.event.comment.body, '/approe')
+        if: contains(github.event.comment.body, '/+1') || contains(github.event.comment.body, '/approve')
         with:
           script: |
             if(context.payload.sender.id == context.payload.issue.user.id){
@@ -75,10 +75,10 @@ jobs:
         with:
           script: |
             if(context.payload.sender.id != context.payload.issue.user.id){
-              const permission = await github.request(`GET /repos/${context.repo.owner}/${context.repo.repo}/collaborators/${context.payload.sender.id}/permission`, {
+              const permission = await github.request(`GET /repos/${context.repo.owner}/${context.repo.repo}/collaborators/${context.payload.sender.login}/permission`, {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                username: context.payload.sender.id,
+                username: context.payload.sender.login,
               })
               if(!["admin","maintain","write"].includes(permission.data.permission)){
                 await github.rest.issues.createComment({
@@ -98,15 +98,13 @@ jobs:
             })
 
             if( pull.data.mergeable_state != "clean" ){
-              if(context.payload.sender.id != context.payload.issue.user.id){
-                  await github.rest.issues.createComment({
-                    issue_number: context.issue.number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: pull.data.mergeable_state
-                  })
-                  return
-              }
+                await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: `This pr cannot be merged! (status: ${pull.data.mergeable_state})`
+                })
+                return
             }
 
             await github.rest.pulls.merge({
