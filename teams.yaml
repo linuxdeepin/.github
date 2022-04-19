@@ -232,3 +232,11 @@ teams:
         - seetaface-authorize
         - seetaface-anti-spoofing-x
         - seetaface-age-predictor
+  - name: deepin-terminal
+    parent_team: Maintainers
+    members:
+      - changzex
+      - HuiHui97520
+    repositories_permissions:
+      maintain:
+        - deepin-terminal
