@@ -240,3 +240,10 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-terminal
+  - name: deepin-calculator
+    parent_team: Maintainers
+    members:
+      - ut003506
+    repositories_permissions:
+      maintain:
+        - deepin-calculator
