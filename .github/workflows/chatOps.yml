@@ -43,7 +43,7 @@ jobs:
               return
             }
             const users = command[0].match(/\@\w+/g)
-            if( !user ){
+            if( !users ){
               return
             }
             await github.rest.pulls.requestReviewers({
