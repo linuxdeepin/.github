@@ -54,6 +54,7 @@ teams:
       - zccrs
       - LiuLibang
       - HuiHui97520
+      - lhxsm
     repositories_permissions:
       maintain:
         - deepin-font-manager
@@ -63,8 +64,8 @@ teams:
     parent_team: Maintainers
     members:
       - zccrs
-      - zhangkai749
       - HuiHui97520
+      - lhxsm
     repositories_permissions:
       maintain:
         - deepin-manual
@@ -117,7 +118,7 @@ teams:
     members:
       - zccrs
       - kegechen
-      - zhangkai749
+      - lhxsm
       - HuiHui97520
       - LiuLibang
       - lzwind
@@ -215,6 +216,7 @@ teams:
     parent_team: Maintainers
     members:
       - RiskVirusPro
+      - lhxsm
     repositories_permissions:
       maintain:
         - deepin-system-monitor
@@ -244,6 +246,7 @@ teams:
     members:
       - changzex
       - HuiHui97520
+      - lhxsm
     repositories_permissions:
       maintain:
         - deepin-terminal
@@ -251,6 +254,7 @@ teams:
     parent_team: Maintainers
     members:
       - ut003506
+      - lhxsm
     repositories_permissions:
       maintain:
         - deepin-calculator
