@@ -19,6 +19,8 @@ settings:
       - deepin-face
       - deepin-calculator
       - deepin-terminal
+      - dde-file-manager
+      - dde-control-center
     features:
       issues:
         enable: false
