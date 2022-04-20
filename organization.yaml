@@ -16,6 +16,8 @@ settings:
       - deepin-system-monitor
       - gio-qt
       - udisks2-qt5
+      - deepin-face
+      - deepin-calculator
     features:
       issues:
         enable: false
