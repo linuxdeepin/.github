@@ -204,6 +204,13 @@ teams:
     repositories_permissions:
       maintain:
         - gio-qt
+  - name: dde-grand-search
+    parent_team: Maintainers
+    members:
+      - Clauszy
+    repositories_permissions:
+      maintain:
+        - dde-grand-search        
   - name: deepin-system-monitor
     parent_team: Maintainers
     members:
