@@ -254,3 +254,10 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-calculator
+  - name: dde-control-center
+    parent_team: Maintainers
+    members:
+      - shenwenqi3441
+    repositories_permissions:
+      maintain:
+        - dde-control-center
