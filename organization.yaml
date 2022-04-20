@@ -18,6 +18,7 @@ settings:
       - udisks2-qt5
       - deepin-face
       - deepin-calculator
+      - deepin-terminal
     features:
       issues:
         enable: false
