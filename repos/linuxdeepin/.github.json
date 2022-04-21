@@ -10,11 +10,6 @@
     "branches": ["master"]
   },
   {
-    "src": "workflow-templates/call-chatOps.yml",
-    "dest": "linuxdeepin/.github/.github/workflows/call-chatOps.yml",
-    "branches": ["master"]
-  },
-  {
     "src": "workflow-templates/call-transfer-issues.yml",
     "dest": "linuxdeepin/.github/.github/workflows/call-transfer-issues.yml",
     "branches": ["master"]
