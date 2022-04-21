@@ -14,6 +14,7 @@ jobs:
     if: contains(github.event.comment.html_url, '/pull/')
     runs-on: [ubuntu-latest]
     steps:
+      # assign to someone
       - name: assign
         uses: actions/github-script@v5
         if: contains(github.event.comment.body, '/assign')
@@ -29,7 +30,7 @@ jobs:
               repo: context.repo.repo,
               assignees: groups[1]
             })
-
+      # request someone to review
       - name: review
         uses: actions/github-script@v5
         if: contains(github.event.comment.body, '/review')
@@ -52,7 +53,7 @@ jobs:
               repo: context.repo.repo,
               reviewers: users.map(a=>a.slice(1))
             });
-
+      # !deprecated add approve label
       - name: "approve"
         uses: actions/github-script@v5
         if: contains(github.event.comment.body, '/+1') || contains(github.event.comment.body, '/approve')
@@ -74,6 +75,31 @@ jobs:
               labels: ['approve']
             })
 
+      # retrigger checks
+      - name: check
+        uses: actions/github-script@v5
+        if: contains(github.event.comment.body, '/check')
+        with:
+          script: |
+            const pull = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+            })
+            const resp = await github.rest.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: pull.data.head.sha,
+            });
+            for(const run of resp.data.check_runs){
+              await github.rest.checks.rerequestSuite({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                check_suite_id: run.check_suite.id,
+              });
+            }
+
+      # auto merge pull request
       - name: install depends for load scripts
         if: contains(github.event.comment.body, '/merge')
         run: |
@@ -103,12 +129,9 @@ jobs:
               installationId: app_installation.data.id
             });
             core.setOutput('app_token', token)
-
       - name: merge
         uses: actions/github-script@v5
         if: contains(github.event.comment.body, '/merge')
-        env:
-          REF: ${{ github.event.pull_request.head.ref }}
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
           script: |
