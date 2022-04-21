@@ -13,7 +13,6 @@ teams:
       - tsic404
   - name: deepin
     members:
-      - peeweep
       - felixonmars
       - BLumia
       - justforlxz
@@ -117,11 +116,6 @@ teams:
   - name: Maintainers
     members:
       - zccrs
-      - kegechen
-      - lhxsm
-      - HuiHui97520
-      - LiuLibang
-      - lzwind
     repositories_permissions:
       triage:
         - action-teams-manager
@@ -174,7 +168,6 @@ teams:
       - lxl690
       - alivezhy
       - ariZhou
-      - peeweep
       - zimo-liu
   - name: deepin-anything
     parent_team: Maintainers
