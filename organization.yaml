@@ -21,6 +21,7 @@ settings:
       - deepin-terminal
       - dde-file-manager
       - dde-control-center
+      - dde-grand-search
     features:
       issues:
         enable: false
