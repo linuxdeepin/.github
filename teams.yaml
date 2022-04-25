@@ -80,6 +80,16 @@ teams:
         - deepin-music
       triage:
         - action-teams-manager
+  - name: deepin-screen-recorder
+    parent_team: Maintainers
+    members:
+      - zccrs
+      - lzwind
+    repositories_permissions:
+      maintain:
+        - deepin-screen-recorder
+      triage:
+        - action-teams-manager
   - name: Designer
     members:
       - shule1987
