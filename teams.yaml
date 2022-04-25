@@ -37,16 +37,14 @@ teams:
         - developer-center
       triage:
         - action-teams-manager
-  - name: deepin-camera
-    parent_team: Maintainers
+  - name: deepin-camera-member
+    parent_team: Projects
     members:
-      - zccrs
+      - pengfeixx
       - lzwind
     repositories_permissions:
       maintain:
         - deepin-camera
-      triage:
-        - action-teams-manager
   - name: deepin-font-manager
     parent_team: Maintainers
     members:
@@ -70,16 +68,22 @@ teams:
         - deepin-manual
       triage:
         - action-teams-manager
-  - name: deepin-music
-    parent_team: Maintainers
+  - name: deepin-music-member
+    parent_team: Projects
     members:
-      - zccrs
+      - wangyu0701
       - lzwind
     repositories_permissions:
       maintain:
         - deepin-music
-      triage:
-        - action-teams-manager
+  - name: deepin-screen-recorder-member
+    parent_team: Projects
+    members:
+      - lzwind
+      - HeeMingYang
+    repositories_permissions:
+      maintain:
+        - deepin-screen-recorder
   - name: Designer
     members:
       - shule1987
