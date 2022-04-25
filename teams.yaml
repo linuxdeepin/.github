@@ -40,13 +40,20 @@ teams:
   - name: deepin-camera
     parent_team: Maintainers
     members:
-      - zccrs
+      - pengfeixx
       - lzwind
     repositories_permissions:
       maintain:
         - deepin-camera
+  - name: deepin-camera-member
+    parent_team: Projects
+    members:
+      - pengfeixx
+      - lzwind
+      - feeengli
+    repositories_permissions:
       triage:
-        - action-teams-manager
+        - deepin-camera
   - name: deepin-font-manager
     parent_team: Maintainers
     members:
@@ -73,13 +80,37 @@ teams:
   - name: deepin-music
     parent_team: Maintainers
     members:
-      - zccrs
+      - wangyu0701
       - lzwind
     repositories_permissions:
       maintain:
         - deepin-music
+  - name: deepin-music-member
+    parent_team: Projects
+    members:
+      - wangyu0701
+      - lzwind
+      - zhangwenchaoworking  
+    repositories_permissions:
       triage:
-        - action-teams-manager
+        - deepin-music
+  - name: deepin-screen-recorder
+    parent_team: Maintainers
+    members:
+      - lzwind
+      - HeeMingYang
+    repositories_permissions:
+      maintain:
+        - deepin-screen-recorder
+  - name: deepin-screen-recorder-member
+    parent_team: Projects
+    members:
+      - lzwind
+      - HeeMingYang
+      - hundundadi
+    repositories_permissions:
+      triage:
+        - deepin-screen-recorder
   - name: Designer
     members:
       - shule1987
