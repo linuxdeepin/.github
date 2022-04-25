@@ -88,8 +88,6 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-screen-recorder
-      triage:
-        - action-teams-manager
   - name: Designer
     members:
       - shule1987
