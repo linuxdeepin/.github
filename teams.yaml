@@ -5,12 +5,146 @@ teams:
     repositories_permissions:
       maintain:
         - "*"
-  - name: DDE-member
-    parent_team: Projects
+  - name: DDE
+    parent_team: Maintainers
     members:
-      - justforlxz
       - zccrs
-      - tsic404
+      - wubw1992
+      - zsien
+      - KT-lcz
+      - ssk-wh
+      - robertkill
+      - groveer
+      - shaojun
+    repositories_permissions:
+      maintain:
+        - go-gir-generator
+        - golang-dbus
+        - go-lib
+        - go-dbus-factory
+        - go-x11-client
+        - dde-api
+        - dde-qt-dbus-factory
+        - startdde
+        - dde-daemon
+        - deepin-desktop-schemas
+        - deepin-authentication
+        - deepin-ab-recovery
+        - lastore-daemon
+        - deepin-user-experience-daemon
+        - dpa-ext-gnomekeyring
+        - deepin-network-proxy
+        - deepin-sound-theme
+        - golang-github-lofanmi-pinyin
+        - dareader
+        - dde-wldpms
+        - dde-wloutput-daemon
+        - dde-wayland-config
+        - lightdm
+        - hw-cloud-config
+        - golang-1.15
+        - golang-defaults
+        - dh-golang
+        - default-settings
+        - dde-control-center
+        - dde-session-shell
+        - dde-dock
+        - dde-clipboard
+        - dde-session-ui
+        - dde-network-core
+        - dde-launcher
+        - dde-manual-content
+        - deepin-wallpapers
+        - dde-polkit-agent
+        - uos-license-content
+        - policykit-1
+        - polkit-qt5-1
+        - ipwatchd
+        - papirus-icon-theme
+        - uos-release-note
+        - dde-account-faces
+        - deepin-gettext-tools
+        - deepin-gtk-theme
+        - network-manager
+        - networkmanager-qt
+        - deepin-pw-check
+      triage:
+        - action-teams-manager
+    - name: DDE-member
+      parent_team: Projects
+      members:
+        - justforlxz
+        - zccrs
+        - tsic404
+        - wubw1992
+        - zsien
+        - KT-lcz
+        - ssk-wh
+        - robertkill
+        - groveer
+        - shaojun
+        - ut000966
+        - waterlovemelon
+        - dengbo11
+        - donghualin
+        - FeiW-UT003691
+        - ut003722
+        - hubenchang0515
+        - shenwenqi3441
+      repositories_permissions:
+        maintain:
+          - go-gir-generator
+          - golang-dbus
+          - go-lib
+          - go-dbus-factory
+          - go-x11-client
+          - dde-api
+          - dde-qt-dbus-factory
+          - startdde
+          - dde-daemon
+          - deepin-desktop-schemas
+          - deepin-authentication
+          - deepin-ab-recovery
+          - lastore-daemon
+          - deepin-user-experience-daemon
+          - dpa-ext-gnomekeyring
+          - deepin-network-proxy
+          - deepin-sound-theme
+          - golang-github-lofanmi-pinyin
+          - dareader
+          - dde-wldpms
+          - dde-wloutput-daemon
+          - dde-wayland-config
+          - lightdm
+          - hw-cloud-config
+          - golang-1.15
+          - golang-defaults
+          - dh-golang
+          - default-settings
+          - dde-control-center
+          - dde-session-shell
+          - dde-dock
+          - dde-clipboard
+          - dde-session-ui
+          - dde-network-core
+          - dde-launcher
+          - dde-manual-content
+          - deepin-wallpapers
+          - dde-polkit-agent
+          - uos-license-content
+          - policykit-1
+          - polkit-qt5-1
+          - ipwatchd
+          - papirus-icon-theme
+          - uos-release-note
+          - dde-account-faces
+          - deepin-gettext-tools
+          - deepin-gtk-theme
+          - network-manager
+          - networkmanager-qt
+          - deepin-pw-check
+        triage:
+        - action-teams-manager
   - name: deepin
     members:
       - felixonmars
