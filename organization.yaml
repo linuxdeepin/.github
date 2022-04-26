@@ -22,6 +22,7 @@ settings:
       - dde-file-manager
       - dde-control-center
       - dde-grand-search
+      - deepin-screen-recorder
     features:
       issues:
         enable: false
