@@ -19,7 +19,6 @@ teams:
     repositories_permissions:
       maintain:
         - go-gir-generator
-        - golang-dbus
         - go-lib
         - go-dbus-factory
         - go-x11-client
@@ -31,20 +30,13 @@ teams:
         - deepin-authentication
         - deepin-ab-recovery
         - lastore-daemon
-        - deepin-user-experience-daemon
         - dpa-ext-gnomekeyring
         - deepin-network-proxy
         - deepin-sound-theme
-        - golang-github-lofanmi-pinyin
         - dareader
         - dde-wldpms
         - dde-wloutput-daemon
         - dde-wayland-config
-        - lightdm
-        - hw-cloud-config
-        - golang-1.15
-        - golang-defaults
-        - dh-golang
         - default-settings
         - dde-control-center
         - dde-session-shell
@@ -56,20 +48,10 @@ teams:
         - dde-manual-content
         - deepin-wallpapers
         - dde-polkit-agent
-        - uos-license-content
-        - policykit-1
-        - polkit-qt5-1
-        - ipwatchd
-        - papirus-icon-theme
-        - uos-release-note
         - dde-account-faces
         - deepin-gettext-tools
         - deepin-gtk-theme
-        - network-manager
-        - networkmanager-qt
         - deepin-pw-check
-      triage:
-        - action-teams-manager
     - name: DDE-member
       parent_team: Projects
       members:
@@ -91,10 +73,10 @@ teams:
         - ut003722
         - hubenchang0515
         - shenwenqi3441
+        - liaohanqin
       repositories_permissions:
-        maintain:
+        triage:
           - go-gir-generator
-          - golang-dbus
           - go-lib
           - go-dbus-factory
           - go-x11-client
@@ -106,20 +88,13 @@ teams:
           - deepin-authentication
           - deepin-ab-recovery
           - lastore-daemon
-          - deepin-user-experience-daemon
           - dpa-ext-gnomekeyring
           - deepin-network-proxy
           - deepin-sound-theme
-          - golang-github-lofanmi-pinyin
           - dareader
           - dde-wldpms
           - dde-wloutput-daemon
           - dde-wayland-config
-          - lightdm
-          - hw-cloud-config
-          - golang-1.15
-          - golang-defaults
-          - dh-golang
           - default-settings
           - dde-control-center
           - dde-session-shell
@@ -131,20 +106,10 @@ teams:
           - dde-manual-content
           - deepin-wallpapers
           - dde-polkit-agent
-          - uos-license-content
-          - policykit-1
-          - polkit-qt5-1
-          - ipwatchd
-          - papirus-icon-theme
-          - uos-release-note
           - dde-account-faces
           - deepin-gettext-tools
           - deepin-gtk-theme
-          - network-manager
-          - networkmanager-qt
           - deepin-pw-check
-        triage:
-        - action-teams-manager
   - name: deepin
     members:
       - felixonmars
