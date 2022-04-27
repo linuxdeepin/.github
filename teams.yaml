@@ -129,6 +129,7 @@ teams:
       - vivianxf
       - luodeepin
       - janeaaaa
+      - zimo-liu
     repositories_permissions:
       maintain:
         - open-source-students
@@ -261,11 +262,7 @@ teams:
     members:
       - avltreeql
       - baozidai
-      - BLumia
-      - justforlxz
       - SamLukeYes
-      - myml
-      - zccrs
       - F915
       - msojocs
       - Re-s
@@ -274,10 +271,7 @@ teams:
       - RitchieGao
       - FLanWu
       - Echlorine
-      - Zeno-sole
-      - ClayStan
       - QIUZHILEI
-      - tsic404
       - cmdmspaint
       - wc58
       - xiaojiaenen
@@ -293,12 +287,10 @@ teams:
       - rolfma
       - PDPENG
       - lizi-garden
-      - janeaaaa
       - SakuraTemps
       - lxl690
       - alivezhy
       - ariZhou
-      - zimo-liu
   - name: deepin-anything
     parent_team: Maintainers
     members:
