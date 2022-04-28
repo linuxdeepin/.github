@@ -23,6 +23,22 @@ settings:
       - dde-control-center
       - dde-grand-search
       - deepin-screen-recorder
+      - dareader
+      - dde-daemon
+      - dde-session-shell
+      - dde-session-ui
+      - dde-wldpms
+      - dde-wloutput-daemon
+      - deepin-desktop-schemas
+      - deepin-network-proxy
+      - deepin-sound-theme
+      - default-settings
+      - dpa-ext-gnomekeyring
+      - go-dbus-factory
+      - go-gir-generator
+      - go-lib
+      - go-x11-client
+      - startdde
     features:
       issues:
         enable: false
