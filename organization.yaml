@@ -39,6 +39,15 @@ settings:
       - go-lib
       - go-x11-client
       - startdde
+      - dde-account-faces
+      - dde-clipboard
+      - dde-dock
+      - dde-manual-content
+      - dde-network-core
+      - dde-polkit-agent
+      - dde-wallpapers
+      - deepin-gettext-tools
+      - deepin-pw-check
     features:
       issues:
         enable: false
