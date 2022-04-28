@@ -1,0 +1,27 @@
+[
+  {
+    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/dpa-ext-gnomekeyring/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/dpa-ext-gnomekeyring/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/dpa-ext-gnomekeyring/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
+    "src": "workflow-templates/cppcheck.yml",
+    "dest": "linuxdeepin/dpa-ext-gnomekeyring/.github/workflows/cppcheck.yml"
+  },
+  {
+    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
+    "src": "workflow-templates/call-build-deb.yml",
+    "dest": "linuxdeepin/dpa-ext-gnomekeyring/.github/workflows/call-build-deb.yml"
+  }
+]
