@@ -380,3 +380,26 @@ teams:
     repositories_permissions:
       maintain:
         - dde-control-center
+  - name: deepin-kwin
+    parent_team: Maintainers
+    members:
+      - axylp
+      - hitong602
+      - ChaojiangLuo
+    repositories_permissions:
+      maintain:
+        - deepin-kwin
+        - dde-kwin
+  - name: deepin-kwin-member
+    parent_team: Projects
+    members:
+      - axylp
+      - hitong602
+      - ChaojiangLuo
+      - diguoliang
+      - thinkingning
+      - wangxinbo-git
+    repositories_permissions:
+      triage:
+        - deepin-kwin
+        - dde-kwin
