@@ -48,6 +48,8 @@ settings:
       - dde-wallpapers
       - deepin-gettext-tools
       - deepin-pw-check
+      - dde-kwin
+      - deepin-kwin
     features:
       issues:
         enable: false
