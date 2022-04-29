@@ -54,6 +54,7 @@ settings:
       - dde-launcher
       - dde-qt-dbus-factory
       - lastore-daemon
+      - deepin-ab-recovery
     features:
       issues:
         enable: false
