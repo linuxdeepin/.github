@@ -16,6 +16,7 @@ teams:
       - robertkill
       - groveer
       - shaojun
+      - kegechen
     repositories_permissions:
       maintain:
         - go-gir-generator
@@ -74,6 +75,14 @@ teams:
       - hubenchang0515
       - shenwenqi3441
       - liaohanqin
+      - Mars-cb
+      - laplac2
+      - ECQZXC
+      - caixr23
+      - shaotianlu1995
+      - rocet92
+      - weizhixiang1993
+      - 2722195064
     repositories_permissions:
       triage:
         - go-gir-generator
