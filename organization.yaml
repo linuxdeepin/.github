@@ -55,6 +55,7 @@ settings:
       - dde-qt-dbus-factory
       - lastore-daemon
       - deepin-ab-recovery
+      - dde-wayland-config
     features:
       issues:
         enable: false
