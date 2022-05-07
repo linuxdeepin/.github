@@ -1,0 +1,22 @@
+name: Validate-YAML
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    types: [ opened, synchronize ] 
+
+jobs:
+  validate-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate YAML file
+        run: 'yamllint -d "{
+          extends: relaxed, rules: {
+            new-lines: disable,
+            line-length: {max: 120},
+            trailing-spaces: {level: warning},
+            new-line-at-end-of-file: {level: warning}
+          }
+        }" .'
