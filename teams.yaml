@@ -200,7 +200,7 @@ teams:
     members:
       - wyu71
       - lzwind
-      - zhangwenchaoworking  
+      - zhangwenchaoworking
     repositories_permissions:
       triage:
         - deepin-music
@@ -336,7 +336,7 @@ teams:
       - Clauszy
     repositories_permissions:
       maintain:
-        - dde-grand-search        
+        - dde-grand-search
   - name: deepin-system-monitor
     parent_team: Maintainers
     members:
