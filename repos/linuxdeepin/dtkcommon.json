@@ -16,11 +16,6 @@
   },
   {
     "branches": ["master"],
-    "src": "workflow-templates/cppcheck.yml",
-    "dest": "linuxdeepin/dtkcommon/.github/workflows/cppcheck.yml"
-  },
-  {
-    "branches": ["master"],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/dtkcommon/.github/workflows/call-build-deb.yml"
   }
