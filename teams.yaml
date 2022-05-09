@@ -147,23 +147,68 @@ teams:
         - developer-center
       triage:
         - action-teams-manager
-  - name: deepin-camera
+  - name: Multimedia-audio-video
     parent_team: Maintainers
     members:
-      - pengfeixx
       - lzwind
+      - pengfeixx
+      - wyu71
+      - HeeMingYang
     repositories_permissions:
       maintain:
         - deepin-camera
-  - name: deepin-camera-member
+        - deepin-music
+        - deepin-screen-recorder
+        - deepin-movie-reborn
+  - name: Multimedia-audio-video-member
     parent_team: Projects
     members:
-      - pengfeixx
       - lzwind
+      - pengfeixx
+      - wyu71
+      - HeeMingYang
       - feeengli
+      - zhangwenchaoworking
+      - shuaijie
+      - hundundadi
+      - myk1343
     repositories_permissions:
       triage:
         - deepin-camera
+        - deepin-music
+        - deepin-screen-recorder
+        - deepin-movie-reborn
+  - name: Multimedia-graphics
+    parent_team: Maintainers
+    members:
+      - lzwind
+      - deepin-CD
+      - starhcq
+    repositories_permissions:
+      maintain:
+        - deepin-draw
+        - deepin-image-viewer
+        - deepin-album
+        - deepin-ocr
+        - image-editor
+  - name: Multimedia-graphics-member
+    parent_team: Projects
+    members:
+      - lzwind
+      - deepin-CD
+      - starhcq
+      - tanl123
+      - dependon
+      - wzyforgit
+      - rb-union
+      - helloseekll
+    repositories_permissions:
+      triage:
+        - deepin-draw
+        - deepin-image-viewer
+        - deepin-album
+        - deepin-ocr
+        - image-editor
   - name: deepin-font-manager
     parent_team: Maintainers
     members:
@@ -187,40 +232,6 @@ teams:
         - deepin-manual
       triage:
         - action-teams-manager
-  - name: deepin-music
-    parent_team: Maintainers
-    members:
-      - wyu71
-      - lzwind
-    repositories_permissions:
-      maintain:
-        - deepin-music
-  - name: deepin-music-member
-    parent_team: Projects
-    members:
-      - wyu71
-      - lzwind
-      - zhangwenchaoworking
-    repositories_permissions:
-      triage:
-        - deepin-music
-  - name: deepin-screen-recorder
-    parent_team: Maintainers
-    members:
-      - lzwind
-      - HeeMingYang
-    repositories_permissions:
-      maintain:
-        - deepin-screen-recorder
-  - name: deepin-screen-recorder-member
-    parent_team: Projects
-    members:
-      - lzwind
-      - HeeMingYang
-      - hundundadi
-    repositories_permissions:
-      triage:
-        - deepin-screen-recorder
   - name: Designer
     members:
       - shule1987
