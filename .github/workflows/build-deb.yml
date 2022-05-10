@@ -7,6 +7,7 @@ on:
 
 env:
   BRIDGE_TOKEN: ${{ secrets.BridgeToken }}
+  SERVER: https://jenkins-bridge-deepin-pre.uniontech.com
 
 jobs:
   build:
@@ -36,6 +37,15 @@ jobs:
       - name: Print log
         run: |
           jenkins-bridge-client -token "$BRIDGE_TOKEN" -runid "${{ steps.generate-runid.outputs.RUN_ID }}" -printlog
+
+      - name: Print warning
+        run: |
+          echo warning on aarch64
+          jenkins-bridge-client cat -server $SERVER -token "$BRIDGE_TOKEN" -file warning_aarch64.txt -runid "${{ steps.generate-runid.outputs.RUN_ID }}"
+          echo warning on mips64
+          jenkins-bridge-client cat -server $SERVER -token "$BRIDGE_TOKEN" -file warning_mips64.txt -runid "${{ steps.generate-runid.outputs.RUN_ID }}"
+          echo warning on x86_64
+          jenkins-bridge-client cat -server $SERVER -token "$BRIDGE_TOKEN" -file warning_x86_64.txt -runid "${{ steps.generate-runid.outputs.RUN_ID }}"
 
       - name: Download Artifacts
         run: |
