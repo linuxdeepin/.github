@@ -424,4 +424,11 @@ teams:
       triage:
         - deepin-kwin
         - dde-kwin
+  - name: dde-introduction
+    parent_team: Maintainers
+    members:
+      - allen5864
+    repositories_permissions:
+      maintain:
+        - dde-introduction
 
