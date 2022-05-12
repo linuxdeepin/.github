@@ -56,6 +56,7 @@ settings:
       - lastore-daemon
       - deepin-ab-recovery
       - dde-wayland-config
+      - dde-introduction
     features:
       issues:
         enable: false
