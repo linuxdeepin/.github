@@ -57,6 +57,8 @@ settings:
       - deepin-ab-recovery
       - dde-wayland-config
       - dde-introduction
+      - deepin-deb-installer
+      - deepin-compressor
     features:
       issues:
         enable: false
