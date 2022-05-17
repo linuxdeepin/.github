@@ -431,3 +431,20 @@ teams:
     repositories_permissions:
       maintain:
         - dde-introduction
+  - name: deepin-deb-installer
+    parent_team: Maintainers
+    members:
+      - jxm96
+      - LiuLibang
+      - HuiHui97520
+    repositories_permissions:
+      maintain:
+        - deepin-deb-installer
+  - name: deepin-compressor
+    parent_team: Maintainers
+    members:
+      - jxm96
+      - HuiHui97520
+    repositories_permissions:
+      maintain:
+        - deepin-compressor
