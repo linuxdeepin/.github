@@ -1,32 +1,32 @@
 [
   {
-    "branches": ["master"],
+    "branches": ["apricot"],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/backup-to-gitlab.yml"
   },
   {
-    "branches": ["master"],
+    "branches": ["apricot"],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-commitlint.yml"
   },
   {
-    "branches": ["master"],
+    "branches": ["apricot"],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-chatOps.yml"
   },
   {
-    "branches": ["master"],
+    "branches": ["apricot"],
     "src": "workflow-templates/cppcheck.yml",
     "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/cppcheck.yml"
   },
   {
-    "branches": ["master"],
+    "branches": ["apricot"],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-build-deb.yml"
   },
   {
-    "branches": ["master"],
+    "branches": ["apricot"],
     "src": "workflow-templates/call-build-distribution.yaml",
-    "dest": "linuxdeepin/deepin-desktop-base/.github/workflows/call-build-distribution.yaml"
+    "dest": "linuxdeepin/deepin-desktop-base/.github/workflows/call-build-distribution.yml"
   }
 ]
