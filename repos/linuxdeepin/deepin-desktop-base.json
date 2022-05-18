@@ -26,7 +26,7 @@
   },
   {
     "branches": ["apricot"],
-    "src": "workflow-templates/call-build-distribution.yaml",
+    "src": "workflow-templates/call-build-distribution.yml",
     "dest": "linuxdeepin/deepin-desktop-base/.github/workflows/call-build-distribution.yml"
   }
 ]
