@@ -2,27 +2,27 @@
   {
     "branches": ["apricot"],
     "src": "workflow-templates/backup-to-gitlab.yml",
-    "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/backup-to-gitlab.yml"
+    "dest": "linuxdeepin/deepin-desktop-base/.github/workflows/backup-to-gitlab.yml"
   },
   {
     "branches": ["apricot"],
     "src": "workflow-templates/call-commitlint.yml",
-    "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-commitlint.yml"
+    "dest": "linuxdeepin/deepin-desktop-base/.github/workflows/call-commitlint.yml"
   },
   {
     "branches": ["apricot"],
     "src": "workflow-templates/call-chatOps.yml",
-    "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-chatOps.yml"
+    "dest": "linuxdeepin/deepin-desktop-base/.github/workflows/call-chatOps.yml"
   },
   {
     "branches": ["apricot"],
     "src": "workflow-templates/cppcheck.yml",
-    "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/cppcheck.yml"
+    "dest": "linuxdeepin/deepin-desktop-base/.github/workflows/cppcheck.yml"
   },
   {
     "branches": ["apricot"],
     "src": "workflow-templates/call-build-deb.yml",
-    "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-build-deb.yml"
+    "dest": "linuxdeepin/deepin-desktop-base/.github/workflows/call-build-deb.yml"
   },
   {
     "branches": ["apricot"],
