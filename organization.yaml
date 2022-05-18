@@ -59,6 +59,12 @@ settings:
       - dde-introduction
       - deepin-deb-installer
       - deepin-compressor
+      - deepin-album
+      - deepin-draw
+      - deepin-image-viewer
+      - deepin-movie-reborn
+      - deepin-ocr
+      - image-editor
     features:
       issues:
         enable: false
