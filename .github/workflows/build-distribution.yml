@@ -1,19 +1,15 @@
 name: Distribution Builder
 on:
   workflow_call:
-    BUILD_GPG_PRIVATE_KEY:
-      required: true
-    BUILD_SSH_PRIVATE_KEY:
-      required: true
-    WEBDAV_PASSWD:
-      required: true
-    WEBDAV_USER:
-      required: true
-env:
-  BUILD_GPG_PRIVATE_KEY: ${{ secrets.BUILD_GPG_PRIVATE_KEY }}
-  BUILD_SSH_PRIVATE_KEY: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
-  WEBDAV_PASSWD: ${{ secrets.WEBDAV_PASSWD }}
-  WEBDAV_USER: ${{ secrets.WEBDAV_USER }}
+    secrets:
+      BUILD_GPG_PRIVATE_KEY:
+        required: true
+      BUILD_SSH_PRIVATE_KEY:
+        required: true
+      WEBDAV_PASSWD:
+        required: true
+      WEBDAV_USER:
+        required: true
 jobs:
   Arch:
     container:
@@ -43,11 +39,11 @@ jobs:
         id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v4
         with:
-          gpg_private_key: ${{ BUILD_GPG_PRIVATE_KEY }}
+          gpg_private_key: ${{ secrets.BUILD_GPG_PRIVATE_KEY }}
       - uses: webfactory/ssh-agent@v0.5.4
         name: Import SSH key
         with:
-          ssh-private-key: ${{ BUILD_SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
       - run: git config --global user.email "justforlxz@gmail.com"
       - run: git config --global user.name "justforlxz"
       - name: Build
@@ -72,16 +68,10 @@ jobs:
             fi
             cd ..
           done
-      - name: Archive build results
-        if: ${{ github.event_name == 'push' }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: archlinux package files
-          path: LICENSE
       - name: Mount webdav
         if: ${{ github.event_name == 'push' }}
         run: |
-          echo "https://webdav.mkacg.com ${{ WEBDAV_USER }} ${{ WEBDAV_PASSWD }}" >> /etc/davfs2/secrets
+          echo "https://webdav.mkacg.com ${{ secrets.WEBDAV_USER }} ${{ secrets.WEBDAV_PASSWD }}" >> /etc/davfs2/secrets
           echo "use_locks 0" >> /etc/davfs2/davfs2.conf
           mkdir repo
           mount -t davfs https://webdav.mkacg.com/ repo
@@ -155,7 +145,7 @@ jobs:
       - uses: webfactory/ssh-agent@v0.5.4
         name: Import SSH key
         with:
-          ssh-private-key: ${{ BUILD_SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
       - run: git config --global user.email "justforlxz@gmail.com"
       - run: git config --global user.name "justforlxz"
       - name: Build
@@ -188,16 +178,10 @@ jobs:
             fi
             break
           done
-      - name: Archive build results
-        if: ${{ github.event_name == 'push' }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: debian package files
-          path: dist/*.deb
       - name: Mount webdav
         if: ${{ github.event_name == 'push' }}
         run: |
-          echo "https://webdav.mkacg.com ${{ WEBDAV_USER }} ${{ WEBDAV_PASSWD }}" >> /etc/davfs2/secrets
+          echo "https://webdav.mkacg.com ${{ secrets.WEBDAV_USER }} ${{ secrets.WEBDAV_PASSWD }}" >> /etc/davfs2/secrets
           echo "use_locks 0" >> /etc/davfs2/davfs2.conf
           mkdir repo
           mount -t davfs https://webdav.mkacg.com/ repo
