@@ -57,6 +57,15 @@ settings:
       - deepin-ab-recovery
       - dde-wayland-config
       - dde-introduction
+      - deepin-deb-installer
+      - deepin-compressor
+      - deepin-album
+      - deepin-draw
+      - deepin-image-viewer
+      - deepin-movie-reborn
+      - deepin-ocr
+      - image-editor
+      - deepin-picker
     features:
       issues:
         enable: false

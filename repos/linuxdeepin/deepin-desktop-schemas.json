@@ -18,5 +18,15 @@
     "branches": ["master"],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/deepin-desktop-schemas/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branches": ["master"],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/deepin-desktop-schemas/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branches": ["master"],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/deepin-desktop-schemas/.github/workflows/call-build-distribution.yml"
   }
 ]
