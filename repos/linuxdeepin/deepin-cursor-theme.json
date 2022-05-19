@@ -1,0 +1,32 @@
+[
+  {
+    "branches": ["master"],
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/deepin-cursor-theme/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branches": ["master"],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/deepin-cursor-theme/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branches": ["master"],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/deepin-cursor-theme/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branches": ["master"],
+    "src": "workflow-templates/cppcheck.yml",
+    "dest": "linuxdeepin/deepin-cursor-theme/.github/workflows/cppcheck.yml"
+  },
+  {
+    "branches": ["master"],
+    "src": "workflow-templates/call-build-deb.yml",
+    "dest": "linuxdeepin/deepin-cursor-theme/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branches": ["master"],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/deepin-cursor-theme/.github/workflows/call-build-distribution.yml"
+  }
+]

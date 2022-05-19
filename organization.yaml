@@ -66,6 +66,10 @@ settings:
       - deepin-ocr
       - image-editor
       - deepin-picker
+      - deepin-desktop-base
+      - deepin-icon-theme
+      - deepin-cursor-theme
+      - deepin-wallpapers
     features:
       issues:
         enable: false
