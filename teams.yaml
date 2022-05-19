@@ -229,6 +229,7 @@ teams:
       - zccrs
       - HuiHui97520
       - lhxsm
+      - UOS-Python
     repositories_permissions:
       maintain:
         - deepin-manual
