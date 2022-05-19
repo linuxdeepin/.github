@@ -65,6 +65,7 @@ settings:
       - deepin-movie-reborn
       - deepin-ocr
       - image-editor
+      - deepin-picker
     features:
       issues:
         enable: false
