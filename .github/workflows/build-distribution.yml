@@ -33,7 +33,7 @@ jobs:
           pacman-key -r AFAAFC4EF142770966FC4C805987B0C2A80EA669
           pacman-key --lsign-key AFAAFC4EF142770966FC4C805987B0C2A80EA669
           echo "[deepin]" >> /etc/pacman.conf
-          echo "Server = https://packages.mkacg.com/arch/\$repo/os/\$arch" >> /etc/pacman.conf
+          echo "Server = https://packages.mkacg.com/arch/deepin" >> /etc/pacman.conf
           pacman -Sy openssh davfs2 deepin-keyring devtools-deepin-git base-devel --noconfirm --noprogressbar --needed
       - name: Import GPG key
         id: import_gpg

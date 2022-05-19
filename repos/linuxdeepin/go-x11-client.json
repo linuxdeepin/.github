@@ -18,5 +18,10 @@
     "branches": ["master"],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/go-x11-client/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branches": ["master"],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/go-x11-client/.github/workflows/call-build-distribution.yml"
   }
 ]
