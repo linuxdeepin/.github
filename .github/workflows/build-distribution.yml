@@ -124,6 +124,7 @@ jobs:
           rm -rf lock
           git push -f
   Debian:
+    if: ${{ false }}
     container:
       image: debian:testing
       options: --privileged
