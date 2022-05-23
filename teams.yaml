@@ -405,6 +405,13 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-gomoku
+  - name: deepin-clone
+    parent_team: Maintainers
+    members:
+      - guonafu
+    repositories_permissions:
+      maintain:
+        - deepin-clone
   - name: dde-control-center
     parent_team: Maintainers
     members:
