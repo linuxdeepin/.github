@@ -466,3 +466,10 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-log-viewer
+  - name: deepin-voice-note
+    parent_team: Maintainers
+    members:
+      - ut000454
+    repositories_permissions:
+      maintain:
+        - deepin-voice-note
