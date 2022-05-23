@@ -397,6 +397,14 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-calculator
+  - name: deepin-gomoku
+    parent_team: Maintainers
+    members: 
+      - guoshaoyu
+      - lxp002764
+    repositories_permissions:
+      maintain:
+        - deepin-gomoku
   - name: dde-control-center
     parent_team: Maintainers
     members:
