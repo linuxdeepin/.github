@@ -70,6 +70,8 @@ settings:
       - deepin-icon-theme
       - deepin-cursor-theme
       - deepin-wallpapers
+      - deepin-clone
+      - deepin-boot-maker
       - deepin-log-viewer
     features:
       issues:
