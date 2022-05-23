@@ -412,6 +412,14 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-clone
+  - name: deepin-boot-maker
+    parent_team: Maintainers
+    members:
+      - guonafu
+      - wanjian1
+    repositories_permissions:
+      maintain:
+        - deepin-boot-maker
   - name: dde-control-center
     parent_team: Maintainers
     members:
