@@ -70,6 +70,7 @@ settings:
       - deepin-icon-theme
       - deepin-cursor-theme
       - deepin-wallpapers
+      - deepin-log-viewer
     features:
       issues:
         enable: false
