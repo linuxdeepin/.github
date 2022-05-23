@@ -405,6 +405,14 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-gomoku
+  - name: deepin-lianliankan
+    parent_team: Maintainers
+    members:
+      - guoshaoyu
+      - lxp002764
+    repositories_permissions:
+      maintain:
+        - deepin-lianliankan
   - name: deepin-clone
     parent_team: Maintainers
     members:
