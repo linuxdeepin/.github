@@ -73,6 +73,8 @@ settings:
       - deepin-clone
       - deepin-boot-maker
       - deepin-log-viewer
+      - deepin-gomoku
+      - deepin-lianliankan
     features:
       issues:
         enable: false
