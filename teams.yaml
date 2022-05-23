@@ -451,3 +451,10 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-compressor
+  - name: deepin-log-viewer
+    parent_team: Maintainers
+    members:
+      - lxp002764
+    repositories_permissions:
+      maintain:
+        - deepin-log-viewer
