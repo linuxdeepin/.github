@@ -399,7 +399,7 @@ teams:
         - deepin-calculator
   - name: deepin-gomoku
     parent_team: Maintainers
-    members: 
+    members:
       - guoshaoyu
       - lxp002764
     repositories_permissions:

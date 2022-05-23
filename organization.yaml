@@ -71,6 +71,8 @@ settings:
       - deepin-cursor-theme
       - deepin-wallpapers
       - deepin-log-viewer
+      - deepin-gomoku
+      - deepin-lianliankan
     features:
       issues:
         enable: false
