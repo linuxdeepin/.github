@@ -6,6 +6,7 @@ on:
         required: true
 
 env:
+  GITHUB_TOKEN: ${{ github.token }}
   BRIDGE_TOKEN: ${{ secrets.BridgeToken }}
   SERVER: https://jenkins-bridge-deepin-pre.uniontech.com
 
