@@ -211,30 +211,6 @@ teams:
         - deepin-ocr
         - image-editor
         - deepin-picker
-  - name: deepin-font-manager
-    parent_team: Maintainers
-    members:
-      - zccrs
-      - LiuLibang
-      - HuiHui97520
-      - lhxsm
-    repositories_permissions:
-      maintain:
-        - deepin-font-manager
-      triage:
-        - action-teams-manager
-  - name: deepin-manual
-    parent_team: Maintainers
-    members:
-      - zccrs
-      - HuiHui97520
-      - lhxsm
-      - UOS-Python
-    repositories_permissions:
-      maintain:
-        - deepin-manual
-      triage:
-        - action-teams-manager
   - name: Designer
     members:
       - shule1987
@@ -351,14 +327,6 @@ teams:
     repositories_permissions:
       maintain:
         - dde-grand-search
-  - name: deepin-system-monitor
-    parent_team: Maintainers
-    members:
-      - RiskVirusPro
-      - lhxsm
-    repositories_permissions:
-      maintain:
-        - deepin-system-monitor
   - name: deepin-face
     parent_team: Maintainers
     members:
@@ -380,39 +348,6 @@ teams:
         - seetaface-authorize
         - seetaface-anti-spoofing-x
         - seetaface-age-predictor
-  - name: deepin-terminal
-    parent_team: Maintainers
-    members:
-      - changzex
-      - HuiHui97520
-      - lhxsm
-    repositories_permissions:
-      maintain:
-        - deepin-terminal
-  - name: deepin-calculator
-    parent_team: Maintainers
-    members:
-      - ut003506
-      - lhxsm
-    repositories_permissions:
-      maintain:
-        - deepin-calculator
-  - name: deepin-gomoku
-    parent_team: Maintainers
-    members:
-      - guoshaoyu
-      - lxp002764
-    repositories_permissions:
-      maintain:
-        - deepin-gomoku
-  - name: deepin-lianliankan
-    parent_team: Maintainers
-    members:
-      - guoshaoyu
-      - lxp002764
-    repositories_permissions:
-      maintain:
-        - deepin-lianliankan
   - name: deepin-clone
     parent_team: Maintainers
     members:
@@ -458,41 +393,51 @@ teams:
       triage:
         - deepin-kwin
         - dde-kwin
-  - name: dde-introduction
+  - name: NJ-common-tools
     parent_team: Maintainers
     members:
+      - lhxsm
+      - zccrs
       - allen5864
-    repositories_permissions:
-      maintain:
-        - dde-introduction
-  - name: deepin-deb-installer
-    parent_team: Maintainers
-    members:
       - jxm96
+      - lxp002764
+      - ut000454
+      - changzex
+      - ut003506
+      - guoshaoyu
+      - RiskVirusPro
+      - UOS-Python
       - LiuLibang
       - HuiHui97520
     repositories_permissions:
       maintain:
+        - dde-introduction
         - deepin-deb-installer
-  - name: deepin-compressor
-    parent_team: Maintainers
-    members:
-      - jxm96
-      - HuiHui97520
-    repositories_permissions:
-      maintain:
         - deepin-compressor
-  - name: deepin-log-viewer
-    parent_team: Maintainers
-    members:
-      - lxp002764
-    repositories_permissions:
-      maintain:
         - deepin-log-viewer
-  - name: deepin-voice-note
-    parent_team: Maintainers
-    members:
-      - ut000454
-    repositories_permissions:
-      maintain:
         - deepin-voice-note
+        - deepin-terminal
+        - deepin-calculator
+        - deepin-gomoku
+        - deepin-lianliankan
+        - deepin-system-monitor
+        - deepin-manual
+        - deepin-font-manager
+  - name: NJ-common-tools-member
+    parent_team: Projects
+    members:
+      - lhxsm
+    repositories_permissions:
+      triage:
+        - dde-introduction
+        - deepin-deb-installer
+        - deepin-compressor
+        - deepin-log-viewer
+        - deepin-voice-note
+        - deepin-terminal
+        - deepin-calculator
+        - deepin-gomoku
+        - deepin-lianliankan
+        - deepin-system-monitor
+        - deepin-manual
+        - deepin-font-manager
