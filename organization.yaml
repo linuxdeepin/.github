@@ -76,6 +76,7 @@ settings:
       - deepin-gomoku
       - deepin-lianliankan
       - deepin-downloader
+      - dde-app-services
     features:
       issues:
         enable: false
