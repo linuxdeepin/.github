@@ -441,3 +441,10 @@ teams:
         - deepin-system-monitor
         - deepin-manual
         - deepin-font-manager
+  - name: deepin-downloader
+    parent_team: Maintainers
+    members:
+      - san-Hei
+    repositories_permissions:
+      maintain:
+        - deepin-downloader
