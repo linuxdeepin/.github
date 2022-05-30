@@ -75,6 +75,7 @@ settings:
       - deepin-log-viewer
       - deepin-gomoku
       - deepin-lianliankan
+      - deepin-downloader
     features:
       issues:
         enable: false
