@@ -232,6 +232,7 @@ teams:
         - dtkwidget
         - qt5integration
         - qt5platform-plugins
+        - dde-app-services
       triage:
         - action-teams-manager
   - name: DTK-member
