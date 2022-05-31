@@ -33,6 +33,7 @@ jobs:
         env:
           CHANGE_ID: ${{ github.event.pull_request.number }}
         run: |
+          jenkins-bridge-client -token $BRIDGE_TOKEN -triggerAbicheck || true
           echo "::set-output name=RUN_ID::$(jenkins-bridge-client -token $BRIDGE_TOKEN -triggerBuild)"
 
       - name: Print log
