@@ -292,6 +292,7 @@ teams:
       - lxl690
       - alivezhy
       - ariZhou
+      - ZhongYic00
   - name: deepin-anything
     parent_team: Maintainers
     members:
