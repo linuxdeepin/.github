@@ -89,25 +89,20 @@ jobs:
         run: |
           for (( ; ; ))
           do
-            git clone git@github.com:deepin-community/push-sleep.git
+            rm -rf push-sleep || true
+            git clone git@github.com:deepin-community/push-sleep.git -b arch
             cd push-sleep
-            git checkout arch
             if [[ -f "lock" ]];
             then
-              sleep 10
-              rm -rf push-sleep
+              sleep $[ ( $RANDOM % 10 )  + 1 ]s
               continue
             else
               touch lock
               git add lock
               git commit -m "lock arch"
-              for (( ; ; ))
-              do
-                git push && break
-                sleep 10
-              done
+              git push || continue
+              break
             fi
-            break
           done
       - name: Download all packages
         uses: actions/download-artifact@v3
@@ -172,25 +167,19 @@ jobs:
         run: |
           for (( ; ; ))
           do
-            git clone git@github.com:deepin-community/push-sleep.git
+            rm -rf push-sleep || true
+            git clone git@github.com:deepin-community/push-sleep.git -b debian
             cd push-sleep
-            git checkout debian
             if [[ -f "lock" ]];
             then
-              sleep 60
-              rm -rf push-sleep
+              sleep $[ ( $RANDOM % 10 )  + 1 ]s
               continue
             else
               touch lock
               git add lock
               git commit -m "lock debian"
-              for (( ; ; ))
-              do
-                git push && break
-                sleep 60
-              done
+              git push || continue
             fi
-            break
           done
       - name: Mount webdav
         if: ${{ github.event_name == 'push' }}
