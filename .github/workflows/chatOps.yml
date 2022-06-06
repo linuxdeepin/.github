@@ -86,19 +86,17 @@ jobs:
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
             })
-            const resp = await github.rest.checks.listForRef({
+            const resp = await github.rest.checks.listSuitesForRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: pull.data.head.sha,
             });
-            for(const run of resp.data.check_runs){
-              await github.rest.checks.rerequestSuite({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                check_suite_id: run.check_suite.id,
-              });
-            }
-
+            const suite = resp.data.check_suites[resp.data.check_suites.length-1]
+            await github.rest.checks.rerequestSuite({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              check_suite_id: suite.id,
+            });
       # auto merge pull request
       - name: install depends for load scripts
         if: contains(github.event.comment.body, '/merge')
