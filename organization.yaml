@@ -77,6 +77,8 @@ settings:
       - deepin-lianliankan
       - deepin-downloader
       - dde-app-services
+      - deepin-voice-note
+      - deepin-turbo
     features:
       issues:
         enable: false
