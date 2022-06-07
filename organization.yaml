@@ -81,6 +81,7 @@ settings:
       - deepin-voice-note
       - deepin-diskmanager
       - deepin-turbo
+      - deepin-fcitxconfigtool-plugin
     features:
       issues:
         enable: false
