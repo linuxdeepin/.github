@@ -79,8 +79,13 @@ jobs:
       - name: check
         uses: actions/github-script@v5
         if: contains(github.event.comment.body, '/check')
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
         with:
           script: |
+            const { COMMENT_BODY } = process.env
+            const checkNameGroup = COMMENT_BODY.match(/\/check (\S+)/)
+
             const pull = await github.rest.pulls.get({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -92,11 +97,27 @@ jobs:
               ref: pull.data.head.sha,
             });
             const suite = resp.data.check_suites[resp.data.check_suites.length-1]
-            await github.rest.checks.rerequestSuite({
+
+            if(!checkNameGroup) {
+              await github.rest.checks.rerequestSuite({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                check_suite_id: suite.id,
+              });
+              return
+            }
+
+            const listResp = await github.rest.checks.listForSuite({
               owner: context.repo.owner,
               repo: context.repo.repo,
               check_suite_id: suite.id,
             });
+            for(const run of listResp.data.check_runs){
+              const name = run.name.replace(/ \/ /g,'/')
+              if(name.includes(checkNameGroup[1])){
+                await github.request(`POST /repos/${context.repo.owner}/${context.repo.repo}/actions/jobs/${run.id}/rerun`);
+              }
+            }
       # auto merge pull request
       - name: install depends for load scripts
         if: contains(github.event.comment.body, '/merge')
