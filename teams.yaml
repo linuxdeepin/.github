@@ -450,3 +450,19 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-downloader
+  - name: deepin-diskmanager
+    parent_team: Maintainers
+    members:
+      - ut001275
+      - lwh2398819901
+    repositories_permissions:
+      maintain:
+        - deepin-diskmanager
+  - name: deepin-fcitxconfigtool-plugin
+    parent_team: Maintainers
+    members:
+      - chenshijie-uos
+      - san-Hei
+    repositories_permissions:
+      maintain:
+      - deepin-fcitxconfigtool-plugin
