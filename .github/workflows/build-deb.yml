@@ -72,13 +72,7 @@ jobs:
           cd jenkins-bridge-client
           go build .
           sudo install -Dvm755 jenkins-bridge-client -t /usr/bin/
-
-      - name: Pre Check status
-        id: pre-check
-        run: jenkins-bridge-client apipass -server $SERVER -token ${{ secrets.BridgeToken }} || echo "::set-output name=PASS_CODE::$?"
-
       - name: Run Check Job
-        if: ${{ steps.pre-check.outputs.PASS_CODE }}  == "-1"
         id: check
         run: |
           runid=$(jenkins-bridge-client -token ${{ secrets.BridgeToken }} -triggerAbicheck)
@@ -87,7 +81,7 @@ jobs:
           jenkins-bridge-client cat -server $SERVER -token ${{ secrets.BridgeToken }} -file api_check.txt -runid $runid
       - name: If Check not pass
         uses: actions/github-script@v6
-        if: ${{ steps.pre-check.outputs.PASS_CODE }}  == "-1" && ${{ steps.check.outputs.PASS_CODE }}  == "-1"
+        if: steps.check.outputs.PASS_CODE == '-1'
         with:
           script: |
             github.rest.issues.addLabels({
