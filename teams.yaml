@@ -465,4 +465,4 @@ teams:
       - san-Hei
     repositories_permissions:
       maintain:
-      - deepin-fcitxconfigtool-plugin
+        - deepin-fcitxconfigtool-plugin
