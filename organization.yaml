@@ -84,7 +84,7 @@ settings:
       - deepin-fcitxconfigtool-plugin
     features:
       issues:
-        enable: false
+        enable: true
       allow_merge_commit:
         enable: false
     branches:
