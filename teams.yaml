@@ -305,6 +305,8 @@ teams:
     parent_team: Maintainers
     members:
       - lvwujun
+      - Clauszy
+      - Johnson-zs
     repositories_permissions:
       maintain:
         - dde-file-manager
@@ -312,13 +314,43 @@ teams:
     parent_team: Maintainers
     members:
       - lvwujun
+      - Johnson-zs
+      - itsXuSt
     repositories_permissions:
       maintain:
         - udisks2-qt5
+  - name: dde-device-formatter
+    parent_team: Maintainers
+    members:
+      - lvwujun
+      - itsXuSt
+    repositories_permissions:
+      maintain:
+        - dde-device-formatter
+  - name: deepin-screensaver
+    parent_team: Maintainers
+    members:
+      - Clauszy
+      - wangchunlin5013
+      - lvwujun
+    repositories_permissions:
+      maintain:
+        - deepin-screensaver
+  - name: disomaster
+    parent_team: Maintainers
+    members:
+      - lvwujun
+      - Johnson-zs
+      - itsXuSt
+    repositories_permissions:
+      maintain:
+        - disomaster
   - name: gio-qt
     parent_team: Maintainers
     members:
       - lvwujun
+      - misonlan
+      - Johnson-zs
     repositories_permissions:
       maintain:
         - gio-qt
