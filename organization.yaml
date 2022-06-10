@@ -78,6 +78,7 @@ settings:
       - deepin-downloader
       - dde-app-services
       - deepin-voice-note
+      - deepin-diskmanager
       - deepin-turbo
     features:
       issues:
