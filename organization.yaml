@@ -29,6 +29,7 @@ settings:
       - dde-session-ui
       - dde-wldpms
       - dde-wloutput-daemon
+      - dde-wloutput
       - deepin-desktop-schemas
       - deepin-network-proxy
       - deepin-sound-theme
