@@ -53,6 +53,7 @@ teams:
         - deepin-gettext-tools
         - deepin-gtk-theme
         - deepin-pw-check
+        - dde-wloutput
   - name: DDE-member
     parent_team: Projects
     members:
@@ -119,6 +120,7 @@ teams:
         - deepin-gettext-tools
         - deepin-gtk-theme
         - deepin-pw-check
+        - dde-wloutput
   - name: deepin
     members:
       - felixonmars
