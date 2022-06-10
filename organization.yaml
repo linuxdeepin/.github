@@ -82,6 +82,9 @@ settings:
       - deepin-diskmanager
       - deepin-turbo
       - deepin-fcitxconfigtool-plugin
+      - dde-device-formatter
+      - deepin-screensaver
+      - disomaster
     features:
       issues:
         enable: false
