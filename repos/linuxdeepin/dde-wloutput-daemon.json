@@ -1,26 +1,26 @@
 [
   {
-    "branches": ["master"],
+    "branches": ["master", "develop/.+", "dev-wayland"],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/backup-to-gitlab.yml"
   },
   {
-    "branches": ["master"],
+    "branches": ["master", "develop/.+", "dev-wayland"],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/call-commitlint.yml"
   },
   {
-    "branches": ["master"],
+    "branches": ["master", "develop/.+", "dev-wayland"],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/call-chatOps.yml"
   },
   {
-    "branches": ["master"],
+    "branches": ["master", "develop/.+", "dev-wayland"],
     "src": "workflow-templates/cppcheck.yml",
     "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/cppcheck.yml"
   },
   {
-    "branches": ["master"],
+    "branches": ["master", "develop/.+", "dev-wayland"],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/call-build-deb.yml"
   }
