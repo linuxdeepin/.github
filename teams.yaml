@@ -347,6 +347,14 @@ teams:
     repositories_permissions:
       maintain:
         - disomaster
+  - name: docparser
+    parent_team: Maintainers
+    members:
+      - Kakueeen
+      - lvwujun
+    repositories_permissions:
+      maintain:
+        - docparser
   - name: gio-qt
     parent_team: Maintainers
     members:
