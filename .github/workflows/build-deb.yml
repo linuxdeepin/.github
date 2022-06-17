@@ -48,11 +48,13 @@ jobs:
           jenkins-bridge-client cat -server $SERVER -token "$BRIDGE_TOKEN" -file warning_x86_64.txt -runid "${{ steps.generate-runid.outputs.RUN_ID }}"
 
       - name: Download Artifacts
+        continue-on-error: true
         run: |
           jenkins-bridge-client -token "$BRIDGE_TOKEN" -runid "${{ steps.generate-runid.outputs.RUN_ID }}" -downloadArtifacts
           ls -lh ./artifacts
 
       - uses: linuxdeepin/upload-artifact@single-artifact-upload
+        continue-on-error: true
         with:
           path: ./artifacts/*.deb
           single-archive: "false"
