@@ -139,7 +139,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         with:
           fetch-depth: 0
-      - if: ${{ github.event_name == 'push' }}
+      - name: fetch
         run: |
           git fetch --prune --tags
       - name: Init
@@ -323,7 +323,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         with:
           fetch-depth: 0
-      - if: ${{ github.event_name == 'push' }}
+      - name: fetch
         run: |
           git fetch --prune --tags
       - name: Install dep
