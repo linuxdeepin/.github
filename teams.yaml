@@ -368,6 +368,7 @@ teams:
     parent_team: Maintainers
     members:
       - Clauszy
+      - wangchunlin5013
     repositories_permissions:
       maintain:
         - dde-grand-search
