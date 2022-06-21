@@ -35,23 +35,42 @@ jobs:
           echo "[deepin]" >> /etc/pacman.conf
           echo "Server = https://deepin-community.github.io/arch-dde-repo" >> /etc/pacman.conf
           pacman -Sy deepin-keyring devtools-deepin-git base-devel --noconfirm --noprogressbar --needed
-      - name: Build
-        env:
-          sha: ${{ github.GITHUB_SHA }}
+      - name: Compress Source
         run: |
           name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
-          git clone https://github.com/deepin-community/repo .repo
+          mkdir ${name}-git
+          rsync -a . ${name}-git
+          rm -rf ${name}-git/archlinux
+          tar -czf archlinux/source.tar.gz ${name}-git
+          echo "deepin_source_name=${name}-git" >> archlinux/PKGBUILD
+      - name: Get package version
+        id: version
+        env:
+          sha: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ "${sha}" == "" ]
+          then
+            echo "::set-output name=VERSION::1.0.0"
+          else
+            version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
+            echo "::set-output name=VERSION::${version}"
+          fi
+      - name: Build
+        env:
+          version: ${{ steps.version.outputs.VERSION }}
+        run: |
+          sed -i "/pkgver=/cpkgver=${version}" archlinux/PKGBUILD
           sed -i "s|MAKEFLAGS=.*|MAKEFLAGS=-j$(nproc)|" /etc/makepkg.conf
           useradd -m user
-          cp -r .repo/deepincn/git/$name /home/user/$name
-          chown -R user /home/user/$name
-          cd /home/user/$name
+          rsync -a archlinux /home/user/
+          chown -R user /home/user/archlinux
+          cd /home/user/archlinux
               deepin-x86_64-build -- -U user
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: Arch
-          path: /home/user/**/*.zst
+          path: /home/user/archlinux/*.zst
   Arch-Upload:
     if: ${{ github.event_name == 'push' }}
     needs: [ Arch ]
