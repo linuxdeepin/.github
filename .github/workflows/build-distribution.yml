@@ -11,7 +11,7 @@ on:
       WEBDAV_USER:
         required: false
 jobs:
-  Arch:
+  archlinux-build:
     container:
       image: archlinux:latest
       options: --privileged
@@ -39,7 +39,7 @@ jobs:
         run: |
           name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
           mkdir ${name}-git
-          rsync -a . ${name}-git
+          rsync -a . ${name}-git --exclude "${name}-git"
           rm -rf ${name}-git/archlinux
           tar -czf archlinux/source.tar.gz ${name}-git
           echo "deepin_source_name=${name}-git" >> archlinux/PKGBUILD
@@ -71,7 +71,7 @@ jobs:
         with:
           name: Arch
           path: /home/user/archlinux/*.zst
-  Arch-Upload:
+  archlinux-upload:
     if: ${{ github.event_name == 'push' }}
     needs: [ Arch ]
     runs-on: ubuntu-latest
@@ -147,7 +147,33 @@ jobs:
             rm -rf lock
             git push -f
           fi
-  Debian:
+  debian-setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Init
+        run: |
+          echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
+          sudo apt-get update
+          sudo apt-get install -y ca-certificates
+      - name: Cache
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: ~/sid-base-amd64.tgz
+          key: sid-base-amd64
+      - name: Create base
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get -y install pbuilder debian-archive-keyring
+          sudo pbuilder create --architecture amd64 \
+                               --mirror "http://ftp.us.debian.org/debian/" \
+                               --distribution sid \
+                               --basetgz ~/sid-base-amd64.tgz \
+                               --allow-untrusted \
+                               --debootstrapopts --keyring=/usr/share/keyrings/debian-archive-keyring.gpg \
+                               --debootstrapopts --include=debian-archive-keyring,ca-certificates
+  debian-build:
+    needs: [ debian-setup ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -173,17 +199,6 @@ jobs:
         with:
           path: ~/sid-base-amd64.tgz
           key: sid-base-amd64
-      - name: Create base
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          sudo apt-get -y install pbuilder debian-archive-keyring
-          sudo pbuilder create --architecture amd64 \
-                               --mirror "http://ftp.us.debian.org/debian/" \
-                               --distribution sid \
-                               --basetgz ~/sid-base-amd64.tgz \
-                               --allow-untrusted \
-                               --debootstrapopts --keyring=/usr/share/keyrings/debian-archive-keyring.gpg \
-                               --debootstrapopts --include=debian-archive-keyring,ca-certificates
       - name: Install dep
         run: |
           echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
@@ -248,9 +263,9 @@ jobs:
         with:
           name: Debian
           path: ~/deb/*
-  Debian-Upload:
+  debian-upload:
     if: ${{ github.event_name == 'push' }}
-    needs: [ Debian ]
+    needs: [ debian-build ]
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -306,7 +321,7 @@ jobs:
             rm -rf lock
             git push -f
           fi
-  Deepin-Setup:
+  deepin-setup:
     runs-on: ubuntu-latest
     steps:
       - name: Init
@@ -343,8 +358,8 @@ jobs:
           mv buster.z08.zip buster.z08
           7z x buster.zip
           mv buster.tgz ~/deepin-base-amd64.tgz
-  Deepin:
-    needs: [ Deepin-Setup ]
+  deepin-build:
+    needs: [ deepin-setup ]
     continue-on-error: true
     runs-on: ubuntu-latest
     steps:
@@ -446,9 +461,9 @@ jobs:
         with:
           name: Deepin
           path: ~/deb/*
-  Deepin-Upload:
+  deepin-upload:
     if: ${{ github.event_name == 'push' }}
-    needs: [ Deepin ]
+    needs: [ deepin-upload ]
     runs-on: ubuntu-latest
     steps:
       - uses: webfactory/ssh-agent@v0.5.4
