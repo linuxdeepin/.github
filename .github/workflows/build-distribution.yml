@@ -73,7 +73,7 @@ jobs:
           path: /home/user/archlinux/*.zst
   archlinux-upload:
     if: ${{ github.event_name == 'push' }}
-    needs: [ Arch ]
+    needs: [ archlinux-build ]
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
