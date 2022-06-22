@@ -463,7 +463,7 @@ jobs:
           path: ~/deb/*
   deepin-upload:
     if: ${{ github.event_name == 'push' }}
-    needs: [ deepin-upload ]
+    needs: [ deepin-build ]
     runs-on: ubuntu-latest
     steps:
       - uses: webfactory/ssh-agent@v0.5.4
