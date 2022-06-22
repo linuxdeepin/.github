@@ -91,30 +91,18 @@ jobs:
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
             })
-            const resp = await github.rest.checks.listSuitesForRef({
+            const listResp = await github.rest.checks.listForRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: pull.data.head.sha,
             });
-            const suite = resp.data.check_suites[resp.data.check_suites.length-1]
-
-            if(!checkNameGroup) {
-              await github.rest.checks.rerequestSuite({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                check_suite_id: suite.id,
-              });
-              return
-            }
-
-            const listResp = await github.rest.checks.listForSuite({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              check_suite_id: suite.id,
-            });
             for(const run of listResp.data.check_runs){
-              const name = run.name.replace(/ \/ /g,'/')
-              if(name.includes(checkNameGroup[1])){
+              if(checkNameGroup) {
+                const name = run.name.replace(/ \/ /g,'/')
+                if(name.includes(checkNameGroup[1])){
+                  await github.request(`POST /repos/${context.repo.owner}/${context.repo.repo}/actions/jobs/${run.id}/rerun`);
+                }
+              }else{
                 await github.request(`POST /repos/${context.repo.owner}/${context.repo.repo}/actions/jobs/${run.id}/rerun`);
               }
             }
