@@ -509,3 +509,21 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-fcitxconfigtool-plugin
+  - name: deepin-graphics-driver-manager
+    parent_team: Maintainers
+    members:
+      - kingjinni
+      - guonafu
+      - liuli0217
+    repositories_permissions:
+      maintain:
+        - deepin-graphics-driver-manager
+  - name: dde-printer
+    parent_team: Maintainers
+    members:
+      - reddevillg
+      - liuli0217
+      - kingjinni
+    repositories_permissions:
+      maintain:
+        - dde-printer
