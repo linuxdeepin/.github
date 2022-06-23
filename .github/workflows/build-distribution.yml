@@ -264,7 +264,6 @@ jobs:
           mkdir ~/deb
           find -name "*.deb" | xargs -I {} cp {} ~/deb
       - name: Upload artifact
-        if: ${{ github.event_name == 'push' }}
         uses: actions/upload-artifact@v3
         with:
           name: Debian
@@ -462,7 +461,6 @@ jobs:
           mkdir ~/deb
           find -name "*.deb" | xargs -I {} cp {} ~/deb
       - name: Upload artifact
-        if: ${{ github.event_name == 'push' }}
         uses: actions/upload-artifact@v3
         with:
           name: Deepin
