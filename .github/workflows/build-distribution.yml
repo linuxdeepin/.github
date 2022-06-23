@@ -48,7 +48,7 @@ jobs:
         env:
           sha: ${{ github.event.pull_request.head.sha }}
         run: |
-          if [ "${sha}" == "" ]
+          if [ "${sha}" != "" ]
           then
             echo "::set-output name=VERSION::1.0.0"
           else
@@ -209,7 +209,7 @@ jobs:
         env:
           sha: ${{ github.event.pull_request.head.sha }}
         run: |
-          if [ "${sha}" == "" ]
+          if [ "${sha}" != "" ]
           then
             echo "::set-output name=VERSION::1.0.0"
           else
@@ -390,7 +390,7 @@ jobs:
         env:
           sha: ${{ github.event.pull_request.head.sha }}
         run: |
-          if [ "${sha}" == "" ]
+          if [ "${sha}" != "" ]
           then
             echo "::set-output name=VERSION::1.0.0"
           else
