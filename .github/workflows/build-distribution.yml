@@ -20,6 +20,15 @@ jobs:
         - /etc/machine-id:/etc/machine-id
     runs-on: ubuntu-latest
     steps:
+      - name: Init
+        run: |
+          pacman-key --init
+          pacman-key --populate
+          pacman-key -r AFAAFC4EF142770966FC4C805987B0C2A80EA669
+          pacman-key --lsign-key AFAAFC4EF142770966FC4C805987B0C2A80EA669
+          echo "[deepin]" >> /etc/pacman.conf
+          echo "Server = https://deepin-community.github.io/arch-dde-repo" >> /etc/pacman.conf
+          pacman -Sy deepin-keyring devtools-deepin-git git base-devel --noconfirm --noprogressbar --needed
       - uses: actions/checkout@v3
         if: ${{ github.event.pull_request.head.sha }}
         with:
@@ -32,15 +41,6 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: |
           git fetch --prune --tags
-      - name: Init
-        run: |
-          pacman-key --init
-          pacman-key --populate
-          pacman-key -r AFAAFC4EF142770966FC4C805987B0C2A80EA669
-          pacman-key --lsign-key AFAAFC4EF142770966FC4C805987B0C2A80EA669
-          echo "[deepin]" >> /etc/pacman.conf
-          echo "Server = https://deepin-community.github.io/arch-dde-repo" >> /etc/pacman.conf
-          pacman -Sy deepin-keyring devtools-deepin-git base-devel --noconfirm --noprogressbar --needed
       - name: Compress Source
         run: |
           name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
