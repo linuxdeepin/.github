@@ -26,6 +26,12 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/checkout@v3
         if: ${{ github.event_name == 'push' }}
+        with:
+          fetch-depth: 0
+      - name: fetch
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          git fetch --prune --tags
       - name: Init
         run: |
           pacman-key --init
