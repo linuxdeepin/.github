@@ -86,6 +86,8 @@ settings:
       - deepin-screensaver
       - disomaster
       - docparser
+      - dde-printer
+      - deepin-graphics-driver-manager
     features:
       issues:
         enable: true
