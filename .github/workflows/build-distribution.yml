@@ -37,6 +37,11 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         with:
           fetch-depth: 0
+      - name: Trusted github repository
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+          git config --global --add safe.directory /__w/$name/$name
       - name: fetch
         if: ${{ github.event_name == 'push' }}
         run: |
@@ -190,6 +195,11 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         with:
           fetch-depth: 0
+      - name: Trusted github repository
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+          git config --global --add safe.directory /__w/$name/$name
       - name: fetch
         if: ${{ github.event_name == 'push' }}
         run: |
@@ -376,6 +386,11 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         with:
           fetch-depth: 0
+      - name: Trusted github repository
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+          git config --global --add safe.directory /__w/$name/$name
       - name: fetch
         if: ${{ github.event_name == 'push' }}
         run: |
