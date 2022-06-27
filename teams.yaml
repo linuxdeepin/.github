@@ -454,6 +454,7 @@ teams:
       - UOS-Python
       - LiuLibang
       - HuiHui97520
+      - chenhaifeng-ut
     repositories_permissions:
       maintain:
         - dde-introduction
@@ -468,6 +469,7 @@ teams:
         - deepin-system-monitor
         - deepin-manual
         - deepin-font-manager
+        - dde-calendar
   - name: NJ-common-tools-member
     parent_team: Projects
     members:
@@ -486,6 +488,7 @@ teams:
         - deepin-system-monitor
         - deepin-manual
         - deepin-font-manager
+        - dde-calendar
   - name: deepin-downloader
     parent_team: Maintainers
     members:
