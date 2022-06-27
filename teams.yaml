@@ -53,6 +53,7 @@ teams:
         - deepin-gettext-tools
         - deepin-gtk-theme
         - deepin-pw-check
+        - dde-wloutput
   - name: DDE-member
     parent_team: Projects
     members:
@@ -119,6 +120,7 @@ teams:
         - deepin-gettext-tools
         - deepin-gtk-theme
         - deepin-pw-check
+        - dde-wloutput
   - name: deepin
     members:
       - felixonmars
@@ -232,6 +234,7 @@ teams:
         - dtkwidget
         - qt5integration
         - qt5platform-plugins
+        - dde-app-services
       triage:
         - action-teams-manager
   - name: DTK-member
@@ -291,6 +294,7 @@ teams:
       - lxl690
       - alivezhy
       - ariZhou
+      - ZhongYic00
   - name: deepin-anything
     parent_team: Maintainers
     members:
@@ -303,6 +307,8 @@ teams:
     parent_team: Maintainers
     members:
       - lvwujun
+      - Clauszy
+      - Johnson-zs
     repositories_permissions:
       maintain:
         - dde-file-manager
@@ -310,13 +316,51 @@ teams:
     parent_team: Maintainers
     members:
       - lvwujun
+      - Johnson-zs
+      - itsXuSt
     repositories_permissions:
       maintain:
         - udisks2-qt5
+  - name: dde-device-formatter
+    parent_team: Maintainers
+    members:
+      - lvwujun
+      - itsXuSt
+    repositories_permissions:
+      maintain:
+        - dde-device-formatter
+  - name: deepin-screensaver
+    parent_team: Maintainers
+    members:
+      - Clauszy
+      - wangchunlin5013
+      - lvwujun
+    repositories_permissions:
+      maintain:
+        - deepin-screensaver
+  - name: disomaster
+    parent_team: Maintainers
+    members:
+      - lvwujun
+      - Johnson-zs
+      - itsXuSt
+    repositories_permissions:
+      maintain:
+        - disomaster
+  - name: docparser
+    parent_team: Maintainers
+    members:
+      - Kakueeen
+      - lvwujun
+    repositories_permissions:
+      maintain:
+        - docparser
   - name: gio-qt
     parent_team: Maintainers
     members:
       - lvwujun
+      - misonlan
+      - Johnson-zs
     repositories_permissions:
       maintain:
         - gio-qt
@@ -324,6 +368,7 @@ teams:
     parent_team: Maintainers
     members:
       - Clauszy
+      - wangchunlin5013
     repositories_permissions:
       maintain:
         - dde-grand-search
@@ -401,7 +446,7 @@ teams:
       - allen5864
       - jxm96
       - lxp002764
-      - ut000454
+      - uos-liuyang
       - changzex
       - ut003506
       - guoshaoyu
@@ -448,3 +493,37 @@ teams:
     repositories_permissions:
       maintain:
         - deepin-downloader
+  - name: deepin-diskmanager
+    parent_team: Maintainers
+    members:
+      - ut001275
+      - lwh2398819901
+    repositories_permissions:
+      maintain:
+        - deepin-diskmanager
+  - name: deepin-fcitxconfigtool-plugin
+    parent_team: Maintainers
+    members:
+      - chenshijie-uos
+      - san-Hei
+    repositories_permissions:
+      maintain:
+        - deepin-fcitxconfigtool-plugin
+  - name: deepin-graphics-driver-manager
+    parent_team: Maintainers
+    members:
+      - kingjinni
+      - guonafu
+      - liuli0217
+    repositories_permissions:
+      maintain:
+        - deepin-graphics-driver-manager
+  - name: dde-printer
+    parent_team: Maintainers
+    members:
+      - reddevillg
+      - liuli0217
+      - kingjinni
+    repositories_permissions:
+      maintain:
+        - dde-printer

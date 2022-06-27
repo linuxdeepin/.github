@@ -17,7 +17,7 @@ jobs:
       # assign to someone
       - name: assign
         uses: actions/github-script@v5
-        if: contains(github.event.comment.body, '/assign')
+        if: startsWith(github.event.comment.body, '/assign')
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
         with:
@@ -33,7 +33,7 @@ jobs:
       # request someone to review
       - name: review
         uses: actions/github-script@v5
-        if: contains(github.event.comment.body, '/review')
+        if: startsWith(github.event.comment.body, '/review')
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
         with:
@@ -56,7 +56,7 @@ jobs:
       # !deprecated add approve label
       - name: "approve"
         uses: actions/github-script@v5
-        if: contains(github.event.comment.body, '/+1') || contains(github.event.comment.body, '/approve')
+        if: startsWith(github.event.comment.body, '/+1') || contains(github.event.comment.body, '/approve')
         with:
           script: |
             if(context.payload.sender.id == context.payload.issue.user.id){
@@ -78,35 +78,42 @@ jobs:
       # retrigger checks
       - name: check
         uses: actions/github-script@v5
-        if: contains(github.event.comment.body, '/check')
+        if: startsWith(github.event.comment.body, '/check')
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
         with:
           script: |
+            const { COMMENT_BODY } = process.env
+            const checkNameGroup = COMMENT_BODY.match(/\/check (\S+)/)
+
             const pull = await github.rest.pulls.get({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
             })
-            const resp = await github.rest.checks.listForRef({
+            const listResp = await github.rest.checks.listForRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: pull.data.head.sha,
             });
-            for(const run of resp.data.check_runs){
-              await github.rest.checks.rerequestSuite({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                check_suite_id: run.check_suite.id,
-              });
+            for(const run of listResp.data.check_runs){
+              if(checkNameGroup) {
+                const name = run.name.replace(/ \/ /g,'/')
+                if(name.includes(checkNameGroup[1])){
+                  await github.request(`POST /repos/${context.repo.owner}/${context.repo.repo}/actions/jobs/${run.id}/rerun`);
+                }
+              }else{
+                await github.request(`POST /repos/${context.repo.owner}/${context.repo.repo}/actions/jobs/${run.id}/rerun`);
+              }
             }
-
       # auto merge pull request
       - name: install depends for load scripts
-        if: contains(github.event.comment.body, '/merge')
+        if: startsWith(github.event.comment.body, '/merge')
         run: |
           npm install @octokit/rest
           npm install @octokit/auth-app
       - name: Get token using github-script
-        if: contains(github.event.comment.body, '/merge')
+        if: startsWith(github.event.comment.body, '/merge')
         id: get-token
         uses: actions/github-script@v6
         with:
@@ -131,7 +138,7 @@ jobs:
             core.setOutput('app_token', token)
       - name: merge
         uses: actions/github-script@v5
-        if: contains(github.event.comment.body, '/merge')
+        if: startsWith(github.event.comment.body, '/merge')
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
           script: |

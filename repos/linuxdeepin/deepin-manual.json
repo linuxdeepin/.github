@@ -1,11 +1,6 @@
 [
   {
     "branches": ["master", "dev/.+", "maintain/.+", "uos"],
-    "src": "workflow-templates/backup-to-gitlab.yml",
-    "dest": "linuxdeepin/deepin-manual/.github/workflows/backup-to-gitlab.yml"
-  },
-  {
-    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/deepin-manual/.github/workflows/call-commitlint.yml"
   },

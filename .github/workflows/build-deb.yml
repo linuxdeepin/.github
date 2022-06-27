@@ -9,6 +9,7 @@ env:
   GITHUB_TOKEN: ${{ github.token }}
   BRIDGE_TOKEN: ${{ secrets.BridgeToken }}
   SERVER: https://jenkins-bridge-deepin-pre.uniontech.com
+  CHANGE_ID: ${{ github.event.pull_request.number }}
 
 jobs:
   build:
@@ -30,8 +31,6 @@ jobs:
 
       - name: Trigger build
         id: generate-runid
-        env:
-          CHANGE_ID: ${{ github.event.pull_request.number }}
         run: |
           echo "::set-output name=RUN_ID::$(jenkins-bridge-client -token $BRIDGE_TOKEN -triggerBuild)"
 
@@ -49,11 +48,13 @@ jobs:
           jenkins-bridge-client cat -server $SERVER -token "$BRIDGE_TOKEN" -file warning_x86_64.txt -runid "${{ steps.generate-runid.outputs.RUN_ID }}"
 
       - name: Download Artifacts
+        continue-on-error: true
         run: |
           jenkins-bridge-client -token "$BRIDGE_TOKEN" -runid "${{ steps.generate-runid.outputs.RUN_ID }}" -downloadArtifacts
           ls -lh ./artifacts
 
       - uses: linuxdeepin/upload-artifact@single-artifact-upload
+        continue-on-error: true
         with:
           path: ./artifacts/*.deb
           single-archive: "false"
@@ -62,3 +63,33 @@ jobs:
         if: cancelled()
         run: |
           jenkins-bridge-client -token "$BRIDGE_TOKEN" -runid "${{ steps.generate-runid.outputs.RUN_ID }}" -cancelBuild
+
+  apicheck:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request_target'
+    steps:
+      - name: Install Client
+        run: |
+          git clone https://github.com/linuxdeepin/jenkins-bridge-client.git jenkins-bridge-client
+          cd jenkins-bridge-client
+          go build .
+          sudo install -Dvm755 jenkins-bridge-client -t /usr/bin/
+      - name: Run Check Job
+        id: check
+        run: |
+          runid=$(jenkins-bridge-client -token ${{ secrets.BridgeToken }} -triggerAbicheck)
+          jenkins-bridge-client wait -server $SERVER -token ${{ secrets.BridgeToken }} -runid $runid
+          jenkins-bridge-client apipass -server $SERVER -token ${{ secrets.BridgeToken }} || echo "::set-output name=PASS_CODE::$?"
+          jenkins-bridge-client cat -server $SERVER -token ${{ secrets.BridgeToken }} -file api_check.txt -runid $runid
+      - name: If Check not pass
+        uses: actions/github-script@v6
+        if: steps.check.outputs.PASS_CODE == '-1'
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['API changes']
+            })
+            throw "Code has api changes, please submit for review"

@@ -10,4 +10,11 @@ deepin is an open source Linux distribution dedicated to providing beautiful, ea
    - Facebook Group: <https://www.facebook.com/groups/mydeepinlinux>
 2. To get up to speed quickly, start with our [getting started guide](https://wiki.deepin.org/en/home)!
 
+
+### Join SIG
+
+- [deepinM1](https://github.com/linuxdeepin/deepin-m1) deepin M1 porting.
+- [deepinRISCV](https://github.com/linuxdeepin/deepin-riscv) deepin RISC-V porting.
+- [deepinWIKI](https://github.com/linuxdeepin/wiki.deepin.org) WIKI for every deepin users.
+
 Welcome to everyone！

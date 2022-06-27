@@ -29,6 +29,7 @@ settings:
       - dde-session-ui
       - dde-wldpms
       - dde-wloutput-daemon
+      - dde-wloutput
       - deepin-desktop-schemas
       - deepin-network-proxy
       - deepin-sound-theme
@@ -75,9 +76,19 @@ settings:
       - deepin-log-viewer
       - deepin-gomoku
       - deepin-lianliankan
+      - deepin-downloader
+      - dde-app-services
+      - deepin-voice-note
+      - deepin-diskmanager
+      - deepin-turbo
+      - deepin-fcitxconfigtool-plugin
+      - dde-device-formatter
+      - deepin-screensaver
+      - disomaster
+      - docparser
     features:
       issues:
-        enable: false
+        enable: true
       allow_merge_commit:
         enable: false
     branches:
