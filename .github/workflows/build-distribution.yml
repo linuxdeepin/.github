@@ -139,6 +139,7 @@ jobs:
       - name: Download all packages
         uses: actions/download-artifact@v3
         with:
+          name: Arch
           path: ./pkgs
       - name: Upload packages
         run: |
@@ -322,6 +323,7 @@ jobs:
       - name: Download all packages
         uses: actions/download-artifact@v3
         with:
+          name: Debian
           path: ./deb
       - name: Upload packages
         run: |
