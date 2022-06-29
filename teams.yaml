@@ -162,6 +162,17 @@ teams:
         - deepin-music
         - deepin-screen-recorder
         - deepin-movie-reborn
+        - deepin-terminal
+        - deepin-font-manager
+        - deepin-system-monitor
+        - deepin-compressor
+        - deepin-reader
+        - deepin-calculator
+        - deepin-voice-note
+        - dde-introduction
+        - deepin-lianliankan
+        - deepin-gomoku
+        - deepin-devicemanager
   - name: Multimedia-audio-video-member
     parent_team: Projects
     members:
@@ -170,7 +181,6 @@ teams:
       - wyu71
       - HeeMingYang
       - feeengli
-      - zhangwenchaoworking
       - shuaijie
       - hundundadi
       - myk1343
@@ -180,6 +190,17 @@ teams:
         - deepin-music
         - deepin-screen-recorder
         - deepin-movie-reborn
+        - deepin-terminal
+        - deepin-font-manager
+        - deepin-system-monitor
+        - deepin-compressor
+        - deepin-reader
+        - deepin-calculator
+        - deepin-voice-note
+        - dde-introduction
+        - deepin-lianliankan
+        - deepin-gomoku
+        - deepin-devicemanager
   - name: Multimedia-graphics
     parent_team: Maintainers
     members:
@@ -194,14 +215,16 @@ teams:
         - deepin-ocr
         - image-editor
         - deepin-picker
+        - deepin-log-viewer
+        - deepin-manual
+        - deepin-deb-installer
+        - deepin-editor
   - name: Multimedia-graphics-member
     parent_team: Projects
     members:
       - lzwind
       - deepin-CD
       - starhcq
-      - tanl123
-      - dependon
       - wzyforgit
       - rb-union
       - helloseekll
@@ -213,6 +236,10 @@ teams:
         - deepin-ocr
         - image-editor
         - deepin-picker
+        - deepin-log-viewer
+        - deepin-manual
+        - deepin-deb-installer
+        - deepin-editor
   - name: Designer
     members:
       - shule1987
