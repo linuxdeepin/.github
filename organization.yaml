@@ -89,6 +89,7 @@ settings:
       - dde-printer
       - deepin-graphics-driver-manager
       - dde-calendar
+      - deepin-shortcut-viewer
     features:
       issues:
         enable: true
