@@ -211,7 +211,7 @@ jobs:
         run: |
           echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
           sudo apt-get update
-          sudo apt-get install -y ca-certificates
+          sudo apt-get install -y ca-certificates devscripts
       - name: Cache
         id: cache
         uses: actions/cache@v3
