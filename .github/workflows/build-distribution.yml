@@ -211,7 +211,7 @@ jobs:
         run: |
           echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
           sudo apt-get update
-          sudo apt-get install -y ca-certificates devscripts
+          sudo apt-get install -y ca-certificates
       - name: Cache
         id: cache
         uses: actions/cache@v3
@@ -254,6 +254,8 @@ jobs:
           echo "deb http://ftp.us.debian.org/debian/ sid main contrib non-free" >> /etc/apt/sources.list
 
           apt-get update || true
+          apt-get dist-upgrade -y
+          apt-get install devscripts -y
           EOF
           chmod +x ~/hooks/D50Update
           PROJECT_NAME=$(dpkg-parsechangelog -S Source)
