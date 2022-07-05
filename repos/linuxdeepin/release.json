@@ -1,0 +1,7 @@
+[
+  {
+    "branches": ["master"],
+    "src": "workflow-templates/call-check-tag.yml",
+    "dest": "linuxdeepin/release/.github/workflows/call-check-tag.yml"
+  }
+]

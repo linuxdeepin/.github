@@ -1,0 +1,11 @@
+name: check tag
+on:
+  pull_request_target:
+    paths-ignore:
+      - ".github/workflows/**"
+
+jobs:
+  Check:
+    uses: linuxdeepin/.github/.github/workflows/check-tag.yml@master
+    secrets:
+      APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
