@@ -518,15 +518,14 @@ teams:
   - name: deepin-downloader
     parent_team: Maintainers
     members:
-      - san-Hei
+      - caimc123456
     repositories_permissions:
       maintain:
         - deepin-downloader
   - name: deepin-diskmanager
     parent_team: Maintainers
     members:
-      - ut001275
-      - lwh2398819901
+      - caimc123456
     repositories_permissions:
       maintain:
         - deepin-diskmanager
