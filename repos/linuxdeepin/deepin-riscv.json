@@ -1,0 +1,7 @@
+[
+    {
+        "branches": ["master"],
+        "src": "workflow-templates/cla-check.yml",
+        "dest": "linuxdeepin/deepin-riscv/.github/workflows/cla-check.yml"
+    }
+]
