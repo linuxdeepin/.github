@@ -11,6 +11,7 @@ settings:
       - dtkcore
       - dtkwidget
       - dtkgui
+      - dtkdeclarative
       - qt5integration
       - deepin-anything
       - deepin-system-monitor
