@@ -534,7 +534,7 @@ jobs:
       - name: Upload packages
         run: |
           git clone git@github.com:deepin-community/deepin-dde-repo.git
-          find deb -name "*.deb" | xargs -I {} sudo reprepro --delete -b deepin-dde-repo -C main includedeb sid {}
+          find deb -name "*.deb" | xargs -I {} sudo reprepro --delete -b deepin-dde-repo -C main includedeb apricot {}
           cd deepin-dde-repo
           git add .
           git commit --amend --no-edit
