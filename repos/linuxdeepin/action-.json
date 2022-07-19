@@ -13,5 +13,30 @@
     "branches": ["main"],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/action-organization-manager/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/action-sync/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/action-organization-manager/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/action-cppcheck/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/contributor-assistant-github-action/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/action-teams-manager/.github/workflows/call-clacheck.yml"
   }
 ]

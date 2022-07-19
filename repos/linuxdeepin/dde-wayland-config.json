@@ -18,5 +18,10 @@
     "branches": ["master"],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/dde-wayland-config/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/dde-wayland-config/.github/workflows/call-clacheck.yml"
   }
 ]

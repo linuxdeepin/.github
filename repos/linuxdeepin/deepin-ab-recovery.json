@@ -18,5 +18,10 @@
     "branches": ["master"],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/deepin-ab-recovery/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/deepin-ab-recovery/.github/workflows/call-clacheck.yml"
   }
 ]
