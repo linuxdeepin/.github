@@ -25,7 +25,7 @@
     "dest": "linuxdeepin/deepin-music/.github/workflows/call-build-deb.yml"
   },
   {
-    "branch": [".+"],
+    "branch": ["master", "dev/.+", "maintain/.+", "uos"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/deepin-music/.github/workflows/call-clacheck.yml"
   }

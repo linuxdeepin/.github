@@ -15,7 +15,7 @@
     "branches": ["master"]
   },
   {
-    "branch": [".+"],
+    "branch": ["master"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/.github/.github/workflows/call-clacheck.yml"
   }

@@ -25,7 +25,7 @@
     "dest": "linuxdeepin/deepin-gtk-theme/.github/workflows/call-build-distribution.yml"
   },
   {
-    "branch": [".+"],
+    "branches": ["master", "dev/.+", "maintain/.+", "uos"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/deepin-gtk-theme/.github/workflows/call-clacheck.yml"
   }
