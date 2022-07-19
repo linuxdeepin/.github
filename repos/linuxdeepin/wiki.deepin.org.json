@@ -10,7 +10,7 @@
     "dest": "linuxdeepin/wiki.deepin.org/.github/workflows/call-chatOps.yml"
   },
   {
-    "branch": [".+"],
+    "branch": ["master"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/wiki.deepin.org/.github/workflows/call-clacheck.yml"
   }

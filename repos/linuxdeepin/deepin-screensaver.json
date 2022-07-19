@@ -25,7 +25,7 @@
     "dest": "linuxdeepin/deepin-screensaver/.github/workflows/call-build-deb.yml"
   },
   {
-    "branch": [".+"],
+    "branch": ["master", "develop/.+"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/deepin-screensaver/.github/workflows/call-clacheck.yml"
   }

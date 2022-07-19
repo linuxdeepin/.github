@@ -25,7 +25,7 @@
     "dest": "linuxdeepin/deepin-boot-maker/.github/workflows/call-build-deb.yml"
   },
   {
-    "branch": [".+"],
+    "branches": ["master", "dev/.+", "maintain/.+"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/deepin-boot-maker/.github/workflows/call-clacheck.yml"
   }

@@ -25,7 +25,7 @@
     "dest": "linuxdeepin/udisks2-qt5/.github/workflows/call-build-deb.yml"
   },
   {
-    "branch": [".+"],
+    "branch": ["master"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/udisks2-qt5/.github/workflows/call-clacheck.yml"
   }

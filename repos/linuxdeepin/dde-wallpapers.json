@@ -20,7 +20,7 @@
     "dest": "linuxdeepin/dde-wallpapers/.github/workflows/call-build-deb.yml"
   },
   {
-    "branch": [".+"],
+    "branches": ["master", "dev/.+", "maintain/.+"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/dde-wallpapers/.github/workflows/call-clacheck.yml"
   }

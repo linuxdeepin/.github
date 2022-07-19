@@ -25,7 +25,7 @@
     "dest": "linuxdeepin/gio-qt/.github/workflows/call-build-deb.yml"
   },
   {
-    "branch": [".+"],
+    "branch": ["master"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/gio-qt/.github/workflows/call-clacheck.yml"
   }

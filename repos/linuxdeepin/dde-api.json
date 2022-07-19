@@ -25,7 +25,7 @@
     "dest": "linuxdeepin/dde-api/.github/workflows/call-build-distribution.yml"
   },
   {
-    "branch": [".+"],
+    "branch": ["master"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/dde-api/.github/workflows/call-clacheck.yml"
   }

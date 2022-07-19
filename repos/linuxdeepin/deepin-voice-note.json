@@ -25,7 +25,7 @@
     "dest": "linuxdeepin/deepin-voice-note/.github/workflows/call-build-deb.yml"
   },
   {
-    "branch": [".+"],
+    "branch": ["master", "develop[/.+", "maintain/.+"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/deepin-voice-note/.github/workflows/call-clacheck.yml"
   }
