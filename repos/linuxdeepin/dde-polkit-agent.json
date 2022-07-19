@@ -28,5 +28,10 @@
     "branches": ["master"],
     "src": "workflow-templates/call-build-distribution.yml",
     "dest": "linuxdeepin/dde-polkit-agent/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/dde-polkit-agent/.github/workflows/call-clacheck.yml"
   }
 ]

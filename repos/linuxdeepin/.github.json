@@ -13,5 +13,10 @@
     "src": "workflow-templates/call-transfer-issues.yml",
     "dest": "linuxdeepin/.github/.github/workflows/call-transfer-issues.yml",
     "branches": ["master"]
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/.github/.github/workflows/call-clacheck.yml"
   }
 ]

@@ -23,5 +23,10 @@
     "branches": ["master", "develop/.+", "maintain/.+"],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/deepin-diskmanager/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/deepin-diskmanager/.github/workflows/call-clacheck.yml"
   }
 ]

@@ -18,5 +18,10 @@
     "branches": ["master", "dev/.+", "maintain/.+", "uos"],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/deepin-manual/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branch": [".+"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/deepin-manual/.github/workflows/call-clacheck.yml"
   }
 ]
