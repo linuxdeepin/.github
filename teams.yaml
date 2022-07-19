@@ -519,6 +519,7 @@ teams:
     parent_team: Maintainers
     members:
       - caimc123456
+      - guonafu
     repositories_permissions:
       maintain:
         - deepin-downloader
@@ -526,6 +527,7 @@ teams:
     parent_team: Maintainers
     members:
       - caimc123456
+      - guonafu
     repositories_permissions:
       maintain:
         - deepin-diskmanager
