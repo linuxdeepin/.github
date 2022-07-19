@@ -22,6 +22,6 @@
   {
     "branches": ["master", "dev/.+", "maintain/.+"],
     "src": "workflow-templates/call-clacheck.yml",
-    "dest": "linuxdeepin/dde-manual/.github/workflows/call-clacheck.yml"
+    "dest": "linuxdeepin/dde-manual-content/.github/workflows/call-clacheck.yml"
   }
 ]
