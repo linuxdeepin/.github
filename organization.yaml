@@ -92,6 +92,7 @@ settings:
       - dde-calendar
       - deepin-reader
       - deepin-devicemanager
+      - deepin-editor
     features:
       issues:
         enable: true
