@@ -25,6 +25,11 @@
     "dest": "linuxdeepin/dtkdeclarative/.github/workflows/call-build-deb.yml"
   },
   {
+    "branches": ["master"],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/dtkgui/.github/workflows/call-build-distribution.yml"
+  },
+  {
     "branch": ["master"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/dtkdeclarative/.github/workflows/call-clacheck.yml"
