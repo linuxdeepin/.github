@@ -13,22 +13,24 @@ on:
 jobs:
   archlinux-build:
     container:
-      image: archlinux:latest
+      image: ghcr.io/justforlxz/deepin-builder-docker/archlinux:master
       options: --privileged
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
         - /etc/machine-id:/etc/machine-id
     runs-on: ubuntu-latest
     steps:
-      - name: Init
-        run: |
-          pacman-key --init
-          pacman-key --populate
-          pacman-key -r AFAAFC4EF142770966FC4C805987B0C2A80EA669
-          pacman-key --lsign-key AFAAFC4EF142770966FC4C805987B0C2A80EA669
-          echo "[deepin]" >> /etc/pacman.conf
-          echo "Server = https://deepin-community.github.io/arch-dde-repo" >> /etc/pacman.conf
-          pacman -Sy deepin-keyring devtools-deepin-git git base-devel --noconfirm --noprogressbar --needed
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.BUILD_GPG_PRIVATE_KEY }}
+      - uses: webfactory/ssh-agent@v0.5.4
+        name: Import SSH key
+        with:
+          ssh-private-key: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
+      - run: git config --global user.email "ci@deepin.org"
+      - run: git config --global user.name "deepin-ci"
       - uses: actions/checkout@v3
         if: ${{ github.event.pull_request.head.sha }}
         with:
@@ -46,16 +48,8 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: |
           git fetch --prune --tags
-      - name: Compress Source
-        run: |
-          name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
-          mkdir ${name}-git
-          rsync -a . ${name}-git --exclude "${name}-git"
-          rm -rf ${name}-git/archlinux
-          tar -czf archlinux/source.tar.gz ${name}-git
-          echo "deepin_source_name=${name}-git" >> archlinux/PKGBUILD
-      - name: Get package version
-        id: version
+      - name: Get package info
+        id: meta
         env:
           sha: ${{ github.event.pull_request.head.sha }}
         run: |
@@ -68,99 +62,37 @@ jobs:
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
             echo "::set-output name=VERSION::${version}"
           fi
-      - name: Build
+
+          repo=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+          echo "::set-output name=REPO::${repo}"
+      - name: Compress Source
         env:
-          version: ${{ steps.version.outputs.VERSION }}
-        run: |
-          sed -i "/pkgver=/cpkgver=${version}" archlinux/PKGBUILD
-          sed -i "s|MAKEFLAGS=.*|MAKEFLAGS=-j$(nproc)|" /etc/makepkg.conf
-          useradd -m user
-          rsync -a archlinux /home/user/
-          chown -R user /home/user/archlinux
-          cd /home/user/archlinux
-              deepin-x86_64-build -- -U user
+          workdir: ${{ github.workspace }}
+          repo: ${{ steps.meta.outputs.REPO }}
+        run: /compress $workdir $repo
+      - name: Build
+        run: /build $workdir $repo $version
+        env:
+          workdir: ${{ github.workspace }}
+          repo: ${{ steps.meta.outputs.REPO }}
+          version: ${{ steps.meta.outputs.VERSION }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: Arch
-          path: /home/user/archlinux/*.zst
-  archlinux-upload:
-    if: ${{ github.event_name == 'push' }}
-    needs: [ archlinux-build ]
-    runs-on: ubuntu-latest
-    container:
-      image: archlinux:latest
-      options: --privileged
-      volumes:
-        - /sys/fs/cgroup:/sys/fs/cgroup
-        - /etc/machine-id:/etc/machine-id
-    steps:
-      - name: Init
-        run: |
-          pacman-key --init
-          pacman-key --populate
-          pacman-key -r AFAAFC4EF142770966FC4C805987B0C2A80EA669
-          pacman-key --lsign-key AFAAFC4EF142770966FC4C805987B0C2A80EA669
-          echo "[deepin]" >> /etc/pacman.conf
-          echo "Server = https://deepin-community.github.io/arch-dde-repo" >> /etc/pacman.conf
-          pacman -Sy openssh devtools --noconfirm --noprogressbar --needed
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v4
-        with:
-          gpg_private_key: ${{ secrets.BUILD_GPG_PRIVATE_KEY }}
-      - uses: webfactory/ssh-agent@v0.5.4
-        name: Import SSH key
-        with:
-          ssh-private-key: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
-      - run: git config --global user.email "ci@deepin.org"
-      - run: git config --global user.name "deepin-ci"
-      - name: Lock Database
-        if: ${{ always() }}
-        id: lock
-        run: |
-          for (( ; ; ))
-          do
-            rm -rf push-sleep || true
-            git clone git@github.com:deepin-community/push-sleep.git -b arch
-            cd push-sleep
-            if [[ -f "lock" ]];
-            then
-              sleep $[ ( $RANDOM % 10 )  + 1 ]s
-              continue
-            else
-              touch lock
-              git add lock
-              git commit -m "lock arch"
-              git push || continue
-              break
-            fi
-          done
-      - name: Download all packages
-        uses: actions/download-artifact@v3
-        with:
-          name: Arch
-          path: ./pkgs
-      - name: Upload packages
-        run: |
-          find pkgs -name "*.zst" | xargs -I {} gpg --detach-sign --default-key builder {}
-          git clone git@github.com:deepin-community/arch-dde-repo.git
-          find pkgs -name "*.zst" | xargs -I {} cp {} arch-dde-repo
-          find pkgs -name "*.sig" | xargs -I {} cp {} arch-dde-repo
-          find pkgs -name "*.zst" | xargs -I {} repo-add -p -R arch-dde-repo/deepin.db.tar.xz {}
-          cd arch-dde-repo
-          git add .
-          git commit --amend --no-edit
-          git push -f
-      - name: Unlock
-        if: ${{ always() }}
-        run: |
-          cd push-sleep
-          if [[ -f lock ]]; then
-            git reset HEAD^
-            rm -rf lock
-            git push -f
-          fi
+          path: ${{ github.workspace }}/.pkgs/*.zst
+      - name: Lock db
+        if: ${{ github.event_name == 'push' }}
+        run: /db lock
+      - name: Commit
+        if: ${{ github.event_name == 'push' }}
+        env:
+          workdir: ${{ github.workspace }}
+          repo: ${{ steps.meta.outputs.REPO }}
+        run: /commit $workdir $repo
+      - name: Unlock db
+        if: ${{ github.event_name == 'push' }}
+        run: /db unlock
   debian-setup:
     runs-on: ubuntu-latest
     steps:
