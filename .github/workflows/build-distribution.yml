@@ -82,16 +82,16 @@ jobs:
           name: Arch
           path: ${{ github.workspace }}/.pkgs/*.zst
       - name: Lock db
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
         run: /db lock
       - name: Commit
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
         env:
           workdir: ${{ github.workspace }}
           repo: ${{ steps.meta.outputs.REPO }}
         run: /commit $workdir $repo
       - name: Unlock db
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
         run: /db unlock
   debian-setup:
     runs-on: ubuntu-latest
@@ -219,7 +219,7 @@ jobs:
           name: Debian
           path: ~/deb/*
   debian-upload:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
     needs: [ debian-build ]
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -425,7 +425,7 @@ jobs:
           name: Deepin
           path: ~/deb/*
   deepin-upload:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
     needs: [ deepin-build ]
     runs-on: ubuntu-latest
     steps:
