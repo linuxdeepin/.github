@@ -8,6 +8,7 @@ Deepin is an open source Linux distribution dedicated to providing beautiful, ea
    - Discord: <https://discord.gg/xjjkcp6H2P>
    - Telegram: <https://t.me/deepin>
    - Facebook Group: <https://www.facebook.com/groups/mydeepinlinux>
+   - Matrix: <https://matrix.to/#/#deepin:matrix.org>
 2. To get up to speed quickly, start with our [getting started guide](https://wiki.deepin.org/en/home)!
 
 ### Join SIG
