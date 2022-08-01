@@ -4,7 +4,7 @@ Deepin is an open source Linux distribution dedicated to providing beautiful, ea
 
 ### Get started with Deepin
 
-1. To learn more about deepin, Join our groups：
+1. To learn more about deepin, join our groups:
    - Discord: <https://discord.gg/xjjkcp6H2P>
    - Telegram: <https://t.me/deepin>
    - Facebook Group: <https://www.facebook.com/groups/mydeepinlinux>
@@ -12,8 +12,9 @@ Deepin is an open source Linux distribution dedicated to providing beautiful, ea
 
 ### Join SIG
 
-- [deepinM1](https://github.com/linuxdeepin/deepin-m1) deepin M1 porting.
-- [deepinRISCV](https://github.com/linuxdeepin/deepin-riscv) deepin RISC-V porting.
-- [deepinWIKI](https://github.com/linuxdeepin/wiki.deepin.org) WIKI for every deepin users.
+- [deepin RISCV](https://github.com/linuxdeepin/deepin-riscv) deepin RISC-V porting.
+- [deepin WIKI](https://github.com/linuxdeepin/wiki.deepin.org) WIKI for every deepin users.
+- [deepin M1](https://github.com/linuxdeepin/deepin-m1) deepin M1 porting.
+- [deepin Test SIG](https://github.com/deepin-community/SIG/tree/master/sig/deepin-testsig) join pre-release testing.
 
 Welcome to everyone！
