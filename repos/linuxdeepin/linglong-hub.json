@@ -18,5 +18,10 @@
     "branch": ["master", "develop/snipe", "release/snipe"],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/linglong-hub/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branch": ["master", "develop/snipe", "release/snipe"],
+    "src": "workflow-templates/call-linglong-hub.yml",
+    "dest": "linuxdeepin/linglong-hub/.github/workflows/call-build-linglong.yml"
   }
 ]
