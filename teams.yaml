@@ -119,7 +119,7 @@ teams:
         - deepin-gtk-theme
         - deepin-pw-check
         - dde-wloutput
-  - name: DDE-Front-Qt
+  - name: DDE-Frontend-Qt
     parent_team: Maintainers
     members:
       - ut000966
@@ -151,7 +151,7 @@ teams:
         - deepin-gtk-theme
         - deepin-pw-check
         - dde-wloutput
-  - name: DDE-Rear-Golang
+  - name: DDE-Backend-Golang
     parent_team: Maintainers
     members:
       - liaohanqin
