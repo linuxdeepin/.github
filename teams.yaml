@@ -73,17 +73,15 @@ teams:
       - donghualin
       - FeiW-UT003691
       - ut003722
-      - hubenchang0515
       - shenwenqi3441
       - liaohanqin
       - Mars-cb
-      - laplac2
       - ECQZXC
       - caixr23
-      - shaotianlu1995
       - rocet92
       - weizhixiangcoder
       - 2722195064
+      - yixinshark
     repositories_permissions:
       triage:
         - go-gir-generator
@@ -121,6 +119,59 @@ teams:
         - deepin-gtk-theme
         - deepin-pw-check
         - dde-wloutput
+  - name: DDE-Frontend-Qt
+    parent_team: Maintainers
+    members:
+      - ut000966
+      - waterlovemelon
+      - liaohanqin
+      - rocet92
+      - weizhixiangcoder
+    repositories_permissions:
+      maintain:
+        - dde-qt-dbus-factory
+        - dpa-ext-gnomekeyring
+        - deepin-sound-theme
+        - dareader
+        - dde-wldpms
+        - dde-wloutput-daemon
+        - dde-wayland-config
+        - dde-control-center
+        - dde-session-shell
+        - dde-dock
+        - dde-clipboard
+        - dde-session-ui
+        - dde-network-core
+        - dde-launcher
+        - dde-manual-content
+        - deepin-wallpapers
+        - dde-polkit-agent
+        - dde-account-faces
+        - deepin-gettext-tools
+        - deepin-gtk-theme
+        - deepin-pw-check
+        - dde-wloutput
+  - name: DDE-Backend-Golang
+    parent_team: Maintainers
+    members:
+      - liaohanqin
+      - rocet92
+      - weizhixiangcoder
+    repositories_permissions:
+      maintain:
+        - go-gir-generator
+        - go-lib
+        - go-dbus-factory
+        - go-x11-client
+        - dde-api
+        - startdde
+        - dde-daemon
+        - deepin-desktop-schemas
+        - deepin-authentication
+        - deepin-ab-recovery
+        - lastore-daemon
+        - deepin-network-proxy
+        - default-settings
   - name: deepin
     members:
       - felixonmars
