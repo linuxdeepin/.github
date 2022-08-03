@@ -149,6 +149,16 @@ teams:
         - developer-center
       triage:
         - action-teams-manager
+  - name: linglong-member
+    parent_team: Projects
+    members:
+      - realwujing
+      - hqh2010
+      - liujianqiang-niu
+    repositories_permissions:
+      triage:
+        - developer-center
+        - linglong-hub
   - name: Multimedia-audio-video
     parent_team: Maintainers
     members:
