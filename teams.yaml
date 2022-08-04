@@ -581,6 +581,7 @@ teams:
     members:
       - caimc123456
       - guonafu
+      - michael19911108
     repositories_permissions:
       maintain:
         - deepin-downloader
@@ -589,6 +590,7 @@ teams:
     members:
       - caimc123456
       - guonafu
+      - michael19911108
     repositories_permissions:
       maintain:
         - deepin-diskmanager
