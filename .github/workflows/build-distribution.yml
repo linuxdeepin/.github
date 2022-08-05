@@ -11,7 +11,37 @@ on:
       WEBDAV_USER:
         required: false
 jobs:
+  archlinux-check:
+    container:
+      image: ghcr.io/justforlxz/deepin-builder-docker/archlinux:master
+      options: --privileged
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+        - /etc/machine-id:/etc/machine-id
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.result.outputs.RESULT }}
+    steps:
+      - uses: actions/checkout@v3
+        if: ${{ github.event.pull_request.head.sha }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/checkout@v3
+        if: ${{ github.event_name == 'push' }}
+        with:
+          fetch-depth: 0
+      - name: Check dep
+        id: result
+        run: |
+          if [[ -f archlinux/PKGBUILD ]];
+          then
+            echo "::set-output name=RESULT::true"
+          else
+            echo "::set-output name=RESULT::false"
+          fi
   archlinux-build:
+    needs: archlinux-check
+    if: ${{ needs.archlinux-check.outputs.result == 'true' }}
     container:
       image: ghcr.io/justforlxz/deepin-builder-docker/archlinux:master
       options: --privileged
