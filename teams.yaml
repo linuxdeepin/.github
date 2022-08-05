@@ -206,9 +206,11 @@ teams:
       - realwujing
       - hqh2010
       - liujianqiang-niu
+      - tsic404
     repositories_permissions:
       triage:
         - developer-center
+      maintain:
         - linglong-hub
   - name: Multimedia-audio-video
     parent_team: Maintainers
