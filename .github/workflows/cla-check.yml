@@ -42,5 +42,6 @@ jobs:
           allow-email-list: '*@uniontech.com,*@deepin.org,*@deepin.com'
           custom-pr-sign-comment: 'I have read the CLA Document and I hereby sign the CLA.'
           #custom-allsigned-prcomment: 'pull request comment when all contributors has signed, defaults to **CLA Assistant Lite bot** All Contributors have signed the CLA.'
-          #lock-pullrequest-aftermerge: false - if you don't want this bot to automatically lock the pull request after merging (default - true)
+          lock-pullrequest-aftermerge: false
+          # if you don't want this bot to automatically lock the pull request after merging (default - true)
           #use-dco-flag: true - If you are using DCO instead of CLA
