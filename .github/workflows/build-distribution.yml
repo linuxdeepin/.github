@@ -217,6 +217,10 @@ jobs:
           echo "deb [trusted=yes] https://deepin-community.github.io/debian-sid-dde-repo sid main" >> /etc/apt/sources.list
           echo "deb http://ftp.us.debian.org/debian/ sid main contrib non-free" >> /etc/apt/sources.list
 
+          echo "Package: *" >> /etc/apt/preferences
+          echo "Pin: origin deepin-community.github.io" >> /etc/apt/preferences
+          echo "Pin-Priority: 1000" >> /etc/apt/preferences
+
           apt-get update || true
           apt-get dist-upgrade -y
           apt-get install devscripts -y
