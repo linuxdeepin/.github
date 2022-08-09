@@ -9,6 +9,7 @@ env:
   GITHUB_TOKEN: ${{ github.token }}
   BRIDGE_TOKEN: ${{ secrets.BridgeToken }}
   SERVER: https://jenkins-bridge-deepin-pre.uniontech.com
+  CHANGE_ID: ${{ github.event.pull_request.number }}
 
 jobs:
   build:
