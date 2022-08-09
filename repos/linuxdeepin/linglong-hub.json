@@ -21,7 +21,7 @@
   },
   {
     "branch": ["master", "develop/snipe", "release/snipe"],
-    "src": "workflow-templates/call-linglong-hub.yml",
+    "src": "workflow-templates/call-build-linglong.yml",
     "dest": "linuxdeepin/linglong-hub/.github/workflows/call-build-linglong.yml"
   }
 ]
