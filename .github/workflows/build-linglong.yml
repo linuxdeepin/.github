@@ -14,38 +14,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: "PROD"
     steps:
-      - name: install depends
-        run: |
-          npm install @octokit/rest
-
-      - name: call build or not
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { Octokit } = require("@octokit/rest");
-            const octokit = new Octokit({
-              auth: process.env.GITHUB_TOKEN,
-            });
-
-            const { data } = await octokit.issues.listLabelsOnIssue({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-            });
-
-            const labeled = (data.find(label => label.name === "Allow Build") !== undefined)
-
-            if (!labeled) {
-              octokit.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: '@linuxdeepin/linglong-member label `Allow Build` to call build'
-              });
-              throw "This pull request has not been checked"
-            }
-
       - name: Print Environment
         run: export
 
