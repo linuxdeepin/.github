@@ -1,37 +1,72 @@
 [
   {
-    "branches": ["master", "develop/.+", "maintain/.+"],
+    "branches": [
+      "master",
+      "develop/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/deepin-turbo/.github/workflows/backup-to-gitlab.yml"
   },
   {
-    "branches": ["master", "develop/.+", "maintain/.+"],
+    "branches": [
+      "master",
+      "develop/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/deepin-turbo/.github/workflows/call-commitlint.yml"
   },
   {
-    "branches": ["master", "develop/.+", "maintain/.+"],
+    "branches": [
+      "master",
+      "develop/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/deepin-turbo/.github/workflows/call-chatOps.yml"
   },
   {
-    "branches": ["master", "develop/.+", "maintain/.+"],
+    "branches": [
+      "master",
+      "develop/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/cppcheck.yml",
     "dest": "linuxdeepin/deepin-turbo/.github/workflows/cppcheck.yml"
   },
   {
-    "branches": ["master", "develop/.+", "maintain/.+"],
+    "branches": [
+      "master",
+      "develop/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/deepin-turbo/.github/workflows/call-build-deb.yml"
   },
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/call-build-distribution.yml",
     "dest": "linuxdeepin/deepin-turbo/.github/workflows/call-build-distribution.yml"
   },
   {
-    "branch": ["master", "develop/.+", "maintain/.+"],
+    "branch": [
+      "master",
+      "develop/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/deepin-turbo/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "maintain/.+"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/deepin-turbo/.github/workflows/call-license-check.yml"
   }
 ]
