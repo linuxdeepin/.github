@@ -4,10 +4,10 @@ on: workflow_call
 jobs:
   Check-License:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v3
       - uses: fsfe/reuse-action@v1.2.0
+        continue-on-error: true
   Check-README:
     runs-on: ubuntu-latest
     steps:
@@ -19,11 +19,11 @@ jobs:
         shell: zsh {0}
   Check-README_zh_CN:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v3
       - name: Install zsh
         run: sudo apt install zsh
       - name: README.zh_CN.md Check
+        continue-on-error: true
         run: if [ ! -f "README.zh_CN.md" ]; then echo "missing README.zh_CN.md";return 1;fi
         shell: zsh {0}
