@@ -11,6 +11,7 @@ settings:
       - dtkcore
       - dtkwidget
       - dtkgui
+      - dtk-template
       - dtkdeclarative
       - qt5integration
       - deepin-anything
