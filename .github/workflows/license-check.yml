@@ -26,7 +26,7 @@ jobs:
         with:
           name: results
       - name: comment PR
-        uses: machine-learning-apps/pr-comment@master
+        uses: OleksiyRudenko/pr-comment@pull_request_target
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -64,7 +64,7 @@ jobs:
         with:
           name: results
       - name: comment PR
-        uses: machine-learning-apps/pr-comment@master
+        uses: OleksiyRudenko/pr-comment@pull_request_target
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
