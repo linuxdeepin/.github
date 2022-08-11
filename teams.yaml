@@ -220,7 +220,7 @@ teams:
       - wyu71
       - HeeMingYang
     repositories_permissions:
-      maintain:
+      write:
         - deepin-camera
         - deepin-music
         - deepin-screen-recorder
@@ -271,7 +271,7 @@ teams:
       - deepin-CD
       - starhcq
     repositories_permissions:
-      maintain:
+      write:
         - deepin-draw
         - deepin-image-viewer
         - deepin-album
@@ -390,7 +390,7 @@ teams:
       - re2zero
       - wangrong1069
     repositories_permissions:
-      maintain:
+      write:
         - deepin-anything
   - name: dde-file-manager
     parent_team: Maintainers
@@ -399,7 +399,7 @@ teams:
       - Clauszy
       - Johnson-zs
     repositories_permissions:
-      maintain:
+      write:
         - dde-file-manager
   - name: udisks2-qt5
     parent_team: Maintainers
@@ -416,7 +416,7 @@ teams:
       - lvwujun
       - itsXuSt
     repositories_permissions:
-      maintain:
+      write:
         - dde-device-formatter
   - name: deepin-screensaver
     parent_team: Maintainers
@@ -425,7 +425,7 @@ teams:
       - wangchunlin5013
       - lvwujun
     repositories_permissions:
-      maintain:
+      write:
         - deepin-screensaver
   - name: disomaster
     parent_team: Maintainers
@@ -442,7 +442,7 @@ teams:
       - Kakueeen
       - lvwujun
     repositories_permissions:
-      maintain:
+      write:
         - docparser
   - name: gio-qt
     parent_team: Maintainers
@@ -451,7 +451,7 @@ teams:
       - misonlan
       - Johnson-zs
     repositories_permissions:
-      maintain:
+      write:
         - gio-qt
   - name: dde-grand-search
     parent_team: Maintainers
@@ -545,7 +545,7 @@ teams:
       - HuiHui97520
       - chenhaifeng-ut
     repositories_permissions:
-      maintain:
+      write:
         - dde-introduction
         - deepin-deb-installer
         - deepin-compressor
@@ -585,7 +585,7 @@ teams:
       - guonafu
       - michael19911108
     repositories_permissions:
-      maintain:
+      write:
         - deepin-downloader
   - name: deepin-diskmanager
     parent_team: Maintainers
@@ -594,7 +594,7 @@ teams:
       - guonafu
       - michael19911108
     repositories_permissions:
-      maintain:
+      write:
         - deepin-diskmanager
   - name: deepin-fcitxconfigtool-plugin
     parent_team: Maintainers
@@ -602,7 +602,7 @@ teams:
       - chenshijie-uos
       - san-Hei
     repositories_permissions:
-      maintain:
+      write:
         - deepin-fcitxconfigtool-plugin
   - name: deepin-graphics-driver-manager
     parent_team: Maintainers
@@ -611,7 +611,7 @@ teams:
       - guonafu
       - liuli0217
     repositories_permissions:
-      maintain:
+      write:
         - deepin-graphics-driver-manager
   - name: dde-printer
     parent_team: Maintainers
@@ -620,5 +620,5 @@ teams:
       - liuli0217
       - kingjinni
     repositories_permissions:
-      maintain:
+      write:
         - dde-printer
