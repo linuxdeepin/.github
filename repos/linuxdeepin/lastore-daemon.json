@@ -1,27 +1,44 @@
 [
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/lastore-daemon/.github/workflows/backup-to-gitlab.yml"
   },
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/lastore-daemon/.github/workflows/call-commitlint.yml"
   },
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/lastore-daemon/.github/workflows/call-chatOps.yml"
   },
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/lastore-daemon/.github/workflows/call-build-deb.yml"
   },
   {
-    "branch": ["master"],
+    "branch": [
+      "master"
+    ],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/lastore-daemon/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/lastore-daemon/.github/workflows/call-license-check.yml"
   }
 ]
