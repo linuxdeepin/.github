@@ -14,7 +14,13 @@ jobs:
         continue-on-error: true
       - name: Generate Reports
         if: steps.lcheck.outcome != 'success'
-        run: mkdir output;reuse lint > output/results.txt || true
+        run: |
+          mkdir output
+          echo "License miss" > output/results || true
+          echo "<details>" >> output/results || true
+          echo "  <summary> Click me </summary>" >> output/results || true
+          reuse lint >> output/results.txt || true
+          echo "</details>" >> output/results.txt || true
       - name: Generate License pass Reports
         if: steps.lcheck.outcome == 'success'
         run: mkdir output;echo "All right about License Check!" > output/results.txt || true
