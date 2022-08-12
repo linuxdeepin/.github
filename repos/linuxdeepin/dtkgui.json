@@ -54,5 +54,12 @@
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/dtkgui/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-doc-check.yml",
+    "dest": "linuxdeepin/dtkgui/.github/workflows/call-doc-check.yml"
   }
 ]
