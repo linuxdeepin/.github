@@ -18,7 +18,7 @@ teams:
       - shaojun
       - kegechen
     repositories_permissions:
-      maintain:
+      push:
         - go-gir-generator
         - go-lib
         - go-dbus-factory
@@ -128,7 +128,7 @@ teams:
       - rocet92
       - weizhixiangcoder
     repositories_permissions:
-      maintain:
+      push:
         - dde-qt-dbus-factory
         - dpa-ext-gnomekeyring
         - deepin-sound-theme
@@ -158,7 +158,7 @@ teams:
       - rocet92
       - weizhixiangcoder
     repositories_permissions:
-      maintain:
+      push:
         - go-gir-generator
         - go-lib
         - go-dbus-factory
@@ -316,7 +316,7 @@ teams:
       - zccrs
       - kegechen
     repositories_permissions:
-      maintain:
+      push:
         - dtkcommon
         - dtkcore
         - dtkdeclarative
@@ -409,7 +409,7 @@ teams:
       - Johnson-zs
       - itsXuSt
     repositories_permissions:
-      maintain:
+      push:
         - udisks2-qt5
   - name: dde-device-formatter
     parent_team: Maintainers
@@ -435,7 +435,7 @@ teams:
       - Johnson-zs
       - itsXuSt
     repositories_permissions:
-      maintain:
+      push:
         - disomaster
   - name: docparser
     parent_team: Maintainers
@@ -460,7 +460,7 @@ teams:
       - Clauszy
       - wangchunlin5013
     repositories_permissions:
-      maintain:
+      push:
         - dde-grand-search
   - name: deepin-face
     parent_team: Maintainers
@@ -469,7 +469,7 @@ teams:
       - kegechen
       - robertkill
     repositories_permissions:
-      maintain:
+      push:
         - deepin-face
         - seetaface-tracker
         - seetaface-tennis
@@ -488,7 +488,7 @@ teams:
     members:
       - guonafu
     repositories_permissions:
-      maintain:
+      push:
         - deepin-clone
   - name: deepin-boot-maker
     parent_team: Maintainers
@@ -496,14 +496,14 @@ teams:
       - guonafu
       - wanjian1
     repositories_permissions:
-      maintain:
+      push:
         - deepin-boot-maker
   - name: dde-control-center
     parent_team: Maintainers
     members:
       - shenwenqi3441
     repositories_permissions:
-      maintain:
+      push:
         - dde-control-center
   - name: deepin-kwin
     parent_team: Maintainers
@@ -512,7 +512,7 @@ teams:
       - hitong602
       - ChaojiangLuo
     repositories_permissions:
-      maintain:
+      push:
         - deepin-kwin
         - dde-kwin
   - name: deepin-kwin-member
