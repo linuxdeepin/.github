@@ -9,15 +9,7 @@ jobs:
       - name: Fetch code
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
-      - name: Download commitlint config teamplate
-        run: |
-          wget https://raw.githubusercontent.com/linuxdeepin/.github/master/commitlint/commitlint.config.js \
-            -O ./commitlint.config.js
-
-      - name: CommitLint
-        uses: wagoid/commitlint-github-action@v4
-        with:
-          configFile: "./commitlint.config.js"
+      - name: Call Conventional Commits Checker
+        uses: linuxdeepin/action-conventionalcommits-checker@master
