@@ -59,7 +59,7 @@
     "branches": [
       "master"
     ],
-    "src": "workflow-templates/call-license-check.yml",
+    "src": "workflow-templates/call-doc-check.yml",
     "dest": "linuxdeepin/dtkwidget/.github/workflows/call-doc-check.yml"
   }
 ]
