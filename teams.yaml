@@ -247,6 +247,7 @@ teams:
       - jeffshuai
       - hundundadi
       - myk1343
+      - ang486
     repositories_permissions:
       triage:
         - deepin-camera
@@ -270,6 +271,7 @@ teams:
       - lzwind
       - deepin-CD
       - starhcq
+      - wzyforgit
     repositories_permissions:
       push:
         - deepin-draw
