@@ -12,12 +12,19 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
+      - name: Call Conventional Commits Checker
+        uses: linuxdeepin/action-conventionalcommits-checker@master
+        id: conventionalcommits-checker
+        continue-on-error: true
+
       - name: Download commitlint config teamplate
+        if: steps.conventionalcommits-checker.outcome == 'failure'
         run: |
           wget https://raw.githubusercontent.com/linuxdeepin/.github/master/commitlint/commitlint.config.js \
             -O ./commitlint.config.js
 
       - name: CommitLint
         uses: wagoid/commitlint-github-action@v4
+        if: steps.conventionalcommits-checker.outcome == 'failure'
         with:
           configFile: "./commitlint.config.js"
