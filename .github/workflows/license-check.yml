@@ -18,9 +18,8 @@ jobs:
         if: steps.lcheck.outcome != 'success'
         run: |
           mkdir output
-          echo "License miss" > output/results || true
-          echo "<details>" >> output/results || true
-          echo "  <summary> Click me </summary>" >> output/results || true
+          printf "## License: REUSE Compliance Check failed\n" > output/results.txt || true
+          echo "<details>" >> output/results.txt || true
           reuse lint >> output/results.txt || true
           echo "</details>" >> output/results.txt || true
       - name: Generate License pass Reports
