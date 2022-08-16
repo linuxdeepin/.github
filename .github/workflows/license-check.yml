@@ -18,11 +18,11 @@ jobs:
         if: steps.lcheck.outcome != 'success'
         run: |
           mkdir output
-          echo "License miss" > output/results || true
-          echo "<details>" >> output/results || true
-          echo "  <summary> Click me </summary>" >> output/results || true
+          echo "License missing" > output/results.txt
+          echo "<details>" >> output/results.txt 
+          echo "  <summary> Click me </summary>" >> output/results.txt || true
           reuse lint >> output/results.txt || true
-          echo "</details>" >> output/results.txt || true
+          echo "</details>" >> output/results.txt 
       - name: Generate License pass Reports
         if: steps.lcheck.outcome == 'success'
         run: mkdir output;echo "All right about License Check!" > output/results.txt || true
