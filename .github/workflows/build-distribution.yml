@@ -215,7 +215,7 @@ jobs:
           rm /etc/apt/sources.list
           echo "deb [trusted=yes] https://deepin-community.github.io/debian-sid-dde-deps-repo sid main" >> /etc/apt/sources.list
           echo "deb [trusted=yes] https://deepin-community.github.io/debian-sid-dde-repo sid main" >> /etc/apt/sources.list
-          echo "deb http://ftp.us.debian.org/debian/ sid main contrib non-free" >> /etc/apt/sources.list
+          echo "deb https://ftp.jaist.ac.jp/pub/Linux/debian/ sid main contrib non-free" >> /etc/apt/sources.list
 
           echo "Package: *" >> /etc/apt/preferences
           echo "Pin: origin deepin-community.github.io" >> /etc/apt/preferences
