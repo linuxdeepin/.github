@@ -61,5 +61,14 @@
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/deepin-downloader/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "dev",
+      "maintain/.+"
+    ],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/deepin-downloader/.github/workflows/call-build-distribution.yml"
   }
 ]

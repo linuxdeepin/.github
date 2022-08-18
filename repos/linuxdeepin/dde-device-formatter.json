@@ -54,5 +54,13 @@
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/dde-device-formatter/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+"
+    ],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/dde-device-formatter/.github/workflows/call-build-distribution.yml"
   }
 ]
