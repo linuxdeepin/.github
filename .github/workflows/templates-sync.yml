@@ -56,9 +56,6 @@ jobs:
         uses: linuxdeepin/action-sync@main
         if: steps.changed-configs.outputs.any_changed == 'true'
         with:
-          app_id: 174141
-          installation_id: 23463138
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
           files: "${{ steps.changed-configs.outputs.all_changed_files }}"
           message: "chore: Sync by ${{ github.event.head_commit.url }}"
 
@@ -73,8 +70,5 @@ jobs:
         uses: linuxdeepin/action-sync@main
         if: steps.changed-files.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
         with:
-          app_id: 174141
-          installation_id: 23463138
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
           files: "${{ steps.all-configs.outputs.ALL_CONFIGS }}"
           message: "chore: Sync by ${{ github.event.head_commit.url }}"
