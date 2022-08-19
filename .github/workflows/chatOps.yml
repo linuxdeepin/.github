@@ -98,9 +98,13 @@ jobs:
             });
             for(const run of listResp.data.check_runs){
               if(checkNameGroup) {
-                const name = run.name.replace(/ \/ /g,'/')
-                if(name.includes(checkNameGroup[1])){
+                const input = checkNameGroup[1].startsWith("/") ? checkNameGroup[1] : '/' + checkNameGroup[1]
+                const name ='/' + run.name.replace(/ \/ /g,'/')
+                if(name.includes(input){
+                  console.log(name, "re-check")
                   await github.request(`POST /repos/${context.repo.owner}/${context.repo.repo}/actions/jobs/${run.id}/rerun`);
+                } else {
+                  console.log(name, "skip")
                 }
               }else{
                 await github.request(`POST /repos/${context.repo.owner}/${context.repo.repo}/actions/jobs/${run.id}/rerun`);
