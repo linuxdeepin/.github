@@ -100,7 +100,7 @@ jobs:
               if(checkNameGroup) {
                 const input = checkNameGroup[1].startsWith("/") ? checkNameGroup[1] : '/' + checkNameGroup[1]
                 const name ='/' + run.name.replace(/ \/ /g,'/')
-                if(name.includes(input){
+                if(name.includes(input)){
                   console.log(name, "re-check")
                   await github.request(`POST /repos/${context.repo.owner}/${context.repo.repo}/actions/jobs/${run.id}/rerun`);
                 } else {
