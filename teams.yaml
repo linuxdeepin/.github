@@ -248,6 +248,7 @@ teams:
       - hundundadi
       - myk1343
       - ang486
+      - lichunlong111
     repositories_permissions:
       triage:
         - deepin-camera
@@ -293,6 +294,7 @@ teams:
       - wzyforgit
       - rb-union
       - helloseekll
+      - fanjiuwu
     repositories_permissions:
       triage:
         - deepin-draw
