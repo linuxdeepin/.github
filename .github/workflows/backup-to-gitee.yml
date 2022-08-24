@@ -1,4 +1,4 @@
-name: backup to gitlab
+name: backup to gitee
 on:
   workflow_call:
     secrets:

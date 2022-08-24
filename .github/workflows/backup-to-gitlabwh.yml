@@ -1,4 +1,4 @@
-name: backup to gitlab
+name: backup to gitlabwh
 on:
   workflow_call:
     secrets:
@@ -6,7 +6,7 @@ on:
         required: true
 
 jobs:
-  backup-to-gitlab:
+  backup-to-gitlabwh:
     if: github.repository_owner == 'linuxdeepin'
     name: backup-to-gitlab
     runs-on: ubuntu-latest
