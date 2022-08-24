@@ -3,9 +3,9 @@ on:
   workflow_call:
     secrets:
       GITEE_SYNC_TOKEN:
-        require: true
+        required: true
       BRIDGETOKEN:
-        require: true
+        required: true
 
 jobs:
   backup-to-gitee:
