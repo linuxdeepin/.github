@@ -61,5 +61,12 @@
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/deepin-movie-reborn/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/deepin-movie-reborn/.github/workflows/call-build-distribution.yml"
   }
 ]
