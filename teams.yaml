@@ -2,8 +2,9 @@ teams:
   - name: Admins
     members:
       - zccrs
+      - deepin-admin-bot
     repositories_permissions:
-      maintain:
+      admin:
         - "*"
   - name: DDE
     parent_team: Maintainers
