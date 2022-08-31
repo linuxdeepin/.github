@@ -530,6 +530,7 @@ teams:
       - thinkingning
       - wangxinbo-git
       - dandan-y
+      - zy-seven
     repositories_permissions:
       triage:
         - deepin-kwin
