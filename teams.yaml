@@ -529,6 +529,7 @@ teams:
       - diguoliang
       - thinkingning
       - wangxinbo-git
+      - dandan-y
     repositories_permissions:
       triage:
         - deepin-kwin
