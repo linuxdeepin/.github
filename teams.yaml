@@ -404,6 +404,19 @@ teams:
       - lvwujun
       - Clauszy
       - Johnson-zs
+      - obslee
+      - Kakueeen
+      - GongHeng2017
+      - itsXuSt
+      - misonlan
+      - Lighto
+      - re2zero
+      - wangrong1069
+      - shzhuangpub
+      - hanxiii-z
+      - stdLike
+      - tingwei1123
+      - toberyan
     repositories_permissions:
       push:
         - dde-file-manager
@@ -430,6 +443,7 @@ teams:
       - Clauszy
       - wangchunlin5013
       - lvwujun
+      - obslee
     repositories_permissions:
       push:
         - deepin-screensaver
@@ -464,6 +478,7 @@ teams:
     members:
       - Clauszy
       - wangchunlin5013
+      - hanxiii-z
     repositories_permissions:
       push:
         - dde-grand-search
