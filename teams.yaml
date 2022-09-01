@@ -532,6 +532,7 @@ teams:
       - dandan-y
       - xupeidongdong
       - zhangyaninga
+      - guokaka
     repositories_permissions:
       triage:
         - deepin-kwin
