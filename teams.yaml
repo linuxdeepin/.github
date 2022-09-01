@@ -532,6 +532,7 @@ teams:
       - dandan-y
       - xupeidongdong
       - zhangyaninga
+      - UniqueDing
     repositories_permissions:
       triage:
         - deepin-kwin
