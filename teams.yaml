@@ -552,6 +552,7 @@ teams:
       - UniqueDing
       - xyruos
       - guokaka
+      - san-Hei
     repositories_permissions:
       triage:
         - deepin-kwin
