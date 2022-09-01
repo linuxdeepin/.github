@@ -533,6 +533,7 @@ teams:
       - xupeidongdong
       - zhangyaninga
       - guokaka
+      - UniqueDing
     repositories_permissions:
       triage:
         - deepin-kwin
