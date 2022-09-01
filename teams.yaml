@@ -550,6 +550,7 @@ teams:
       - zhangyaninga
       - UniqueDing
       - xyruos
+      - guokaka
     repositories_permissions:
       triage:
         - deepin-kwin
