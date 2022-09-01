@@ -24,13 +24,6 @@
     "branches": [
       "apricot"
     ],
-    "src": "workflow-templates/cppcheck.yml",
-    "dest": "linuxdeepin/deepin-desktop-base/.github/workflows/cppcheck.yml"
-  },
-  {
-    "branches": [
-      "apricot"
-    ],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/deepin-desktop-base/.github/workflows/call-build-deb.yml"
   },
