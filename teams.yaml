@@ -531,7 +531,6 @@ teams:
       - axylp
       - hitong602
       - ChaojiangLuo
-      - xyruos
     repositories_permissions:
       push:
         - deepin-kwin
