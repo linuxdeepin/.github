@@ -629,3 +629,10 @@ teams:
     repositories_permissions:
       push:
         - dde-printer
+  - name: unilang
+    parent_team: Maintainers
+    members:
+      - FrankHB
+    repositories_permissions:
+      maintain:
+        - unilang
