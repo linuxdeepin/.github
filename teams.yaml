@@ -531,6 +531,7 @@ teams:
       - axylp
       - hitong602
       - ChaojiangLuo
+      - xyruos
     repositories_permissions:
       push:
         - deepin-kwin
@@ -548,6 +549,7 @@ teams:
       - xupeidongdong
       - zhangyaninga
       - UniqueDing
+      - xyruos
     repositories_permissions:
       triage:
         - deepin-kwin
