@@ -598,6 +598,19 @@ teams:
     repositories_permissions:
       push:
         - dde-printer
+  - name: deepin-plymouth
+    parent_team: Maintainers
+    members:
+      - ALTNT
+      - hengdinx
+      - uos-eng
+      - wxphaha
+    repositories_permissions:
+      push:
+        - deepin-plymouth
+        - deepin-desktop-base
+        - deepin-icon-theme
+        - deepin-cursor-theme
   - name: unilang
     parent_team: Maintainers
     members:
