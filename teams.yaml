@@ -602,6 +602,9 @@ teams:
     parent_team: Maintainers
     members:
       - ALTNT
+      - hengdinx
+      - uos-eng
+      - wxphaha
     repositories_permissions:
       push:
         - deepin-plymouth
