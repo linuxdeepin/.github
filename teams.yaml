@@ -608,6 +608,9 @@ teams:
     repositories_permissions:
       push:
         - deepin-plymouth
+        - deepin-desktop-base
+        - deepin-icon-theme
+        - deepin-cursor-theme
   - name: unilang
     parent_team: Maintainers
     members:
