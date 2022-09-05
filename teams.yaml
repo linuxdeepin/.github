@@ -123,7 +123,7 @@ teams:
   - name: DDE-Frontend-Qt
     parent_team: Maintainers
     members:
-      - ut000966
+      - chenjun1982
       - waterlovemelon
       - liaohanqin
       - rocet92
