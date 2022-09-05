@@ -602,7 +602,6 @@ teams:
     parent_team: Maintainers
     members:
       - ALTNT
-      - wxp19831104
     repositories_permissions:
       push:
         - deepin-plymouth
