@@ -71,7 +71,7 @@ settings:
       - deepin-picker
       - deepin-desktop-base
       - deepin-icon-theme
-      - deepin-cursor-theme
+      - deepin-plymouth
       - deepin-wallpapers
       - deepin-clone
       - deepin-boot-maker
