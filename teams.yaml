@@ -83,6 +83,7 @@ teams:
       - weizhixiangcoder
       - 2722195064
       - yixinshark
+      - wentaosong1993
     repositories_permissions:
       triage:
         - go-gir-generator
