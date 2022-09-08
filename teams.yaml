@@ -509,6 +509,7 @@ teams:
     parent_team: Maintainers
     members:
       - guonafu
+      - SuperZhangxueming
     repositories_permissions:
       push:
         - deepin-clone
@@ -517,6 +518,7 @@ teams:
     members:
       - guonafu
       - wanjian1
+      - Fire-dtx
     repositories_permissions:
       push:
         - deepin-boot-maker
@@ -580,6 +582,10 @@ teams:
     members:
       - chenshijie-uos
       - san-Hei
+      - guonafu
+      - caimc123456
+      - Fire-dtx
+      - SuperZhangxueming
     repositories_permissions:
       push:
         - deepin-fcitxconfigtool-plugin
