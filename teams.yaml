@@ -431,6 +431,15 @@ teams:
     repositories_permissions:
       push:
         - udisks2-qt5
+  - name: deepin-shortcut-viewer
+    parent_team: Maintainers
+    members:
+      - lvwujun
+      - Kakueeen
+      - Lighto
+    repositories_permissions:
+      push:
+        - deepin-shortcut-viewer
   - name: dde-device-formatter
     parent_team: Maintainers
     members:
