@@ -11,6 +11,8 @@ settings:
       - dtkcore
       - dtkwidget
       - dtkgui
+      - dtk-template
+      - dtkdeclarative
       - qt5integration
       - deepin-anything
       - deepin-system-monitor
@@ -69,7 +71,7 @@ settings:
       - deepin-picker
       - deepin-desktop-base
       - deepin-icon-theme
-      - deepin-cursor-theme
+      - deepin-plymouth
       - deepin-wallpapers
       - deepin-clone
       - deepin-boot-maker
@@ -90,6 +92,9 @@ settings:
       - deepin-graphics-driver-manager
       - dde-calendar
       - deepin-shortcut-viewer
+      - deepin-reader
+      - deepin-devicemanager
+      - deepin-editor
     features:
       issues:
         enable: true

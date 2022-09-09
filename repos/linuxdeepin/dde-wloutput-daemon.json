@@ -1,27 +1,65 @@
 [
   {
-    "branches": ["master", "develop/.+", "dev-wayland"],
+    "branches": [
+      "master",
+      "develop/.+",
+      "dev-wayland"
+    ],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/backup-to-gitlab.yml"
   },
   {
-    "branches": ["master", "develop/.+", "dev-wayland"],
+    "branches": [
+      "master",
+      "develop/.+",
+      "dev-wayland"
+    ],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/call-commitlint.yml"
   },
   {
-    "branches": ["master", "develop/.+", "dev-wayland"],
+    "branches": [
+      "master",
+      "develop/.+",
+      "dev-wayland"
+    ],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/call-chatOps.yml"
   },
   {
-    "branches": ["master", "develop/.+", "dev-wayland"],
+    "branches": [
+      "master",
+      "develop/.+",
+      "dev-wayland"
+    ],
     "src": "workflow-templates/cppcheck.yml",
     "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/cppcheck.yml"
   },
   {
-    "branches": ["master", "develop/.+", "dev-wayland"],
+    "branches": [
+      "master",
+      "develop/.+",
+      "dev-wayland"
+    ],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "dev-wayland"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "dev-wayland"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/dde-wloutput-daemon/.github/workflows/call-license-check.yml"
   }
 ]

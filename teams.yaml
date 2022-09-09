@@ -2,8 +2,9 @@ teams:
   - name: Admins
     members:
       - zccrs
+      - deepin-admin-bot
     repositories_permissions:
-      maintain:
+      admin:
         - "*"
   - name: DDE
     parent_team: Maintainers
@@ -15,10 +16,10 @@ teams:
       - ssk-wh
       - robertkill
       - groveer
-      - shaojun
+      - shao-jun
       - kegechen
     repositories_permissions:
-      maintain:
+      push:
         - go-gir-generator
         - go-lib
         - go-dbus-factory
@@ -66,24 +67,23 @@ teams:
       - ssk-wh
       - robertkill
       - groveer
-      - shaojun
-      - ut000966
+      - shao-jun
+      - chenjun1982
       - waterlovemelon
       - dengbo11
       - donghualin
-      - FeiW-UT003691
+      - FeiWang1119
       - ut003722
-      - hubenchang0515
       - shenwenqi3441
       - liaohanqin
       - Mars-cb
-      - laplac2
       - ECQZXC
       - caixr23
-      - shaotianlu1995
       - rocet92
       - weizhixiangcoder
       - 2722195064
+      - yixinshark
+      - wentaosong1993
     repositories_permissions:
       triage:
         - go-gir-generator
@@ -121,6 +121,59 @@ teams:
         - deepin-gtk-theme
         - deepin-pw-check
         - dde-wloutput
+  - name: DDE-Frontend-Qt
+    parent_team: Maintainers
+    members:
+      - chenjun1982
+      - waterlovemelon
+      - liaohanqin
+      - rocet92
+      - weizhixiangcoder
+    repositories_permissions:
+      push:
+        - dde-qt-dbus-factory
+        - dpa-ext-gnomekeyring
+        - deepin-sound-theme
+        - dareader
+        - dde-wldpms
+        - dde-wloutput-daemon
+        - dde-wayland-config
+        - dde-control-center
+        - dde-session-shell
+        - dde-dock
+        - dde-clipboard
+        - dde-session-ui
+        - dde-network-core
+        - dde-launcher
+        - dde-manual-content
+        - deepin-wallpapers
+        - dde-polkit-agent
+        - dde-account-faces
+        - deepin-gettext-tools
+        - deepin-gtk-theme
+        - deepin-pw-check
+        - dde-wloutput
+  - name: DDE-Backend-Golang
+    parent_team: Maintainers
+    members:
+      - liaohanqin
+      - rocet92
+      - weizhixiangcoder
+    repositories_permissions:
+      push:
+        - go-gir-generator
+        - go-lib
+        - go-dbus-factory
+        - go-x11-client
+        - dde-api
+        - startdde
+        - dde-daemon
+        - deepin-desktop-schemas
+        - deepin-authentication
+        - deepin-ab-recovery
+        - lastore-daemon
+        - deepin-network-proxy
+        - default-settings
   - name: deepin
     members:
       - felixonmars
@@ -149,6 +202,18 @@ teams:
         - developer-center
       triage:
         - action-teams-manager
+  - name: linglong-member
+    parent_team: Projects
+    members:
+      - realwujing
+      - hqh2010
+      - liujianqiang-niu
+      - tsic404
+    repositories_permissions:
+      triage:
+        - developer-center
+      maintain:
+        - linglong-hub
   - name: Multimedia-audio-video
     parent_team: Maintainers
     members:
@@ -157,7 +222,7 @@ teams:
       - wyu71
       - HeeMingYang
     repositories_permissions:
-      maintain:
+      push:
         - deepin-camera
         - deepin-music
         - deepin-screen-recorder
@@ -181,9 +246,11 @@ teams:
       - wyu71
       - HeeMingYang
       - feeengli
-      - shuaijie
+      - jeffshuai
       - hundundadi
       - myk1343
+      - ang486
+      - lichunlong111
     repositories_permissions:
       triage:
         - deepin-camera
@@ -207,8 +274,9 @@ teams:
       - lzwind
       - deepin-CD
       - starhcq
+      - wzyforgit
     repositories_permissions:
-      maintain:
+      push:
         - deepin-draw
         - deepin-image-viewer
         - deepin-album
@@ -227,7 +295,8 @@ teams:
       - starhcq
       - wzyforgit
       - rb-union
-      - helloseekll
+      - HZLwwwwt
+      - fanjiuwu
     repositories_permissions:
       triage:
         - deepin-draw
@@ -252,8 +321,9 @@ teams:
     members:
       - zccrs
       - kegechen
+      - groveer
     repositories_permissions:
-      maintain:
+      push:
         - dtkcommon
         - dtkcore
         - dtkdeclarative
@@ -262,6 +332,7 @@ teams:
         - qt5integration
         - qt5platform-plugins
         - dde-app-services
+        - dtk-template
       triage:
         - action-teams-manager
   - name: DTK-member
@@ -327,7 +398,7 @@ teams:
       - re2zero
       - wangrong1069
     repositories_permissions:
-      maintain:
+      push:
         - deepin-anything
   - name: dde-file-manager
     parent_team: Maintainers
@@ -335,8 +406,21 @@ teams:
       - lvwujun
       - Clauszy
       - Johnson-zs
+      - obslee
+      - Kakueeen
+      - GongHeng2017
+      - itsXuSt
+      - misonlan
+      - Lighto
+      - re2zero
+      - wangrong1069
+      - shzhuangpub
+      - hanxiii-z
+      - stdLike
+      - tingwei1123
+      - toberyan
     repositories_permissions:
-      maintain:
+      push:
         - dde-file-manager
   - name: udisks2-qt5
     parent_team: Maintainers
@@ -345,7 +429,7 @@ teams:
       - Johnson-zs
       - itsXuSt
     repositories_permissions:
-      maintain:
+      push:
         - udisks2-qt5
   - name: dde-device-formatter
     parent_team: Maintainers
@@ -353,7 +437,7 @@ teams:
       - lvwujun
       - itsXuSt
     repositories_permissions:
-      maintain:
+      push:
         - dde-device-formatter
   - name: deepin-screensaver
     parent_team: Maintainers
@@ -361,8 +445,9 @@ teams:
       - Clauszy
       - wangchunlin5013
       - lvwujun
+      - obslee
     repositories_permissions:
-      maintain:
+      push:
         - deepin-screensaver
   - name: disomaster
     parent_team: Maintainers
@@ -371,7 +456,7 @@ teams:
       - Johnson-zs
       - itsXuSt
     repositories_permissions:
-      maintain:
+      push:
         - disomaster
   - name: docparser
     parent_team: Maintainers
@@ -379,7 +464,7 @@ teams:
       - Kakueeen
       - lvwujun
     repositories_permissions:
-      maintain:
+      push:
         - docparser
   - name: gio-qt
     parent_team: Maintainers
@@ -388,15 +473,16 @@ teams:
       - misonlan
       - Johnson-zs
     repositories_permissions:
-      maintain:
+      push:
         - gio-qt
   - name: dde-grand-search
     parent_team: Maintainers
     members:
       - Clauszy
       - wangchunlin5013
+      - hanxiii-z
     repositories_permissions:
-      maintain:
+      push:
         - dde-grand-search
   - name: deepin-face
     parent_team: Maintainers
@@ -405,7 +491,7 @@ teams:
       - kegechen
       - robertkill
     repositories_permissions:
-      maintain:
+      push:
         - deepin-face
         - seetaface-tracker
         - seetaface-tennis
@@ -423,23 +509,25 @@ teams:
     parent_team: Maintainers
     members:
       - guonafu
+      - SuperZhangxueming
     repositories_permissions:
-      maintain:
+      push:
         - deepin-clone
   - name: deepin-boot-maker
     parent_team: Maintainers
     members:
       - guonafu
       - wanjian1
+      - Fire-dtx
     repositories_permissions:
-      maintain:
+      push:
         - deepin-boot-maker
   - name: dde-control-center
     parent_team: Maintainers
     members:
       - shenwenqi3441
     repositories_permissions:
-      maintain:
+      push:
         - dde-control-center
   - name: deepin-kwin
     parent_team: Maintainers
@@ -448,7 +536,7 @@ teams:
       - hitong602
       - ChaojiangLuo
     repositories_permissions:
-      maintain:
+      push:
         - deepin-kwin
         - dde-kwin
   - name: deepin-kwin-member
@@ -460,83 +548,46 @@ teams:
       - diguoliang
       - thinkingning
       - wangxinbo-git
+      - dandan-y
+      - xupeidongdong
+      - zhangyaninga
+      - UniqueDing
+      - xyruos
+      - guokaka
+      - san-Hei
     repositories_permissions:
       triage:
         - deepin-kwin
         - dde-kwin
-  - name: NJ-common-tools
-    parent_team: Maintainers
-    members:
-      - lhxsm
-      - zccrs
-      - allen5864
-      - jxm96
-      - lxp002764
-      - uos-liuyang
-      - changzex
-      - ut003506
-      - guoshaoyu
-      - RiskVirusPro
-      - UOS-Python
-      - LiuLibang
-      - HuiHui97520
-      - chenhaifeng-ut
-    repositories_permissions:
-      maintain:
-        - dde-introduction
-        - deepin-deb-installer
-        - deepin-compressor
-        - deepin-log-viewer
-        - deepin-voice-note
-        - deepin-terminal
-        - deepin-calculator
-        - deepin-gomoku
-        - deepin-lianliankan
-        - deepin-system-monitor
-        - deepin-manual
-        - deepin-font-manager
-        - dde-calendar
-  - name: NJ-common-tools-member
-    parent_team: Projects
-    members:
-      - lhxsm
-    repositories_permissions:
-      triage:
-        - dde-introduction
-        - deepin-deb-installer
-        - deepin-compressor
-        - deepin-log-viewer
-        - deepin-voice-note
-        - deepin-terminal
-        - deepin-calculator
-        - deepin-gomoku
-        - deepin-lianliankan
-        - deepin-system-monitor
-        - deepin-manual
-        - deepin-font-manager
-        - dde-calendar
   - name: deepin-downloader
     parent_team: Maintainers
     members:
-      - san-Hei
+      - caimc123456
+      - guonafu
+      - michael19911108
     repositories_permissions:
-      maintain:
+      push:
         - deepin-downloader
   - name: deepin-diskmanager
     parent_team: Maintainers
     members:
-      - ut001275
-      - lwh2398819901
+      - caimc123456
+      - guonafu
+      - michael19911108
     repositories_permissions:
-      maintain:
+      push:
         - deepin-diskmanager
   - name: deepin-fcitxconfigtool-plugin
     parent_team: Maintainers
     members:
       - chenshijie-uos
       - san-Hei
+      - guonafu
+      - caimc123456
+      - Fire-dtx
+      - SuperZhangxueming
     repositories_permissions:
-      maintain:
+      push:
         - deepin-fcitxconfigtool-plugin
   - name: deepin-graphics-driver-manager
     parent_team: Maintainers
@@ -545,7 +596,7 @@ teams:
       - guonafu
       - liuli0217
     repositories_permissions:
-      maintain:
+      push:
         - deepin-graphics-driver-manager
   - name: dde-printer
     parent_team: Maintainers
@@ -554,5 +605,24 @@ teams:
       - liuli0217
       - kingjinni
     repositories_permissions:
-      maintain:
+      push:
         - dde-printer
+  - name: deepin-plymouth
+    parent_team: Maintainers
+    members:
+      - ALTNT
+      - hengdinx
+      - uos-eng
+      - wxphaha
+    repositories_permissions:
+      push:
+        - deepin-plymouth
+        - deepin-desktop-base
+        - deepin-icon-theme
+  - name: unilang
+    parent_team: Maintainers
+    members:
+      - FrankHB
+    repositories_permissions:
+      maintain:
+        - unilang

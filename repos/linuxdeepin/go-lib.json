@@ -1,27 +1,51 @@
 [
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/go-lib/.github/workflows/backup-to-gitlab.yml"
   },
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/go-lib/.github/workflows/call-commitlint.yml"
   },
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/go-lib/.github/workflows/call-chatOps.yml"
   },
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/go-lib/.github/workflows/call-build-deb.yml"
   },
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/call-build-distribution.yml",
     "dest": "linuxdeepin/go-lib/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/go-lib/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/go-lib/.github/workflows/call-license-check.yml"
   }
 ]

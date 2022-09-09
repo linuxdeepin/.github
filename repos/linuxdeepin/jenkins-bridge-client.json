@@ -8,5 +8,10 @@
     "branches": ["master"],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/jenkins-bridge-client/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branch": ["master"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/jenkins-bridge-client/.github/workflows/call-clacheck.yml"
   }
 ]

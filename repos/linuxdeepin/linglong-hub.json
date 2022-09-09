@@ -1,0 +1,56 @@
+[
+  {
+    "branches": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/linglong-hub/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/linglong-hub/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branche": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/linglong-hub/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/linglong-hub/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-build-linglong.yml",
+    "dest": "linuxdeepin/linglong-hub/.github/workflows/call-build-linglong.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/linglong-hub/.github/workflows/call-license-check.yml"
+  }
+]

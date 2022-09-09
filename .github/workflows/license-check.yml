@@ -1,0 +1,82 @@
+name: License and README Check
+on: workflow_call
+
+jobs:
+  Check-License:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Install reuse
+        run: sudo apt install reuse
+      - name: License Check
+        id: lcheck
+        run: reuse lint
+        continue-on-error: true
+      - name: Generate Reports
+        if: steps.lcheck.outcome != 'success'
+        run: |
+          mkdir output
+          printf "## License: REUSE Compliance Check failed\n" > output/results.txt || true
+          echo "<details>" >> output/results.txt || true
+          reuse lint >> output/results.txt || true
+          echo "</details>" >> output/results.txt || true
+      - name: Generate License pass Reports
+        if: steps.lcheck.outcome == 'success'
+        run: mkdir output;echo "All right about License Check!" > output/results.txt || true
+      - uses: actions/upload-artifact@v3.1.0
+        with:
+          name: results
+          path: output
+      - uses: actions/download-artifact@v3.0.0
+        with:
+          name: results
+      - name: comment PR
+        uses: OleksiyRudenko/pr-comment@pull_request_target
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: output/results.txt
+  Check-README:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Install zsh
+        run: sudo apt install zsh
+      - name: README.md Check
+        id: rcheck
+        continue-on-error: true
+        run: if [ ! -f "README.md" ];then echo "missing README.md";return 1;fi
+        shell: zsh {0}
+      - name: Generate README Check Reports
+        if: steps.rcheck.outcome != 'success'
+        run: mkdir output||true; echo "missing README.md" > output/results.txt
+      - name: README.zh_CN.md Check
+        id: zhrcheck
+        continue-on-error: true
+        run: if [ ! -f "README.zh_CN.md" ]; then echo "missing README.zh_CN.md";return 1;fi
+        shell: zsh {0}
+      - name: Generate README zh_CN Check Reports
+        if: steps.zhrcheck.outcome != 'success'
+        run: mkdir output||true; echo "missing README.zh_CN.md" >> output/results.txt
+      - name: Generate Reports
+        if: steps.rcheck.outcome == 'success' && steps.zhrcheck.outcome == 'success'
+        run: mkdir output||true; echo "All right about README Check" >> output/results.txt
+      - uses: actions/upload-artifact@v3.1.0
+        with:
+          name: results
+          path: output
+      - uses: actions/download-artifact@v3.0.0
+        with:
+          name: results
+      - name: comment PR
+        uses: OleksiyRudenko/pr-comment@pull_request_target
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: output/results.txt

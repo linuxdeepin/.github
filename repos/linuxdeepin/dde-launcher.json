@@ -1,32 +1,72 @@
 [
   {
-    "branches": ["master", "dev/.+", "maintain/.+"],
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/dde-launcher/.github/workflows/backup-to-gitlab.yml"
   },
   {
-    "branches": ["master", "dev/.+", "maintain/.+"],
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/dde-launcher/.github/workflows/call-commitlint.yml"
   },
   {
-    "branches": ["master", "dev/.+", "maintain/.+"],
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/dde-launcher/.github/workflows/call-chatOps.yml"
   },
   {
-    "branches": ["master", "dev/.+", "maintain/.+"],
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/cppcheck.yml",
     "dest": "linuxdeepin/dde-launcher/.github/workflows/cppcheck.yml"
   },
   {
-    "branches": ["master", "dev/.+", "maintain/.+"],
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/dde-launcher/.github/workflows/call-build-deb.yml"
   },
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/call-build-distribution.yml",
     "dest": "linuxdeepin/dde-launcher/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/dde-launcher/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/dde-launcher/.github/workflows/call-license-check.yml"
   }
 ]

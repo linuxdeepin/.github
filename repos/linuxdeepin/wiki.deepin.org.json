@@ -2,11 +2,16 @@
   {
     "branches": ["master"],
     "src": "workflow-templates/backup-to-gitlab.yml",
-    "dest": "linuxdeepin/jenkins-bridge-client/.github/workflows/backup-to-gitlab.yml"
+    "dest": "linuxdeepin/wiki.deepin.org/.github/workflows/backup-to-gitlab.yml"
   },
   {
     "branches": ["master"],
     "src": "workflow-templates/call-chatOps.yml",
-    "dest": "linuxdeepin/jenkins-bridge-client/.github/workflows/call-chatOps.yml"
+    "dest": "linuxdeepin/wiki.deepin.org/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branch": ["master"],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/wiki.deepin.org/.github/workflows/call-clacheck.yml"
   }
 ]

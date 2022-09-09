@@ -32,25 +32,25 @@ jobs:
       - name: Trigger build
         id: generate-runid
         run: |
-          echo "::set-output name=RUN_ID::$(jenkins-bridge-client -token $BRIDGE_TOKEN -triggerBuild)"
+          echo "::set-output name=RUN_ID::$(jenkins-bridge-client triggerBuild --token $BRIDGE_TOKEN)"
 
       - name: Print log
         run: |
-          jenkins-bridge-client -token "$BRIDGE_TOKEN" -runid "${{ steps.generate-runid.outputs.RUN_ID }}" -printlog
+          jenkins-bridge-client printLog --token "$BRIDGE_TOKEN" --runid "${{ steps.generate-runid.outputs.RUN_ID }}"
 
       - name: Print warning
         run: |
           echo warning on aarch64
-          jenkins-bridge-client cat -server $SERVER -token "$BRIDGE_TOKEN" -file warning_aarch64.txt -runid "${{ steps.generate-runid.outputs.RUN_ID }}"
+          jenkins-bridge-client cat --server $SERVER --token "$BRIDGE_TOKEN" --file warning_aarch64.txt --runid "${{ steps.generate-runid.outputs.RUN_ID }}"
           echo warning on mips64
-          jenkins-bridge-client cat -server $SERVER -token "$BRIDGE_TOKEN" -file warning_mips64.txt -runid "${{ steps.generate-runid.outputs.RUN_ID }}"
+          jenkins-bridge-client cat --server $SERVER --token "$BRIDGE_TOKEN" --file warning_mips64.txt --runid "${{ steps.generate-runid.outputs.RUN_ID }}"
           echo warning on x86_64
-          jenkins-bridge-client cat -server $SERVER -token "$BRIDGE_TOKEN" -file warning_x86_64.txt -runid "${{ steps.generate-runid.outputs.RUN_ID }}"
+          jenkins-bridge-client cat --server $SERVER --token "$BRIDGE_TOKEN" --file warning_x86_64.txt --runid "${{ steps.generate-runid.outputs.RUN_ID }}"
 
       - name: Download Artifacts
         continue-on-error: true
         run: |
-          jenkins-bridge-client -token "$BRIDGE_TOKEN" -runid "${{ steps.generate-runid.outputs.RUN_ID }}" -downloadArtifacts
+          jenkins-bridge-client downloadArtifacts --token "$BRIDGE_TOKEN" --runid "${{ steps.generate-runid.outputs.RUN_ID }}"
           ls -lh ./artifacts
 
       - uses: linuxdeepin/upload-artifact@single-artifact-upload
@@ -62,7 +62,7 @@ jobs:
       - name: cancelled post runs
         if: cancelled()
         run: |
-          jenkins-bridge-client -token "$BRIDGE_TOKEN" -runid "${{ steps.generate-runid.outputs.RUN_ID }}" -cancelBuild
+          jenkins-bridge-client cancelBuild --token "$BRIDGE_TOKEN" --runid "${{ steps.generate-runid.outputs.RUN_ID }}"
 
   apicheck:
     runs-on: ubuntu-latest
@@ -77,10 +77,10 @@ jobs:
       - name: Run Check Job
         id: check
         run: |
-          runid=$(jenkins-bridge-client -token ${{ secrets.BridgeToken }} -triggerAbicheck)
-          jenkins-bridge-client wait -server $SERVER -token ${{ secrets.BridgeToken }} -runid $runid
-          jenkins-bridge-client apipass -server $SERVER -token ${{ secrets.BridgeToken }} || echo "::set-output name=PASS_CODE::$?"
-          jenkins-bridge-client cat -server $SERVER -token ${{ secrets.BridgeToken }} -file api_check.txt -runid $runid
+          runid=$(jenkins-bridge-client triggerAbicheck --token ${{ secrets.BridgeToken }})
+          jenkins-bridge-client wait --server $SERVER --token ${{ secrets.BridgeToken }} --runid $runid
+          jenkins-bridge-client apipass --server $SERVER --token ${{ secrets.BridgeToken }} || echo "::set-output name=PASS_CODE::$?"
+          jenkins-bridge-client cat --server $SERVER --token ${{ secrets.BridgeToken }} --file api_check.txt --runid $runid
       - name: If Check not pass
         uses: actions/github-script@v6
         if: steps.check.outputs.PASS_CODE == '-1'
