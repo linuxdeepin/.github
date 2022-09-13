@@ -57,7 +57,13 @@ jobs:
         if: steps.changed-configs.outputs.any_changed == 'true'
         with:
           files: "${{ steps.changed-configs.outputs.all_changed_files }}"
-          message: "chore: Sync by ${{ github.event.head_commit.url }}"
+          message: |
+            chore: Sync by ${{ github.event.head_commit.url }}
+
+            sync by github workflow
+
+            Log: none
+            Influence: none
 
       - name: Get all configs
         id: all-configs
@@ -71,4 +77,10 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
         with:
           files: "${{ steps.all-configs.outputs.ALL_CONFIGS }}"
-          message: "chore: Sync by ${{ github.event.head_commit.url }}"
+          message: |
+            chore: Sync by ${{ github.event.head_commit.url }}
+
+            sync by github workflow
+
+            Log: none
+            Influence: none
