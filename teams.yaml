@@ -647,3 +647,27 @@ teams:
     repositories_permissions:
       maintain:
         - unilang
+  - name: dde-dock
+    parent_team: Maintainers
+    members:
+      - ut003640
+    repositories_permissions:
+      push:
+        - dde-dock
+        - dde-network-core
+  - name: dde-launcher
+    parent_team: Maintainers
+    members:
+      - wentaosong1993
+    repositories_permissions:
+      push:
+        - dde-launcher
+        - dde-session-ui
+  - name: dde-session-shell
+    parent_team: Maintainers
+    members:
+      - yixinshark
+    repositories_permissions:
+      push:
+        - dde-session-shell
+        - dde-clipboard
