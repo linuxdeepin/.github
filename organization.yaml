@@ -95,6 +95,17 @@ settings:
       - deepin-reader
       - deepin-devicemanager
       - deepin-editor
+      - dtksystemsettings
+      - dtkdevice
+      - dtkdisplay
+      - dtknetwork
+      - dtkbluetooth
+      - dtkcrypt
+      - dtkio
+      - dtkmultimedia
+      - dtknetworkmanager
+      - dtksystem
+      - dtkaudiomanager
     features:
       issues:
         enable: true
