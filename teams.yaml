@@ -322,6 +322,7 @@ teams:
       - zccrs
       - kegechen
       - groveer
+      - toberyan
     repositories_permissions:
       push:
         - dtkcommon
