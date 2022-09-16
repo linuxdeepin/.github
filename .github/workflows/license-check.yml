@@ -17,28 +17,11 @@ jobs:
       - name: Generate Reports
         if: steps.lcheck.outcome != 'success'
         run: |
-          mkdir output
-          printf "## License: REUSE Compliance Check failed\n" > output/results.txt || true
-          echo "<details>" >> output/results.txt || true
-          reuse lint >> output/results.txt || true
-          echo "</details>" >> output/results.txt || true
-      - name: Generate License pass Reports
-        if: steps.lcheck.outcome == 'success'
-        run: mkdir output;echo "All right about License Check!" > output/results.txt || true
-      - uses: actions/upload-artifact@v3.1.0
-        with:
-          name: results
-          path: output
-      - uses: actions/download-artifact@v3.0.0
-        with:
-          name: results
-      - name: comment PR
-        uses: OleksiyRudenko/pr-comment@pull_request_target
-        continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          path: output/results.txt
+          printf "## License: REUSE Compliance Check failed\n" >> $GITHUB_STEP_SUMMARY || true
+          echo "<details>" >> $GITHUB_STEP_SUMMARY || true
+          reuse lint >> $GITHUB_STEP_SUMMARY || true
+          echo "</details>" >> $GITHUB_STEP_SUMMARY || true
+          exit 1
   Check-README:
     runs-on: ubuntu-latest
     steps:
@@ -54,7 +37,7 @@ jobs:
         shell: zsh {0}
       - name: Generate README Check Reports
         if: steps.rcheck.outcome != 'success'
-        run: mkdir output||true; echo "missing README.md" > output/results.txt
+        run: echo "missing README.md" >> $GITHUB_STEP_SUMMARY
       - name: README.zh_CN.md Check
         id: zhrcheck
         continue-on-error: true
@@ -62,21 +45,7 @@ jobs:
         shell: zsh {0}
       - name: Generate README zh_CN Check Reports
         if: steps.zhrcheck.outcome != 'success'
-        run: mkdir output||true; echo "missing README.zh_CN.md" >> output/results.txt
-      - name: Generate Reports
-        if: steps.rcheck.outcome == 'success' && steps.zhrcheck.outcome == 'success'
-        run: mkdir output||true; echo "All right about README Check" >> output/results.txt
-      - uses: actions/upload-artifact@v3.1.0
-        with:
-          name: results
-          path: output
-      - uses: actions/download-artifact@v3.0.0
-        with:
-          name: results
-      - name: comment PR
-        uses: OleksiyRudenko/pr-comment@pull_request_target
-        continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          path: output/results.txt
+        run: echo "missing README.zh_CN.md" >> $GITHUB_STEP_SUMMARY
+      - name: Check and Reflect Status
+        if: steps.rcheck.outcome != 'success' || steps.zhrcheck.outcome != 'success'
+        run: exit 1
