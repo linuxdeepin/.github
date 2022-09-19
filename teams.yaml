@@ -250,7 +250,6 @@ teams:
       - hundundadi
       - myk1343
       - ang486
-      - lichunlong111
     repositories_permissions:
       triage:
         - deepin-camera
@@ -297,6 +296,7 @@ teams:
       - rb-union
       - HZLwwwwt
       - fanjiuwu
+      - lichunlong111
     repositories_permissions:
       triage:
         - deepin-draw
@@ -309,6 +309,31 @@ teams:
         - deepin-manual
         - deepin-deb-installer
         - deepin-editor
+  - name: Multimedia-DTK
+    parent_team: Maintainers
+    members:
+      - lzwind
+      - wyu71
+      - starhcq
+      - wzyforgit
+    repositories_permissions:
+      push:
+        - dtkdevice
+        - dtkmultimedia
+  - name: Multimedia-DTK-member
+    parent_team: Projects
+    members:
+      - lzwind
+      - wyu71
+      - starhcq
+      - wzyforgit
+      - rb-union
+      - jeffshuai
+      - myk1343
+    repositories_permissions:
+      triage:
+        - dtkdevice
+        - dtkmultimedia
   - name: Designer
     members:
       - shule1987
