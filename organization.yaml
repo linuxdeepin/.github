@@ -73,6 +73,7 @@ settings:
       - deepin-icon-theme
       - deepin-plymouth
       - deepin-wallpapers
+      - deepin-wallpapers-nonfree
       - deepin-clone
       - deepin-boot-maker
       - deepin-log-viewer

@@ -49,6 +49,7 @@ teams:
         - dde-launcher
         - dde-manual-content
         - deepin-wallpapers
+        - deepin-wallpapers-nonfree
         - dde-polkit-agent
         - dde-account-faces
         - deepin-gettext-tools
