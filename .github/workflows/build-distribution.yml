@@ -74,7 +74,7 @@ jobs:
       - name: fetch
         if: ${{ github.event_name == 'push' }}
         run: |
-          git fetch --prune --tags
+          git fetch --tags --force
       - name: Get package info
         id: meta
         env:
