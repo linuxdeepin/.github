@@ -86,7 +86,12 @@ jobs:
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
+            if [ "$num" = "$tag" ]; then
+              num=$(git rev-list --all --count); 
+            fi
+            num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
+            echo ${version}
             echo "::set-output name=VERSION::${version}"
           fi
 
@@ -165,7 +170,7 @@ jobs:
       - name: fetch
         if: ${{ github.event_name == 'push' }}
         run: |
-          git fetch --prune --tags
+          git fetch --tags --force
       - name: Init
         run: |
           echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
@@ -193,7 +198,12 @@ jobs:
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
+            if [ "$num" = "$tag" ]; then
+              num=$(git rev-list --all --count); 
+            fi
+            num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
+            echo ${version}
             echo "::set-output name=VERSION::${version}"
           fi
       - name: Build
@@ -366,7 +376,7 @@ jobs:
       - name: fetch
         if: ${{ github.event_name == 'push' }}
         run: |
-          git fetch --prune --tags
+          git fetch --tags --force
       - name: Install dep
         run: |
           sudo apt-get update
@@ -388,7 +398,12 @@ jobs:
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
+            if [ "$num" = "$tag" ]; then
+              num=$(git rev-list --all --count); 
+            fi
+            num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
+            echo ${version}
             echo "::set-output name=VERSION::${version}"
           fi
       - name: Build
@@ -424,11 +439,7 @@ jobs:
           chmod +x ~/hooks/A100remove
 
           PROJECT_NAME=$(dpkg-parsechangelog -S Source)
-          tag=$(git describe --tags | cut -f1 -d '-') || echo
-          num=$(git describe --tags | cut -f2 -d '-') || echo
-          if [ "$num" = "$tag" ]; then num=$(git rev-list --all --count); fi
-          num=`echo $num | awk '{printf("%03d",$0)}'`
-          new_dir=${PROJECT_NAME}-$version
+          new_dir=$PROJECT_NAME-$version
           mkdir $new_dir
           rsync -a . $new_dir --exclude $new_dir
           rm -rf $new_dir/.git
