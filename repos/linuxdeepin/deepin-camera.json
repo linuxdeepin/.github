@@ -68,5 +68,15 @@
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/deepin-camera/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+",
+      "uos"
+    ],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/deepin-camera/.github/workflows/call-build-distribution.yml"
   }
 ]
