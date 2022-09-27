@@ -699,3 +699,11 @@ teams:
       push:
         - dde-session-shell
         - dde-clipboard
+  - name: deepin-home
+    parent_team: Maintainers
+    members:
+      - justforlxz
+      - myml
+    repositories_permissions:
+      push:
+        - deepin-home

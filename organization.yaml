@@ -106,6 +106,7 @@ settings:
       - dtknetworkmanager
       - dtksystem
       - dtkaudiomanager
+      - deepin-home
     features:
       issues:
         enable: true
