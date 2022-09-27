@@ -584,6 +584,7 @@ teams:
       - ChaojiangLuo
     repositories_permissions:
       push:
+        - deepin-kwayland
         - deepin-kwin
         - dde-kwin
   - name: deepin-kwin-member
@@ -604,6 +605,7 @@ teams:
       - san-Hei
     repositories_permissions:
       triage:
+        - deepin-kwayland
         - deepin-kwin
         - dde-kwin
   - name: deepin-downloader
