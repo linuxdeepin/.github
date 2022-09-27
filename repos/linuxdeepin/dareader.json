@@ -28,5 +28,12 @@
     "branch": ["master"],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/dareader/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/dareader/.github/workflows/call-build-distribution.yml"
   }
 ]
