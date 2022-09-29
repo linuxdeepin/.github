@@ -33,5 +33,19 @@
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/dtkio/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-build-deb.yml",
+    "dest": "linuxdeepin/dtkio/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/dtkio/.github/workflows/call-build-distribution.yml"
   }
 ]
