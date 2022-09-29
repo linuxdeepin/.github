@@ -708,3 +708,8 @@ teams:
     repositories_permissions:
       push:
         - deepin-home
+  # Corporate Contributor: Phytium
+  - name: corporate-contributor-phytium
+    parent_team: Maintainers
+    members:
+      - phytiumss
