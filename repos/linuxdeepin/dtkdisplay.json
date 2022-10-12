@@ -47,5 +47,12 @@
     ],
     "src": "workflow-templates/call-build-distribution.yml",
     "dest": "linuxdeepin/dtkdisplay/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-dtk-unittest.yml",
+    "dest": "linuxdeepin/dtkdisplay/.github/workflows/call-dtk-unittest.yml"
   }
 ]
