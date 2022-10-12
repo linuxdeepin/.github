@@ -713,3 +713,8 @@ teams:
     parent_team: Maintainers
     members:
       - phytiumss
+  # Corporate Contributor: Zhaoxin
+  - name: corporate-contributor-zhaoxin
+    parent_team: Maintainers
+    members:
+      - leoliu-oc
