@@ -26,5 +26,19 @@
     ],
     "src": "workflow-templates/call-dtk-unittest.yml",
     "dest": "linuxdeepin/dtk-template/.github/workflows/call-dtk-unittest.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/dtk-template/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/dtk-template/.github/workflows/call-tag-build.yml"
   }
 ]

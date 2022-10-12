@@ -1,17 +1,37 @@
 [
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/wiki.deepin.org/.github/workflows/backup-to-gitlab.yml"
   },
   {
-    "branches": ["master"],
+    "branches": [
+      "master"
+    ],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/wiki.deepin.org/.github/workflows/call-chatOps.yml"
   },
   {
-    "branch": ["master"],
+    "branch": [
+      "master"
+    ],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/wiki.deepin.org/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/wiki.deepin.org/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/wiki.deepin.org/.github/workflows/call-tag-build.yml"
   }
 ]

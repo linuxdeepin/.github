@@ -47,5 +47,19 @@
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/go-lib/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/go-lib/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/go-lib/.github/workflows/call-tag-build.yml"
   }
 ]
