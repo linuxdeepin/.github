@@ -47,5 +47,19 @@
     ],
     "src": "workflow-templates/call-build-distribution.yml",
     "dest": "linuxdeepin/default-settings/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/default-settings/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/default-settings/.github/workflows/call-tag-build.yml"
   }
 ]

@@ -78,5 +78,19 @@
     ],
     "src": "workflow-templates/call-build-distribution.yml",
     "dest": "linuxdeepin/deepin-camera/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/deepin-camera/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/deepin-camera/.github/workflows/call-tag-build.yml"
   }
 ]
