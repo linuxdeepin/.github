@@ -1,0 +1,137 @@
+name: auto tag
+
+on:
+  workflow_call:
+    secrets:
+      APP_PRIVATE_KEY:
+        required: true
+
+env:
+  APP_ID: 174141
+  APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+
+jobs:
+  auto_tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: get changelog version
+        id: get-version
+        run: |
+          echo "::set-output name=TAG::$(LC_ALL=C dpkg-parsechangelog -S Version)"
+          echo "::set-output name=DISTRIBUTION::$(LC_ALL=C dpkg-parsechangelog -S Distribution)"
+
+      - name: check tag exsits
+        id: test-tag-exists
+        run: |
+          git fetch --tags
+          echo "::set-output name=EXISTS::$(if [ $(git tag -l ${{ steps.get-version.outputs.TAG }}) ]; then echo yes; else echo no; fi)"
+
+      - name: create comment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const BOT_NAME = "TAG Bot"
+            const COMMENT_HEAD = "**" + BOT_NAME + "**\n\n"
+            const COMMENT_BODY = "TAG: ${{ steps.get-version.outputs.TAG }}\nEXISTED: ${{ steps.test-tag-exists.outputs.EXISTS }}"
+            const response = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            })
+
+            const reg = new RegExp("\\*+" + BOT_NAME + "\\*+")
+            tagBotComment= response.data.find(comment => comment.body.match(reg))
+            if (tagBotComment) {
+              await github.rest.issues.updateComment({
+                  comment_id: tagBotComment.id,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: COMMENT_HEAD + COMMENT_BODY
+              })
+
+            } else {
+              await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: COMMENT_HEAD + COMMENT_BODY
+              })
+            }
+
+            if ("${{ steps.test-tag-exists.outputs.EXISTS }}" === "yes"){
+              core.setFailed("Tag: ${{ steps.get-version.outputs.TAG }} exists!")
+            }
+
+      - name: install depends for load scripts
+        if: github.event.pull_request.merged
+        run: |
+          npm install @octokit/rest
+          npm install @octokit/auth-app
+
+      - name: get email
+        if: github.event.pull_request.merged
+        id: get-email
+        uses: evvanErb/get-github-email-by-username-action@v1.25
+        with:
+          github-username: '${{ github.event.pull_request.user.login }}'
+
+      - name: Get token using github-script
+        id: get-token
+        if: github.event.pull_request.merged
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { Octokit } = require("@octokit/rest");
+            const { createAppAuth } = require("@octokit/auth-app");
+            const appOctokit = new Octokit({
+              authStrategy: createAppAuth,
+              auth: {
+                appId: process.env.APP_ID,
+                privateKey: process.env.APP_PRIVATE_KEY,
+              }
+            });
+            const app_installation = await appOctokit.rest.apps.getRepoInstallation({
+              owner: context.payload.organization.login,
+              repo: context.payload.repository.name
+            });
+            const { token } = await appOctokit.auth({
+              type: "installation",
+              installationId: app_installation.data.id
+            });
+            core.setOutput('app_token', token)
+
+      - name: Create tag
+        if: github.event.pull_request.merged
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ steps.get-token.outputs.app_token }}
+          script: |
+            const { data } = await github.rest.git.createTag({
+              repo: context.repo.repo,
+              owner: context.repo.owner,
+              message: "Release " + context.repo.repo + " ${{ steps.get-version.outputs.TAG }}",
+              type: 'commit',
+              object: context.sha,
+              tag: "${{ steps.get-version.outputs.TAG }}",
+              tagger: {
+                name: "${{ github.event.pull_request.user.login }}",
+                email: "${{ steps.get-email.outputs.email }}",
+                date: (() => {
+                  const date = new Date();
+                  return date.toISOString();
+                })(),
+              },
+            })
+
+            const res = await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{ steps.get-version.outputs.TAG }}',
+              sha: data.sha
+            })
