@@ -27,7 +27,7 @@ jobs:
       run: |
         echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
         sudo apt-get update
-        sudo apt-get install -y qtbase5-dev libgtest-dev libgmock-dev ninja-build devscripts
+        sudo apt-get install -y libgtest-dev libgmock-dev ninja-build devscripts equivs
         yes | sudo mk-build-deps -i
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
