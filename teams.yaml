@@ -526,8 +526,7 @@ teams:
     parent_team: Maintainers
     members:
       - Clauszy
-      - wangchunlin5013
-      - hanxiii-z
+      - Kakueeen
     repositories_permissions:
       push:
         - dde-grand-search
