@@ -87,7 +87,7 @@ jobs:
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
             if [ "$num" = "$tag" ]; then
-              num=$(git rev-list --all --count); 
+              num=$(git rev-list --all --count);
             fi
             num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
@@ -201,7 +201,7 @@ jobs:
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
             if [ "$num" = "$tag" ]; then
-              num=$(git rev-list --all --count); 
+              num=$(git rev-list --all --count);
             fi
             num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
@@ -401,7 +401,7 @@ jobs:
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
             if [ "$num" = "$tag" ]; then
-              num=$(git rev-list --all --count); 
+              num=$(git rev-list --all --count);
             fi
             num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
