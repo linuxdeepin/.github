@@ -127,6 +127,8 @@ jobs:
         run: /db unlock
   debian-setup:
     runs-on: ubuntu-latest
+    # move to obs
+    if: false
     steps:
       - name: Init
         run: |
