@@ -349,6 +349,7 @@ teams:
       - kegechen
       - groveer
       - toberyan
+      - xzl01
     repositories_permissions:
       push:
         - dtkcommon
