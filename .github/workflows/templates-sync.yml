@@ -71,7 +71,7 @@ jobs:
         run: |
           all_configs=`find repos -type f | grep json | xargs`
           echo all configs $all_configs
-          echo "::set-output name=ALL_CONFIGS::$all_configs"
+          echo "ALL_CONFIGS=$all_configs" >> $GITHUB_OUTPUT
       - name: Sync all files
         uses: linuxdeepin/action-sync@main
         if: steps.changed-files.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'

@@ -22,14 +22,14 @@ jobs:
       - name: get changelog version
         id: get-version
         run: |
-          echo "::set-output name=TAG::$(LC_ALL=C dpkg-parsechangelog -S Version)"
-          echo "::set-output name=DISTRIBUTION::$(LC_ALL=C dpkg-parsechangelog -S Distribution)"
+          echo "TAG=$(LC_ALL=C dpkg-parsechangelog -S Version)" >> $GITHUB_OUTPUT
+          echo "DISTRIBUTION=$(LC_ALL=C dpkg-parsechangelog -S Distribution)" >> $GITHUB_OUTPUT
 
       - name: check tag exsits
         id: test-tag-exists
         run: |
           git fetch --tags
-          echo "::set-output name=EXISTS::$(if [ $(git tag -l ${{ steps.get-version.outputs.TAG }}) ]; then echo yes; else echo no; fi)"
+          echo "EXISTS=$(if [ $(git tag -l ${{ steps.get-version.outputs.TAG }}) ]; then echo yes; else echo no; fi)" >> $GITHUB_OUTPUT
 
       - name: create comment
         uses: actions/github-script@v6
