@@ -32,7 +32,7 @@ jobs:
       - name: Trigger build
         id: generate-runid
         run: |
-          echo "::set-output name=RUN_ID::$(jenkins-bridge-client triggerBuild --token $BRIDGE_TOKEN)"
+          echo "RUN_ID=$(jenkins-bridge-client triggerBuild --token $BRIDGE_TOKEN)" >> $GITHUB_OUTPUT
 
       - name: Print log
         run: |
@@ -79,7 +79,7 @@ jobs:
         run: |
           runid=$(jenkins-bridge-client triggerAbicheck --token ${{ secrets.BridgeToken }})
           jenkins-bridge-client wait --server $SERVER --token ${{ secrets.BridgeToken }} --runid $runid
-          jenkins-bridge-client apipass --server $SERVER --token ${{ secrets.BridgeToken }} || echo "::set-output name=PASS_CODE::$?"
+          jenkins-bridge-client apipass --server $SERVER --token ${{ secrets.BridgeToken }} || echo "PASS_CODE=$?" >> $GITHUB_OUTPUT
           jenkins-bridge-client cat --server $SERVER --token ${{ secrets.BridgeToken }} --file api_check.txt --runid $runid
       - name: If Check not pass
         uses: actions/github-script@v6
