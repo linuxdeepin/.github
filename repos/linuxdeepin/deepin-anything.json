@@ -54,5 +54,19 @@
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/deepin-anything/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/deepin-anything/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/deepin-anything/.github/workflows/call-tag-build.yml"
   }
 ]

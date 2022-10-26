@@ -49,6 +49,7 @@ teams:
         - dde-launcher
         - dde-manual-content
         - deepin-wallpapers
+        - deepin-wallpapers-nonfree
         - dde-polkit-agent
         - dde-account-faces
         - deepin-gettext-tools
@@ -73,7 +74,6 @@ teams:
       - dengbo11
       - donghualin
       - FeiWang1119
-      - ut003722
       - shenwenqi3441
       - liaohanqin
       - Mars-cb
@@ -202,18 +202,39 @@ teams:
         - developer-center
       triage:
         - action-teams-manager
-  - name: linglong-member
+  - name: linglong-maintainer
     parent_team: Projects
     members:
       - realwujing
-      - hqh2010
-      - liujianqiang-niu
-      - tsic404
     repositories_permissions:
       triage:
         - developer-center
       maintain:
         - linglong-hub
+        - linglong-box
+        - linglong-dbus-proxy
+        - linglong-homepage
+        - linglong-web-store
+  - name: linglong-member
+    parent_team: Projects
+    members:
+      - iceyer
+      - hqh2010
+      - liujianqiang-niu
+      - tsic404
+      - Bruce
+      - sukie
+      - Heysion
+      - black-desk
+      - ismdeep
+    repositories_permissions:
+      triage:
+        - developer-center
+        - linglong-hub
+        - linglong-box
+        - linglong-dbus-proxy
+        - linglong-homepage
+        - linglong-web-store
   - name: Multimedia-audio-video
     parent_team: Maintainers
     members:
@@ -250,7 +271,6 @@ teams:
       - hundundadi
       - myk1343
       - ang486
-      - lichunlong111
     repositories_permissions:
       triage:
         - deepin-camera
@@ -297,6 +317,7 @@ teams:
       - rb-union
       - HZLwwwwt
       - fanjiuwu
+      - lichunlong111
     repositories_permissions:
       triage:
         - deepin-draw
@@ -309,6 +330,31 @@ teams:
         - deepin-manual
         - deepin-deb-installer
         - deepin-editor
+  - name: Multimedia-DTK
+    parent_team: Maintainers
+    members:
+      - lzwind
+      - wyu71
+      - starhcq
+      - wzyforgit
+    repositories_permissions:
+      push:
+        - dtkdevice
+        - dtkmultimedia
+  - name: Multimedia-DTK-member
+    parent_team: Projects
+    members:
+      - lzwind
+      - wyu71
+      - starhcq
+      - wzyforgit
+      - rb-union
+      - jeffshuai
+      - myk1343
+    repositories_permissions:
+      triage:
+        - dtkdevice
+        - dtkmultimedia
   - name: Designer
     members:
       - shule1987
@@ -322,6 +368,8 @@ teams:
       - zccrs
       - kegechen
       - groveer
+      - toberyan
+      - xzl01
     repositories_permissions:
       push:
         - dtkcommon
@@ -333,6 +381,17 @@ teams:
         - qt5platform-plugins
         - dde-app-services
         - dtk-template
+        - dtksystemsettings
+        - dtkdevice
+        - dtkdisplay
+        - dtknetwork
+        - dtkbluetooth
+        - dtkcrypt
+        - dtkio
+        - dtkmultimedia
+        - dtknetworkmanager
+        - dtksystem
+        - dtkaudiomanager
       triage:
         - action-teams-manager
   - name: DTK-member
@@ -488,8 +547,7 @@ teams:
     parent_team: Maintainers
     members:
       - Clauszy
-      - wangchunlin5013
-      - hanxiii-z
+      - Kakueeen
     repositories_permissions:
       push:
         - dde-grand-search
@@ -535,6 +593,7 @@ teams:
     parent_team: Maintainers
     members:
       - shenwenqi3441
+      - caixr23
     repositories_permissions:
       push:
         - dde-control-center
@@ -546,6 +605,7 @@ teams:
       - ChaojiangLuo
     repositories_permissions:
       push:
+        - deepin-kwayland
         - deepin-kwin
         - dde-kwin
   - name: deepin-kwin-member
@@ -566,6 +626,7 @@ teams:
       - san-Hei
     repositories_permissions:
       triage:
+        - deepin-kwayland
         - deepin-kwin
         - dde-kwin
   - name: deepin-downloader
@@ -635,3 +696,45 @@ teams:
     repositories_permissions:
       maintain:
         - unilang
+  - name: dde-dock
+    parent_team: Maintainers
+    members:
+      - ut003640
+    repositories_permissions:
+      push:
+        - dde-dock
+        - dde-network-core
+  - name: dde-launcher
+    parent_team: Maintainers
+    members:
+      - wentaosong1993
+    repositories_permissions:
+      push:
+        - dde-launcher
+        - dde-session-ui
+  - name: dde-session-shell
+    parent_team: Maintainers
+    members:
+      - yixinshark
+    repositories_permissions:
+      push:
+        - dde-session-shell
+        - dde-clipboard
+  - name: deepin-home
+    parent_team: Maintainers
+    members:
+      - justforlxz
+      - myml
+    repositories_permissions:
+      push:
+        - deepin-home
+  # Corporate Contributor: Phytium
+  - name: corporate-contributor-phytium
+    parent_team: Maintainers
+    members:
+      - phytiumss
+  # Corporate Contributor: Zhaoxin
+  - name: corporate-contributor-zhaoxin
+    parent_team: Maintainers
+    members:
+      - leoliu-oc

@@ -53,6 +53,7 @@ settings:
       - deepin-pw-check
       - dde-kwin
       - deepin-kwin
+      - deepin-kwayland
       - dde-api
       - dde-launcher
       - dde-qt-dbus-factory
@@ -73,6 +74,7 @@ settings:
       - deepin-icon-theme
       - deepin-plymouth
       - deepin-wallpapers
+      - deepin-wallpapers-nonfree
       - deepin-clone
       - deepin-boot-maker
       - deepin-log-viewer
@@ -91,9 +93,22 @@ settings:
       - dde-printer
       - deepin-graphics-driver-manager
       - dde-calendar
+      - deepin-shortcut-viewer
       - deepin-reader
       - deepin-devicemanager
       - deepin-editor
+      - dtksystemsettings
+      - dtkdevice
+      - dtkdisplay
+      - dtknetwork
+      - dtkbluetooth
+      - dtkcrypt
+      - dtkio
+      - dtkmultimedia
+      - dtknetworkmanager
+      - dtksystem
+      - dtkaudiomanager
+      - deepin-home
     features:
       issues:
         enable: true

@@ -61,5 +61,29 @@
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+",
+      "uos"
+    ],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-tag-build.yml"
   }
 ]

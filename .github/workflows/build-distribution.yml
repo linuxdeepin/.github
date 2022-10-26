@@ -30,9 +30,9 @@ jobs:
         run: |
           if [[ -f archlinux/PKGBUILD ]];
           then
-            echo "::set-output name=RESULT::true"
+            echo "RESULT=true" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=RESULT::false"
+            echo "RESULT=false" >> $GITHUB_OUTPUT
           fi
   archlinux-build:
     needs: archlinux-check
@@ -74,7 +74,7 @@ jobs:
       - name: fetch
         if: ${{ github.event_name == 'push' }}
         run: |
-          git fetch --prune --tags
+          git fetch --tags --force
       - name: Get package info
         id: meta
         env:
@@ -82,16 +82,21 @@ jobs:
         run: |
           if [ "${sha}" != "" ]
           then
-            echo "::set-output name=VERSION::1.0.0"
+            echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
+            if [ "$num" = "$tag" ]; then
+              num=$(git rev-list --all --count);
+            fi
+            num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
-            echo "::set-output name=VERSION::${version}"
+            echo ${version}
+            echo "VERSION=${version}" >> $GITHUB_OUTPUT
           fi
 
           repo=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
-          echo "::set-output name=REPO::${repo}"
+          echo "name=REPO=${repo}" >> $GITHUB_OUTPUT
       - name: Compress Source
         env:
           workdir: ${{ github.workspace }}
@@ -122,6 +127,8 @@ jobs:
         run: /db unlock
   debian-setup:
     runs-on: ubuntu-latest
+    # move to obs
+    if: false
     steps:
       - name: Init
         run: |
@@ -165,7 +172,7 @@ jobs:
       - name: fetch
         if: ${{ github.event_name == 'push' }}
         run: |
-          git fetch --prune --tags
+          git fetch --tags --force
       - name: Init
         run: |
           echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
@@ -189,12 +196,17 @@ jobs:
         run: |
           if [ "${sha}" != "" ]
           then
-            echo "::set-output name=VERSION::1.0.0"
+            echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
+            if [ "$num" = "$tag" ]; then
+              num=$(git rev-list --all --count);
+            fi
+            num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
-            echo "::set-output name=VERSION::${version}"
+            echo ${version}
+            echo "VERSION=${version}" >> $GITHUB_OUTPUT
           fi
       - name: Build
         shell: bash
@@ -285,7 +297,7 @@ jobs:
               break
             fi
           done
-          echo ::set-output name=exit_code::0
+          echo "exit_code=0" >> $GITHUB_OUTPUT
       - name: Download all packages
         uses: actions/download-artifact@v3
         with:
@@ -366,7 +378,7 @@ jobs:
       - name: fetch
         if: ${{ github.event_name == 'push' }}
         run: |
-          git fetch --prune --tags
+          git fetch --tags --force
       - name: Install dep
         run: |
           sudo apt-get update
@@ -384,12 +396,17 @@ jobs:
         run: |
           if [ "${sha}" != "" ]
           then
-            echo "::set-output name=VERSION::1.0.0"
+            echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
+            if [ "$num" = "$tag" ]; then
+              num=$(git rev-list --all --count);
+            fi
+            num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
-            echo "::set-output name=VERSION::${version}"
+            echo ${version}
+            echo "VERSION=${version}" >> $GITHUB_OUTPUT
           fi
       - name: Build
         env:
@@ -424,11 +441,7 @@ jobs:
           chmod +x ~/hooks/A100remove
 
           PROJECT_NAME=$(dpkg-parsechangelog -S Source)
-          tag=$(git describe --tags | cut -f1 -d '-') || echo
-          num=$(git describe --tags | cut -f2 -d '-') || echo
-          if [ "$num" = "$tag" ]; then num=$(git rev-list --all --count); fi
-          num=`echo $num | awk '{printf("%03d",$0)}'`
-          new_dir=${PROJECT_NAME}-$version
+          new_dir=$PROJECT_NAME-$version
           mkdir $new_dir
           rsync -a . $new_dir --exclude $new_dir
           rm -rf $new_dir/.git
@@ -490,7 +503,7 @@ jobs:
               break
             fi
           done
-          echo ::set-output name=exit_code::0
+          echo "exit_code=0" >> $GITHUB_OUTPUT
       - name: Download all packages
         uses: actions/download-artifact@v3
         with:

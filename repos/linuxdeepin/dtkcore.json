@@ -61,5 +61,19 @@
     ],
     "src": "workflow-templates/call-doc-check.yml",
     "dest": "linuxdeepin/dtkcore/.github/workflows/call-doc-check.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/dtkcore/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/dtkcore/.github/workflows/call-tag-build.yml"
   }
 ]

@@ -1,0 +1,72 @@
+[
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/dtksystem/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/dtksystem/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/dtksystem/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/dtksystem/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/dtksystem/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-build-deb.yml",
+    "dest": "linuxdeepin/dtksystem/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/dtksystem/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-dtk-unittest.yml",
+    "dest": "linuxdeepin/dtksystem/.github/workflows/call-dtk-unittest.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/dtksystem/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/dtksystem/.github/workflows/call-tag-build.yml"
+  }
+]

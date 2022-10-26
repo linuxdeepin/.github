@@ -1,7 +1,23 @@
 [
-    {
-        "branches": ["master"],
-        "src": "workflow-templates/call-clacheck.yml",
-        "dest": "linuxdeepin/deepin-riscv/.github/workflows/call-clacheck.yml"
-    }
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/deepin-riscv/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/deepin-riscv/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/deepin-riscv/.github/workflows/call-tag-build.yml"
+  }
 ]
