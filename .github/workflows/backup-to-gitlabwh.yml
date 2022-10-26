@@ -25,7 +25,7 @@ jobs:
       - name: Trigger sync
         id: generate-runid
         run: |
-          echo "::set-output name=RUN_ID::$(jenkins-bridge-client triggerSync --token '${{ secrets.BRIDGETOKEN }}')"
+          echo "RUN_ID=$(jenkins-bridge-client triggerSync --token '${{ secrets.BRIDGETOKEN }}')" >> $GITHUB_OUTPUT
 
       - name: Print log
         run: |

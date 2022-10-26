@@ -30,9 +30,9 @@ jobs:
         run: |
           if [[ -f archlinux/PKGBUILD ]];
           then
-            echo "::set-output name=RESULT::true"
+            echo "RESULT=true" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=RESULT::false"
+            echo "RESULT=false" >> $GITHUB_OUTPUT
           fi
   archlinux-build:
     needs: archlinux-check
@@ -82,7 +82,7 @@ jobs:
         run: |
           if [ "${sha}" != "" ]
           then
-            echo "::set-output name=VERSION::1.0.0"
+            echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
@@ -92,11 +92,11 @@ jobs:
             num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
             echo ${version}
-            echo "::set-output name=VERSION::${version}"
+            echo "VERSION=${version}" >> $GITHUB_OUTPUT
           fi
 
           repo=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
-          echo "::set-output name=REPO::${repo}"
+          echo "REPO=${repo}" >> $GITHUB_OUTPUT
       - name: Compress Source
         env:
           workdir: ${{ github.workspace }}
@@ -196,7 +196,7 @@ jobs:
         run: |
           if [ "${sha}" != "" ]
           then
-            echo "::set-output name=VERSION::1.0.0"
+            echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
@@ -206,7 +206,7 @@ jobs:
             num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
             echo ${version}
-            echo "::set-output name=VERSION::${version}"
+            echo "VERSION=${version}" >> $GITHUB_OUTPUT
           fi
       - name: Build
         shell: bash
@@ -297,7 +297,7 @@ jobs:
               break
             fi
           done
-          echo ::set-output name=exit_code::0
+          echo "exit_code=0" >> $GITHUB_OUTPUT
       - name: Download all packages
         uses: actions/download-artifact@v3
         with:
@@ -396,7 +396,7 @@ jobs:
         run: |
           if [ "${sha}" != "" ]
           then
-            echo "::set-output name=VERSION::1.0.0"
+            echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
             num=$(git describe --tags | cut -f2 -d '-') || echo
@@ -406,7 +406,7 @@ jobs:
             num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
             echo ${version}
-            echo "::set-output name=VERSION::${version}"
+            echo "VERSION=${version}" >> $GITHUB_OUTPUT
           fi
       - name: Build
         env:
@@ -503,7 +503,7 @@ jobs:
               break
             fi
           done
-          echo ::set-output name=exit_code::0
+          echo "exit_code=0" >> $GITHUB_OUTPUT
       - name: Download all packages
         uses: actions/download-artifact@v3
         with:

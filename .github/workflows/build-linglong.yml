@@ -33,7 +33,7 @@ jobs:
       - name: Trigger build
         id: generate-runid
         run: |
-          echo "::set-output name=RUN_ID::$(jenkins-bridge-client triggerlinglong --token $BRIDGE_TOKEN)"
+          echo "RUN_ID=$(jenkins-bridge-client triggerlinglong --token $BRIDGE_TOKEN)" >> $GITHUB_OUTPUT
 
       - name: Print log
         run: |
