@@ -478,6 +478,7 @@ teams:
       - stdLike
       - tingwei1123
       - toberyan
+      - liyigang1
     repositories_permissions:
       push:
         - dde-file-manager
