@@ -202,18 +202,39 @@ teams:
         - developer-center
       triage:
         - action-teams-manager
-  - name: linglong-member
+  - name: linglong-maintainer
     parent_team: Projects
     members:
       - realwujing
-      - hqh2010
-      - liujianqiang-niu
-      - tsic404
     repositories_permissions:
       triage:
         - developer-center
       maintain:
         - linglong-hub
+        - linglong-box
+        - linglong-dbus-proxy
+        - linglong-homepage
+        - linglong-web-store
+  - name: linglong-member
+    parent_team: Projects
+    members:
+      - iceyer
+      - hqh2010
+      - liujianqiang-niu
+      - tsic404
+      - Bruce
+      - sukie
+      - Heysion
+      - black_desk
+      - ismdeep
+    repositories_permissions:
+      triage:
+        - developer-center
+        - linglong-hub
+        - linglong-box
+        - linglong-dbus-proxy
+        - linglong-homepage
+        - linglong-web-store
   - name: Multimedia-audio-video
     parent_team: Maintainers
     members:
