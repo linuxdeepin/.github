@@ -96,7 +96,7 @@ jobs:
           fi
 
           repo=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
-          echo "name=REPO=${repo}" >> $GITHUB_OUTPUT
+          echo "REPO=${repo}" >> $GITHUB_OUTPUT
       - name: Compress Source
         env:
           workdir: ${{ github.workspace }}
