@@ -206,6 +206,7 @@ teams:
     parent_team: Projects
     members:
       - realwujing
+      - ismdeep
     repositories_permissions:
       triage:
         - developer-center
