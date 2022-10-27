@@ -5,10 +5,13 @@ on:
     secrets:
       APP_PRIVATE_KEY:
         required: true
+      TRANSIFEX_API_TOKEN:
+        required: true
 
 env:
   APP_ID: 174141
   APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+  TRANSIFEX_API_TOKEN: ${{ secrets.TRANSIFEX_API_TOKEN }}
 
 jobs:
   auto_tag:
@@ -18,7 +21,38 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-
+      - name: Check translations config
+        run: |
+          if ! test -f ".tx/deepin.conf"; then
+              echo "need .tx/deepin.conf, it likes: "
+              echo "--------------------------------"
+              echo "[transifex]"
+              echo "branch = m20"
+              echo "--------------------------------"
+              echo "Because we don't know the translation branch corresponding to this branch."
+              exit 1
+          fi
+      - name: Init transifex file
+        run: |
+          # TODO: not environment variable, action will override $HOME
+          mkdir -p /home/runner/work/_temp/_github_home/
+          cat << EOF > /home/runner/work/_temp/_github_home/.transifexrc
+          [https://www.transifex.com]
+          rest_hostname = https://rest.api.transifex.com
+          api_hostname = https://api.transifex.com
+          hostname = https://www.transifex.com
+          token = ${{ env.TRANSIFEX_API_TOKEN }}
+          EOF
+      - name: Check translations update
+        uses: justforlxz/deepin-builder-docker/translate@master
+      - name: Check git files
+        shell: bash
+        run: |
+          lines=$(git status -s | wc -l | awk '{print $1}')
+          git status -s
+          if [[ x"$lines" != x0 ]]; then
+              exit 2
+          fi
       - name: get changelog version
         id: get-version
         run: |
