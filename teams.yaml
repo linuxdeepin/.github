@@ -211,6 +211,7 @@ teams:
         - developer-center
       maintain:
         - linglong-hub
+        - linglong-builder-demo
         - linglong-box
         - linglong-dbus-proxy
         - linglong-homepage
@@ -231,6 +232,7 @@ teams:
       triage:
         - developer-center
         - linglong-hub
+        - linglong-builder-demo
         - linglong-box
         - linglong-dbus-proxy
         - linglong-homepage
