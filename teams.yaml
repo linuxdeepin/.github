@@ -395,6 +395,7 @@ teams:
         - dtknetworkmanager
         - dtksystem
         - dtkaudiomanager
+        - dtkprinter
       triage:
         - action-teams-manager
   - name: DTK-member
