@@ -21,13 +21,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - name: Check .tx/config
-        id: check_tx
-        uses: andstor/file-existence-action@v1
-        with:
-          files: ".tx/config"
       - name: Check translations config
-        if: steps.check_tx.outputs.files_exists == 'true'
         run: |
           if ! test -f ".tx/deepin.conf"; then
               echo "need .tx/deepin.conf, it likes: "
@@ -36,10 +30,10 @@ jobs:
               echo "branch = m20"
               echo "--------------------------------"
               echo "Because we don't know the translation branch corresponding to this branch."
+              echo "If you don't know the corresponding translation branch, don't set branch value, we will use the default value."
               exit 1
           fi
       - name: Init transifex file
-        if: steps.check_tx.outputs.files_exists == 'true'
         run: |
           # TODO: not environment variable, action will override $HOME
           mkdir -p /home/runner/work/_temp/_github_home/
@@ -51,10 +45,8 @@ jobs:
           token = ${{ env.TRANSIFEX_API_TOKEN }}
           EOF
       - name: Check translations update
-        if: steps.check_tx.outputs.files_exists == 'true'
         uses: justforlxz/deepin-builder-docker/translate@master
       - name: Check git files
-        if: steps.check_tx.outputs.files_exists == 'true'
         shell: bash
         run: |
           lines=$(git status -s | wc -l | awk '{print $1}')
