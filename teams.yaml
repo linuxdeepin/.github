@@ -743,3 +743,10 @@ teams:
     parent_team: Maintainers
     members:
       - leoliu-oc
+  - name: xdg-desktop-portal-dde
+    parent_team: Maintainers
+    members:
+      - justforlxz
+    repositories_permissions:
+      push:
+        - xdg-desktop-portal-dde

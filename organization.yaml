@@ -109,6 +109,7 @@ settings:
       - dtksystem
       - dtkaudiomanager
       - deepin-home
+      - xdg-desktop-portal-dde
     features:
       issues:
         enable: true
