@@ -387,7 +387,6 @@ teams:
         - dtksystemsettings
         - dtkdevice
         - dtkdisplay
-        - dtknetwork
         - dtkbluetooth
         - dtkcrypt
         - dtkio
