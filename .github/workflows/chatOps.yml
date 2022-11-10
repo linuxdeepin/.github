@@ -16,7 +16,7 @@ jobs:
     steps:
       # assign to someone
       - name: assign
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         if: startsWith(github.event.comment.body, '/assign')
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
@@ -32,7 +32,7 @@ jobs:
             })
       # request someone to review
       - name: review
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         if: startsWith(github.event.comment.body, '/review')
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
@@ -55,7 +55,7 @@ jobs:
             });
       # !deprecated add approve label
       - name: "approve"
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         if: startsWith(github.event.comment.body, '/+1') || contains(github.event.comment.body, '/approve')
         with:
           script: |
@@ -77,7 +77,7 @@ jobs:
 
       # retrigger checks
       - name: check
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         if: startsWith(github.event.comment.body, '/check')
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
@@ -141,7 +141,7 @@ jobs:
             });
             core.setOutput('app_token', token)
       - name: merge
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         if: startsWith(github.event.comment.body, '/merge')
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
