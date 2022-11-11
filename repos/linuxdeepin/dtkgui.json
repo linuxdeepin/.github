@@ -75,5 +75,12 @@
     ],
     "src": "workflow-templates/call-tag-build.yml",
     "dest": "linuxdeepin/dtkgui/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "issue-templates/config-empty.yml",
+    "dest": "linuxdeepin/dtkgui/.github/ISSUE_TEMPLATE/config.yml"
   }
 ]
