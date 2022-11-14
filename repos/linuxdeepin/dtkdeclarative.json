@@ -80,7 +80,14 @@
     "branch": [
       "master"
     ],
-    "src": "issue-templates/config-empty.yml",
-    "dest": "linuxdeepin/dtkdeclarative/.github/ISSUE_TEMPLATE/config.yml"
+    "src": "issue-templates/empty-issue.md",
+    "dest": "linuxdeepin/dtkdeclarative/.github/ISSUE_TEMPLATE/empty-issue.md"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "issue-templates/unit-test-report.md",
+    "dest": "linuxdeepin/dtkdeclarative/.github/ISSUE_TEMPLATE/unit-test-report.md"
   }
 ]
