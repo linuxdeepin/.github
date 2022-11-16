@@ -26,6 +26,7 @@ settings:
       - dde-grand-search
       - deepin-screen-recorder
       - dareader
+      - warm-sched
       - dde-daemon
       - dde-session-shell
       - dde-session-ui
