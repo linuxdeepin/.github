@@ -708,6 +708,15 @@ teams:
       push:
         - dde-dock
         - dde-network-core
+  - name: warm-sched
+    parent_team: Maintainers
+    members:
+      - electricface
+      - Iceyer
+      - black-desk
+    repositories_permissions:
+      push:
+        - warm-sched
   - name: dde-launcher
     parent_team: Maintainers
     members:
