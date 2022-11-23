@@ -30,7 +30,7 @@ jobs:
       - name: Trigger build
         id: generate-runid
         run: |
-          echo ":RUN_ID=$(jenkins-bridge-client triggerTagBuild --token $BRIDGE_TOKEN)" >> $GITHUB_OUTPUT
+          echo "RUN_ID=$(jenkins-bridge-client triggerTagBuild --token $BRIDGE_TOKEN)" >> $GITHUB_OUTPUT
       - name: Print log
         run: |
           jenkins-bridge-client printLog --token "$BRIDGE_TOKEN" --runid "${{ steps.generate-runid.outputs.RUN_ID }}"
