@@ -216,6 +216,10 @@ teams:
         - linglong-dbus-proxy
         - linglong-homepage
         - linglong-web-store
+        - linglong-loader
+        - linglong-store
+        - linglong-repo
+        - linglong-pica
   - name: linglong-member
     parent_team: Projects
     members:
@@ -237,6 +241,10 @@ teams:
         - linglong-dbus-proxy
         - linglong-homepage
         - linglong-web-store
+        - linglong-loader
+        - linglong-store
+        - linglong-repo
+        - linglong-pica
   - name: Multimedia-audio-video
     parent_team: Maintainers
     members:
