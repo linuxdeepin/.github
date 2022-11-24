@@ -211,6 +211,7 @@ teams:
         - developer-center
       maintain:
         - linglong-hub
+        - linglong-builder-demo
         - linglong-box
         - linglong-dbus-proxy
         - linglong-homepage
@@ -231,6 +232,7 @@ teams:
       triage:
         - developer-center
         - linglong-hub
+        - linglong-builder-demo
         - linglong-box
         - linglong-dbus-proxy
         - linglong-homepage
@@ -370,6 +372,7 @@ teams:
       - groveer
       - toberyan
       - xzl01
+      - asterwyx
     repositories_permissions:
       push:
         - dtkcommon
@@ -384,7 +387,6 @@ teams:
         - dtksystemsettings
         - dtkdevice
         - dtkdisplay
-        - dtknetwork
         - dtkbluetooth
         - dtkcrypt
         - dtkio
@@ -392,6 +394,7 @@ teams:
         - dtknetworkmanager
         - dtksystem
         - dtkaudiomanager
+        - dtkprinter
       triage:
         - action-teams-manager
   - name: DTK-member
@@ -478,6 +481,7 @@ teams:
       - stdLike
       - tingwei1123
       - toberyan
+      - liyigang1
     repositories_permissions:
       push:
         - dde-file-manager
@@ -704,6 +708,15 @@ teams:
       push:
         - dde-dock
         - dde-network-core
+  - name: warm-sched
+    parent_team: Maintainers
+    members:
+      - electricface
+      - Iceyer
+      - black-desk
+    repositories_permissions:
+      push:
+        - warm-sched
   - name: dde-launcher
     parent_team: Maintainers
     members:
@@ -738,3 +751,10 @@ teams:
     parent_team: Maintainers
     members:
       - leoliu-oc
+  - name: xdg-desktop-portal-dde
+    parent_team: Maintainers
+    members:
+      - justforlxz
+    repositories_permissions:
+      push:
+        - xdg-desktop-portal-dde

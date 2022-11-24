@@ -68,5 +68,19 @@
     ],
     "src": "workflow-templates/call-tag-build.yml",
     "dest": "linuxdeepin/dtkmultimedia/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "issue-templates/empty-issue.md",
+    "dest": "linuxdeepin/dtkmultimedia/.github/ISSUE_TEMPLATE/empty-issue.md"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "issue-templates/unit-test-report.md",
+    "dest": "linuxdeepin/dtkmultimedia/.github/ISSUE_TEMPLATE/unit-test-report.md"
   }
 ]

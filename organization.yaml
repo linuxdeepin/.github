@@ -26,6 +26,7 @@ settings:
       - dde-grand-search
       - deepin-screen-recorder
       - dareader
+      - warm-sched
       - dde-daemon
       - dde-session-shell
       - dde-session-ui
@@ -109,6 +110,7 @@ settings:
       - dtksystem
       - dtkaudiomanager
       - deepin-home
+      - xdg-desktop-portal-dde
     features:
       issues:
         enable: true
