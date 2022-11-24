@@ -1,0 +1,60 @@
+name: deploy doc to gh-pages
+
+on:
+  workflow_call:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    container:
+      image: linuxdeepin/apricot:latest
+      options: --privileged
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+        - /etc/machine-id:/etc/machine-id
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: init base environment
+        run: |
+          echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+          rm /etc/apt/sources.list
+          echo "deb [trusted=yes] https://deepin-community.github.io/deepin-dde-repo apricot main\ndeb-src [trusted=yes] https://deepin-community.github.io/deepin-dde-repo apricot main" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://deepin-community.github.io/deepin-dde-deps-repo apricot main\ndeb-src [trusted=yes] https://deepin-community.github.io/deepin-dde-deps-repo apricot main" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://ftp.jaist.ac.jp/pub/Linux/deepin/ apricot main contrib non-free\ndeb-src [trusted=yes] https://ftp.jaist.ac.jp/pub/Linux/deepin/ apricot main contrib non-free" >> /etc/apt/sources.list
+          apt-get update && apt-get install -y --force-yes ca-certificates apt-transport-https sudo
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Prepare
+        run: |
+          sudo apt-get install -y --force-yes doxygen
+          sudo apt-get install -y --force-yes devscripts equivs git
+          mk-build-deps
+          sudo apt-get install -y --force-yes ./*.deb
+          git clone https://github.com/jothepro/doxygen-awesome-css.git --depth=1
+      - name: Build Docs
+        run: |
+          cmake -Bbuild -DBUILD_DOCS=ON -DBUILD_TESTING=OFF -DDOXYGEN_GENERATE_HTML="YES" \
+                        -DDOXYGEN_HTML_EXTRA_STYLESHEET="`pwd`/doxygen-awesome-css/doxygen-awesome.css" \
+                        -DDOXYGEN_TAGFILES="qtcore.tags=http://doc.qt.io/qt-5/;qtwidgets/tags=http://doc.qt.io/qt-5/" .
+          cmake --build build --target doxygen
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./build/docs/html
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
