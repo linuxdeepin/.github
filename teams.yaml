@@ -221,6 +221,7 @@ teams:
         - linglong-store
         - linglong-repo
         - linglong-pica
+        - linglong-doc
   - name: linglong-member
     parent_team: Projects
     members:
@@ -247,6 +248,7 @@ teams:
         - linglong-store
         - linglong-repo
         - linglong-pica
+        - linglong-doc
   - name: Multimedia-audio-video
     parent_team: Maintainers
     members:
