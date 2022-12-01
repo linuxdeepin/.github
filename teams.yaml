@@ -617,8 +617,10 @@ teams:
     parent_team: Maintainers
     members:
       - axylp
-      - hitong602
+      - haidong-602
       - ChaojiangLuo
+      - zhangyaninga
+      - zy-seven
     repositories_permissions:
       push:
         - dwayland
@@ -629,7 +631,7 @@ teams:
     parent_team: Projects
     members:
       - axylp
-      - hitong602
+      - haidong-602
       - ChaojiangLuo
       - diguoliang
       - thinkingning
@@ -637,6 +639,7 @@ teams:
       - dandan-y
       - xupeidongdong
       - zhangyaninga
+      - zy-seven
       - UniqueDing
       - xyruos
       - guokaka
