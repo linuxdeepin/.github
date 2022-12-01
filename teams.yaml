@@ -624,6 +624,7 @@ teams:
         - dwayland
         - deepin-kwin
         - dde-kwin
+        - deepin-wayland-protocols
   - name: deepin-kwin-member
     parent_team: Projects
     members:
@@ -645,6 +646,7 @@ teams:
         - dwayland
         - deepin-kwin
         - dde-kwin
+        - deepin-wayland-protocols
   - name: deepin-downloader
     parent_team: Maintainers
     members:
