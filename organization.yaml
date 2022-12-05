@@ -111,6 +111,11 @@ settings:
       - dtkaudiomanager
       - deepin-home
       - xdg-desktop-portal-dde
+      - linglong
+      - linglong-box
+      - linglong-loader
+      - linglong-dbus-proxy
+      - linglong-hub
     features:
       issues:
         enable: true
