@@ -39,13 +39,13 @@ jobs:
           感谢您的提交，我们非常感谢。 像许多开源项目一样，在接受您的贡献之前，我们要求您签署我们的[个人贡献者许可协议](https://github.com/linuxdeepin/cla/blob/master/%E4%B8%AA%E4%BA%BA%E8%B4%A1%E7%8C%AE%E8%80%85%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%89-V1.0.md)。 您只需发布与以下格式相同的评论即可签署[个人贡献者许可协议](https://github.com/linuxdeepin/cla/blob/master/%E4%B8%AA%E4%BA%BA%E8%B4%A1%E7%8C%AE%E8%80%85%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%89-V1.0.md)。<br/>
           Thank you for your submission, we really appreciate it. Like many open-source projects, we ask that $you sign our [Individual Contributor License Agreement](https://github.com/linuxdeepin/cla/blob/master/Individual%20Contributor%20License%20Agreement-EN-V1.0.md) before we can accept your contribution. You can sign the [Individual Contributor License Agreement](https://github.com/linuxdeepin/cla/blob/master/Individual%20Contributor%20License%20Agreement-EN-V1.0.md) by just posting a Pull Request Comment same as the below format.<br/>
           <br/>'
-          allow-email-list: '*@uniontech.com,*@deepin.org,*@deepin.com'
+          # allow-email-list: ''
           custom-pr-sign-comment: 'I have read the CLA Document and I hereby sign the CLA.'
           #custom-allsigned-prcomment: 'pull request comment when all contributors has signed, defaults to **CLA Assistant Lite bot** All Contributors have signed the CLA.'
           lock-pullrequest-aftermerge: false
           # if you don't want this bot to automatically lock the pull request after merging (default - true)
           #use-dco-flag: true - If you are using DCO instead of CLA
-          partner-allow-email-list: '*@phytium.com.cn,*@zhaoxin.com'
+          partner-allow-email-list: '*@phytium.com.cn,*@zhaoxin.com,*@uniontech.com,*@deepin.org,*@deepin.com'
           partner-not-in-org-comment: '
           <br/>
           提交邮箱中包含我们的合作伙伴，但您似乎并非合作伙伴的成员或对接人，请联系相关对接人将您添加至组织之中，或由其重新发起 Pull Request。
