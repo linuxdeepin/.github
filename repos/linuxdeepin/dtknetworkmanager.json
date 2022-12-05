@@ -73,6 +73,13 @@
     "branch": [
       "master"
     ],
+    "src": "workflow-templates/call-deploy-dev-doc.yml",
+    "dest": "linuxdeepin/dtknetworkmanager/.github/workflows/call-deploy-dev-doc.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
     "src": "issue-templates/empty-issue.md",
     "dest": "linuxdeepin/dtknetworkmanager/.github/ISSUE_TEMPLATE/empty-issue.md"
   },
