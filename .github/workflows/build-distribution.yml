@@ -22,6 +22,11 @@ jobs:
       result: ${{ steps.result.outputs.RESULT }}
     steps:
       - uses: actions/checkout@v3
+        if: ${{ github.event.pull_request.head.sha }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/checkout@v3
+        if: ${{ github.event_name == 'push' }}
         with:
           fetch-depth: 0
       - name: Check dep
