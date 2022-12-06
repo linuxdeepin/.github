@@ -16,7 +16,6 @@ jobs:
       image: ghcr.io/justforlxz/deepin-builder-docker/archlinux:master
       options: --privileged
       volumes:
-        - /sys/fs/cgroup:/sys/fs/cgroup
         - /etc/machine-id:/etc/machine-id
     runs-on: ubuntu-latest
     outputs:
@@ -41,7 +40,6 @@ jobs:
       image: ghcr.io/justforlxz/deepin-builder-docker/archlinux:master
       options: --privileged
       volumes:
-        - /sys/fs/cgroup:/sys/fs/cgroup
         - /etc/machine-id:/etc/machine-id
     runs-on: ubuntu-latest
     steps:
@@ -153,7 +151,7 @@ jobs:
                                --debootstrapopts --keyring=/usr/share/keyrings/debian-archive-keyring.gpg \
                                --debootstrapopts --include=debian-archive-keyring,ca-certificates
   debian-build:
-    needs: [ debian-setup ]
+    needs: [debian-setup]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -263,7 +261,7 @@ jobs:
           path: ~/deb/*
   debian-upload:
     if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
-    needs: [ debian-build ]
+    needs: [debian-build]
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -358,7 +356,7 @@ jobs:
           7z x buster.zip
           mv buster.tgz ~/deepin-base-amd64.tgz
   deepin-build:
-    needs: [ deepin-setup ]
+    needs: [deepin-setup]
     continue-on-error: true
     runs-on: ubuntu-latest
     steps:
@@ -470,7 +468,7 @@ jobs:
           path: ~/deb/*
   deepin-upload:
     if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
-    needs: [ deepin-build ]
+    needs: [deepin-build]
     runs-on: ubuntu-latest
     steps:
       - uses: webfactory/ssh-agent@v0.5.4
