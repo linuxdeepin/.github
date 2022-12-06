@@ -39,9 +39,9 @@ jobs:
           git clone https://github.com/jothepro/doxygen-awesome-css.git --depth=1
       - name: Build Docs
         run: |
-          cmake -Bbuild -DBUILD_DOCS=ON -DBUILD_TESTING=OFF -DDOXYGEN_GENERATE_HTML="YES" \
-                        -DDOXYGEN_HTML_EXTRA_STYLESHEET="`pwd`/doxygen-awesome-css/doxygen-awesome.css" \
-                        -DDOXYGEN_TAGFILES="qtcore.tags=http://doc.qt.io/qt-5/;qtwidgets/tags=http://doc.qt.io/qt-5/" .
+          cmake -Bbuild -DBUILD_DOCS=ON -DBUILD_TESTING=OFF -DDOXYGEN_GENERATE_HTML="YES" -DDOXYGEN_GENERATE_TREEVIEW="YES" \
+                        -DDOXYGEN_HTML_EXTRA_STYLESHEET="`pwd`/doxygen-awesome-css/doxygen-awesome.css;`pwd`/doxygen-awesome-css/doxygen-awesome-sidebar-only.css" \
+                        -DDOXYGEN_TAGFILES="qtcore.tags=http://doc.qt.io/qt-5/;qtwidgets.tags=http://doc.qt.io/qt-5/" .
           cmake --build build --target doxygen
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
