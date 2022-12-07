@@ -779,3 +779,12 @@ teams:
     repositories_permissions:
       push:
         - xdg-desktop-portal-dde
+  - name: doc-sig
+    parent_team: Maintainers
+    members:
+      - xzl01
+      - asterwyx
+      - ComixHe
+    repositories_permissions:
+      push:
+        - doxygen-theme
