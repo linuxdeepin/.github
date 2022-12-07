@@ -778,7 +778,7 @@ teams:
       - justforlxz
     repositories_permissions:
       push:
-        - xdg-desktop-portal-dde 
+        - xdg-desktop-portal-dde
   - name: doc-sig
     parent_team: Maintainers
     members:
