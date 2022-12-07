@@ -48,6 +48,6 @@ jobs:
           partner-allow-email-list: '*@phytium.com.cn,*@zhaoxin.com,*@uniontech.com,*@deepin.org,*@deepin.com'
           partner-not-in-org-comment: '
           <br/>
-          提交邮箱中包含我们的合作伙伴，但您似乎并非合作伙伴的成员或对接人，请联系相关对接人将您添加至组织之中，或由其重新发起 Pull Request。
-          The commit email domain belongs to one of our partners, but it seems you are not yet a member of the current organization, please contact the contact person to add you to the organization or let them submit the Pull Request.
+          提交邮箱中包含我们的合作伙伴，但您似乎并非合作伙伴的成员或对接人，请联系相关对接人将您添加至组织之中，或由其重新发起 Pull Request。<br/>
+          The commit email domain belongs to one of our partners, but it seems you are not yet a member of the current organization, please contact the contact person to add you to the organization or let them submit the Pull Request.<br/>
           <br/>'
