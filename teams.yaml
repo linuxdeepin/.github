@@ -411,6 +411,7 @@ teams:
         - dtksystem
         - dtkaudiomanager
         - dtkprinter
+        - dtknotifications
       triage:
         - action-teams-manager
   - name: DTK-member
