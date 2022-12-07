@@ -88,10 +88,7 @@ jobs:
             echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
-            num=$(git describe --tags | cut -f2 -d '-') || echo
-            if [ "$num" = "$tag" ]; then
-              num=$(git rev-list --all --count);
-            fi
+            num=$(git rev-list --all --count);
             num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
             echo ${version}
@@ -202,10 +199,7 @@ jobs:
             echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
-            num=$(git describe --tags | cut -f2 -d '-') || echo
-            if [ "$num" = "$tag" ]; then
-              num=$(git rev-list --all --count);
-            fi
+            num=$(git rev-list --all --count);
             num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
             echo ${version}
@@ -402,10 +396,7 @@ jobs:
             echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
           else
             tag=$(git describe --tags | cut -f1 -d '-') || echo
-            num=$(git describe --tags | cut -f2 -d '-') || echo
-            if [ "$num" = "$tag" ]; then
-              num=$(git rev-list --all --count);
-            fi
+            num=$(git rev-list --all --count);
             num=`echo $num | awk '{printf("%03d",$0)}'`
             version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)
             echo ${version}
