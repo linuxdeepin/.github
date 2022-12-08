@@ -235,6 +235,7 @@ teams:
       - Heysion
       - black-desk
       - ismdeep
+      - kamiyadm
     repositories_permissions:
       triage:
         - developer-center
