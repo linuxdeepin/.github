@@ -99,6 +99,7 @@ settings:
       - deepin-devicemanager
       - deepin-editor
       - dtksystemsettings
+      - dtknotifications
       - dtkdevice
       - dtkdisplay
       - dtknetwork
