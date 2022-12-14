@@ -130,7 +130,7 @@ settings:
         required_status_checks:
           require_review: true
           strict: true
-      uos:
+      release/*:
         dismiss_stale_reviews: true
         enforce_admins: false
         required_approving_review_count: 1
