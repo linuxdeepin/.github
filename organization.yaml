@@ -54,7 +54,7 @@ settings:
       - deepin-pw-check
       - dde-kwin
       - deepin-kwin
-      - deepin-kwayland
+      - dwayland
       - dde-api
       - dde-launcher
       - dde-qt-dbus-factory
