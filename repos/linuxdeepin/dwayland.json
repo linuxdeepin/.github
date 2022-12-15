@@ -1,0 +1,82 @@
+[
+  {
+    "branches": [
+      "master",
+      "release/.+"
+    ],
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/dwayland/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/dwayland/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/dwayland/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "release/.+"
+    ],
+    "src": "workflow-templates/cppcheck.yml",
+    "dest": "linuxdeepin/dwayland/.github/workflows/cppcheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-build-deb.yml",
+    "dest": "linuxdeepin/dwayland/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/dwayland/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/dwayland/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/dwayland/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/dwayland/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "dest": "linuxdeepin/dwayland/.github/workflows/call-tag-build.yml"
+  }
+]
