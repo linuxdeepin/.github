@@ -2,8 +2,8 @@
   {
     "branches": [
       "master",
-      "dev/.+",
-      "maintain/.+"
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/backup-to-gitlab.yml",
     "dest": "linuxdeepin/deepin-kwin/.github/workflows/backup-to-gitlab.yml"
@@ -11,8 +11,8 @@
   {
     "branches": [
       "master",
-      "dev/.+",
-      "maintain/.+"
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/deepin-kwin/.github/workflows/call-commitlint.yml"
@@ -20,8 +20,8 @@
   {
     "branches": [
       "master",
-      "dev/.+",
-      "maintain/.+"
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/deepin-kwin/.github/workflows/call-chatOps.yml"
@@ -29,8 +29,8 @@
   {
     "branches": [
       "master",
-      "dev/.+",
-      "maintain/.+"
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/cppcheck.yml",
     "dest": "linuxdeepin/deepin-kwin/.github/workflows/cppcheck.yml"
@@ -38,8 +38,8 @@
   {
     "branches": [
       "master",
-      "dev/.+",
-      "maintain/.+"
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-build-deb.yml",
     "dest": "linuxdeepin/deepin-kwin/.github/workflows/call-build-deb.yml"
@@ -47,8 +47,8 @@
   {
     "branch": [
       "master",
-      "dev/.+",
-      "maintain/.+"
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/deepin-kwin/.github/workflows/call-clacheck.yml"
@@ -56,8 +56,8 @@
   {
     "branches": [
       "master",
-      "dev/.+",
-      "maintain/.+"
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/deepin-kwin/.github/workflows/call-license-check.yml"
