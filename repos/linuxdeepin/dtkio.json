@@ -66,6 +66,13 @@
     "branch": [
       "master"
     ],
+    "src": "workflow-templates/call-deploy-dev-doc.yml",
+    "dest": "linuxdeepin/dtkio/.github/workflows/call-deploy-dev-doc.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
     "src": "workflow-templates/call-tag-build.yml",
     "dest": "linuxdeepin/dtkio/.github/workflows/call-tag-build.yml"
   },
