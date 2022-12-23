@@ -36,12 +36,26 @@ jobs:
           sudo apt-get install -y --force-yes devscripts equivs git
           mk-build-deps
           sudo apt-get install -y --force-yes ./*.deb
-          git clone https://github.com/jothepro/doxygen-awesome-css.git --depth=1
+          git clone https://github.com/linuxdeepin/doxygen-theme.git --depth=1
+          sed -i "s|change address|https://github.com/linuxdeepin/$(basename `pwd`)|" doxygen-theme/doxygen-awesome-css/header.html
+          sed -i "s|doxtime|$(date +"%Y-%m-%d-%R  %:::z")|" doxygen-theme/doxygen-awesome-css/footer.html
+
       - name: Build Docs
         run: |
           cmake -Bbuild -DBUILD_DOCS=ON -DBUILD_TESTING=OFF -DDOXYGEN_GENERATE_HTML="YES" -DDOXYGEN_GENERATE_TREEVIEW="YES" \
-                        -DDOXYGEN_HTML_EXTRA_STYLESHEET="`pwd`/doxygen-awesome-css/doxygen-awesome.css;`pwd`/doxygen-awesome-css/doxygen-awesome-sidebar-only.css" \
-                        -DDOXYGEN_TAGFILES="qtcore.tags=http://doc.qt.io/qt-5/;qtwidgets.tags=http://doc.qt.io/qt-5/" .
+                        -DDOXYGEN_HTML_EXTRA_STYLESHEET="./doxygen-theme/doxygen-awesome-css/doxygen-awesome.css;\
+                          ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-sidebar-only.css;\
+                          ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css"\
+                        -DDOXYGEN_HTML_EXTRA_FILES="./doxygen-theme/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js;\
+                          ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js;\
+                          ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-paragraph-link.js;\
+                          ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-interactive-toc.js;"\
+                        -DDOXYGEN_GENERATE_TREEVIEW="YES"\
+                        -DDOXYGEN_DISABLE_INDEX="NO"\
+                        -DDOXYGEN_FULL_SIDEBAR="NO"\
+                        -DDOXYGEN_HTML_HEADER="./doxygen-theme/doxygen-awesome-css/header.html"\
+                        -DDOXYGEN_HTML_FOOTER="./doxygen-theme/doxygen-awesome-css/footer.html"\
+                        -DDOXYGEN_TAGFILES="qtcore.tags=http://doc.qt.io/qt-5/;qtwidgets/tags=http://doc.qt.io/qt-5/" .
           cmake --build build --target doxygen
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
