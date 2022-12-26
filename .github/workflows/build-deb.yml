@@ -14,6 +14,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # disable uos
+    if: false
     steps:
       - name: Print Environment
         run: export
