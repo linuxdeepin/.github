@@ -66,7 +66,7 @@ jobs:
       - name: get changelog version
         id: get-version
         run: |
-          echo "TAG=$(LC_ALL=C dpkg-parsechangelog -S Version)" >> $GITHUB_OUTPUT
+          echo "TAG=$(LC_ALL=C dpkg-parsechangelog -S Version | sed 's/:/%/g' | sed 's/~/_/g')" >> $GITHUB_OUTPUT
           echo "DISTRIBUTION=$(LC_ALL=C dpkg-parsechangelog -S Distribution)" >> $GITHUB_OUTPUT
 
       - name: check tag exsits
@@ -82,7 +82,7 @@ jobs:
           script: |
             const BOT_NAME = "TAG Bot"
             const COMMENT_HEAD = "**" + BOT_NAME + "**\n\n"
-            const COMMENT_BODY = "TAG: ${{ steps.get-version.outputs.TAG }}\nEXISTED: ${{ steps.test-tag-exists.outputs.EXISTS }}"
+            const COMMENT_BODY = "TAG: ${{ steps.get-version.outputs.TAG }}\nEXISTED: ${{ steps.test-tag-exists.outputs.EXISTS }}\nDISTRIBUTION: ${{ steps.get-version.outputs.DISTRIBUTION }}"
             const response = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -108,7 +108,7 @@ jobs:
               })
             }
 
-            if ("${{ steps.test-tag-exists.outputs.EXISTS }}" === "yes"){
+            if ("${{ steps.test-tag-exists.outputs.EXISTS }}" === "yes" && "${{ steps.get-version.outputs.DISTRIBUTION }}" !== "UNRELEASED"){
               core.setFailed("Tag: ${{ steps.get-version.outputs.TAG }} exists!")
             }
 
@@ -156,6 +156,11 @@ jobs:
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
           script: |
+            const distribution = "${{ steps.get-version.outputs.DISTRIBUTION }}"
+            if (distribution === "UNRELEASED") {
+              core.info("UNRELEASED will not create tag")
+              return
+            }
             const { data } = await github.rest.git.createTag({
               repo: context.repo.repo,
               owner: context.repo.owner,
