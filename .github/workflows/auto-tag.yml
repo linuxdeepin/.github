@@ -66,14 +66,28 @@ jobs:
       - name: get changelog version
         id: get-version
         run: |
-          echo "TAG=$(LC_ALL=C dpkg-parsechangelog -S Version | sed 's/:/%/g' | sed 's/~/_/g')" >> $GITHUB_OUTPUT
+          echo "TAG=$(LC_ALL=C dpkg-parsechangelog -S Version)" >> $GITHUB_OUTPUT
           echo "DISTRIBUTION=$(LC_ALL=C dpkg-parsechangelog -S Distribution)" >> $GITHUB_OUTPUT
+
+      - name: check epoch
+        id: get-tag
+        shell: python
+        run: |
+          import os
+          tag = "${{ steps.get-version.outputs.TAG }}"
+          if tag.__contains__(":"):
+              tag = tag.split(":")[1]
+          if tag.__contains__("-"):
+              tag = tag.split("-")[0]
+          output_file = os.environ.get("GITHUB_OUTPUT")
+          with open(output_file, "a") as output:
+              output.write("TAG=" + tag + "\n")
 
       - name: check tag exsits
         id: test-tag-exists
         run: |
           git fetch --tags
-          echo "EXISTS=$(if [ $(git tag -l ${{ steps.get-version.outputs.TAG }}) ]; then echo yes; else echo no; fi)" >> $GITHUB_OUTPUT
+          echo "EXISTS=$(if [ $(git tag -l ${{ steps.get-tag.outputs.TAG }}) ]; then echo yes; else echo no; fi)" >> $GITHUB_OUTPUT
 
       - name: create comment
         uses: actions/github-script@v6
@@ -82,7 +96,7 @@ jobs:
           script: |
             const BOT_NAME = "TAG Bot"
             const COMMENT_HEAD = "**" + BOT_NAME + "**\n\n"
-            const COMMENT_BODY = "TAG: ${{ steps.get-version.outputs.TAG }}\nEXISTED: ${{ steps.test-tag-exists.outputs.EXISTS }}\nDISTRIBUTION: ${{ steps.get-version.outputs.DISTRIBUTION }}"
+            const COMMENT_BODY = "TAG: ${{ steps.get-tag.outputs.TAG }}\nEXISTED: ${{ steps.test-tag-exists.outputs.EXISTS }}\nDISTRIBUTION: ${{ steps.get-version.outputs.DISTRIBUTION }}"
             const response = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -109,7 +123,7 @@ jobs:
             }
 
             if ("${{ steps.test-tag-exists.outputs.EXISTS }}" === "yes" && "${{ steps.get-version.outputs.DISTRIBUTION }}" !== "UNRELEASED"){
-              core.setFailed("Tag: ${{ steps.get-version.outputs.TAG }} exists!")
+              core.setFailed("Tag: ${{ steps.get-tag.outputs.TAG }} exists!")
             }
 
       - name: install depends for load scripts
@@ -164,10 +178,10 @@ jobs:
             const { data } = await github.rest.git.createTag({
               repo: context.repo.repo,
               owner: context.repo.owner,
-              message: "Release " + context.repo.repo + " ${{ steps.get-version.outputs.TAG }}",
+              message: "Release " + context.repo.repo + " ${{ steps.get-tag.outputs.TAG }}",
               type: 'commit',
               object: context.sha,
-              tag: "${{ steps.get-version.outputs.TAG }}",
+              tag: "${{ steps.get-tag.outputs.TAG }}",
               tagger: {
                 name: "${{ github.event.pull_request.user.login }}",
                 email: "${{ steps.get-email.outputs.email }}",
@@ -181,6 +195,6 @@ jobs:
             const res = await github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'refs/tags/${{ steps.get-version.outputs.TAG }}',
+              ref: 'refs/tags/${{ steps.get-tag.outputs.TAG }}',
               sha: data.sha
             })
