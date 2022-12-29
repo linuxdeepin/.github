@@ -409,7 +409,6 @@ teams:
         - dtkio
         - dtkmultimedia
         - dtknetworkmanager
-        - dtksystem
         - dtkaudiomanager
         - dtkprinter
         - dtknotifications
