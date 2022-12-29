@@ -108,7 +108,6 @@ settings:
       - dtkio
       - dtkmultimedia
       - dtknetworkmanager
-      - dtksystem
       - dtkaudiomanager
       - deepin-home
       - xdg-desktop-portal-dde
