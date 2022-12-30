@@ -26,19 +26,22 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: ".tx/config"
+      - name: Check .tx/deepin.conf
+        id: check_deepin
+        uses: andstor/file-existence-action@v1
+        with:
+          files: ".tx/deepin.conf"
       - name: Check translations config
-        if: steps.check_files.outputs.files_exists == 'true'
+        if: steps.check_files.outputs.files_exists == 'true' && steps.check_deepin.outputs.files_exists == 'false'
         run: |
-          if ! test -f ".tx/deepin.conf"; then
-              echo "need .tx/deepin.conf, it likes: "
-              echo "--------------------------------"
-              echo "[transifex]"
-              echo "branch = m20"
-              echo "--------------------------------"
-              echo "Because we don't know the translation branch corresponding to this branch."
-              echo "If you don't know the corresponding translation branch, don't set branch value, we will use the default value."
-              exit 1
-          fi
+          echo "need .tx/deepin.conf, it likes: "
+          echo "--------------------------------"
+          echo "[transifex]"
+          echo "branch = m20"
+          echo "--------------------------------"
+          echo "Because we don't know the translation branch corresponding to this branch."
+          echo "If you don't know the corresponding translation branch, don't set branch value, we will use the default value."
+          exit 1
       - name: Init transifex file
         if: steps.check_files.outputs.files_exists == 'true'
         run: |
