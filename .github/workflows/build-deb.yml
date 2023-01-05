@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     # disable uos
-    if: false
+    if: ${{ github.repository == 'linuxdeepin/deepin-deb-installer' }}
     steps:
       - name: Print Environment
         run: export
