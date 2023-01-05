@@ -135,13 +135,6 @@ jobs:
           npm install @octokit/rest
           npm install @octokit/auth-app
 
-      - name: get email
-        if: github.event.pull_request.merged
-        id: get-email
-        uses: evvanErb/get-github-email-by-username-action@v1.25
-        with:
-          github-username: '${{ github.event.pull_request.user.login }}'
-
       - name: Get token using github-script
         id: get-token
         if: github.event.pull_request.merged
@@ -166,6 +159,14 @@ jobs:
               installationId: app_installation.data.id
             });
             core.setOutput('app_token', token)
+
+      - name: get email
+        if: github.event.pull_request.merged
+        id: get-email
+        uses: evvanErb/get-github-email-by-username-action@v2
+        with:
+          github-username: '${{ github.event.pull_request.user.login }}'
+          token: '${{ steps.get-token.outputs.app_token }}'
 
       - name: Create tag
         if: github.event.pull_request.merged
