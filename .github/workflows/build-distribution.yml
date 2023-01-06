@@ -319,6 +319,7 @@ jobs:
           fi
   deepin-setup:
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Init
         run: |
