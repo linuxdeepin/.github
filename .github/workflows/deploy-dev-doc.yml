@@ -41,6 +41,7 @@ jobs:
       - name: Prepare
         run: |
           sudo apt-get install -y --force-yes doxygen
+          sudo apt-get install -y --force-yes doxyqml
           sudo apt-get install -y --force-yes devscripts equivs git
           mk-build-deps
           sudo apt-get install -y --force-yes ./*.deb
