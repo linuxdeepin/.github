@@ -317,6 +317,8 @@ teams:
         - deepin-image-viewer
         - deepin-album
         - deepin-ocr
+        - deepin-ncnn
+        - deepin-opencv-mobile
         - deepin-ocr-plugin-manager
         - image-editor
         - deepin-picker
@@ -340,7 +342,8 @@ teams:
         - deepin-draw
         - deepin-image-viewer
         - deepin-album
-        - deepin-ocr
+        - deepin-ncnn
+        - deepin-opencv-mobile
         - deepin-ocr-plugin-manager
         - image-editor
         - deepin-picker
