@@ -33,6 +33,9 @@
       "release/.+"
     ],
     "src": "workflow-templates/cppcheck.yml",
+    "deletelist": [
+      ".github/workflows/cppcheck.yml"
+    ],
     "dest": "linuxdeepin/deepin-wayland-protocols/.github/workflows/cppcheck.yml"
   },
   {
