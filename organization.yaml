@@ -33,6 +33,14 @@ settings:
       - dde-wldpms
       - dde-wloutput-daemon
       - dde-wloutput
+      - dde-appearance
+      - dde-application-manager
+      - dde-cooperation
+      - dde-permission-manager
+      - dde-session
+      - dde-widgets
+      - deepin-desktop-theme
+      - dde-api-proxy
       - deepin-desktop-schemas
       - deepin-network-proxy
       - deepin-sound-theme
