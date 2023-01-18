@@ -425,7 +425,6 @@ teams:
         - dtk-template
         - dtksystemsettings
         - dtkdevice
-        - dtkdisplay
         - dtkbluetooth
         - dtkcrypt
         - dtkio

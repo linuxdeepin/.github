@@ -109,7 +109,6 @@ settings:
       - dtksystemsettings
       - dtknotifications
       - dtkdevice
-      - dtkdisplay
       - dtknetwork
       - dtkbluetooth
       - dtkcrypt
