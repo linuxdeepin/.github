@@ -126,6 +126,8 @@ jobs:
         if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
         run: /db unlock
   debian-setup:
+    # move to obs
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Init
