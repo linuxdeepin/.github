@@ -435,6 +435,7 @@ teams:
         - dtknotifications
       triage:
         - action-teams-manager
+        - developer-center
   - name: DTK-member
     parent_team: Projects
     members:
