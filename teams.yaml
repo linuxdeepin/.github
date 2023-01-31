@@ -211,6 +211,7 @@ teams:
       - luodeepin
       - janeaaaa
       - zimo-liu
+      - UTsweetyfish
     repositories_permissions:
       maintain:
         - open-source-students
