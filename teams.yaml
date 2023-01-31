@@ -412,7 +412,7 @@ teams:
       - ComixHe
       - 18202781743
       - FeiWang1119
-    repositories_permissions:   
+    repositories_permissions:
       push:
         - dtkcommon
         - dtkcore
