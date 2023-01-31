@@ -412,7 +412,7 @@ teams:
       - ComixHe
       - 18202781743
       - FeiWang1119
-    repositories_permissions:
+    repositories_permissions:   
       push:
         - dtkcommon
         - dtkcore
@@ -435,6 +435,7 @@ teams:
         - dtknotifications
       triage:
         - action-teams-manager
+        - developer-center
   - name: DTK-member
     parent_team: Projects
     members:
