@@ -508,18 +508,13 @@ teams:
       - lvwujun
       - Clauszy
       - Johnson-zs
-      - obslee
       - Kakueeen
       - GongHeng2017
       - itsXuSt
-      - misonlan
       - Lighto
       - re2zero
       - wangrong1069
       - shzhuangpub
-      - hanxiii-z
-      - stdLike
-      - tingwei1123
       - toberyan
       - liyigang1
     repositories_permissions:
@@ -543,6 +538,26 @@ teams:
     repositories_permissions:
       push:
         - deepin-shortcut-viewer
+  - name: deepin-pdfium
+    parent_team: Maintainers
+    members:
+      - lvwujun
+      - Kakueeen
+      - GongHeng2017
+    repositories_permissions:
+      push:
+        - deepin-pdfium
+  - name: util-dfm
+    parent_team: Maintainers
+    members:
+      - lvwujun
+      - itsXuSt
+      - Kakueeen
+      - Johnson-zs
+      - liyigang1
+    repositories_permissions:
+      push:
+        - util-dfm
   - name: dde-device-formatter
     parent_team: Maintainers
     members:
@@ -555,9 +570,7 @@ teams:
     parent_team: Maintainers
     members:
       - Clauszy
-      - wangchunlin5013
       - lvwujun
-      - obslee
     repositories_permissions:
       push:
         - deepin-screensaver
@@ -582,7 +595,6 @@ teams:
     parent_team: Maintainers
     members:
       - lvwujun
-      - misonlan
       - Johnson-zs
     repositories_permissions:
       push:
