@@ -460,6 +460,9 @@ teams:
       - tsic404
       - zzxyb
       - cccccccb
+    repositories_permissions:
+      triage:
+        - developer-center
   - name: Students
     members:
       - avltreeql
