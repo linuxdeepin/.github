@@ -218,55 +218,52 @@ teams:
         - developer-center
       triage:
         - action-teams-manager
-  - name: linglong-maintainer
+  - name: linglong
     parent_team: Projects
     members:
-      - realwujing
-      - hqh2010
-    repositories_permissions:
-      triage:
-        - developer-center
-      push:
-        - linglong-hub
-        - linglong-builder-demo
-        - linglong
-        - linglong-box
-        - linglong-dbus-proxy
-        - linglong-homepage
-        - linglong-web-store
-        - linglong-loader
-        - linglong-store
-        - linglong-repo
-        - linglong-pica
-        - linglong-doc
-  - name: linglong-member
-    parent_team: Projects
-    members:
-      - iceyer
-      - hqh2010
-      - liujianqiang-niu
-      - tsic404
-      - Bruce
-      - sukie
       - Heysion
       - black-desk
+      - hqh2010
+      - iceyer
       - ismdeep
       - kamiyadm
+      - liujianqiang-niu
+      - myml
+      - realwujing
+      - tsic404
     repositories_permissions:
       triage:
-        - developer-center
-        - linglong-hub
-        - linglong-builder-demo
         - linglong
         - linglong-box
+        - linglong-builder-demo
         - linglong-dbus-proxy
-        - linglong-homepage
-        - linglong-web-store
-        - linglong-loader
-        - linglong-store
-        - linglong-repo
-        - linglong-pica
         - linglong-doc
+        - linglong-homepage
+        - linglong-hub
+        - linglong-loader
+        - linglong-pica
+        - linglong-repo
+        - linglong-store
+        - linglong-web-store
+  - name: linglong-maintainer
+    parent_team: linglong
+    members:
+      - black-desk
+      - iceyer
+    repositories_permissions:
+      push:
+        - linglong
+        - linglong-box
+        - linglong-builder-demo
+        - linglong-dbus-proxy
+        - linglong-doc
+        - linglong-homepage
+        - linglong-hub
+        - linglong-loader
+        - linglong-pica
+        - linglong-repo
+        - linglong-store
+        - linglong-web-store
   - name: Multimedia-audio-video
     parent_team: Maintainers
     members:
