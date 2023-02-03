@@ -368,6 +368,7 @@ teams:
     members:
       - re2zero
       - wangrong1069
+      - toberyan
     repositories_permissions:
       push:
         - deepin-anything
@@ -395,6 +396,7 @@ teams:
       - lvwujun
       - Johnson-zs
       - itsXuSt
+      - toberyan
     repositories_permissions:
       push:
         - udisks2-qt5
@@ -404,6 +406,7 @@ teams:
       - lvwujun
       - Kakueeen
       - Lighto
+      - toberyan
     repositories_permissions:
       push:
         - deepin-shortcut-viewer
@@ -413,6 +416,7 @@ teams:
       - lvwujun
       - Kakueeen
       - GongHeng2017
+      - toberyan
     repositories_permissions:
       push:
         - deepin-pdfium
@@ -424,6 +428,7 @@ teams:
       - Kakueeen
       - Johnson-zs
       - liyigang1
+      - toberyan
     repositories_permissions:
       push:
         - util-dfm
@@ -432,6 +437,7 @@ teams:
     members:
       - lvwujun
       - itsXuSt
+      - toberyan
     repositories_permissions:
       push:
         - dde-device-formatter
@@ -440,6 +446,7 @@ teams:
     members:
       - Clauszy
       - lvwujun
+      - toberyan
     repositories_permissions:
       push:
         - deepin-screensaver
@@ -449,6 +456,7 @@ teams:
       - lvwujun
       - Johnson-zs
       - itsXuSt
+      - toberyan
     repositories_permissions:
       push:
         - disomaster
@@ -457,6 +465,7 @@ teams:
     members:
       - Kakueeen
       - lvwujun
+      - toberyan
     repositories_permissions:
       push:
         - docparser
@@ -465,6 +474,7 @@ teams:
     members:
       - lvwujun
       - Johnson-zs
+      - toberyan
     repositories_permissions:
       push:
         - gio-qt
@@ -473,6 +483,7 @@ teams:
     members:
       - Clauszy
       - Kakueeen
+      - toberyan
     repositories_permissions:
       push:
         - dde-grand-search
