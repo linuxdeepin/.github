@@ -59,6 +59,12 @@ teams:
         - dde-wloutput
         - dde-cooperation
         - xdg-desktop-portal-dde
+        - dde-appearance
+        - dde-application-manager
+        - dde-permission-manager
+        - dde-api-proxy
+        - dde-widgets
+        - deepin-desktop-theme
   - name: deepin
     members:
       - felixonmars
