@@ -578,7 +578,7 @@ teams:
     repositories_permissions:
       push:
         - deepin-diskmanager
-  - name: deepin-fcitxconfigtool-plugin
+  - name: fcitx
     parent_team: Maintainers
     members:
       - chenshijie-uos
@@ -587,9 +587,11 @@ teams:
       - caimc123456
       - Fire-dtx
       - SuperZhangxueming
+      - zsien
     repositories_permissions:
       push:
         - deepin-fcitxconfigtool-plugin
+        - deepin-fcitx5configtool-plugin
   - name: deepin-graphics-driver-manager
     parent_team: Maintainers
     members:

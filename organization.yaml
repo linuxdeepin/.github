@@ -95,6 +95,7 @@ settings:
       - deepin-diskmanager
       - deepin-turbo
       - deepin-fcitxconfigtool-plugin
+      - deepin-fcitx5configtool-plugin
       - dde-device-formatter
       - deepin-screensaver
       - disomaster
