@@ -6,19 +6,19 @@ teams:
     repositories_permissions:
       admin:
         - "*"
-  - name: DDE
+  - name: dde-maintainer
     parent_team: Maintainers
     members:
-      - zccrs
-      - wubw1992
+      - tsic404
+      - Decodetalkers
+      - ComixHe
+      - dengbo11
       - zsien
-      - KT-lcz
-      - ssk-wh
-      - robertkill
-      - groveer
-      - shao-jun
-      - kegechen
+      - l631197874
+      - BLumia
     repositories_permissions:
+      triage:
+        - developer-center
       push:
         - go-gir-generator
         - go-lib
@@ -29,7 +29,6 @@ teams:
         - startdde
         - dde-daemon
         - deepin-desktop-schemas
-        - deepin-authentication
         - deepin-ab-recovery
         - lastore-daemon
         - dpa-ext-gnomekeyring
@@ -41,13 +40,15 @@ teams:
         - dde-wayland-config
         - default-settings
         - dde-control-center
+        - dde-session
+        - dde-session-ui
         - dde-session-shell
         - dde-dock
         - dde-clipboard
-        - dde-session-ui
         - dde-network-core
         - dde-launcher
         - dde-manual-content
+        - dde-wallpapers
         - deepin-wallpapers
         - deepin-wallpapers-nonfree
         - dde-polkit-agent
@@ -56,140 +57,8 @@ teams:
         - deepin-gtk-theme
         - deepin-pw-check
         - dde-wloutput
-        - dde-appearance
-        - dde-application-manager
         - dde-cooperation
-        - dde-permission-manager
-        - dde-session
-        - dde-widgets
-        - deepin-desktop-theme
-        - dde-api-proxy
-  - name: DDE-member
-    parent_team: Projects
-    members:
-      - justforlxz
-      - zccrs
-      - tsic404
-      - wubw1992
-      - zsien
-      - KT-lcz
-      - ssk-wh
-      - robertkill
-      - groveer
-      - shao-jun
-      - chenjun1982
-      - waterlovemelon
-      - dengbo11
-      - donghualin
-      - FeiWang1119
-      - shenwenqi3441
-      - liaohanqin
-      - Mars-cb
-      - ECQZXC
-      - caixr23
-      - rocet92
-      - weizhixiangcoder
-      - 2722195064
-      - yixinshark
-      - wentaosong1993
-    repositories_permissions:
-      triage:
-        - go-gir-generator
-        - go-lib
-        - go-dbus-factory
-        - go-x11-client
-        - dde-api
-        - dde-qt-dbus-factory
-        - startdde
-        - dde-daemon
-        - deepin-desktop-schemas
-        - deepin-authentication
-        - deepin-ab-recovery
-        - lastore-daemon
-        - dpa-ext-gnomekeyring
-        - deepin-network-proxy
-        - deepin-sound-theme
-        - dareader
-        - dde-wldpms
-        - dde-wloutput-daemon
-        - dde-wayland-config
-        - default-settings
-        - dde-control-center
-        - dde-session-shell
-        - dde-dock
-        - dde-clipboard
-        - dde-session-ui
-        - dde-network-core
-        - dde-launcher
-        - dde-manual-content
-        - deepin-wallpapers
-        - dde-polkit-agent
-        - dde-account-faces
-        - deepin-gettext-tools
-        - deepin-gtk-theme
-        - deepin-pw-check
-        - dde-wloutput
-        - dde-appearance
-        - dde-application-manager
-        - dde-cooperation
-        - dde-permission-manager
-        - dde-session
-        - dde-widgets
-        - deepin-desktop-theme
-        - dde-api-proxy
-  - name: DDE-Frontend-Qt
-    parent_team: Maintainers
-    members:
-      - chenjun1982
-      - waterlovemelon
-      - liaohanqin
-      - rocet92
-      - weizhixiangcoder
-    repositories_permissions:
-      push:
-        - dde-qt-dbus-factory
-        - dpa-ext-gnomekeyring
-        - deepin-sound-theme
-        - dareader
-        - dde-wldpms
-        - dde-wloutput-daemon
-        - dde-wayland-config
-        - dde-control-center
-        - dde-session-shell
-        - dde-dock
-        - dde-clipboard
-        - dde-session-ui
-        - dde-network-core
-        - dde-launcher
-        - dde-manual-content
-        - deepin-wallpapers
-        - dde-polkit-agent
-        - dde-account-faces
-        - deepin-gettext-tools
-        - deepin-gtk-theme
-        - deepin-pw-check
-        - dde-wloutput
-  - name: DDE-Backend-Golang
-    parent_team: Maintainers
-    members:
-      - liaohanqin
-      - rocet92
-      - weizhixiangcoder
-    repositories_permissions:
-      push:
-        - go-gir-generator
-        - go-lib
-        - go-dbus-factory
-        - go-x11-client
-        - dde-api
-        - startdde
-        - dde-daemon
-        - deepin-desktop-schemas
-        - deepin-authentication
-        - deepin-ab-recovery
-        - lastore-daemon
-        - deepin-network-proxy
-        - default-settings
+        - xdg-desktop-portal-dde
   - name: deepin
     members:
       - felixonmars
@@ -758,14 +627,6 @@ teams:
     repositories_permissions:
       maintain:
         - unilang
-  - name: dde-dock
-    parent_team: Maintainers
-    members:
-      - ut003640
-    repositories_permissions:
-      push:
-        - dde-dock
-        - dde-network-core
   - name: warm-sched
     parent_team: Maintainers
     members:
@@ -775,22 +636,6 @@ teams:
     repositories_permissions:
       push:
         - warm-sched
-  - name: dde-launcher
-    parent_team: Maintainers
-    members:
-      - wentaosong1993
-    repositories_permissions:
-      push:
-        - dde-launcher
-        - dde-session-ui
-  - name: dde-session-shell
-    parent_team: Maintainers
-    members:
-      - yixinshark
-    repositories_permissions:
-      push:
-        - dde-session-shell
-        - dde-clipboard
   - name: deepin-home
     parent_team: Maintainers
     members:
