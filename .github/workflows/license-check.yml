@@ -9,7 +9,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Install reuse
-        run: sudo apt install reuse
+        run: |
+          sudo sed -i 's/azure.archive.ubuntu.com/mirrors.layeronline.com/g' /etc/apt/sources.list
+          sudo apt update
+          sudo apt install reuse
       - name: License Check
         id: lcheck
         run: reuse lint
@@ -29,7 +32,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Install zsh
-        run: sudo apt install zsh
+        run: |
+          sudo sed -i 's/azure.archive.ubuntu.com/mirrors.layeronline.com/g' /etc/apt/sources.list
+          sudo apt update
+          sudo apt install zsh
       - name: README.md Check
         id: rcheck
         continue-on-error: true
