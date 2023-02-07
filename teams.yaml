@@ -593,6 +593,7 @@ teams:
       - caimc123456
       - guonafu
       - michael19911108
+      - lengzhou321
     repositories_permissions:
       push:
         - deepin-diskmanager
