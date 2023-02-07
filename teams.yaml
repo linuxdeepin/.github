@@ -689,3 +689,11 @@ teams:
     repositories_permissions:
       push:
         - doxygen-theme
+  - name: deepin-sysdev
+    parent_team: Maintainers
+    members:
+      - Zeno-sole
+      - UTsweetyfish
+    repositories_permissions:
+      push:
+        - deepin-upgrade-manager
