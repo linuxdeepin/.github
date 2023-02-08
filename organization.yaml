@@ -124,6 +124,7 @@ settings:
       - linglong-loader
       - linglong-dbus-proxy
       - linglong-hub
+      - deepin-upgrade-manager
     features:
       issues:
         enable: true
