@@ -126,6 +126,7 @@ teams:
     members:
       - black-desk
       - iceyer
+      - kamiyadm
     repositories_permissions:
       push:
         - linglong
