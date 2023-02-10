@@ -148,14 +148,12 @@ teams:
       - pengfeixx
       - wyu71
       - HeeMingYang
-      - ArchieMeng
     repositories_permissions:
       push:
         - deepin-camera
         - deepin-music
         - deepin-screen-recorder
         - deepin-movie-reborn
-        - deepin-terminal
         - deepin-font-manager
         - deepin-system-monitor
         - deepin-compressor
@@ -178,14 +176,12 @@ teams:
       - hundundadi
       - myk1343
       - ang486
-      - ArchieMeng
     repositories_permissions:
       triage:
         - deepin-camera
         - deepin-music
         - deepin-screen-recorder
         - deepin-movie-reborn
-        - deepin-terminal
         - deepin-font-manager
         - deepin-system-monitor
         - deepin-compressor
@@ -702,3 +698,4 @@ teams:
     repositories_permissions:
       push:
         - deepin-upgrade-manager
+        - deepin-terminal
