@@ -16,6 +16,7 @@ teams:
       - zsien
       - l631197874
       - BLumia
+      - asterwyx
     repositories_permissions:
       triage:
         - developer-center
