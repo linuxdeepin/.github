@@ -358,7 +358,6 @@ teams:
       - Ronghzhe
       - DthRee523
       - Zongyin-Hao
-      - ambition-echo
       - OrangePeel-2019
       - xiaohu-mc
       - xyf527
@@ -697,6 +696,8 @@ teams:
       - UTsweetyfish
       - ArchieMeng
     repositories_permissions:
+      triage:
+        - developer-center
       push:
         - deepin-upgrade-manager
         - deepin-terminal
