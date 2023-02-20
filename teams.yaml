@@ -66,6 +66,8 @@ teams:
         - dde-api-proxy
         - dde-widgets
         - deepin-desktop-theme
+        - deepin-fcitxconfigtool-plugin
+        - deepin-fcitx5configtool-plugin
   - name: deepin
     members:
       - felixonmars
