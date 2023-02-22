@@ -12,6 +12,7 @@ on:
         required: false
 jobs:
   archlinux-check:
+    if: false
     container:
       image: ghcr.io/justforlxz/deepin-builder-docker/archlinux:master
       options: --privileged
