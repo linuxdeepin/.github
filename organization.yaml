@@ -23,6 +23,7 @@ settings:
       - deepin-terminal
       - dde-file-manager
       - dde-control-center
+      - dde-display
       - dde-grand-search
       - deepin-screen-recorder
       - dareader
