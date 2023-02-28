@@ -73,6 +73,20 @@
     "branch": [
       "master"
     ],
+    "src": "workflow-templates/call-deploy-dev-doc.yml",
+    "dest": "linuxdeepin/dtkbluetooth/.github/workflows/call-deploy-dev-doc.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-doc-check.yml",
+    "dest": "linuxdeepin/dtkbluetooth/.github/workflows/call-doc-check.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
     "src": "issue-templates/empty-issue.md",
     "dest": "linuxdeepin/dtkbluetooth/.github/ISSUE_TEMPLATE/empty-issue.md"
   },
