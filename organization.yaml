@@ -1,6 +1,24 @@
 organization: linuxdeepin
 settings:
   - repositories:
+      - linglong
+      - linglong-box
+      - linglong-loader
+      - linglong-dbus-proxy
+      - linglong-hub
+      - xdg-desktop-portal-dde
+      - deepin-upgrade-manager
+      - dtksystemsettings
+      - dtknotifications
+      - dtkdevice
+      - dtknetwork
+      - dtkbluetooth
+      - dtkcrypt
+      - dtkio
+      - dtkmultimedia
+      - dtknetworkmanager
+      - dtkaudiomanager
+      - deepin-home
       - deepin-camera
       - deepin-music
       - deepin-manual
@@ -108,24 +126,6 @@ settings:
       - deepin-reader
       - deepin-devicemanager
       - deepin-editor
-      - dtksystemsettings
-      - dtknotifications
-      - dtkdevice
-      - dtknetwork
-      - dtkbluetooth
-      - dtkcrypt
-      - dtkio
-      - dtkmultimedia
-      - dtknetworkmanager
-      - dtkaudiomanager
-      - deepin-home
-      - xdg-desktop-portal-dde
-      - linglong
-      - linglong-box
-      - linglong-loader
-      - linglong-dbus-proxy
-      - linglong-hub
-      - deepin-upgrade-manager
     features:
       issues:
         enable: true
