@@ -18,6 +18,7 @@ teams:
       - BLumia
       - asterwyx
       - 18202781743
+      - Groveer
     repositories_permissions:
       triage:
         - developer-center
@@ -71,6 +72,7 @@ teams:
         - deepin-fcitx5configtool-plugin
         - dde-display
         - deepin-system-upgrade
+        - deepin-service
   - name: deepin
     members:
       - felixonmars
