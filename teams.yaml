@@ -72,7 +72,7 @@ teams:
         - deepin-fcitx5configtool-plugin
         - dde-display
         - deepin-system-upgrade
-        - deepin-service
+        - deepin-service-manager
   - name: deepin
     members:
       - felixonmars

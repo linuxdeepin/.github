@@ -7,6 +7,7 @@ settings:
       - linglong-dbus-proxy
       - linglong-hub
       - xdg-desktop-portal-dde
+      - deepin-service-manager
       - deepin-upgrade-manager
       - dtksystemsettings
       - dtknotifications
