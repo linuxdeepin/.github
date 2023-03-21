@@ -83,7 +83,6 @@ teams:
       - babyfengfjx
       - xuqi27837288
       - Zeno-sole
-      - ClayStan
       - yxsos
       - tsic404
       - SuperEffie
@@ -101,7 +100,7 @@ teams:
       push:
         - developer-center
       triage:
-        - action-teams-manager
+        - "*"
   - name: linglong
     parent_team: Projects
     members:
@@ -386,7 +385,7 @@ teams:
   - name: dde-file-manager
     parent_team: Maintainers
     members:
-      - lvwujun
+      - max-lvs
       - Clauszy
       - Johnson-zs
       - Kakueeen
@@ -404,7 +403,7 @@ teams:
   - name: udisks2-qt5
     parent_team: Maintainers
     members:
-      - lvwujun
+      - max-lvs
       - Johnson-zs
       - itsXuSt
       - toberyan
@@ -414,7 +413,7 @@ teams:
   - name: deepin-shortcut-viewer
     parent_team: Maintainers
     members:
-      - lvwujun
+      - max-lvs
       - Kakueeen
       - Lighto
       - toberyan
@@ -424,7 +423,7 @@ teams:
   - name: deepin-pdfium
     parent_team: Maintainers
     members:
-      - lvwujun
+      - max-lvs
       - Kakueeen
       - GongHeng2017
       - toberyan
@@ -434,7 +433,7 @@ teams:
   - name: util-dfm
     parent_team: Maintainers
     members:
-      - lvwujun
+      - max-lvs
       - itsXuSt
       - Kakueeen
       - Johnson-zs
@@ -446,7 +445,7 @@ teams:
   - name: dde-device-formatter
     parent_team: Maintainers
     members:
-      - lvwujun
+      - max-lvs
       - itsXuSt
       - toberyan
     repositories_permissions:
@@ -456,7 +455,7 @@ teams:
     parent_team: Maintainers
     members:
       - Clauszy
-      - lvwujun
+      - max-lvs
       - toberyan
     repositories_permissions:
       push:
@@ -464,7 +463,7 @@ teams:
   - name: disomaster
     parent_team: Maintainers
     members:
-      - lvwujun
+      - max-lvs
       - Johnson-zs
       - itsXuSt
       - toberyan
@@ -475,7 +474,7 @@ teams:
     parent_team: Maintainers
     members:
       - Kakueeen
-      - lvwujun
+      - max-lvs
       - toberyan
     repositories_permissions:
       push:
@@ -483,7 +482,7 @@ teams:
   - name: gio-qt
     parent_team: Maintainers
     members:
-      - lvwujun
+      - max-lvs
       - Johnson-zs
       - toberyan
     repositories_permissions:
