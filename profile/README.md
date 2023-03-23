@@ -13,7 +13,7 @@ Deepin is an open source Linux distribution dedicated to providing beautiful, ea
 
 ### Join SIG
 
-- [deepin RISCV](https://github.com/linuxdeepin/deepin-riscv) deepin RISC-V porting.
+- [deepin RISCV](https://github.com/deepin-community/sig-deepin-riscv64) deepin RISC-V porting.
 - [deepin WIKI](https://github.com/linuxdeepin/wiki.deepin.org) WIKI for every deepin users.
 - [deepin M1](https://github.com/linuxdeepin/deepin-m1) deepin M1 porting.
 - [deepin Test SIG](https://github.com/deepin-community/SIG/tree/master/sig/deepin-testsig) join pre-release testing.
