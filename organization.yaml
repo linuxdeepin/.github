@@ -82,7 +82,6 @@ settings:
       - dde-wallpapers
       - deepin-gettext-tools
       - deepin-pw-check
-      - dde-kwin
       - deepin-kwin
       - dwayland
       - dde-api
@@ -90,7 +89,6 @@ settings:
       - dde-qt-dbus-factory
       - lastore-daemon
       - deepin-ab-recovery
-      - dde-wayland-config
       - dde-introduction
       - deepin-deb-installer
       - deepin-compressor
