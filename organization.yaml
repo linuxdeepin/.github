@@ -6,6 +6,7 @@ settings:
       - linglong-loader
       - linglong-dbus-proxy
       - linglong-hub
+      - deepin-system-upgrade
       - util-dfm
       - deepin-pdfium
       - xdg-desktop-portal-dde
