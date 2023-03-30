@@ -94,6 +94,7 @@ teams:
       - janeaaaa
       - zimo-liu
       - UTsweetyfish
+      - black-desk
     repositories_permissions:
       maintain:
         - open-source-students
@@ -148,6 +149,14 @@ teams:
         - linglong-repo
         - linglong-store
         - linglong-web-store
+  - name: network-proxy
+    parent_team: Maintainers
+    members:
+      - black-desk
+      - zsien
+    repositories_permissions:
+      push:
+        - deepin-network-proxy
   - name: Multimedia-audio-video
     parent_team: Maintainers
     members:
