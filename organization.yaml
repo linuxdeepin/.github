@@ -70,7 +70,7 @@ settings:
       - default-settings
       - dpa-ext-gnomekeyring
       - go-dbus-factory
-      - go-gir-generator
+      - go-gir
       - go-lib
       - go-x11-client
       - startdde

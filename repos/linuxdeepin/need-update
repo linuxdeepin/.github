@@ -80,7 +80,7 @@ dtkgui.json
 dtkwidget.json
 gio-qt.json
 go-dbus-factory.json
-go-gir-generator.json
+go-gir.json
 go-lib.json
 go-x11-client.json
 image-editor.json
