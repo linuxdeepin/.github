@@ -23,7 +23,7 @@ teams:
       triage:
         - developer-center
       push:
-        - go-gir-generator
+        - go-gir
         - go-lib
         - go-dbus-factory
         - go-x11-client
