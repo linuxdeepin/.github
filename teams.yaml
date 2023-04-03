@@ -19,6 +19,7 @@ teams:
       - asterwyx
       - 18202781743
       - Groveer
+      - kegechen
     repositories_permissions:
       triage:
         - developer-center
@@ -282,6 +283,7 @@ teams:
   - name: Designer
     members:
       - shule1987
+      - kegechen
     repositories_permissions:
       pull:
         - deepin-gtk-theme
