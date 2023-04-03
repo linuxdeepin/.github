@@ -163,7 +163,6 @@ teams:
       - lzwind
       - pengfeixx
       - wyu71
-      - HeeMingYang
     repositories_permissions:
       push:
         - deepin-camera
@@ -186,12 +185,12 @@ teams:
       - lzwind
       - pengfeixx
       - wyu71
-      - HeeMingYang
+      - starhcq
+      - rb-union
       - feeengli
       - jeffshuai
       - hundundadi
       - myk1343
-      - ang486
     repositories_permissions:
       triage:
         - deepin-camera
@@ -212,9 +211,9 @@ teams:
     parent_team: Maintainers
     members:
       - lzwind
-      - deepin-CD
       - starhcq
-      - wzyforgit
+      - wyu71
+      - rb-union
     repositories_permissions:
       push:
         - deepin-draw
@@ -234,13 +233,14 @@ teams:
     parent_team: Projects
     members:
       - lzwind
-      - deepin-CD
       - starhcq
-      - wzyforgit
       - rb-union
-      - HZLwwwwt
-      - fanjiuwu
-      - lichunlong111
+      - pengfeixx
+      - wyu71
+      - feeengli
+      - jeffshuai
+      - hundundadi
+      - myk1343
     repositories_permissions:
       triage:
         - deepin-draw
@@ -262,7 +262,6 @@ teams:
       - lzwind
       - wyu71
       - starhcq
-      - wzyforgit
     repositories_permissions:
       push:
         - dtkdevice
@@ -273,7 +272,6 @@ teams:
       - lzwind
       - wyu71
       - starhcq
-      - wzyforgit
       - rb-union
       - jeffshuai
       - myk1343
