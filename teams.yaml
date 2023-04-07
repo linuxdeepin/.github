@@ -513,6 +513,8 @@ teams:
       - kegechen
       - robertkill
       - zccrs
+      - dengbo11
+      - zsien
     repositories_permissions:
       push:
         - deepin-face
@@ -619,6 +621,7 @@ teams:
       - Fire-dtx
       - SuperZhangxueming
       - zsien
+      - dengbo11
     repositories_permissions:
       push:
         - deepin-fcitxconfigtool-plugin
