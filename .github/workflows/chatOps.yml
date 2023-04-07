@@ -209,7 +209,8 @@ jobs:
 
       - name: check obs comment
         uses: actions/github-script@v6
-        if: ${{ steps.check-obs.outputs.retriggered }} == "false"
+        if: |
+          startsWith(github.event.comment.body, '/check') && ${{ steps.check-obs.outputs.retriggered }} == "false"
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
           script: |
