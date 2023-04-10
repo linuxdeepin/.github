@@ -166,6 +166,7 @@ jobs:
             }
 
             // console.log("HOOK_ID: ", process.env.HOOK_ID)
+            core.setOutput('retriggered', "true")
             if (obs_webhook_need_resend) {
               // deliveries obs webhook
               let maxWebhooks = 1000
@@ -210,12 +211,12 @@ jobs:
       - name: check obs comment
         uses: actions/github-script@v6
         if: |
-          startsWith(github.event.comment.body, '/check') && ${{ steps.check-obs.outputs.retriggered }} == "false"
+          startsWith(github.event.comment.body, '/check') && steps.check-obs.outputs.retriggered == 'true'
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
           script: |
             console.log("redeliveried failed, context.issue.number: ", context.issue.number)
-            const BOT_NAME = "Deepin ChatGPT Bot"
+            const BOT_NAME = "Deepin ChatOps Bot"
             const COMMENT_HEAD = "**" + BOT_NAME + "**\n"
             let COMMENT_BODY = "Deepin redeliveried failed, need update or recreate pull request!!!"
 
