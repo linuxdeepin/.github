@@ -69,13 +69,7 @@ jobs:
       - name: get changelog version
         id: get-version
         run: |
-          export TAG=$(LC_ALL=C dpkg-parsechangelog -S Version)
-          if [ -e go.mod ]
-          then
-            echo "TAG=v$TAG" >> $GITHUB_OUTPUT
-          else
-            echo "TAG=$TAG" >> $GITHUB_OUTPUT
-          fi
+          echo "TAG=$(LC_ALL=C dpkg-parsechangelog -S Version)" >> $GITHUB_OUTPUT
           echo "DISTRIBUTION=$(LC_ALL=C dpkg-parsechangelog -S Distribution)" >> $GITHUB_OUTPUT
 
       - name: check epoch
