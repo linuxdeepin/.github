@@ -103,8 +103,8 @@
     ],
     "src": "issue-templates/dtk-config.yml",
     "deletelist": [
-      ".github/workflows/empty-issue.md",
-      ".github/workflows/unit-test-report.md"
+      ".github/ISSUE_TEMPLATE/empty-issue.md",
+      ".github/ISSUE_TEMPLATE/unit-test-report.md"
     ],
     "dest": "linuxdeepin/dtkbluetooth/.github/ISSUE_TEMPLATE/config.yml"
   }
