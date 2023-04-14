@@ -302,6 +302,7 @@ teams:
       - FeiWang1119
     repositories_permissions:
       push:
+        - dtk
         - dtkcommon
         - dtkcore
         - dtkdeclarative
