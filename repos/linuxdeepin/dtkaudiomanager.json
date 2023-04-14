@@ -89,5 +89,16 @@
     ],
     "src": "issue-templates/unit-test-report.md",
     "dest": "linuxdeepin/dtkaudiomanager/.github/ISSUE_TEMPLATE/unit-test-report.md"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "issue-templates/dtk-config.yml",
+    "deletelist": [
+      ".github/workflows/empty-issue.md",
+      ".github/workflows/unit-test-report.md"
+    ],
+    "dest": "linuxdeepin/dtkaudiomanager/.github/ISSUE_TEMPLATE/config.yml"
   }
 ]

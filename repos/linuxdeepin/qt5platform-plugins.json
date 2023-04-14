@@ -68,5 +68,12 @@
     ],
     "src": "workflow-templates/call-tag-build.yml",
     "dest": "linuxdeepin/qt5platform-plugins/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "issue-templates/dtk-config.yml",
+    "dest": "linuxdeepin/qt5platform-plugins/.github/ISSUE_TEMPLATE/config.yml"
   }
 ]
