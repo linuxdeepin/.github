@@ -151,7 +151,7 @@ jobs:
         id: check-obs
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
-          HOOK_ID: ${{ secrets.HOOK_ID }}
+          HOOK_ID: 389767322
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
           script: |
