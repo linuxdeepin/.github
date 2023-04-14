@@ -12,6 +12,7 @@ settings:
       - xdg-desktop-portal-dde
       - deepin-service-manager
       - deepin-upgrade-manager
+      - dtk
       - dtksystemsettings
       - dtknotifications
       - dtkdevice
