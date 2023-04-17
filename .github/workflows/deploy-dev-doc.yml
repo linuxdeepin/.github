@@ -18,7 +18,7 @@ defaults:
 jobs:
   build:
     container:
-      image: linuxdeepin/beige:latest
+      image: linuxdeepin/beige:base
       options: --privileged
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
@@ -30,10 +30,14 @@ jobs:
         run: |
           echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
           rm /etc/apt/sources.list
-          echo "deb [trusted=yes] https://community-packages.deepin.com/beige/ beige main community commercial\ndeb-src [trusted=yes] https://community-packages.deepin.com/beige/ beige main community commercial" >> /etc/apt/sources.list
-          echo "deb [trusted=yes] https://ci.uniontech.com/repo/deepin/obs/deepin:/Develop:/community/deepin_develop/ ./\ndeb-src [trusted=yes] https://ci.uniontech.com/repo/deepin/obs/deepin:/Develop:/community/deepin_develop/ ./" >> /etc/apt/sources.list
-          echo "deb [trusted=yes] https://ci.uniontech.com/repo/deepin/obs/deepin:/Develop:/dde/deepin_develop/ ./\ndeb-src [trusted=yes] https://ci.uniontech.com/repo/deepin/obs/deepin:/Develop:/dde/deepin_develop/ ./" >> /etc/apt/sources.list
-          echo "deb [trusted=yes] https://ci.uniontech.com/repo/deepin/obs/deepin:/Develop:/main/standard/ ./\ndeb-src [trusted=yes] https://ci.uniontech.com/repo/deepin/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://community-packages.deepin.com/beige/ beige main community commercial" >> /etc/apt/sources.list
+          echo "deb-src [trusted=yes] https://community-packages.deepin.com/beige/ beige main community commercial" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/community/deepin_develop/ ./" >> /etc/apt/sources.list
+          echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/community/deepin_develop/ ./" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/dde/deepin_develop/ ./" >> /etc/apt/sources.list
+          echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/dde/deepin_develop/ ./" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
+          echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
           apt-get update && apt-get install -y --force-yes ca-certificates apt-transport-https sudo
       - uses: actions/checkout@v3
         with:
@@ -41,9 +45,10 @@ jobs:
           persist-credentials: false
       - name: Prepare
         run: |
+          set -x
           sudo apt-get install -y --force-yes doxygen
           sudo apt-get install -y --force-yes python3 python3-pip python3-setuptools
-          sudo pip3 install doxyqml
+          pip3 install resolvelib doxyqml
           sudo apt-get install -y --force-yes devscripts equivs git
           mk-build-deps
           sudo apt-get install -y --force-yes ./*.deb
