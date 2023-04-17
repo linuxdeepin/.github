@@ -82,5 +82,12 @@
     ],
     "src": "workflow-templates/call-tag-build.yml",
     "dest": "linuxdeepin/dde-control-center/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-deploy-dev-doc.yml",
+    "dest": "linuxdeepin/dde-control-center/.github/workflows/call-deploy-dev-doc.yml"
   }
 ]
