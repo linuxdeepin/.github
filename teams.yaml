@@ -384,21 +384,31 @@ teams:
       - alivezhy
       - ariZhou
       - ZhongYic00
-  - name: deepin-anything
-    parent_team: Maintainers
-    members:
-      - re2zero
-      - wangrong1069
-      - toberyan
-    repositories_permissions:
-      push:
-        - deepin-anything
   - name: dde-file-manager
     parent_team: Maintainers
     members:
-      - max-lvs
       - Clauszy
       - Johnson-zs
+      - max-lvs
+      - toberyan
+      - re2zero
+    repositories_permissions:
+      push:
+        - dde-file-manager
+        - udisks2-qt5
+        - deepin-shortcut-viewer
+        - deepin-pdfium
+        - util-dfm
+        - dde-device-formatter
+        - deepin-screensaver
+        - disomaster
+        - docparser
+        - gio-qt
+        - dde-grand-search
+        - deepin-anything
+  - name: dde-file-manager-member
+    parent_team: Projects
+    members:
       - Kakueeen
       - GongHeng2017
       - itsXuSt
@@ -406,108 +416,22 @@ teams:
       - re2zero
       - wangrong1069
       - shzhuangpub
-      - toberyan
       - liyigang1
+      - wangrong1069
     repositories_permissions:
-      push:
+      triage:
         - dde-file-manager
-  - name: udisks2-qt5
-    parent_team: Maintainers
-    members:
-      - max-lvs
-      - Johnson-zs
-      - itsXuSt
-      - toberyan
-    repositories_permissions:
-      push:
         - udisks2-qt5
-  - name: deepin-shortcut-viewer
-    parent_team: Maintainers
-    members:
-      - max-lvs
-      - Kakueeen
-      - Lighto
-      - toberyan
-    repositories_permissions:
-      push:
         - deepin-shortcut-viewer
-  - name: deepin-pdfium
-    parent_team: Maintainers
-    members:
-      - max-lvs
-      - Kakueeen
-      - GongHeng2017
-      - toberyan
-    repositories_permissions:
-      push:
         - deepin-pdfium
-  - name: util-dfm
-    parent_team: Maintainers
-    members:
-      - max-lvs
-      - itsXuSt
-      - Kakueeen
-      - Johnson-zs
-      - liyigang1
-      - toberyan
-    repositories_permissions:
-      push:
         - util-dfm
-  - name: dde-device-formatter
-    parent_team: Maintainers
-    members:
-      - max-lvs
-      - itsXuSt
-      - toberyan
-    repositories_permissions:
-      push:
         - dde-device-formatter
-  - name: deepin-screensaver
-    parent_team: Maintainers
-    members:
-      - Clauszy
-      - max-lvs
-      - toberyan
-    repositories_permissions:
-      push:
         - deepin-screensaver
-  - name: disomaster
-    parent_team: Maintainers
-    members:
-      - max-lvs
-      - Johnson-zs
-      - itsXuSt
-      - toberyan
-    repositories_permissions:
-      push:
         - disomaster
-  - name: docparser
-    parent_team: Maintainers
-    members:
-      - Kakueeen
-      - max-lvs
-      - toberyan
-    repositories_permissions:
-      push:
         - docparser
-  - name: gio-qt
-    parent_team: Maintainers
-    members:
-      - max-lvs
-      - Johnson-zs
-      - toberyan
-    repositories_permissions:
-      push:
         - gio-qt
-  - name: dde-grand-search
-    parent_team: Maintainers
-    members:
-      - Clauszy
-      - Kakueeen
-      - toberyan
-    repositories_permissions:
-      push:
         - dde-grand-search
+        - deepin-anything
   - name: deepin-face
     parent_team: Maintainers
     members:
