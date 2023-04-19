@@ -109,8 +109,8 @@ jobs:
           ssh-keygen -y -f ~/.ssh/id_rsa
           git config --global user.name deepin-admin-bot
           git config --global user.email deepin-admin-bot@deepin.org
-          git clone git@codeberg.org:linuxdeepin/dtkcore.git
-          cd dtkcore
+          git clone git@codeberg.org:${{ github.event.repository.name }}.git codeberg_repo
+          cd codeberg_repo
           git branch -D $DOCS_BRANCH || true
           git checkout --orphan $DOCS_BRANCH
           git rm -rf .
