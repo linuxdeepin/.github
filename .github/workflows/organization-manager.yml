@@ -1,5 +1,6 @@
 name: organization-manager
 on:
+  workflow_dispatch:
   push:
     paths: ["organization.yaml", ".github/workflows/organization-manager.yml"]
 
