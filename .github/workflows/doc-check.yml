@@ -34,6 +34,8 @@ jobs:
           echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
           echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
           apt-get update && apt-get install -y --force-yes ca-certificates apt-transport-https sudo
+          sudo apt-get install -y --force-yes python3-pip
+          pip3 install coverxygen
 
       - uses: actions/checkout@v3
         with:
