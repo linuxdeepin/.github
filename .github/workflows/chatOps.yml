@@ -1,12 +1,9 @@
 name: chatOps
 on:
   workflow_call:
-    secrets:
-      APP_PRIVATE_KEY:
-        required: true
 
 env:
-  APP_ID: 174141
+  APP_ID: ${{ secrets.APP_ID }}
   APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
 
 jobs:
@@ -303,3 +300,32 @@ jobs:
               pull_number: context.issue.number,
               merge_method: 'rebase'
             });
+
+  pr-info:
+    runs-on: ubuntu-latest
+    outputs:
+      ref: ${{ steps.pr.outputs.ref }}
+    steps:
+      - name: Get integration app token
+        id: pr
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const response = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number
+            });
+
+            core.setOutput('ref', response.data.head.sha)
+
+  integration:
+    needs:
+      - pr-info
+    name: Try pr integration
+    if: startsWith(github.event.comment.body, '/integrate')
+    uses: linuxdeepin/.github/.github/workflows/auto-integration-pr.yml@master
+    secrets: inherit
+    with:
+      integrationrepo: ${{ github.repository }}
+      tagsha: ${{ needs.pr-info.outputs.ref }}

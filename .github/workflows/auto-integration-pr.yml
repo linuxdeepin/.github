@@ -4,7 +4,7 @@ on:
     inputs:
       organization:
         type: string
-        default: peeweep-test
+        default: deepin-community
       repository:
         type: string
         default: Repository-Integration
@@ -76,6 +76,7 @@ jobs:
       - name: Integration config
         uses: actions/github-script@v6
         id: integration-config
+        # workflow_dispatch event used for manual trigger workflow
         if: startsWith(github.event.comment.body, '/integrate') || github.event_name == 'workflow_dispatch'
         with:
           script: |
@@ -89,6 +90,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number
+                per_page: 100,
               })
               const reg = new RegExp("\\*+" + BOT_NAME + "\\*+")
               botComment= response.data.find(comment => comment.body.match(reg))
