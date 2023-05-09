@@ -39,6 +39,9 @@
       "master"
     ],
     "src": "workflow-templates/call-tag-build.yml",
+    "deletelist": [
+      ".github/workflows/call-tag-build.yml"
+    ],
     "dest": "linuxdeepin/dtk-template/.github/workflows/call-tag-build.yml"
   },
   {

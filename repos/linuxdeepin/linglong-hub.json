@@ -65,6 +65,9 @@
       "master"
     ],
     "src": "workflow-templates/call-tag-build.yml",
+    "deletelist": [
+      ".github/workflows/call-tag-build.yml"
+    ],
     "dest": "linuxdeepin/linglong-hub/.github/workflows/call-tag-build.yml"
   }
 ]
