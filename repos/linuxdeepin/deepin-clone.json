@@ -42,6 +42,9 @@
       "maintain/.+"
     ],
     "src": "workflow-templates/call-build-deb.yml",
+    "deletelist": [
+      ".github/workflows/call-build-deb.yml"
+    ],
     "dest": "linuxdeepin/deepin-clone/.github/workflows/call-build-deb.yml"
   },
   {
@@ -83,6 +86,9 @@
       "master"
     ],
     "src": "workflow-templates/call-tag-build.yml",
+    "deletelist": [
+      ".github/workflows/call-tag-build.yml"
+    ],
     "dest": "linuxdeepin/deepin-clone/.github/workflows/call-tag-build.yml"
   }
 ]
