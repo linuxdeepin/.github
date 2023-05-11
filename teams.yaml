@@ -74,6 +74,14 @@ teams:
         - dde-display
         - deepin-system-upgrade
         - deepin-service-manager
+  - name: am-maintainer
+    parent_team: Maintainers
+    members:
+      - black-desk
+      - xzl01
+    repositories_permissions:
+      push:
+        - dde-application-manager
   - name: deepin
     members:
       - felixonmars
