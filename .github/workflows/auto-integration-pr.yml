@@ -112,8 +112,8 @@ jobs:
             integrationrepo = "${{ inputs.integrationrepo }}"
             tagsha = "${{ inputs.tagsha }}"
 
-            let milestone = 'v23-Beta'
-            // example: integrate v23-Beta dtk-v23-test
+            let milestone = 'V23-Beta'
+            // example: integrate V23-Beta dtk-v23-test
             const nameGroup = comment_body.match(/\/integrate (\S+)/)
             if (nameGroup && nameGroup.length > 1) {
               milestone = nameGroup[1]
@@ -121,7 +121,7 @@ jobs:
                 topic = nameGroup[2]
                 // 带topic参数直接指定分支，保证后续多个项目同topic集成时一起修改intergration.yml
                 console.log("Use topic: ", topic, " to auto integrate")
-                auotintegrationbranch = "auto-integration-topic-" + topic
+                auotintegrationbranch = "topic-auto-integration-" + topic
               }
             }
 
