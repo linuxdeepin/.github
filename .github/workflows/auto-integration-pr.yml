@@ -113,6 +113,21 @@ jobs:
             tagsha = "${{ inputs.tagsha }}"
 
             let milestone = 'V23-Beta'
+            // get latest milestone from linuxdeepin/developer-center
+            const msresp = await github.rest.issues.listMilestones({
+              owner: "linuxdeepin",
+              repo: "developer-center",
+              state: 'open',
+              sort: 'completeness',
+            });
+
+            core.debug("Get milestone resp: ", msresp)
+            msresp_content = msresp.data
+            if (msresp_content.length > 0) {
+              milestone = msresp_content[0].title
+              console.log("Got latest milestone: ", milestone)
+            }
+
             // example: integrate V23-Beta dtk-v23-test
             const nameGroup = comment_body.match(/\/integrate (\S+)/)
             if (nameGroup && nameGroup.length > 1) {
