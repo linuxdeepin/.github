@@ -151,6 +151,9 @@ jobs:
               integrationContent.topic = topic
             }
 
+            // add timestamp to integration
+            integrationContent.timestamp = Date.now()
+
             exampleindex = integrationContent.repos.map((item) => item.repo).indexOf("linuxdeepin/examplerepo")
             repoindex = integrationContent.repos.map((item) => item.repo).indexOf(integrationrepo)
             if (topic != "undefined" && exampleindex < 0 && repoindex > 0) {
