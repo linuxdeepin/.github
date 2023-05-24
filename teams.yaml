@@ -74,6 +74,7 @@ teams:
         - dde-display
         - deepin-system-upgrade
         - deepin-service-manager
+        - deepin-upgrade-manager
   - name: am-maintainer
     parent_team: Maintainers
     members:
