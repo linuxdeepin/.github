@@ -1,0 +1,120 @@
+name: deploy doc to gh-pages
+
+on:
+  workflow_call:
+    secrets:
+      APP_PRIVATE_KEY:
+        required: true
+    inputs:
+      ref:
+        required: false
+        type: string
+        default: ${{ github.event.pull_request.head.sha }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    container:
+      image: linuxdeepin/beige:base
+      options: --privileged
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+        - /etc/machine-id:/etc/machine-id
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: init base environment
+        run: |
+          echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+          rm /etc/apt/sources.list
+          echo "deb [trusted=yes] https://community-packages.deepin.com/beige/ beige main community commercial" >> /etc/apt/sources.list
+          echo "deb-src [trusted=yes] https://community-packages.deepin.com/beige/ beige main community commercial" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/community/deepin_develop/ ./" >> /etc/apt/sources.list
+          echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/community/deepin_develop/ ./" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/dde/deepin_develop/ ./" >> /etc/apt/sources.list
+          echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/dde/deepin_develop/ ./" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
+          echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
+          apt-get update && apt-get install -y --force-yes ca-certificates apt-transport-https sudo
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref }}
+          persist-credentials: false
+      - name: Prepare
+        run: |
+          set -x
+          sudo apt-get install -y --force-yes doxygen
+          sudo apt-get install -y --force-yes python3 python3-pip python3-setuptools
+          pip3 install resolvelib doxyqml
+          sudo apt-get install -y --force-yes devscripts equivs git
+          mk-build-deps
+          sudo apt-get install -y --force-yes ./*.deb
+          git clone https://github.com/linuxdeepin/doxygen-theme.git --depth=1
+          sed -i "s|change address|https://github.com/linuxdeepin/$(basename `pwd`)|" doxygen-theme/doxygen-awesome-css/header.html
+          sed -i "s|doxtime|$(date +"%Y-%m-%d-%R  %:::z")|" doxygen-theme/doxygen-awesome-css/footer.html
+
+      - name: Build Docs
+        run: |
+          cmake -Bbuild -DBUILD_DOCS=ON -DBUILD_TESTING=OFF -DDOXYGEN_GENERATE_HTML="YES" -DDOXYGEN_PROJECT_NUMBER=`git describe` -DDOXYGEN_GENERATE_TREEVIEW="YES" \
+                        -DDOXYGEN_HTML_EXTRA_STYLESHEET="./doxygen-theme/doxygen-awesome-css/doxygen-awesome.css;\
+                          ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-sidebar-only.css;\
+                          ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css"\
+                        -DDOXYGEN_HTML_EXTRA_FILES="./doxygen-theme/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js;\
+                          ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js;\
+                          ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-paragraph-link.js;\
+                          ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-interactive-toc.js;"\
+                        -DDOXYGEN_GENERATE_TREEVIEW="YES"\
+                        -DDOXYGEN_DISABLE_INDEX="NO"\
+                        -DDOXYGEN_FULL_SIDEBAR="NO"\
+                        -DDOXYGEN_HTML_HEADER="./doxygen-theme/doxygen-awesome-css/header.html"\
+                        -DDOXYGEN_HTML_FOOTER="./doxygen-theme/doxygen-awesome-css/footer.html"\
+                        -DDOXYGEN_TAGFILES="qtcore.tags=http://doc.qt.io/qt-5/;qtwidgets/tags=http://doc.qt.io/qt-5/" .
+          cmake --build build --target doxygen
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./build/docs/html
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push'
+        id: deployment
+        uses: actions/deploy-pages@v1
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          name: github-pages
+          path: github-pages
+      - name: Deploy to Codeberg
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          SSH_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+          GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+          DOCS_BRANCH: docs/${{ inputs.ref }}
+        run: |
+          mkdir ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keygen -y -f ~/.ssh/id_rsa
+          git config --global user.name deepin-admin-bot
+          git config --global user.email deepin-admin-bot@deepin.org
+          git clone git@codeberg.org:linuxdeepin/${{ github.event.repository.name }}.git
+          cd ${{ github.event.repository.name }}
+          git branch -D $DOCS_BRANCH || true
+          git checkout --orphan $DOCS_BRANCH
+          git rm -rf .
+          tar -xvf ../github-pages/artifact.tar
+          git add :/
+          git commit -m "deploy docs"
+          git push -f origin $DOCS_BRANCH

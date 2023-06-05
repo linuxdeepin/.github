@@ -1,0 +1,204 @@
+name: auto tag
+
+on:
+  workflow_call:
+    secrets:
+      APP_PRIVATE_KEY:
+        required: true
+      TRANSIFEX_API_TOKEN:
+        required: true
+
+env:
+  APP_ID: 174141
+  APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+  TRANSIFEX_API_TOKEN: ${{ secrets.TRANSIFEX_API_TOKEN }}
+
+jobs:
+  auto_tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Check .tx/config
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: ".tx/config"
+      - name: Check .tx/deepin.conf
+        id: check_deepin
+        uses: andstor/file-existence-action@v1
+        with:
+          files: ".tx/deepin.conf"
+      - name: Check translations config
+        if: steps.check_files.outputs.files_exists == 'true' && steps.check_deepin.outputs.files_exists == 'false'
+        run: |
+          echo "need .tx/deepin.conf, it likes: "
+          echo "--------------------------------"
+          echo "[transifex]"
+          echo "branch = m20"
+          echo "--------------------------------"
+          echo "Because we don't know the translation branch corresponding to this branch."
+          echo "If you don't know the corresponding translation branch, don't set branch value, we will use the default value."
+          exit 1
+      - name: Init transifex file
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: |
+          # TODO: not environment variable, action will override $HOME
+          mkdir -p /home/runner/work/_temp/_github_home/
+          cat << EOF > /home/runner/work/_temp/_github_home/.transifexrc
+          [https://www.transifex.com]
+          rest_hostname = https://rest.api.transifex.com
+          api_hostname = https://api.transifex.com
+          hostname = https://www.transifex.com
+          token = ${{ env.TRANSIFEX_API_TOKEN }}
+          EOF
+      - name: Check translations update
+        if: steps.check_files.outputs.files_exists == 'true'
+        uses: justforlxz/deepin-builder-docker/translate@master
+      - name: Check git files
+        if: steps.check_files.outputs.files_exists == 'true'
+        shell: bash
+        run: |
+          lines=$(git status -s | wc -l | awk '{print $1}')
+          git status -s
+          if [[ x"$lines" != x0 ]]; then
+              exit 2
+          fi
+      - name: get changelog version
+        id: get-version
+        run: |
+          echo "TAG=$(LC_ALL=C dpkg-parsechangelog -S Version)" >> $GITHUB_OUTPUT
+          echo "DISTRIBUTION=$(LC_ALL=C dpkg-parsechangelog -S Distribution)" >> $GITHUB_OUTPUT
+
+      - name: check epoch
+        id: get-tag
+        shell: python
+        run: |
+          import os
+          tag = "${{ steps.get-version.outputs.TAG }}"
+          if tag.__contains__(":"):
+              tag = tag.split(":")[1]
+          if tag.__contains__("-"):
+              tag = tag.split("-")[0]
+          output_file = os.environ.get("GITHUB_OUTPUT")
+          with open(output_file, "a") as output:
+              output.write("TAG=" + tag + "\n")
+
+      - name: check tag exsits
+        id: test-tag-exists
+        run: |
+          git fetch --tags
+          echo "EXISTS=$(if [ $(git tag -l ${{ steps.get-tag.outputs.TAG }}) ]; then echo yes; else echo no; fi)" >> $GITHUB_OUTPUT
+
+      - name: create comment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const BOT_NAME = "TAG Bot"
+            const COMMENT_HEAD = "**" + BOT_NAME + "**\n\n"
+            const COMMENT_BODY = "TAG: ${{ steps.get-tag.outputs.TAG }}\nEXISTED: ${{ steps.test-tag-exists.outputs.EXISTS }}\nDISTRIBUTION: ${{ steps.get-version.outputs.DISTRIBUTION }}"
+            const response = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            })
+
+            const reg = new RegExp("\\*+" + BOT_NAME + "\\*+")
+            tagBotComment= response.data.find(comment => comment.body.match(reg))
+            if (tagBotComment) {
+              await github.rest.issues.updateComment({
+                  comment_id: tagBotComment.id,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: COMMENT_HEAD + COMMENT_BODY
+              })
+
+            } else {
+              await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: COMMENT_HEAD + COMMENT_BODY
+              })
+            }
+
+            if ("${{ steps.test-tag-exists.outputs.EXISTS }}" === "yes" && "${{ steps.get-version.outputs.DISTRIBUTION }}" !== "UNRELEASED"){
+              core.setFailed("Tag: ${{ steps.get-tag.outputs.TAG }} exists!")
+            }
+
+      - name: install depends for load scripts
+        if: github.event.pull_request.merged
+        run: |
+          npm install @octokit/rest
+          npm install @octokit/auth-app
+
+      - name: Get token using github-script
+        id: get-token
+        if: github.event.pull_request.merged
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { Octokit } = require("@octokit/rest");
+            const { createAppAuth } = require("@octokit/auth-app");
+            const appOctokit = new Octokit({
+              authStrategy: createAppAuth,
+              auth: {
+                appId: process.env.APP_ID,
+                privateKey: process.env.APP_PRIVATE_KEY,
+              }
+            });
+            const app_installation = await appOctokit.rest.apps.getRepoInstallation({
+              owner: context.payload.organization.login,
+              repo: context.payload.repository.name
+            });
+            const { token } = await appOctokit.auth({
+              type: "installation",
+              installationId: app_installation.data.id
+            });
+            core.setOutput('app_token', token)
+
+      - name: get email
+        if: github.event.pull_request.merged
+        id: get-email
+        uses: evvanErb/get-github-email-by-username-action@v2.0
+        with:
+          github-username: '${{ github.event.pull_request.user.login }}'
+          token: '${{ steps.get-token.outputs.app_token }}'
+
+      - name: Create tag
+        if: github.event.pull_request.merged
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ steps.get-token.outputs.app_token }}
+          script: |
+            const distribution = "${{ steps.get-version.outputs.DISTRIBUTION }}"
+            if (distribution === "UNRELEASED") {
+              core.info("UNRELEASED will not create tag")
+              return
+            }
+            const { data } = await github.rest.git.createTag({
+              repo: context.repo.repo,
+              owner: context.repo.owner,
+              message: "Release " + context.repo.repo + " ${{ steps.get-tag.outputs.TAG }}",
+              type: 'commit',
+              object: context.sha,
+              tag: "${{ steps.get-tag.outputs.TAG }}",
+              tagger: {
+                name: "${{ github.event.pull_request.user.login }}",
+                email: "${{ steps.get-email.outputs.email }}",
+                date: (() => {
+                  const date = new Date();
+                  return date.toISOString();
+                })(),
+              },
+            })
+
+            const res = await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{ steps.get-tag.outputs.TAG }}',
+              sha: data.sha
+            })

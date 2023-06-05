@@ -1,0 +1,57 @@
+name: License and README Check
+on: workflow_call
+
+jobs:
+  Check-License:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Install reuse
+        run: |
+          sudo sed -i 's/azure.archive.ubuntu.com/mirrors.layeronline.com/g' /etc/apt/sources.list
+          sudo apt update
+          sudo apt install reuse
+      - name: License Check
+        id: lcheck
+        run: reuse lint
+        continue-on-error: true
+      - name: Generate Reports
+        if: steps.lcheck.outcome != 'success'
+        run: |
+          printf "## License: REUSE Compliance Check failed\n" >> $GITHUB_STEP_SUMMARY || true
+          echo "<details>" >> $GITHUB_STEP_SUMMARY || true
+          reuse lint >> $GITHUB_STEP_SUMMARY || true
+          echo "</details>" >> $GITHUB_STEP_SUMMARY || true
+          exit 1
+  Check-README:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Install zsh
+        run: |
+          sudo sed -i 's/azure.archive.ubuntu.com/mirrors.layeronline.com/g' /etc/apt/sources.list
+          sudo apt update
+          sudo apt install zsh
+      - name: README.md Check
+        id: rcheck
+        continue-on-error: true
+        run: if [ ! -f "README.md" ];then echo "missing README.md";return 1;fi
+        shell: zsh {0}
+      - name: Generate README Check Reports
+        if: steps.rcheck.outcome != 'success'
+        run: echo "missing README.md" >> $GITHUB_STEP_SUMMARY
+      - name: README.zh_CN.md Check
+        id: zhrcheck
+        continue-on-error: true
+        run: if [ ! -f "README.zh_CN.md" -a ! -f "README.zh-CN.md" ]; then echo "missing README.zh_CN.md";return 1;fi
+        shell: zsh {0}
+      - name: Generate README zh_CN Check Reports
+        if: steps.zhrcheck.outcome != 'success'
+        run: echo "missing README.zh_CN.md" >> $GITHUB_STEP_SUMMARY
+      - name: Check and Reflect Status
+        if: steps.rcheck.outcome != 'success' || steps.zhrcheck.outcome != 'success'
+        run: exit 1

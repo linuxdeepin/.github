@@ -1,0 +1,524 @@
+name: Distribution Builder
+on:
+  workflow_call:
+    secrets:
+      BUILD_GPG_PRIVATE_KEY:
+        required: true
+      BUILD_SSH_PRIVATE_KEY:
+        required: true
+      WEBDAV_PASSWD:
+        required: false
+      WEBDAV_USER:
+        required: false
+jobs:
+  archlinux-check:
+    if: false
+    container:
+      image: ghcr.io/justforlxz/deepin-builder-docker/archlinux:master
+      options: --privileged
+      volumes:
+        - /etc/machine-id:/etc/machine-id
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.result.outputs.RESULT }}
+    steps:
+      - uses: actions/checkout@v3
+        if: ${{ github.event.pull_request.head.sha }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/checkout@v3
+        if: ${{ github.event_name == 'push' }}
+        with:
+          fetch-depth: 0
+      - name: Check dep
+        id: result
+        run: |
+          if [[ -f archlinux/PKGBUILD ]];
+          then
+            echo "RESULT=true" >> $GITHUB_OUTPUT
+          else
+            echo "RESULT=false" >> $GITHUB_OUTPUT
+          fi
+  archlinux-build:
+    needs: archlinux-check
+    if: ${{ needs.archlinux-check.outputs.result == 'true' }}
+    container:
+      image: ghcr.io/justforlxz/deepin-builder-docker/archlinux:master
+      options: --privileged
+      volumes:
+        - /etc/machine-id:/etc/machine-id
+    runs-on: ubuntu-latest
+    steps:
+      - name: Import GPG key
+        if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.BUILD_GPG_PRIVATE_KEY }}
+      - uses: webfactory/ssh-agent@v0.5.4
+        if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
+        name: Import SSH key
+        with:
+          ssh-private-key: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
+      - run: git config --global user.email "ci@deepin.org"
+      - run: git config --global user.name "deepin-ci"
+      - uses: actions/checkout@v3
+        if: ${{ github.event.pull_request.head.sha }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/checkout@v3
+        if: ${{ github.event_name == 'push' }}
+        with:
+          fetch-depth: 0
+      - name: Trusted github repository
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+          git config --global --add safe.directory /__w/$name/$name
+      - name: fetch
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          git fetch --tags --force
+      - name: Get package info
+        id: meta
+        env:
+          sha: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ "${sha}" != "" ]
+          then
+            echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
+          else
+            tag=$(git describe --tags | cut -f1 -d '-') || echo
+            num=$(git rev-list --all --count);
+            num=`echo $num | awk '{printf("%03d",$0)}'`
+            version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)+$(date "+%Y%m%d%H%M%S")
+            echo ${version}
+            echo "VERSION=${version}" >> $GITHUB_OUTPUT
+          fi
+
+          repo=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+          echo "REPO=${repo}" >> $GITHUB_OUTPUT
+      - name: Compress Source
+        env:
+          workdir: ${{ github.workspace }}
+          repo: ${{ steps.meta.outputs.REPO }}
+        run: /compress $workdir $repo
+      - name: Build
+        run: /build $workdir $repo $version
+        env:
+          workdir: ${{ github.workspace }}
+          repo: ${{ steps.meta.outputs.REPO }}
+          version: ${{ steps.meta.outputs.VERSION }}
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Arch
+          path: ${{ github.workspace }}/.pkgs/*.zst
+      - name: Lock db
+        if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
+        run: /db lock
+      - name: Commit
+        if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
+        env:
+          workdir: ${{ github.workspace }}
+          repo: ${{ steps.meta.outputs.REPO }}
+        run: /commit $workdir $repo
+      - name: Unlock db
+        if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
+        run: /db unlock
+  debian-setup:
+    # move to obs
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Init
+        run: |
+          echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
+          sudo apt-get update
+          sudo apt-get install -y ca-certificates
+      - name: Cache
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: ~/sid-base-amd64.tgz
+          key: sid-base-amd64
+      - name: Create base
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get -y install pbuilder debian-archive-keyring
+          sudo pbuilder create --architecture amd64 \
+                               --mirror "http://ftp.us.debian.org/debian/" \
+                               --distribution sid \
+                               --basetgz ~/sid-base-amd64.tgz \
+                               --allow-untrusted \
+                               --debootstrapopts --keyring=/usr/share/keyrings/debian-archive-keyring.gpg \
+                               --debootstrapopts --include=debian-archive-keyring,ca-certificates
+  debian-build:
+    needs: [debian-setup]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        if: ${{ github.event.pull_request.head.sha }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/checkout@v3
+        if: ${{ github.event_name == 'push' }}
+        with:
+          fetch-depth: 0
+      - name: Trusted github repository
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+          git config --global --add safe.directory /__w/$name/$name
+      - name: fetch
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          git fetch --tags --force
+      - name: Init
+        run: |
+          echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
+          sudo apt-get update
+          sudo apt-get install -y ca-certificates
+      - name: Cache
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: ~/sid-base-amd64.tgz
+          key: sid-base-amd64
+      - name: Install dep
+        run: |
+          echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
+          sudo apt-get update
+          sudo apt-get install reprepro pbuilder ca-certificates dh-make -y
+      - name: Get package version
+        id: version
+        env:
+          sha: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ "${sha}" != "" ]
+          then
+            echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
+          else
+            tag=$(git describe --tags | cut -f1 -d '-') || echo
+            num=$(git rev-list --all --count);
+            num=`echo $num | awk '{printf("%03d",$0)}'`
+            version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)+$(date "+%Y%m%d%H%M%S")
+            echo ${version}
+            echo "VERSION=${version}" >> $GITHUB_OUTPUT
+          fi
+      - name: Build
+        shell: bash
+        env:
+          version: ${{ steps.version.outputs.VERSION }}
+        run: |
+          mkdir ~/hooks
+          cat << EOF > ~/hooks/D50Update
+          #!/bin/sh
+          #
+          # Runs apt-get update after all other repos have been added.
+          #
+          rm /etc/apt/sources.list
+          echo "deb [trusted=yes] https://deepin-community.github.io/debian-sid-dde-deps-repo sid main" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://deepin-community.github.io/debian-sid-dde-repo sid main" >> /etc/apt/sources.list
+          echo "deb https://ftp.jaist.ac.jp/pub/Linux/debian/ sid main contrib non-free" >> /etc/apt/sources.list
+
+          echo "Package: *" >> /etc/apt/preferences
+          echo "Pin: origin deepin-community.github.io" >> /etc/apt/preferences
+          echo "Pin-Priority: 1000" >> /etc/apt/preferences
+
+          apt-get update || true
+          apt-get dist-upgrade -y
+          apt-get install devscripts -y
+          apt-get install git -y
+          EOF
+          chmod +x ~/hooks/D50Update
+          PROJECT_NAME=$(dpkg-parsechangelog -S Source)
+          new_dir=$PROJECT_NAME-$version
+          mkdir $new_dir
+          rsync -a . $new_dir --exclude $new_dir
+          cd $new_dir
+              rm -rf $new_dir
+              rm -rf .git
+              dch -M -bv "$version-1" "update"
+              if [ -f ./debian/source/format ]; then sed -i 's/native/quilt/g' './debian/source/format'; fi
+              dh_make --createorig -sy || true
+              dpkg-source -b ./
+          cd ..
+          sudo pbuilder --build \
+                        --basetgz ~/sid-base-amd64.tgz \
+                        --allow-untrusted \
+                        --hookdir ~/hooks \
+                        --use-network yes \
+                        --logfile `uname -m`-build.log \
+                        --aptcache "" \
+                        --buildresult . ./*.dsc
+          mkdir ~/deb
+          find -name "*.deb" | xargs -I {} cp {} ~/deb
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Debian
+          path: ~/deb/*
+  debian-upload:
+    if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
+    needs: [debian-build]
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: webfactory/ssh-agent@v0.5.4
+        name: Import SSH key
+        with:
+          ssh-private-key: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
+      - run: git config --global user.email "justforlxz@gmail.com"
+      - run: git config --global user.name "justforlxz"
+      - name: Install dep
+        run: |
+          sudo apt-get install reprepro -y
+      - name: Lock Database
+        shell: bash
+        id: lock
+        run: |
+          for (( ; ; ))
+          do
+            rm -rf push-sleep || true
+            git clone git@github.com:deepin-community/push-sleep.git -b debian
+            cd push-sleep
+            if [[ -f "lock" ]];
+            then
+              sleep $[ ( $RANDOM % 10 )  + 1 ]s
+              continue
+            else
+              touch lock
+              git add lock
+              git commit -m "lock arch"
+              git push || continue
+              break
+            fi
+          done
+          echo "exit_code=0" >> $GITHUB_OUTPUT
+      - name: Download all packages
+        uses: actions/download-artifact@v3
+        with:
+          name: Debian
+          path: ./deb
+      - name: Upload packages
+        run: |
+          git clone git@github.com:deepin-community/debian-sid-dde-repo.git
+          find deb -name "*.deb" | xargs -I {} sudo reprepro --delete -b debian-sid-dde-repo -C main includedeb sid {}
+          cd debian-sid-dde-repo
+          git add .
+          git commit --amend --no-edit
+          git push -f
+      - name: Unlock
+        if: ${{ always() }}
+        run: |
+          cd push-sleep
+          if [[ -f lock ]]; then
+            git reset HEAD^
+            rm -rf lock
+            git push -f
+          fi
+  deepin-setup:
+    runs-on: ubuntu-latest
+    if: false
+    steps:
+      - name: Init
+        run: |
+          echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
+          sudo apt-get update
+          sudo apt-get install -y ca-certificates
+      - name: Cache
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: ~/deepin-base-amd64.tgz
+          key: deepin
+      - name: Create base
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get -y install wget p7zip
+          wget https://github.com/deepin-community/deepin-dde-repo/files/8888053/buster.z01.zip
+          wget https://github.com/deepin-community/deepin-dde-repo/files/8888055/buster.z02.zip
+          wget https://github.com/deepin-community/deepin-dde-repo/files/8888056/buster.z03.zip
+          wget https://github.com/deepin-community/deepin-dde-repo/files/8888058/buster.z04.zip
+          wget https://github.com/deepin-community/deepin-dde-repo/files/8888059/buster.z05.zip
+          wget https://github.com/deepin-community/deepin-dde-repo/files/8888061/buster.z06.zip
+          wget https://github.com/deepin-community/deepin-dde-repo/files/8888062/buster.z07.zip
+          wget https://github.com/deepin-community/deepin-dde-repo/files/8888063/buster.z08.zip
+          wget https://github.com/deepin-community/deepin-dde-repo/files/8888067/buster.zip
+          mv buster.z01.zip buster.z01
+          mv buster.z02.zip buster.z02
+          mv buster.z03.zip buster.z03
+          mv buster.z04.zip buster.z04
+          mv buster.z05.zip buster.z05
+          mv buster.z06.zip buster.z06
+          mv buster.z07.zip buster.z07
+          mv buster.z08.zip buster.z08
+          7z x buster.zip
+          mv buster.tgz ~/deepin-base-amd64.tgz
+  deepin-build:
+    needs: [deepin-setup]
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        if: ${{ github.event.pull_request.head.sha }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/checkout@v3
+        if: ${{ github.event_name == 'push' }}
+        with:
+          fetch-depth: 0
+      - name: Trusted github repository
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+          git config --global --add safe.directory /__w/$name/$name
+      - name: fetch
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          git fetch --tags --force
+      - name: Install dep
+        run: |
+          sudo apt-get update
+          sudo apt-get install reprepro pbuilder dh-make -y
+      - name: Cache
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: ~/deepin-base-amd64.tgz
+          key: deepin
+      - name: Get package version
+        id: version
+        env:
+          sha: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ "${sha}" != "" ]
+          then
+            echo "VERSION=1.0.0" >> $GITHUB_OUTPUT
+          else
+            tag=$(git describe --tags | cut -f1 -d '-') || echo
+            num=$(git rev-list --all --count);
+            num=`echo $num | awk '{printf("%03d",$0)}'`
+            version=${tag:-0.0.0}+r${num}+g$(git rev-parse --short HEAD)+$(date "+%Y%m%d%H%M%S")
+            echo ${version}
+            echo "VERSION=${version}" >> $GITHUB_OUTPUT
+          fi
+      - name: Build
+        env:
+          version: ${{ steps.version.outputs.VERSION }}
+        run: |
+          mkdir ~/hooks
+          cat << EOF > ~/hooks/D50Update
+          #!/bin/sh
+          #
+          # Runs apt-get update after all other repos have been added.
+          #
+
+          rm /etc/apt/sources.list
+          echo "deb [trusted=yes] https://deepin-community.github.io/deepin-dde-repo apricot main" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://deepin-community.github.io/deepin-dde-deps-repo apricot main" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://ftp.jaist.ac.jp/pub/Linux/deepin/ apricot main contrib non-free" >> /etc/apt/sources.list
+
+          apt-get update || true
+          apt-get install git -y
+          EOF
+
+          chmod +x ~/hooks/D50Update
+
+          cat << EOF > ~/hooks/A100remove
+          #!/bin/bash
+
+          if [ -f /var/lib/deepin/deepin_security_verify.whitelist ];then
+              chattr -i /var/lib/deepin/deepin_security_verify.whitelist
+          fi
+          EOF
+
+          chmod +x ~/hooks/A100remove
+
+          PROJECT_NAME=$(dpkg-parsechangelog -S Source)
+          new_dir=$PROJECT_NAME-$version
+          mkdir $new_dir
+          rsync -a . $new_dir --exclude $new_dir
+          rm -rf $new_dir/.git
+          cd $new_dir
+              rm -rf $new_dir
+              dch -M -bv "${version}-1" "update"
+              if [ -f ./debian/source/format ]; then sed -i 's/native/quilt/g' './debian/source/format'; fi
+              dh_make --createorig -sy || true
+              dpkg-source -b ./
+          cd ..
+          rm -rf .git
+          sudo DEB_BUILD_OPTIONS=nocheck pbuilder --build \
+                        --basetgz ~/deepin-base-amd64.tgz \
+                        --allow-untrusted \
+                        --hookdir ~/hooks \
+                        --use-network yes \
+                        --logfile `uname -m`-build.log \
+                        --aptcache "" \
+                        --buildresult . ./*.dsc
+          mkdir ~/deb
+          find -name "*.deb" | xargs -I {} cp {} ~/deb
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Deepin
+          path: ~/deb/*
+  deepin-upload:
+    if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
+    needs: [deepin-build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: webfactory/ssh-agent@v0.5.4
+        name: Import SSH key
+        with:
+          ssh-private-key: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
+      - run: git config --global user.email "justforlxz@gmail.com"
+      - run: git config --global user.name "justforlxz"
+      - name: Install dep
+        run: |
+          sudo apt-get install reprepro rsync -y
+      - name: Lock Database
+        shell: bash
+        id: lock
+        run: |
+          for (( ; ; ))
+          do
+            rm -rf push-sleep || true
+            git clone git@github.com:deepin-community/push-sleep.git -b deepin
+            cd push-sleep
+            if [[ -f "lock" ]];
+            then
+              sleep $[ ( $RANDOM % 10 )  + 1 ]s
+              continue
+            else
+              touch lock
+              git add lock
+              git commit -m "lock arch"
+              git push || continue
+              break
+            fi
+          done
+          echo "exit_code=0" >> $GITHUB_OUTPUT
+      - name: Download all packages
+        uses: actions/download-artifact@v3
+        with:
+          name: Deepin
+          path: ./deb
+      - name: Upload packages
+        run: |
+          git clone git@github.com:deepin-community/deepin-dde-repo.git
+          find deb -name "*.deb" | xargs -I {} sudo reprepro --delete -b deepin-dde-repo -C main includedeb apricot {}
+          cd deepin-dde-repo
+          git add .
+          git commit --amend --no-edit
+          git push -f
+      - name: Unlock
+        if: ${{ always() }}
+        run: |
+          cd push-sleep
+          if [[ -f lock ]]; then
+            git reset HEAD^
+            rm -rf lock
+            git push -f
+          fi

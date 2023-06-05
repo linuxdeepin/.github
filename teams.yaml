@@ -2,90 +2,29 @@ teams:
   - name: Admins
     members:
       - zccrs
+      - deepin-admin-bot
     repositories_permissions:
-      maintain:
+      admin:
         - "*"
-  - name: DDE
+  - name: dde-maintainer
     parent_team: Maintainers
     members:
-      - zccrs
-      - wubw1992
+      - tsic404
+      - Decodetalkers
+      - ComixHe
+      - dengbo11
       - zsien
-      - KT-lcz
-      - ssk-wh
-      - robertkill
-      - groveer
-      - shaojun
+      - l631197874
+      - BLumia
+      - asterwyx
+      - 18202781743
+      - Groveer
       - kegechen
     repositories_permissions:
-      maintain:
-        - go-gir-generator
-        - go-lib
-        - go-dbus-factory
-        - go-x11-client
-        - dde-api
-        - dde-qt-dbus-factory
-        - startdde
-        - dde-daemon
-        - deepin-desktop-schemas
-        - deepin-authentication
-        - deepin-ab-recovery
-        - lastore-daemon
-        - dpa-ext-gnomekeyring
-        - deepin-network-proxy
-        - deepin-sound-theme
-        - dareader
-        - dde-wldpms
-        - dde-wloutput-daemon
-        - dde-wayland-config
-        - default-settings
-        - dde-control-center
-        - dde-session-shell
-        - dde-dock
-        - dde-clipboard
-        - dde-session-ui
-        - dde-network-core
-        - dde-launcher
-        - dde-manual-content
-        - deepin-wallpapers
-        - dde-polkit-agent
-        - dde-account-faces
-        - deepin-gettext-tools
-        - deepin-gtk-theme
-        - deepin-pw-check
-  - name: DDE-member
-    parent_team: Projects
-    members:
-      - justforlxz
-      - zccrs
-      - tsic404
-      - wubw1992
-      - zsien
-      - KT-lcz
-      - ssk-wh
-      - robertkill
-      - groveer
-      - shaojun
-      - ut000966
-      - waterlovemelon
-      - dengbo11
-      - donghualin
-      - FeiW-UT003691
-      - ut003722
-      - hubenchang0515
-      - shenwenqi3441
-      - liaohanqin
-      - Mars-cb
-      - laplac2
-      - ECQZXC
-      - caixr23
-      - shaotianlu1995
-      - rocet92
-      - weizhixiang1993
-      - 2722195064
-    repositories_permissions:
       triage:
-        - go-gir-generator
+        - developer-center
+      push:
+        - go-gir
         - go-lib
         - go-dbus-factory
         - go-x11-client
@@ -94,7 +33,6 @@ teams:
         - startdde
         - dde-daemon
         - deepin-desktop-schemas
-        - deepin-authentication
         - deepin-ab-recovery
         - lastore-daemon
         - dpa-ext-gnomekeyring
@@ -106,19 +44,45 @@ teams:
         - dde-wayland-config
         - default-settings
         - dde-control-center
+        - dde-session
+        - dde-session-ui
         - dde-session-shell
         - dde-dock
         - dde-clipboard
-        - dde-session-ui
         - dde-network-core
         - dde-launcher
         - dde-manual-content
+        - dde-wallpapers
         - deepin-wallpapers
+        - deepin-wallpapers-nonfree
         - dde-polkit-agent
         - dde-account-faces
         - deepin-gettext-tools
         - deepin-gtk-theme
         - deepin-pw-check
+        - dde-wloutput
+        - dde-cooperation
+        - xdg-desktop-portal-dde
+        - dde-appearance
+        - dde-application-manager
+        - dde-permission-manager
+        - dde-api-proxy
+        - dde-widgets
+        - deepin-desktop-theme
+        - deepin-fcitxconfigtool-plugin
+        - deepin-fcitx5configtool-plugin
+        - dde-display
+        - deepin-system-upgrade
+        - deepin-service-manager
+        - deepin-upgrade-manager
+  - name: am-maintainer
+    parent_team: Maintainers
+    members:
+      - black-desk
+      - xzl01
+    repositories_permissions:
+      push:
+        - dde-application-manager
   - name: deepin
     members:
       - felixonmars
@@ -130,7 +94,6 @@ teams:
       - kobe337
       - xuqi27837288
       - Zeno-sole
-      - ClayStan
       - yxsos
       - tsic404
       - SuperEffie
@@ -141,90 +104,196 @@ teams:
       - luodeepin
       - janeaaaa
       - zimo-liu
+      - UTsweetyfish
+      - black-desk
     repositories_permissions:
       maintain:
         - open-source-students
       push:
         - developer-center
       triage:
-        - action-teams-manager
-  - name: deepin-camera
-    parent_team: Maintainers
-    members:
-      - pengfeixx
-      - lzwind
-    repositories_permissions:
-      maintain:
-        - deepin-camera
-  - name: deepin-camera-member
+        - "*"
+  - name: linglong
     parent_team: Projects
     members:
-      - pengfeixx
-      - lzwind
-      - feeengli
+      - Heysion
+      - black-desk
+      - hqh2010
+      - iceyer
+      - ismdeep
+      - kamiyadm
+      - liujianqiang-niu
+      - myml
+      - realwujing
+      - tsic404
     repositories_permissions:
       triage:
-        - deepin-camera
-  - name: deepin-font-manager
+        - linglong
+        - linglong-box
+        - linglong-builder-demo
+        - linglong-dbus-proxy
+        - linglong-doc
+        - linglong-homepage
+        - linglong-hub
+        - linglong-loader
+        - linglong-pica
+        - linglong-repo
+        - linglong-store
+        - linglong-web-store
+  - name: linglong-maintainer
+    parent_team: linglong
+    members:
+      - black-desk
+      - iceyer
+      - kamiyadm
+    repositories_permissions:
+      push:
+        - linglong
+        - linglong-box
+        - linglong-builder-demo
+        - linglong-dbus-proxy
+        - linglong-doc
+        - linglong-homepage
+        - linglong-hub
+        - linglong-loader
+        - linglong-pica
+        - linglong-repo
+        - linglong-store
+        - linglong-web-store
+  - name: network-proxy
     parent_team: Maintainers
     members:
-      - zccrs
-      - LiuLibang
-      - HuiHui97520
-      - lhxsm
+      - black-desk
+      - zsien
     repositories_permissions:
-      maintain:
+      push:
+        - deepin-network-proxy
+  - name: Multimedia-audio-video
+    parent_team: Maintainers
+    members:
+      - lzwind
+      - pengfeixx
+      - wyu71
+    repositories_permissions:
+      push:
+        - deepin-camera
+        - deepin-music
+        - deepin-screen-recorder
+        - deepin-movie-reborn
         - deepin-font-manager
-      triage:
-        - action-teams-manager
-  - name: deepin-manual
-    parent_team: Maintainers
-    members:
-      - zccrs
-      - HuiHui97520
-      - lhxsm
-    repositories_permissions:
-      maintain:
-        - deepin-manual
-      triage:
-        - action-teams-manager
-  - name: deepin-music
-    parent_team: Maintainers
-    members:
-      - wyu71
-      - lzwind
-    repositories_permissions:
-      maintain:
-        - deepin-music
-  - name: deepin-music-member
-    parent_team: Projects
-    members:
-      - wyu71
-      - lzwind
-      - zhangwenchaoworking  
-    repositories_permissions:
-      triage:
-        - deepin-music
-  - name: deepin-screen-recorder
-    parent_team: Maintainers
-    members:
-      - lzwind
-      - HeeMingYang
-    repositories_permissions:
-      maintain:
-        - deepin-screen-recorder
-  - name: deepin-screen-recorder-member
+        - deepin-system-monitor
+        - deepin-compressor
+        - deepin-reader
+        - deepin-calculator
+        - deepin-voice-note
+        - dde-introduction
+        - deepin-lianliankan
+        - deepin-gomoku
+        - deepin-devicemanager
+  - name: Multimedia-audio-video-member
     parent_team: Projects
     members:
       - lzwind
-      - HeeMingYang
+      - pengfeixx
+      - wyu71
+      - starhcq
+      - rb-union
+      - feeengli
+      - jeffshuai
       - hundundadi
+      - myk1343
     repositories_permissions:
       triage:
+        - deepin-camera
+        - deepin-music
         - deepin-screen-recorder
+        - deepin-movie-reborn
+        - deepin-font-manager
+        - deepin-system-monitor
+        - deepin-compressor
+        - deepin-reader
+        - deepin-calculator
+        - deepin-voice-note
+        - dde-introduction
+        - deepin-lianliankan
+        - deepin-gomoku
+        - deepin-devicemanager
+  - name: Multimedia-graphics
+    parent_team: Maintainers
+    members:
+      - lzwind
+      - starhcq
+      - wyu71
+      - rb-union
+    repositories_permissions:
+      push:
+        - deepin-draw
+        - deepin-image-viewer
+        - deepin-album
+        - deepin-ocr
+        - ncnn
+        - opencv-mobile
+        - deepin-ocr-plugin-manager
+        - image-editor
+        - deepin-picker
+        - deepin-log-viewer
+        - deepin-manual
+        - deepin-deb-installer
+        - deepin-editor
+  - name: Multimedia-graphics-member
+    parent_team: Projects
+    members:
+      - lzwind
+      - starhcq
+      - rb-union
+      - pengfeixx
+      - wyu71
+      - feeengli
+      - jeffshuai
+      - hundundadi
+      - myk1343
+    repositories_permissions:
+      triage:
+        - deepin-draw
+        - deepin-image-viewer
+        - deepin-album
+        - deepin-ocr
+        - ncnn
+        - opencv-mobile
+        - deepin-ocr-plugin-manager
+        - image-editor
+        - deepin-picker
+        - deepin-log-viewer
+        - deepin-manual
+        - deepin-deb-installer
+        - deepin-editor
+  - name: Multimedia-DTK
+    parent_team: Maintainers
+    members:
+      - lzwind
+      - wyu71
+      - starhcq
+    repositories_permissions:
+      push:
+        - dtkdevice
+        - dtkmultimedia
+  - name: Multimedia-DTK-member
+    parent_team: Projects
+    members:
+      - lzwind
+      - wyu71
+      - starhcq
+      - rb-union
+      - jeffshuai
+      - myk1343
+    repositories_permissions:
+      triage:
+        - dtkdevice
+        - dtkmultimedia
   - name: Designer
     members:
       - shule1987
+      - kegechen
     repositories_permissions:
       pull:
         - deepin-gtk-theme
@@ -232,10 +301,15 @@ teams:
   - name: DTK
     parent_team: Maintainers
     members:
-      - zccrs
       - kegechen
+      - xzl01
+      - asterwyx
+      - ComixHe
+      - 18202781743
+      - FeiWang1119
     repositories_permissions:
-      maintain:
+      push:
+        - dtk
         - dtkcommon
         - dtkcore
         - dtkdeclarative
@@ -243,8 +317,21 @@ teams:
         - dtkwidget
         - qt5integration
         - qt5platform-plugins
+        - dde-app-services
+        - dtk-template
+        - dtksystemsettings
+        - dtkdevice
+        - dtkbluetooth
+        - dtkcrypt
+        - dtkio
+        - dtkmultimedia
+        - dtknetworkmanager
+        - dtkaudiomanager
+        - dtkprinter
+        - dtknotifications
       triage:
         - action-teams-manager
+        - developer-center
   - name: DTK-member
     parent_team: Projects
     members:
@@ -269,6 +356,9 @@ teams:
       - tsic404
       - zzxyb
       - cccccccb
+    repositories_permissions:
+      triage:
+        - developer-center
   - name: Students
     members:
       - avltreeql
@@ -291,126 +381,273 @@ teams:
       - Ronghzhe
       - DthRee523
       - Zongyin-Hao
-      - ambition-echo
-      - OrangePeel-2019
       - xiaohu-mc
       - xyf527
-      - rolfma
       - PDPENG
       - lizi-garden
       - SakuraTemps
       - lxl690
       - alivezhy
       - ariZhou
-  - name: deepin-anything
-    parent_team: Maintainers
-    members:
-      - re2zero
-      - wangrong1069
-    repositories_permissions:
-      maintain:
-        - deepin-anything
+      - ZhongYic00
   - name: dde-file-manager
     parent_team: Maintainers
     members:
-      - lvwujun
-    repositories_permissions:
-      maintain:
-        - dde-file-manager
-  - name: udisks2-qt5
-    parent_team: Maintainers
-    members:
-      - lvwujun
-    repositories_permissions:
-      maintain:
-        - udisks2-qt5
-  - name: gio-qt
-    parent_team: Maintainers
-    members:
-      - lvwujun
-    repositories_permissions:
-      maintain:
-        - gio-qt
-  - name: dde-grand-search
-    parent_team: Maintainers
-    members:
       - Clauszy
+      - Johnson-zs
+      - max-lvs
+      - toberyan
+      - re2zero
     repositories_permissions:
-      maintain:
-        - dde-grand-search        
-  - name: deepin-system-monitor
-    parent_team: Maintainers
+      push:
+        - dde-file-manager
+        - udisks2-qt5
+        - deepin-shortcut-viewer
+        - deepin-pdfium
+        - util-dfm
+        - dde-device-formatter
+        - deepin-screensaver
+        - disomaster
+        - docparser
+        - gio-qt
+        - dde-grand-search
+        - deepin-anything
+  - name: dde-file-manager-member
+    parent_team: Projects
     members:
-      - RiskVirusPro
-      - lhxsm
+      - Kakueeen
+      - GongHeng2017
+      - itsXuSt
+      - Lighto-Ku
+      - re2zero
+      - wangrong1069
+      - shzhuangpub
+      - liyigang1
+      - wangrong1069
     repositories_permissions:
-      maintain:
-        - deepin-system-monitor
+      triage:
+        - dde-file-manager
+        - udisks2-qt5
+        - deepin-shortcut-viewer
+        - deepin-pdfium
+        - util-dfm
+        - dde-device-formatter
+        - deepin-screensaver
+        - disomaster
+        - docparser
+        - gio-qt
+        - dde-grand-search
+        - deepin-anything
   - name: deepin-face
     parent_team: Maintainers
     members:
-      - zccrs
+      - black-desk
       - kegechen
       - robertkill
+      - zccrs
+      - dengbo11
+      - zsien
     repositories_permissions:
-      maintain:
+      push:
         - deepin-face
-        - seetaface-tracker
-        - seetaface-tennis
-        - seetaface-recognizer
-        - seetaface-quality-assessor
-        - seetaface-pose-estimation
-        - seetaface-open-role-zoo
-        - seetaface-models
-        - seetaface-landmarker
-        - seetaface-boxes
-        - seetaface-authorize
-        - seetaface-anti-spoofing-x
         - seetaface-age-predictor
-  - name: deepin-terminal
+        - seetaface-anti-spoofing-x
+        - seetaface-authorize
+        - seetaface-boxes
+        - seetaface-landmarker
+        - seetaface-models
+        - seetaface-open-role-zoo
+        - seetaface-pose-estimation
+        - seetaface-quality-assessor
+        - seetaface-recognizer
+        - seetaface-tennis
+        - seetaface-tracker
+  - name: deepin-clone
     parent_team: Maintainers
     members:
-      - changzex
-      - HuiHui97520
-      - lhxsm
+      - guonafu
+      - SuperZhangxueming
     repositories_permissions:
-      maintain:
-        - deepin-terminal
-  - name: deepin-calculator
+      push:
+        - deepin-clone
+  - name: deepin-boot-maker
     parent_team: Maintainers
     members:
-      - ut003506
-      - lhxsm
+      - guonafu
+      - wanjian1
+      - Fire-dtx
     repositories_permissions:
-      maintain:
-        - deepin-calculator
+      push:
+        - deepin-boot-maker
   - name: dde-control-center
     parent_team: Maintainers
     members:
       - shenwenqi3441
+      - caixr23
     repositories_permissions:
-      maintain:
+      push:
         - dde-control-center
   - name: deepin-kwin
     parent_team: Maintainers
     members:
       - axylp
-      - hitong602
+      - haidong-602
       - ChaojiangLuo
+      - zhangyaninga
+      - zy-seven
     repositories_permissions:
-      maintain:
+      push:
+        - dwayland
         - deepin-kwin
         - dde-kwin
+        - deepin-wayland-protocols
   - name: deepin-kwin-member
     parent_team: Projects
     members:
       - axylp
-      - hitong602
+      - haidong-602
       - ChaojiangLuo
       - diguoliang
       - thinkingning
       - wangxinbo-git
+      - dandan-y
+      - xupeidongdong
+      - zhangyaninga
+      - zy-seven
+      - UniqueDing
+      - xyruos
+      - guokaka
+      - san-Hei
     repositories_permissions:
       triage:
+        - dwayland
         - deepin-kwin
         - dde-kwin
+        - deepin-wayland-protocols
+  - name: deepin-downloader
+    parent_team: Maintainers
+    members:
+      - caimc123456
+      - guonafu
+      - michael19911108
+    repositories_permissions:
+      push:
+        - deepin-downloader
+  - name: deepin-diskmanager
+    parent_team: Maintainers
+    members:
+      - caimc123456
+      - guonafu
+      - michael19911108
+      - lengzhou321
+    repositories_permissions:
+      push:
+        - deepin-diskmanager
+  - name: fcitx
+    parent_team: Maintainers
+    members:
+      - chenshijie-uos
+      - san-Hei
+      - guonafu
+      - caimc123456
+      - Fire-dtx
+      - SuperZhangxueming
+      - zsien
+      - dengbo11
+    repositories_permissions:
+      push:
+        - deepin-fcitxconfigtool-plugin
+        - deepin-fcitx5configtool-plugin
+  - name: deepin-graphics-driver-manager
+    parent_team: Maintainers
+    members:
+      - kingjinni
+      - guonafu
+      - liuli0217
+    repositories_permissions:
+      push:
+        - deepin-graphics-driver-manager
+  - name: dde-printer
+    parent_team: Maintainers
+    members:
+      - reddevillg
+      - liuli0217
+      - kingjinni
+    repositories_permissions:
+      push:
+        - dde-printer
+  - name: deepin-plymouth
+    parent_team: Maintainers
+    members:
+      - ALTNT
+      - hengdinx
+      - uos-eng
+      - wxphaha
+    repositories_permissions:
+      push:
+        - deepin-plymouth
+        - deepin-desktop-base
+        - deepin-icon-theme
+  - name: unilang
+    parent_team: Maintainers
+    members:
+      - FrankHB
+    repositories_permissions:
+      maintain:
+        - unilang
+  - name: warm-sched
+    parent_team: Maintainers
+    members:
+      - electricface
+      - Iceyer
+      - black-desk
+    repositories_permissions:
+      push:
+        - warm-sched
+  - name: deepin-home
+    parent_team: Maintainers
+    members:
+      - justforlxz
+      - myml
+    repositories_permissions:
+      push:
+        - deepin-home
+        - dde-calendar
+  # Corporate Contributor: Phytium
+  - name: corporate-contributor-phytium
+    parent_team: Maintainers
+    members:
+      - phytiumss
+  # Corporate Contributor: Zhaoxin
+  - name: corporate-contributor-zhaoxin
+    parent_team: Maintainers
+    members:
+      - leoliu-oc
+  - name: xdg-desktop-portal-dde
+    parent_team: Maintainers
+    members:
+      - justforlxz
+    repositories_permissions:
+      push:
+        - xdg-desktop-portal-dde
+  - name: doc-sig
+    parent_team: Maintainers
+    members:
+      - xzl01
+      - asterwyx
+      - ComixHe
+    repositories_permissions:
+      push:
+        - doxygen-theme
+  - name: deepin-sysdev
+    parent_team: Maintainers
+    members:
+      - Zeno-sole
+      - UTsweetyfish
+      - ArchieMeng
+    repositories_permissions:
+      triage:
+        - developer-center
+      push:
+        - deepin-upgrade-manager
+        - deepin-terminal

@@ -1,0 +1,40 @@
+[
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/jenkins-bridge-client/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/jenkins-bridge-client/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/jenkins-bridge-client/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/jenkins-bridge-client/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "deletelist": [
+      ".github/workflows/call-tag-build.yml"
+    ],
+    "dest": "linuxdeepin/jenkins-bridge-client/.github/workflows/call-tag-build.yml"
+  }
+]

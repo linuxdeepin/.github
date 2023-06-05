@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  sync:
+  templates-sync:
     # limit push on linuxdeepin/.github master branch
     if: github.repository == 'linuxdeepin/.github' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
@@ -29,16 +29,6 @@ jobs:
           separator: " "
           files: |
             repos/linuxdeepin/*.json
-      - name: Sync changed configs
-        uses: linuxdeepin/action-sync@main
-        if: steps.changed-configs.outputs.any_changed == 'true'
-        with:
-          app_id: 174141
-          installation_id: 23463138
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
-          files: "${{ steps.changed-configs.outputs.all_changed_files }}"
-          message: "chore: Sync by ${{ github.event.head_commit.url }}"
-
       # Full sync when file changed or workflow_dispatch event
       - name: Get changed files
         id: changed-files
@@ -48,19 +38,49 @@ jobs:
           files: |
             workflow-templates/*.yml
             .github/workflows/templates-sync.yml
+
+      # Install ssh key and known_hosts
+      - name: Git config
+        env:
+          SSH_KEY: ${{secrets.SYNC_SSH_KEY}}
+          KNOWN_HOSTS: ${{secrets.SYNC_SSH_KNOWN_HOSTS}}
+        run: |
+          mkdir ~/.ssh
+          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          git config --global user.name deepin-admin-bot
+          git config --global user.email deepin-admin-bot@deepin.org
+
+      - name: Sync changed configs
+        uses: linuxdeepin/action-sync@main
+        if: steps.changed-configs.outputs.any_changed == 'true'
+        with:
+          files: "${{ steps.changed-configs.outputs.all_changed_files }}"
+          message: |
+            chore: Sync by ${{ github.event.head_commit.url }}
+
+            sync by github workflow
+
+            Log: none
+            Influence: none
+
       - name: Get all configs
         id: all-configs
         if: steps.changed-files.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           all_configs=`find repos -type f | grep json | xargs`
           echo all configs $all_configs
-          echo "::set-output name=ALL_CONFIGS::$all_configs"
-      - name: Sync changed files
+          echo "ALL_CONFIGS=$all_configs" >> $GITHUB_OUTPUT
+      - name: Sync all files
         uses: linuxdeepin/action-sync@main
         if: steps.changed-files.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
         with:
-          app_id: 174141
-          installation_id: 23463138
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
           files: "${{ steps.all-configs.outputs.ALL_CONFIGS }}"
-          message: "chore: Sync by ${{ github.event.head_commit.url }}"
+          message: |
+            chore: Sync by ${{ github.event.head_commit.url }}
+
+            sync by github workflow
+
+            Log: none
+            Influence: none

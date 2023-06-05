@@ -1,0 +1,86 @@
+[
+  {
+    "branches": [
+      "master",
+      "develop/.+"
+    ],
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/disomaster/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+"
+    ],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/disomaster/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/disomaster/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+"
+    ],
+    "src": "workflow-templates/cppcheck.yml",
+    "dest": "linuxdeepin/disomaster/.github/workflows/cppcheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+"
+    ],
+    "src": "workflow-templates/call-build-deb.yml",
+    "deletelist": [
+      ".github/workflows/call-build-deb.yml"
+    ],
+    "dest": "linuxdeepin/disomaster/.github/workflows/call-build-deb.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "develop/.+"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/disomaster/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/disomaster/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+"
+    ],
+    "src": "workflow-templates/call-build-distribution.yml",
+    "dest": "linuxdeepin/disomaster/.github/workflows/call-build-distribution.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/disomaster/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "deletelist": [
+      ".github/workflows/call-tag-build.yml"
+    ],
+    "dest": "linuxdeepin/disomaster/.github/workflows/call-tag-build.yml"
+  }
+]
