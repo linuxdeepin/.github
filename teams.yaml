@@ -414,6 +414,7 @@ teams:
         - gio-qt
         - dde-grand-search
         - deepin-anything
+        - deepin-diskmanager
   - name: dde-file-manager-member
     parent_team: Projects
     members:
@@ -421,11 +422,12 @@ teams:
       - GongHeng2017
       - itsXuSt
       - Lighto-Ku
-      - re2zero
       - wangrong1069
       - shzhuangpub
       - liyigang1
       - wangrong1069
+      - pppanghu77
+      - LiHua000
     repositories_permissions:
       triage:
         - dde-file-manager
@@ -440,6 +442,7 @@ teams:
         - gio-qt
         - dde-grand-search
         - deepin-anything
+        - deepin-diskmanager
   - name: deepin-face
     parent_team: Maintainers
     members:
@@ -534,16 +537,6 @@ teams:
     repositories_permissions:
       push:
         - deepin-downloader
-  - name: deepin-diskmanager
-    parent_team: Maintainers
-    members:
-      - caimc123456
-      - guonafu
-      - michael19911108
-      - lengzhou321
-    repositories_permissions:
-      push:
-        - deepin-diskmanager
   - name: fcitx
     parent_team: Maintainers
     members:
