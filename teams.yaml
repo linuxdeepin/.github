@@ -107,6 +107,7 @@ teams:
       - UTsweetyfish
       - black-desk
       - FeiWang1119
+      - chenchongbiao
     repositories_permissions:
       maintain:
         - open-source-students
