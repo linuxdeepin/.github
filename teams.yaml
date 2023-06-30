@@ -653,3 +653,20 @@ teams:
       push:
         - deepin-upgrade-manager
         - deepin-terminal
+  - name: deepin-unioncode
+    parent_team: Maintainers
+    members:
+      - deepin-mozart
+      - toberyan
+    repositories_permissions:
+      push:
+        - deepin-unioncode
+  - name: deepin-unioncode-member
+    parent_team: Projects
+    members:
+      - deepin-mozart
+      - toberyan
+      - HJC5305
+    repositories_permissions:
+      triage:
+        - deepin-unioncode
