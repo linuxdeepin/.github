@@ -151,12 +151,14 @@ jobs:
             // add timestamp to integration
             integrationContent.timestamp = Date.now()
 
-            exampleindex = integrationContent.repos.map((item) => item.repo).indexOf("linuxdeepin/examplerepo")
+            // remove example integration item
+            integrationContent.repos = integrationContent.repos.filter(item => item.repo != "linuxdeepin/examplerepo")
+
             repoindex = integrationContent.repos.map((item) => item.repo).indexOf(integrationrepo)
-            if (topic != "undefined" && exampleindex < 0 && repoindex > 0) {
+            if (repoindex >= 0) {
               integrationContent.repos[repoindex] = {repo: integrationrepo, order: 0, tagsha: tagsha}
             } else {
-              integrationContent.repos[0] = {repo: integrationrepo, order: 0, tagsha: tagsha}
+              integrationContent.repos.push({repo: integrationrepo, order: 0, tagsha: tagsha})
             }
 
             fs.writeFile('integration.yml', yaml.dump(integrationContent, {
