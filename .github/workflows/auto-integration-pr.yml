@@ -152,8 +152,9 @@ jobs:
             integrationContent.timestamp = Date.now()
 
             // remove example integration item
+            console.log("repos: ", integrationContent.repos)
             integrationContent.repos = integrationContent.repos.filter(item => item.repo != "linuxdeepin/examplerepo")
-            console.log("filter repos: ", repos)
+            console.log("filter repos: ", integrationContent.repos)
             repoindex = integrationContent.repos.map((item) => item.repo).indexOf(integrationrepo)
             console.log("find repoindex: ", repoindex)
             if (repoindex >= 0) {
