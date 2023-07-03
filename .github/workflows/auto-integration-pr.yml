@@ -153,11 +153,14 @@ jobs:
 
             // remove example integration item
             integrationContent.repos = integrationContent.repos.filter(item => item.repo != "linuxdeepin/examplerepo")
-
+            console.log("filter repos: ", repos)
             repoindex = integrationContent.repos.map((item) => item.repo).indexOf(integrationrepo)
+            console.log("find repoindex: ", repoindex)
             if (repoindex >= 0) {
+              console.log("update")
               integrationContent.repos[repoindex] = {repo: integrationrepo, order: 0, tagsha: tagsha}
             } else {
+              console.log("push")
               integrationContent.repos.push({repo: integrationrepo, order: 0, tagsha: tagsha})
             }
 
