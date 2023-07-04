@@ -46,6 +46,7 @@ jobs:
       - name: Install depends for load scripts
         run: |
           npm install js-yaml
+          npm install shelljs
           npm install @octokit/rest
           npm install @octokit/auth-app
 
@@ -135,6 +136,12 @@ jobs:
               // 带topic参数直接指定分支，保证后续多个项目同topic集成时一起修改intergration.yml
               console.log("Use topic: ", topic, " to auto integrate")
               auotintegrationbranch = "topic-auto-integration-" + topic
+            }
+
+            // checkout the branch if it existed
+            const shell = require('shelljs')
+            if (shell.exec(`git checkout ${auotintegrationbranch}`).code !== 0) {
+              console.log(auotintegrationbranch, " not existed, use master branch")
             }
 
             // genarate integration.yml
