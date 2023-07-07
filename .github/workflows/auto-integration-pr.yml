@@ -149,7 +149,8 @@ jobs:
             const fs = require('fs')
 
             integrationContent = yaml.load(fs.readFileSync('integration.yml'), 'utf8')
-            integrationContent.message = "Integrated for " + milestone
+            // use pull request title as integration title
+            integrationContent.message = "${{ github.event.pull_request.title }} by @${{ github.event.pull_request.user.login }}"
             integrationContent.milestone = milestone
             if (topic != "undefined") {
               integrationContent.topic = topic
