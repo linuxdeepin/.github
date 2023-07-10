@@ -3,11 +3,13 @@ name: Transfer Issues
 on:
   workflow_call:
     secrets:
+      APP_ID:
+        required: true
       APP_PRIVATE_KEY:
         required: true
 
 env:
-  APP_ID: 174141
+  APP_ID: ${{ secrets.APP_ID }}
   APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
   COMMENT_MESSAGE: "Transfer this issue to the developer-center repository"
   TARGET_REPO: "developer-center"

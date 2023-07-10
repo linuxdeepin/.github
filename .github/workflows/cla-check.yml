@@ -2,6 +2,8 @@ name: "CLA Assistant"
 on:
   workflow_call:
     secrets:
+      APP_ID:
+        required: true
       APP_PRIVATE_KEY:
         required: true
 
@@ -15,7 +17,7 @@ jobs:
         uses: linuxdeepin/contributor-assistant-github-action@master
 
         env:
-          APP_ID: 174141
+          APP_ID: ${{ secrets.APP_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
 
