@@ -670,3 +670,16 @@ teams:
     repositories_permissions:
       triage:
         - deepin-unioncode
+  - name: rust-tools
+    parent_team: Maintainers
+    members:
+      - jonah2022
+      - luckhuanhuan
+      - WangMengabc
+      - rtczza
+      - trackers-lover
+      - bin-ly
+    repositories_permissions:
+      pull:
+        - utshell
+        - utsudo
