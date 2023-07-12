@@ -680,6 +680,6 @@ teams:
       - trackers-lover
       - bin-ly
     repositories_permissions:
-      pull:
+      push:
         - utshell
         - utsudo
