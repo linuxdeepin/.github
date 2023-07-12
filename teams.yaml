@@ -484,7 +484,6 @@ teams:
   - name: dde-control-center
     parent_team: Maintainers
     members:
-      - shenwenqi3441
       - caixr23
     repositories_permissions:
       push:
