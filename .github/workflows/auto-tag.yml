@@ -143,6 +143,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            global["fetch"] = fetch
             const { Octokit } = require("@octokit/rest");
             const { createAppAuth } = require("@octokit/auth-app");
             const appOctokit = new Octokit({
