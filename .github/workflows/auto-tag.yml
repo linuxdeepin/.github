@@ -88,7 +88,7 @@ jobs:
           with open(output_file, "a") as output:
               output.write("TAG=" + tag + "\n")
 
-      - name: check tag exsits
+      - name: check tag exists
         id: test-tag-exists
         run: |
           git fetch --tags
