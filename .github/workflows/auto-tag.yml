@@ -185,7 +185,7 @@ jobs:
             const { data } = await github.rest.git.createTag({
               repo: context.repo.repo,
               owner: context.repo.owner,
-              message: "Release " + context.repo.repo + " ${{ steps.get-tag.outputs.TAG }}",
+              message: "Release " + context.repo.repo + " ${{ steps.get-tag.outputs.TAG }}\n",
               type: 'commit',
               object: context.sha,
               tag: "${{ steps.get-tag.outputs.TAG }}",
