@@ -192,6 +192,8 @@ teams:
         - deepin-lianliankan
         - deepin-gomoku
         - deepin-devicemanager
+        - deepin-downloader
+        - deepin-boot-maker
   - name: Multimedia-audio-video-member
     parent_team: Projects
     members:
@@ -220,6 +222,8 @@ teams:
         - deepin-lianliankan
         - deepin-gomoku
         - deepin-devicemanager
+        - deepin-downloader
+        - deepin-boot-maker
   - name: Multimedia-graphics
     parent_team: Maintainers
     members:
