@@ -679,3 +679,15 @@ teams:
       push:
         - utshell
         - utsudo
+  - name: ci-robot
+    parent_team: Maintainers
+    members:
+      - deepin-ci-robot
+    repositories_permissions:
+      push:
+        - dtk
+        - dtkcommon
+        - dtkcore
+        - dtkgui
+        - dtkwidget
+        - dtkdeclarative
