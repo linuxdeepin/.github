@@ -29,6 +29,10 @@ on:
         type: string
         default: "c80020aefa9699f51944e07b1ae02d606a6b25fc"
 
+concurrency:
+  group: "ci-autointegration"
+  cancel-in-progress: false
+
 env:
   APP_ID: ${{ secrets.INTEGRATION_APP_ID }}
   APP_PRIVATE_KEY: ${{ secrets.INTEGRATION_APP_PRIVATE_KEY }}
@@ -36,7 +40,7 @@ env:
   repository: ${{ inputs.repository }}
 
 jobs:
-  auto-integration:
+  pr-auto-integration:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -132,7 +136,7 @@ jobs:
 
             // example: integrate V23-Beta dtk-v23-test
             nameGroup = comment_body.split(" ")
-            if (nameGroup.length > 1) {
+            if (nameGroup.length > 1 && nameGroup[1] != "") {
               topic = nameGroup[1]
               // 带topic参数直接指定分支，保证后续多个项目同topic集成时一起修改intergration.yml
               console.log("Use topic: ", topic, " to auto integrate")
@@ -141,7 +145,7 @@ jobs:
 
             // checkout the branch if it existed
             const shell = require('shelljs')
-            if (shell.exec(`git checkout ${auotintegrationbranch}`).code !== 0) {
+            if (shell.exec(`git fetch origin ${auotintegrationbranch} && git checkout ${auotintegrationbranch}`).code !== 0) {
               console.log(auotintegrationbranch, " not existed, use master branch")
             }
 
