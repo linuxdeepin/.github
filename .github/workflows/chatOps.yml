@@ -191,7 +191,7 @@ jobs:
                 for (var i = 0; i < WebhookDeliveriesResp.data.length; i++) {
                   let wh = WebhookDeliveriesResp.data[i]
                   // console.log("webhook event: ", wh.event, ", webhook repository_id: ", wh.repository_id)
-                  if (wh.event == 'pull_request' && wh.repository_id == ${{ github.repository_id }}) {
+                  if (wh.event == 'pull_request' && wh.repository_id == ${{ github.repository_id }} && (wh.action == 'opened' || wh.action == 'synchronize')) {
                     const resp = await github.rest.orgs.redeliverWebhookDelivery({
                       org: context.repo.owner,
                       hook_id: process.env.HOOK_ID,
