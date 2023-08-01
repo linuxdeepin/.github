@@ -302,6 +302,51 @@ jobs:
               merge_method: 'rebase'
             });
 
+      - name: forcemerge
+        uses: actions/github-script@v6
+        if: startsWith(github.event.comment.body, '/forcemerge') && github.repository_owner == 'linuxdeepin'
+        with:
+          github-token: ${{ steps.get-token.outputs.app_token }}
+          script: |
+            if(context.payload.sender.id != context.payload.issue.user.id){
+              const permission = await github.request(`GET /repos/${context.repo.owner}/${context.repo.repo}/collaborators/${context.payload.sender.login}/permission`, {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                username: context.payload.sender.login,
+              })
+              if(!["admin","maintain","write"].includes(permission.data.permission)){
+                await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: 'Permission denied'
+                })
+                return
+              }
+            }
+
+            const pull = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            })
+
+            if( pull.data.mergeable_state != "clean" ){
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `This pr force merged! (status: ${pull.data.mergeable_state})`
+              })
+            }
+
+            await github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              merge_method: 'rebase'
+            });
+
   pr-info:
     runs-on: ubuntu-latest
     outputs:
