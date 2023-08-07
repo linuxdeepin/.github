@@ -691,3 +691,10 @@ teams:
         - dtkgui
         - dtkwidget
         - dtkdeclarative
+  - name: deepin-autotest-framework
+    parent_team: Maintainers
+    members:
+      - mikigo
+    repositories_permissions:
+      push:
+        - deepin-autotest-framework
