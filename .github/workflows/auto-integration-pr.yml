@@ -200,6 +200,7 @@ jobs:
         with:
           token: ${{ steps.integration_token.outputs.app_token }}
           branch: ${{ steps.integration-config.outputs.branch }}
+          base: master
           title: "auto integration ${{ inputs.integrationrepo }}"
           body: "auto integration from pr https://github.com/${{ github.repository }}/pull/${{ steps.integration-config.outputs.prnumber }}."
           commit-message: "chore: Update integration.yml"
