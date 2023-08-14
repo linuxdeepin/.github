@@ -145,7 +145,7 @@ jobs:
 
             // checkout the branch if it existed
             const shell = require('shelljs')
-            if (shell.exec(`git fetch origin ${auotintegrationbranch} && git checkout ${auotintegrationbranch}`).code !== 0) {
+            if (shell.exec(`git fetch origin ${auotintegrationbranch} && git checkout ${auotintegrationbranch} integration.yml`).code !== 0) {
               console.log(auotintegrationbranch, " not existed, use master branch")
             }
 
@@ -190,9 +190,6 @@ jobs:
             console.log("finally auotintegrationbranch: " + auotintegrationbranch)
             core.setOutput('branch', auotintegrationbranch)
             core.setOutput('prnumber', context.issue.number)
-            if (shell.exec(`git checkout master`).code !== 0) {
-              console.log("warn: checkout master branch failed")
-            }
 
       - name: Remove node_modules dir
         run: |
@@ -205,7 +202,6 @@ jobs:
         with:
           token: ${{ steps.integration_token.outputs.app_token }}
           branch: ${{ steps.integration-config.outputs.branch }}
-          base: master
           title: "auto integration ${{ inputs.integrationrepo }}"
           body: "auto integration from pr https://github.com/${{ github.repository }}/pull/${{ steps.integration-config.outputs.prnumber }}."
           commit-message: "chore: Update integration.yml"
