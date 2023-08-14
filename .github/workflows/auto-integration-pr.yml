@@ -186,13 +186,18 @@ jobs:
                 }
             });
 
+            console.log("finally repos: ", integrationContent.repos)
             console.log("finally auotintegrationbranch: " + auotintegrationbranch)
             core.setOutput('branch', auotintegrationbranch)
             core.setOutput('prnumber', context.issue.number)
+            if (shell.exec(`git checkout master`).code !== 0) {
+              console.log("warn: checkout master branch failed")
+            }
 
       - name: Remove node_modules dir
         run: |
           rm -rf node_modules package-lock.json package.json
+          git diff .
 
       - name: Create or update integration pr
         uses: peter-evans/create-pull-request@v4
