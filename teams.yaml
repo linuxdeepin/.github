@@ -323,6 +323,12 @@ teams:
         - dtkwidget
         - qt5integration
         - qt5platform-plugins
+        - dtk6core
+        - dtk6declarative
+        - dtk6gui
+        - dtk6widget
+        - qt6integration
+        - qt6platform-plugins
         - dde-app-services
         - dtk-template
         - dtksystemsettings
