@@ -32,6 +32,8 @@ teams:
         - dde-qt-dbus-factory
         - startdde
         - dde-daemon
+        - deepin-deepinid-plugin
+        - deepin-deepinid-client
         - deepin-desktop-schemas
         - deepin-ab-recovery
         - lastore-daemon

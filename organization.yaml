@@ -6,6 +6,8 @@ settings:
       - linglong-loader
       - linglong-dbus-proxy
       - linglong-hub
+      - deepin-deepinid-client
+      - deepin-deepinid-plugin
       - deepin-system-upgrade
       - util-dfm
       - deepin-pdfium
