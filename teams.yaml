@@ -427,6 +427,7 @@ teams:
         - dde-grand-search
         - deepin-anything
         - deepin-diskmanager
+        - dde-cooperation
   - name: dde-file-manager-member
     parent_team: Projects
     members:
@@ -440,6 +441,8 @@ teams:
       - wangrong1069
       - pppanghu77
       - LiHua000
+      - N0rthHXD
+      - scx005548
     repositories_permissions:
       triage:
         - dde-file-manager
@@ -455,6 +458,7 @@ teams:
         - dde-grand-search
         - deepin-anything
         - deepin-diskmanager
+        - dde-cooperation
   - name: deepin-face
     parent_team: Maintainers
     members:
