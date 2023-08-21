@@ -24,6 +24,7 @@ jobs:
 
     steps:
       - name: init base environment
+        shell: bash
         run: |
           echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
           rm /etc/apt/sources.list
