@@ -28,6 +28,7 @@ jobs:
         run: |
           echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
           rm /etc/apt/sources.list
+          GITHUB_REF="${{ github.ref }}"
           branch=${GITHUB_REF#refs/heads/}
           if [[ "$branch" =~ ^"topic-" ]]; then
             trimedBranch=${branch#topic-}
