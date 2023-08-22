@@ -28,8 +28,7 @@ jobs:
         run: |
           echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
           rm /etc/apt/sources.list
-          GITHUB_REF="${{ github.ref }}"
-          branch=${GITHUB_REF#refs/heads/}
+          branch="${{ github.head_ref }}"
           if [[ "$branch" =~ ^"topic-" ]]; then
             trimedBranch=${branch#topic-}
             echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/CI:/topics:/${trimedBranch}/deepin_develop/ ./" >> /etc/apt/sources.list
