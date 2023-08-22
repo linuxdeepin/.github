@@ -41,7 +41,7 @@ jobs:
           echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
           apt-get update
           apt-get install -y libgtest-dev libgmock-dev ninja-build devscripts equivs dbus
-          yes | mk-build-deps -i
+          apt -y build-dep .
       - name: Configure CMake
         # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
         # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
