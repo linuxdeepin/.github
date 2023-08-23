@@ -669,6 +669,7 @@ teams:
     repositories_permissions:
       push:
         - deepin-unioncode
+        - deepin-codeporting
   - name: deepin-unioncode-member
     parent_team: Projects
     members:
@@ -676,8 +677,9 @@ teams:
       - toberyan
       - HJC5305
     repositories_permissions:
-      triage:
+      push:
         - deepin-unioncode
+        - deepin-codeporting
   - name: rust-tools
     parent_team: Maintainers
     members:
