@@ -17,13 +17,13 @@ jobs:
           description="mirror of ${homepage}"
           # remove '.' prefix
           repo=${repo#"."}
-          curl -X POST --header 'Content-Type: application/json;charset=UTF-8' 'https://gitee.com/api/v5/enterprises/linuxdeepin/repos' -d '{"private": 1,"access_token":"${{ secrets.GITEE_SYNC_TOKEN }}","name":"'"$repo"'","description":"'"$description"'","homepage":"'"$homepage"'","has_issues":"false","has_wiki":"false","can_comment":"false"}' || true
+          curl -X POST --header 'Content-Type: application/json;charset=UTF-8' 'https://gitee.com/api/v5/orgs/deepin-community/repos' -d '{"private": 1,"access_token":"${{ secrets.GITEE_SYNC_TOKEN }}","name":"'"$repo"'","description":"'"$description"'","homepage":"'"$homepage"'","has_issues":"false","has_wiki":"false","can_comment":"false"}' || true
       - name: push
         run: |
           git clone --bare https://github.com/linuxdeepin/${{ github.event.repository.name }}.git .git
           repo=${{ github.event.repository.name }}
           # remove '.' prefix
           repo=${repo#"."}
-          git remote set-url origin https://myml:${{ secrets.GITEE_SYNC_TOKEN }}@gitee.com/linuxdeepin/${repo}.git
+          git remote set-url origin https://myml:${{ secrets.GITEE_SYNC_TOKEN }}@gitee.com/deepin-community/${repo}.git
           git push -f --all --prune origin
           git push --tags origin
