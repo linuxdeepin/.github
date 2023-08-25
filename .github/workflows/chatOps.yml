@@ -53,7 +53,7 @@ jobs:
       # !deprecated add approve label
       - name: "approve"
         uses: actions/github-script@v6
-        if: startsWith(github.event.comment.body, '/+1') || contains(github.event.comment.body, '/approve')
+        if: startsWith(github.event.comment.body, '/+1')
         with:
           script: |
             if(context.payload.sender.id == context.payload.issue.user.id){
