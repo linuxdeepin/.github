@@ -362,8 +362,11 @@ jobs:
                 repo: context.repo.repo,
                 pull_number: context.issue.number
             });
-
-            core.setOutput('ref', response.data.head.sha)
+            if (response.data.status != "closed") {
+              core.setOutput('ref', response.data.head.sha)
+            } else {
+              core.setOutput('ref', response.data.merge_commit_sha)
+            }
 
   integration:
     needs:
