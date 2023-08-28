@@ -713,3 +713,12 @@ teams:
     repositories_permissions:
       push:
         - deepin-autotest-framework
+  - name: deepin-ai-daemon
+    parent_team: Maintainers
+    members:
+      - deepin-mozart
+      - toberyan
+      - Kakueeen
+    repositories_permissions:
+      push:
+        - deepin-ai-daemon
