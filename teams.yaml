@@ -78,6 +78,7 @@ teams:
         - deepin-system-upgrade
         - deepin-service-manager
         - deepin-upgrade-manager
+        - deepin-im
   - name: am-maintainer
     parent_team: Maintainers
     members:
