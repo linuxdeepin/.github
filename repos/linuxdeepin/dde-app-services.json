@@ -41,18 +41,6 @@
       "dev/.+",
       "maintain/.+"
     ],
-    "src": "workflow-templates/call-build-deb.yml",
-    "deletelist": [
-      ".github/workflows/call-build-deb.yml"
-    ],
-    "dest": "linuxdeepin/dde-app-services/.github/workflows/call-build-deb.yml"
-  },
-  {
-    "branches": [
-      "master",
-      "dev/.+",
-      "maintain/.+"
-    ],
     "src": "workflow-templates/call-clacheck.yml",
     "dest": "linuxdeepin/dde-app-services/.github/workflows/call-clacheck.yml"
   },

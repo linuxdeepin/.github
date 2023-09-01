@@ -37,18 +37,6 @@
   },
   {
     "branches": [
-      "master",
-      "dev/.+",
-      "maintain/.+"
-    ],
-    "src": "workflow-templates/call-build-deb.yml",
-    "deletelist": [
-      ".github/workflows/call-build-deb.yml"
-    ],
-    "dest": "linuxdeepin/dde-control-center/.github/workflows/call-build-deb.yml"
-  },
-  {
-    "branches": [
       "master"
     ],
     "src": "workflow-templates/call-build-distribution.yml",
