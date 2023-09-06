@@ -723,3 +723,10 @@ teams:
     repositories_permissions:
       push:
         - deepin-ai-daemon
+  - name: letmego
+    parent_team: Maintainers
+    members:
+      - mikigo
+    repositories_permissions:
+      push:
+        - letmego
