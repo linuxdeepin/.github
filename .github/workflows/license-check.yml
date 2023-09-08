@@ -47,7 +47,7 @@ jobs:
       - name: README.zh_CN.md Check
         id: zhrcheck
         continue-on-error: true
-        run: if [ ! -f "README.zh_CN.md" -a ! -f "README.zh-CN.md" ]; then echo "missing README.zh_CN.md";return 1;fi
+        run: if [ ! -f "README.zh_CN.md" -a ! -f "README.zh-CN.md" -a ! -f "README.en.md" ]; then echo "missing README.zh_CN.md";return 1;fi
         shell: zsh {0}
       - name: Generate README zh_CN Check Reports
         if: steps.zhrcheck.outcome != 'success'
