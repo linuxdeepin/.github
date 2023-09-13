@@ -24,13 +24,6 @@
     "branches": [
       "master"
     ],
-    "src": "workflow-templates/cppcheck.yml",
-    "dest": "linuxdeepin/deepin-upgrade-manager/.github/workflows/cppcheck.yml"
-  },
-  {
-    "branches": [
-      "master"
-    ],
     "src": "workflow-templates/call-build-deb.yml",
     "deletelist": [
       ".github/workflows/call-build-deb.yml"
