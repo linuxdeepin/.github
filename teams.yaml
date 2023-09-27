@@ -53,6 +53,7 @@ teams:
         - dde-dock
         - dde-clipboard
         - dde-network-core
+        - dde-launchpad
         - dde-launcher
         - dde-manual-content
         - dde-wallpapers
