@@ -731,3 +731,6 @@ teams:
     repositories_permissions:
       push:
         - letmego
+        - funnylog
+        - pdocr-rpc
+        - image-center
