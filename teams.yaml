@@ -418,6 +418,7 @@ teams:
     repositories_permissions:
       push:
         - dde-file-manager
+        - dde-file-manager-extensions
         - udisks2-qt5
         - deepin-shortcut-viewer
         - deepin-pdfium
@@ -449,6 +450,7 @@ teams:
     repositories_permissions:
       triage:
         - dde-file-manager
+        - dde-file-manager-extensions
         - udisks2-qt5
         - deepin-shortcut-viewer
         - deepin-pdfium
