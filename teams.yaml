@@ -629,6 +629,7 @@ teams:
       push:
         - deepin-home
         - dde-calendar
+        - bbs-mobile-web
   # Corporate Contributor: Phytium
   - name: corporate-contributor-phytium
     parent_team: Maintainers
