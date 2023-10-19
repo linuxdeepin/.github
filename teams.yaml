@@ -80,6 +80,7 @@ teams:
         - deepin-service-manager
         - deepin-upgrade-manager
         - deepin-im
+        - dde-shell
   - name: am-maintainer
     parent_team: Maintainers
     members:
