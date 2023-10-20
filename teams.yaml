@@ -21,6 +21,7 @@ teams:
       - Groveer
       - kegechen
       - FeiWang1119
+      - wineee
     repositories_permissions:
       triage:
         - developer-center
