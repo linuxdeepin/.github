@@ -172,10 +172,10 @@ jobs:
             console.log("find repoindex: ", repoindex)
             if (repoindex >= 0) {
               console.log("update")
-              integrationContent.repos[repoindex] = {repo: integrationrepo, order: 0, tagsha: tagsha}
+              integrationContent.repos[repoindex] = {repo: integrationrepo, tagsha: tagsha}
             } else {
               console.log("push")
-              integrationContent.repos.push({repo: integrationrepo, order: 0, tagsha: tagsha})
+              integrationContent.repos.push({repo: integrationrepo, tagsha: tagsha})
             }
 
             fs.writeFile('integration.yml', yaml.dump(integrationContent, {
