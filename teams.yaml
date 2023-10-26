@@ -213,6 +213,7 @@ teams:
       - jeffshuai
       - hundundadi
       - myk1343
+      - qingfuliu
     repositories_permissions:
       triage:
         - deepin-camera
@@ -265,6 +266,7 @@ teams:
       - jeffshuai
       - hundundadi
       - myk1343
+      - qingfuliu
     repositories_permissions:
       triage:
         - deepin-draw
