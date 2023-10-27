@@ -24,7 +24,7 @@
       "release/.+"
     ],
     "src": "workflow-templates/call-chatOps.yml",
-    "dest": "linuxdeepin/dde-lauapplication-wizardnchpad/.github/workflows/call-chatOps.yml"
+    "dest": "linuxdeepin/dde-application-wizardnchpad/.github/workflows/call-chatOps.yml"
   },
   {
     "branches": [
