@@ -1,0 +1,30 @@
+[
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/deepin-autotest-framework/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/deepin-autotest-framework/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/deepin-autotest-framework/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/deepin-autotest-framework/.github/workflows/call-clacheck.yml"
+  }
+]
