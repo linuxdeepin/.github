@@ -687,6 +687,8 @@ teams:
       - deepin-mozart
       - toberyan
       - HJC5305
+      - Lighto
+      - GongHeng2017
     repositories_permissions:
       push:
         - deepin-unioncode
