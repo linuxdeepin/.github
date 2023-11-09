@@ -689,6 +689,7 @@ teams:
       - HJC5305
       - Lighto-Ku
       - GongHeng2017
+      - N0rthHXD
     repositories_permissions:
       push:
         - deepin-unioncode
