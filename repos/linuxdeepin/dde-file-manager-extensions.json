@@ -1,0 +1,63 @@
+[
+  {
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/dde-file-manager-extensions/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/dde-file-manager-extensions/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/dde-file-manager-extensions/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
+    "src": "workflow-templates/cppcheck.yml",
+    "dest": "linuxdeepin/dde-file-manager-extensions/.github/workflows/cppcheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/dde-file-manager-extensions/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "dev/.+",
+      "maintain/.+"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/dde-file-manager-extensions/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/dde-file-manager-extensions/.github/workflows/call-auto-tag.yml"
+  }
+]
