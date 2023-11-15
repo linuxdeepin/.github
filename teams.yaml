@@ -723,6 +723,7 @@ teams:
     parent_team: Maintainers
     members:
       - mikigo
+      - zhao-george
     repositories_permissions:
       push:
         - deepin-autotest-framework
@@ -739,6 +740,7 @@ teams:
     parent_team: Maintainers
     members:
       - mikigo
+      - zhao-george
     repositories_permissions:
       push:
         - letmego
