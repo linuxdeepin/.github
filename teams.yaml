@@ -22,6 +22,7 @@ teams:
       - kegechen
       - FeiWang1119
       - wineee
+      - chenchongbiao
     repositories_permissions:
       triage:
         - developer-center
