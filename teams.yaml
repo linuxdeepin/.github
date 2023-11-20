@@ -684,14 +684,13 @@ teams:
   - name: deepin-unioncode-member
     parent_team: Projects
     members:
-      - deepin-mozart
-      - toberyan
-      - HJC5305
       - Lighto-Ku
       - GongHeng2017
       - N0rthHXD
+      - LiHua000
+      - tsl115
     repositories_permissions:
-      push:
+      triage:
         - deepin-unioncode
         - deepin-codeporting
   - name: rust-tools
