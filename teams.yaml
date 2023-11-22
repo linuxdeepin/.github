@@ -744,3 +744,11 @@ teams:
         - funnylog
         - pdocr-rpc
         - image-center
+  - name: treeland
+    parent_team: Projects
+    members:
+      - justforlxz
+      - wineee
+    repositories_permissions:
+      push:
+        - treeland
