@@ -1,6 +1,7 @@
 organization: linuxdeepin
 settings:
   - repositories:
+      - treeland
       - linglong
       - linglong-box
       - linglong-loader
