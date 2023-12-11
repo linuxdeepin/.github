@@ -43,7 +43,9 @@ jobs:
           echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
           echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
           apt-get update && apt-get install -y --force-yes ca-certificates apt-transport-https sudo
-          sudo apt-get install -y --force-yes python3-pip
+          sudo apt-get install -y --force-yes python3-pip python3.11-venv
+          python3 -m venv source
+          source ./source/bin/activate
           pip3 install coverxygen
 
       - uses: actions/checkout@v3
@@ -60,6 +62,7 @@ jobs:
           checkedSuffix: ".h,.hpp,.hxx"
           checkKind: "enum,enumvalue,friend,typedef,variable,function,signal,slot,class,union,define,namespace"
           genDocCommand: |
+            source ./source/bin/activate
             cmake -Bbuild -DBUILD_DOCS=ON -DBUILD_TESTING=OFF -DDOXYGEN_GENERATE_XML=1 .
             cmake --build build --target doxygen
             python3 -m coverxygen --xml-dir=./build/docs/xml --src-dir . --format json --kind $CHECK_KIND --scope $CHECK_SCOPE --output $CHECK_RES

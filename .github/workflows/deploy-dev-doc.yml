@@ -47,17 +47,20 @@ jobs:
         run: |
           set -x
           sudo apt-get install -y --force-yes doxygen
-          sudo apt-get install -y --force-yes python3 python3-pip python3-setuptools
-          pip3 install resolvelib doxyqml
+          sudo apt-get install -y --force-yes python3 python3-pip python3-setuptools python3.11-venv
           sudo apt-get install -y --force-yes devscripts equivs git
           mk-build-deps
           sudo apt-get install -y --force-yes ./*.deb
           git clone https://github.com/linuxdeepin/doxygen-theme.git --depth=1
           sed -i "s|change address|https://github.com/linuxdeepin/$(basename `pwd`)|" doxygen-theme/doxygen-awesome-css/header.html
           sed -i "s|doxtime|$(date +"%Y-%m-%d-%R  %:::z")|" doxygen-theme/doxygen-awesome-css/footer.html
+          python -m venv source
+          source ./source/bin/activate
+          pip3 install resolvelib doxyqml
 
       - name: Build Docs
         run: |
+          source ./source/bin/activate
           cmake -Bbuild -DBUILD_DOCS=ON -DBUILD_TESTING=OFF -DDOXYGEN_GENERATE_HTML="YES" -DDOXYGEN_PROJECT_NUMBER=`git describe` -DDOXYGEN_GENERATE_TREEVIEW="YES" \
                         -DDOXYGEN_HTML_EXTRA_STYLESHEET="./doxygen-theme/doxygen-awesome-css/doxygen-awesome.css;\
                           ./doxygen-theme/doxygen-awesome-css/doxygen-awesome-sidebar-only.css;\
