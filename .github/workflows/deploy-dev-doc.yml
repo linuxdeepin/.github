@@ -48,7 +48,7 @@ jobs:
           set -x
           sudo apt-get install -y --force-yes doxygen
           sudo apt-get install -y --force-yes python3 python3-pip python3-setuptools
-          pip3 install resolvelib doxyqml
+          pip3 install resolvelib doxyqml --break-system-package
           sudo apt-get install -y --force-yes devscripts equivs git
           mk-build-deps
           sudo apt-get install -y --force-yes ./*.deb
