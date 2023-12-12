@@ -116,6 +116,7 @@ teams:
       - black-desk
       - FeiWang1119
       - chenchongbiao
+      - ComixHe
     repositories_permissions:
       maintain:
         - open-source-students
