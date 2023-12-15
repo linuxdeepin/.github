@@ -680,6 +680,8 @@ teams:
     members:
       - deepin-mozart
       - toberyan
+      - LiHua000
+      - eric2023
     repositories_permissions:
       push:
         - deepin-unioncode
