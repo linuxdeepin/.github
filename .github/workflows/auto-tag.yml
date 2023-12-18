@@ -205,3 +205,36 @@ jobs:
               ref: 'refs/tags/${{ steps.get-tag.outputs.TAG }}',
               sha: data.sha
             })
+
+            // Create a release for tag
+            await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: '${{ steps.get-version.outputs.TAG }}',
+            })
+
+            // Add a reminder for needed rebase to PR in open state
+            const BOT_NAME = "TAG Bot"
+            const COMMENT_HEAD = "**" + BOT_NAME + "**\n\n"
+            const COMMENT_BODY = "New tag: ${{ steps.get-version.outputs.TAG }}\nDISTRIBUTION: ${{ steps.get-version.outputs.DISTRIBUTION }}\nSuggest: synchronizing this PR through rebase #" + context.issue.number
+            for await (const prsResp of github.paginate.iterator(
+              github.rest.pulls.list,
+              {
+                repo: context.repo.repo,
+                owner: context.repo.owner,
+                state: 'open',
+                per_page: 100,
+              }
+            )) {
+              if ("${{ steps.get-version.outputs.DISTRIBUTION }}" === "unstable" || "${{ steps.get-version.outputs.DISTRIBUTION }}" === "stable") {
+                for (var i = 0; i < prsResp.data.length; i++) {
+                  let pr = prsResp.data[i]
+                  await github.rest.issues.createComment({
+                    issue_number: pr.number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: COMMENT_HEAD + COMMENT_BODY
+                  })
+                }
+              }
+            }
