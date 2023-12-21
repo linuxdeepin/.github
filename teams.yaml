@@ -338,6 +338,7 @@ teams:
         - dtk6declarative
         - dtk6gui
         - dtk6widget
+        - dtk6systemsettings
         - qt6integration
         - qt6platform-plugins
         - dde-app-services
