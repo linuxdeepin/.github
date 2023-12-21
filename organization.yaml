@@ -1,6 +1,7 @@
 organization: linuxdeepin
 settings:
   - repositories:
+      - dtk6systemsettings
       - treeland
       - linglong
       - linglong-box
