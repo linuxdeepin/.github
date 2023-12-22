@@ -758,3 +758,11 @@ teams:
     repositories_permissions:
       push:
         - treeland
+  - name: deepin-osconfig
+    parent_team: Projects
+    members:
+      - kegechen
+      - Zeno-sole
+    repositories_permissions:
+      push:
+        - deepin-osconfig
