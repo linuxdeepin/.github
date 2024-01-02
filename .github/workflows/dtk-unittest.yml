@@ -31,9 +31,7 @@ jobs:
 
         run: |
           echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-          echo "deb [trusted=yes] https://community-packages.deepin.com/beige/ beige main community commercial" > /etc/apt/sources.list
-          echo "deb-src [trusted=yes] https://community-packages.deepin.com/beige/ beige main community commercial" >> /etc/apt/sources.list
-          echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/community/deepin_develop/ ./" >> /etc/apt/sources.list
+          echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/community/deepin_develop/ ./" > /etc/apt/sources.list
           echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/community/deepin_develop/ ./" >> /etc/apt/sources.list
           echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/dde/deepin_develop/ ./" >> /etc/apt/sources.list
           echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/dde/deepin_develop/ ./" >> /etc/apt/sources.list
