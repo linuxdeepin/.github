@@ -427,6 +427,7 @@ teams:
       push:
         - dde-file-manager
         - dde-file-manager-extensions
+        - dde-file-manager-external
         - udisks2-qt5
         - deepin-shortcut-viewer
         - deepin-pdfium
@@ -459,6 +460,7 @@ teams:
       triage:
         - dde-file-manager
         - dde-file-manager-extensions
+        - dde-file-manager-external
         - udisks2-qt5
         - deepin-shortcut-viewer
         - deepin-pdfium
