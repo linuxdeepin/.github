@@ -324,6 +324,7 @@ teams:
       - ComixHe
       - 18202781743
       - FeiWang1119
+      - deepin-ci-robot
     repositories_permissions:
       push:
         - dtk
