@@ -769,3 +769,11 @@ teams:
     repositories_permissions:
       push:
         - deepin-osconfig
+  - name: deepin-pc-manager
+    parent_team: Maintainers
+    members:
+      - groveer
+      - qxp930712
+    repositories_permissions:
+      push:
+        - deepin-pc-manager
