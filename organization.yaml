@@ -1,6 +1,7 @@
 organization: linuxdeepin
 settings:
   - repositories:
+      - deepin-pc-manager
       - dtk6systemsettings
       - treeland
       - linglong
