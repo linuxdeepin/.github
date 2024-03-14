@@ -229,12 +229,15 @@ jobs:
               if ("${{ steps.get-version.outputs.DISTRIBUTION }}" === "unstable" || "${{ steps.get-version.outputs.DISTRIBUTION }}" === "stable") {
                 for (var i = 0; i < prsResp.data.length; i++) {
                   let pr = prsResp.data[i]
-                  await github.rest.issues.createComment({
-                    issue_number: pr.number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: COMMENT_HEAD + COMMENT_BODY
-                  })
+                  // Only reminder same base branch's pr
+                  if ("${{ github.base_ref }}" === pr.base.ref) {
+                    await github.rest.issues.createComment({
+                      issue_number: pr.number,
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      body: COMMENT_HEAD + COMMENT_BODY
+                    })
+                  }
                 }
               }
             }
