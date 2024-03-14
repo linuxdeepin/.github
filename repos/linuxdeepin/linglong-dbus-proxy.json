@@ -65,23 +65,6 @@
     "branches": [
       "master"
     ],
-    "src": "workflow-templates/call-build-deb.yml",
-    "deletelist": [
-      ".github/workflows/call-build-deb.yml"
-    ],
-    "dest": "linuxdeepin/linglong-dbus-proxy/.github/workflows/call-build-deb.yml"
-  },
-  {
-    "branches": [
-      "master"
-    ],
-    "src": "workflow-templates/call-build-distribution.yml",
-    "dest": "linuxdeepin/linglong-dbus-proxy/.github/workflows/call-build-distribution.yml"
-  },
-  {
-    "branches": [
-      "master"
-    ],
     "src": "workflow-templates/cppcheck.yml",
     "dest": "linuxdeepin/linglong-dbus-proxy/.github/workflows/cppcheck.yml"
   }
