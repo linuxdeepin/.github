@@ -23,6 +23,9 @@ teams:
       - FeiWang1119
       - wineee
       - chenchongbiao
+      - robertkill
+      - ssk-wh
+      - yixinshark
     repositories_permissions:
       triage:
         - developer-center
