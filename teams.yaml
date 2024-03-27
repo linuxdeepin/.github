@@ -188,6 +188,8 @@ teams:
       - lzwind
       - pengfeixx
       - wyu71
+      - myk1343
+      - starhcq
     repositories_permissions:
       push:
         - deepin-camera
@@ -218,7 +220,7 @@ teams:
       - jeffshuai
       - hundundadi
       - myk1343
-      - qingfuliu
+      - lJxDabab
     repositories_permissions:
       triage:
         - deepin-camera
@@ -244,6 +246,7 @@ teams:
       - starhcq
       - wyu71
       - rb-union
+      - pengfeixx
     repositories_permissions:
       push:
         - deepin-draw
@@ -271,7 +274,7 @@ teams:
       - jeffshuai
       - hundundadi
       - myk1343
-      - qingfuliu
+      - lJxDabab
     repositories_permissions:
       triage:
         - deepin-draw
