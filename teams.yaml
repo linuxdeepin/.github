@@ -679,6 +679,7 @@ teams:
       - Zeno-sole
       - UTsweetyfish
       - ArchieMeng
+      - MingcongBai
     repositories_permissions:
       triage:
         - developer-center
