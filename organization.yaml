@@ -3,6 +3,7 @@ settings:
   - repositories:
       - deepin-pc-manager
       - dtk6systemsettings
+      - dde-launchpad
       - treeland
       - linglong
       - linglong-box
