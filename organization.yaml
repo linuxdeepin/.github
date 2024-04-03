@@ -25,7 +25,6 @@ settings:
       - dtkdevice
       - dtknetwork
       - dtkbluetooth
-      - dtkcrypt
       - dtkio
       - dtkmultimedia
       - dtknetworkmanager
