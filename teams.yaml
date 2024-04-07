@@ -784,3 +784,19 @@ teams:
     repositories_permissions:
       push:
         - deepin-pc-manager
+  - name: deepin-kernel
+    parent_team: Maintainers
+    members:
+      - Avenger-285714
+      - BLumia
+      - chenchongbiao
+      - huangbibo
+      - matrix-wsk
+      - opsiff
+      - realwujing
+      - xzl01
+      - zccrs
+      - Zeno-sole
+    repositories_permissions:
+      push:
+        - deepin-lkrg
