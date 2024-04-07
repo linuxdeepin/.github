@@ -19,7 +19,6 @@ settings:
       - deepin-service-manager
       - deepin-upgrade-manager
       - deepin-unioncode
-      - dtk
       - dtksystemsettings
       - dtknotifications
       - dtkdevice
