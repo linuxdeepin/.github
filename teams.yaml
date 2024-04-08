@@ -801,3 +801,10 @@ teams:
     repositories_permissions:
       push:
         - deepin-lkrg
+  - name: deepin-terminal
+    parent_team: Maintainers
+    members:
+      - ArchieMeng
+    repositories_permissions:
+      push:
+        - deepin-terminal
