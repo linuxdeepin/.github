@@ -681,11 +681,10 @@ teams:
       - ArchieMeng
       - MingcongBai
     repositories_permissions:
-      triage:
-        - developer-center
       push:
         - deepin-upgrade-manager
         - deepin-terminal
+        - developer-center
   - name: deepin-unioncode
     parent_team: Maintainers
     members:
