@@ -799,3 +799,14 @@ teams:
     repositories_permissions:
       push:
         - deepin-lkrg
+  - name: migration-tools
+    parent_team: Maintainers
+    members:
+      - xuezhixin
+      - daaitudian
+      - XingWei-Liu
+      - F16shen
+      - LiHaiP
+    repositories_permissions:
+      push:
+        - migration-tools
