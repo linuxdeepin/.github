@@ -678,13 +678,15 @@ teams:
     members:
       - Zeno-sole
       - UTsweetyfish
-      - ArchieMeng
       - MingcongBai
+      - xzl01
+      - yukarichiba
+      - hudeng-go
     repositories_permissions:
       push:
         - deepin-upgrade-manager
-        - deepin-terminal
         - developer-center
+        - default-settings
   - name: deepin-unioncode
     parent_team: Maintainers
     members:
@@ -810,3 +812,11 @@ teams:
     repositories_permissions:
       push:
         - migration-tools
+
+  - name: deepin-terminal
+    parent_team: Maintainers
+    members:
+      - ArchieMeng
+    repositories_permissions:
+      push:
+        - deepin-terminal
