@@ -4,6 +4,7 @@ settings:
       - deepin-pc-manager
       - dtk6systemsettings
       - dde-launchpad
+      - dde-shell
       - treeland
       - linglong
       - linglong-box
