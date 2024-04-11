@@ -276,6 +276,7 @@ teams:
       - hundundadi
       - myk1343
       - lJxDabab
+      - add-uos
     repositories_permissions:
       triage:
         - deepin-draw
@@ -464,6 +465,7 @@ teams:
       - LiHua000
       - N0rthHXD
       - scx005548
+      - add-uos
     repositories_permissions:
       triage:
         - dde-file-manager
