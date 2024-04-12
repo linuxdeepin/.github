@@ -86,6 +86,7 @@ teams:
         - deepin-upgrade-manager
         - deepin-im
         - dde-shell
+        - dde-application-wizard
   - name: am-maintainer
     parent_team: Maintainers
     members:
