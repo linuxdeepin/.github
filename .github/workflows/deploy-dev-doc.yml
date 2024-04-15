@@ -4,7 +4,7 @@ on:
   workflow_call:
     secrets:
       APP_PRIVATE_KEY:
-        required: true
+        required: false
     inputs:
       ref:
         required: false
@@ -17,6 +17,7 @@ defaults:
 
 jobs:
   build:
+    if: ${{ startsWith(github.repository, 'linuxdeepin/') }}
     container:
       image: linuxdeepin/beige:base
       options: --privileged
