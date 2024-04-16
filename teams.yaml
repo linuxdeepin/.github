@@ -142,6 +142,9 @@ teams:
       - myml
       - realwujing
       - tsic404
+      - ComixHe
+      - dengbo11
+      - chenchongbiao
     repositories_permissions:
       triage:
         - linglong
@@ -162,6 +165,8 @@ teams:
       - black-desk
       - iceyer
       - kamiyadm
+      - dengbo11
+      - ComixHe
     repositories_permissions:
       push:
         - linglong
