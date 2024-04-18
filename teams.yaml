@@ -696,6 +696,7 @@ teams:
         - deepin-upgrade-manager
         - developer-center
         - default-settings
+        - deepin-desktop-base
   - name: deepin-unioncode
     parent_team: Maintainers
     members:
