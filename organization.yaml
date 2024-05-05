@@ -5,6 +5,7 @@ settings:
       - dtk6systemsettings
       - dde-launchpad
       - dde-shell
+      - ddm
       - treeland
       - linglong
       - linglong-box
