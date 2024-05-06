@@ -113,8 +113,8 @@ jobs:
           startsWith(github.event.comment.body, '/merge') || startsWith(github.event.comment.body, '/check') ||
           startsWith(github.event.comment.body, '/forcemerge')
         run: |
-          npm install @octokit/rest
-          npm install @octokit/auth-app
+          npm install @octokit/rest@19.0.13
+          npm install @octokit/auth-app@6.1.1
 
       - name: Get token using github-script
         if: |

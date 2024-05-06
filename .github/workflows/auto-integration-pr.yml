@@ -51,8 +51,8 @@ jobs:
         run: |
           npm install js-yaml
           npm install shelljs
-          npm install @octokit/rest
-          npm install @octokit/auth-app
+          npm install @octokit/rest@19.0.13
+          npm install @octokit/auth-app@6.1.1
 
       - name: Get integration app token
         id: integration_token

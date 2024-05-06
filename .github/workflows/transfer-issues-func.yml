@@ -20,8 +20,8 @@ jobs:
     steps:
       - name: install depends for load scripts
         run: |
-          npm install @octokit/rest
-          npm install @octokit/auth-app
+          npm install @octokit/rest@19.0.13
+          npm install @octokit/auth-app@6.1.1
       - name: Get token using github-script
         id: get-token
         uses: actions/github-script@v6
