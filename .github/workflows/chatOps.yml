@@ -394,6 +394,7 @@ jobs:
     steps:
       - name: Get integration app token
         id: pr
+        if: startsWith(github.event.comment.body, '/integrate')
         uses: actions/github-script@v6
         with:
           script: |
