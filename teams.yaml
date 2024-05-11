@@ -457,6 +457,7 @@ teams:
         - deepin-anything
         - deepin-diskmanager
         - dde-cooperation
+        - dtkio
   - name: dde-file-manager-member
     parent_team: Projects
     members:
@@ -491,6 +492,7 @@ teams:
         - deepin-anything
         - deepin-diskmanager
         - dde-cooperation
+        - dtkio
   - name: deepin-face
     parent_team: Maintainers
     members:
