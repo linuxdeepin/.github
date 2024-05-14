@@ -764,6 +764,7 @@ teams:
       - deepin-mozart
       - toberyan
       - Kakueeen
+      - Clauszy
     repositories_permissions:
       push:
         - deepin-ai-daemon
