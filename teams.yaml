@@ -123,6 +123,7 @@ teams:
       - FeiWang1119
       - chenchongbiao
       - ComixHe
+      - MingcongBai
     repositories_permissions:
       maintain:
         - open-source-students
