@@ -852,10 +852,3 @@ teams:
       push:
         - pkgs-categorizer
 
-  - name: deepin-deb-fix
-    parent_team: Maintainers
-    members:
-      - mhduiy
-    repositories_permissions:
-      push:
-        - deepin-deb-fix
