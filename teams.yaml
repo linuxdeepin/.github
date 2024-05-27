@@ -618,6 +618,7 @@ teams:
       - reddevillg
       - liuli0217
       - kingjinni
+      - winexw
     repositories_permissions:
       push:
         - dde-printer
