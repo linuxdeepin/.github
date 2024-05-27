@@ -26,6 +26,7 @@ teams:
       - robertkill
       - ssk-wh
       - yixinshark
+      - mhduiy
     repositories_permissions:
       triage:
         - developer-center
