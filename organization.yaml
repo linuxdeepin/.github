@@ -136,6 +136,8 @@ settings:
       - deepin-reader
       - deepin-devicemanager
       - deepin-editor
+      - dde-file-manager-extensions
+      - dde-file-manager-external
     features:
       issues:
         enable: true
