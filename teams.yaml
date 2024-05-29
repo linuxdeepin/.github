@@ -200,6 +200,7 @@ teams:
       - wyu71
       - myk1343
       - starhcq
+      - max-lvs
     repositories_permissions:
       push:
         - deepin-camera
@@ -231,6 +232,10 @@ teams:
       - hundundadi
       - myk1343
       - lJxDabab
+      - add-uos
+      - yang233000
+      - yoho0623
+      - Tw1012
     repositories_permissions:
       triage:
         - deepin-camera
@@ -257,6 +262,7 @@ teams:
       - wyu71
       - rb-union
       - pengfeixx
+      - max-lvs
     repositories_permissions:
       push:
         - deepin-draw
@@ -286,6 +292,9 @@ teams:
       - myk1343
       - lJxDabab
       - add-uos
+      - yang233000
+      - yoho0623
+      - Tw1012
     repositories_permissions:
       triage:
         - deepin-draw
@@ -481,6 +490,9 @@ teams:
       - N0rthHXD
       - scx005548
       - add-uos
+      - yang233000
+      - yoho0623
+      - Tw1012
     repositories_permissions:
       triage:
         - dde-file-manager
