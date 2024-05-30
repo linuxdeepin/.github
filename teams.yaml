@@ -345,6 +345,7 @@ teams:
       - waterlovemelon
       - KT-lcz
       - cjqkl
+      - mhduiy
       - deepin-ci-robot
     repositories_permissions:
       push:
