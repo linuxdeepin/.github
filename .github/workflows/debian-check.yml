@@ -1,0 +1,81 @@
+name: Debian Check
+on: 
+  workflow_call:
+    inputs:
+      repository:
+        required: true
+        type: string
+      job_name:
+        required: false
+        type: string
+    secrets:
+      access_token:
+        required: true
+
+env:
+  repository: ${{ inputs.repository }}
+  access_token: ${{ secrets.access_token }}
+  job_name: ${{ inputs.job_name }}
+  pull_number: ${{ github.event.pull_request.number }}
+  ref_type: ${{ github.ref_type }}
+  head_ref: ${{ github.head_ref }}
+  
+jobs:
+  Check-Debian-Prefix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Check Debian Prefix
+        run: |
+          wget -O debian-check.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/debian-check.py
+          wget -O getGithubChangeInfo.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/getGithubChangeInfo.py
+          python3 debian-check.py --type pre-check
+      - name: Comment PR
+        if: always() && hashFiles('comment.txt')
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: comment.txt
+  Check-Specical-Words:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Specical Words
+        env:
+          FILTER_KEYS: "getcap,setcap,lshw,dmidecode"
+        run: |
+          wget -O debian-check.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/debian-check.py
+          wget -O getGithubChangeInfo.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/getGithubChangeInfo.py
+          python3 debian-check.py --type keys-check --keys $FILTER_KEYS --log keys.json
+      - name: Publish reports
+        if: always() && hashFiles('keys.json')
+        uses: actions/upload-artifact@v4
+        with:
+          name: specical-keys-check-artifact
+          path: keys.json
+      - name: Comment PR
+        if: always() && hashFiles('comment.txt')
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: comment.txt
+  Check-Env-Set-Words:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check Env Set Words
+          env:
+            FILTER_KEYS: "export,unset"
+          run: |
+            wget -O debian-check.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/debian-check.py
+            wget -O getGithubChangeInfo.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/getGithubChangeInfo.py
+            python3 debian-check.py --type keys-check --keys $FILTER_KEYS --log env-keys.json
+        - name: Publish reports
+          if: always() && hashFiles('env-keys.json')
+          uses: actions/upload-artifact@v4
+          with:
+            name: env-set-words-check-artifact
+            path: env-keys.json
+        - name: Comment PR
+          if: always() && hashFiles('comment.txt')
+          uses: thollander/actions-comment-pull-request@v2
+          with:
+            filePath: comment.txt
