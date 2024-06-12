@@ -88,5 +88,12 @@
       ".github/workflows/call-tag-build.yml"
     ],
     "dest": "linuxdeepin/dde-file-manager/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": ".github/workflows/call-debian-check.yml",
+    "dest": "linuxdeepin/dde-file-manager/.github/workflows/call-debian-check.yml"
   }
 ]

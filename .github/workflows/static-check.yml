@@ -23,10 +23,8 @@ jobs:
       - name: Mod Check
         if: steps.get-primary-language.outputs.primary_language == 'Go' && hashFiles('go.mod') == ''
         run: |
-          go mod init ${project}
+          go mod init ${{ github.repository }}
           go mod tidy
-        env:
-          project: ${{ github.repository }}
       - name: Config check
         if: steps.get-primary-language.outputs.primary_language == 'Go' && hashFiles('.golangci.yml') == ''
         run: wget -O .golangci.yml https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/golangci.yml
