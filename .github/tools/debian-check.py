@@ -88,7 +88,7 @@ def writeCommentFile(commentMsg):
 
 # 写comment文件第一行run链接
 def writeHeadToCommentFile(filename, content):
-    temp_filename = filename + '.tmp']
+    temp_filename = filename + '.tmp'
     # 写入新内容到临时文件
     with open(temp_filename, 'w', encoding='utf-8') as temp_file:
         temp_file.write(content + '\n')

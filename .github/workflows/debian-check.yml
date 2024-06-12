@@ -2,19 +2,13 @@ name: Debian Check
 on: 
   workflow_call:
     inputs:
-      repository:
-        required: true
-        type: string
       job_name:
         required: false
         type: string
-    secrets:
-      access_token:
-        required: true
 
 env:
-  repository: ${{ inputs.repository }}
-  access_token: ${{ secrets.access_token }}
+  repository: ${{ github.repository }}
+  access_token: ${{ secrets.GITHUB_TOKEN }}
   job_name: ${{ inputs.job_name }}
   pull_number: ${{ github.event.pull_request.number }}
   ref_type: ${{ github.ref_type }}

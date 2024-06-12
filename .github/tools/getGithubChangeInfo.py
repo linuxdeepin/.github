@@ -60,14 +60,14 @@ def get_ref_runs(repo, commitSHA, token, job_name):
     else:
         print(response.json())
 
-# 获取仓库开发语言
-def get_repo_languages(repo, token):
-    url = f'https://api.github.com/repos/{repo}/languages'
-    response = requests.get(url, headers=getHeaders(token))
-    if response.status_code == 200:
-        print(list(response.json().keys())[0])
-    else:
-        print(response.json())
+# # 获取仓库开发语言
+# def get_repo_languages(repo, token):
+#     url = f'https://api.github.com/repos/{repo}/languages'
+#     response = requests.get(url, headers=getHeaders(token))
+#     if response.status_code == 200:
+#         print(list(response.json().keys())[0])
+#     else:
+#         print(response.json())
 
 # 写json文件
 def writeJson(originInfo, logFile, infoType=dict):
@@ -169,7 +169,7 @@ def filter_keywords(repo, pull_number, token, keyLst, excludeSuffLst, logFile, c
         fout.write(json.dumps(originInfo, indent=4, ensure_ascii=False))
     return originInfo
 
-if __name__ == '__main__':
-    repo = sys.argv[1]
-    token = sys.argv[2]
-    get_repo_languages(repo, token)
+# if __name__ == '__main__':
+#     repo = sys.argv[1]
+#     token = sys.argv[2]
+#     get_repo_languages(repo, token)
