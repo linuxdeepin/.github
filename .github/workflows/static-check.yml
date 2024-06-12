@@ -1,13 +1,5 @@
 name: Static Check
-on: 
-  workflow_call:
-    inputs:
-      repository:
-        required: true
-        type: string
-    secrets:
-      access_token:
-        required: true
+on: workflow_call
 
 jobs:
   Static-Check:
@@ -17,34 +9,34 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - name: Get Language
+      - name: Get Primary Language
         if: always()
-        id: get-language
-        run: |
-          wget -O getGithubChangeInfo.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/getGithubChangeInfo.py
-          echo "lang=$(python3 getGithubChangeInfo.py ${{ inputs.repository }} ${{ secrets.access_token }})" >> $GITHUB_OUTPUT
+        id: get-primary-language
+        uses: fiddlermikey/action-get-primary-language@v2.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN}}
       - name: Static Check with Go
-        if: steps.get-language.outputs.lang == 'Go'
+        if: steps.get-primary-language.outputs.primary_language == 'Go'
         uses: actions/setup-go@v5
         with:
           go-version: stable
-      - name: Mod Check;
-        if: steps.get-language.outputs.lang == 'Go' && hashFiles('go.mod') == ''
+      - name: Mod Check
+        if: steps.get-primary-language.outputs.primary_language == 'Go' && hashFiles('go.mod') == ''
         run: |
           go mod init ${project}
           go mod tidy
-      - name: Config check;
-        if: steps.get-language.outputs.lang == 'Go' && hashFiles('.golangci.yml') == ''
-        run: wget -O .golangci.yml https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/golangci.yml
         env:
           project: ${{ github.repository }}
+      - name: Config check
+        if: steps.get-primary-language.outputs.primary_language == 'Go' && hashFiles('.golangci.yml') == ''
+        run: wget -O .golangci.yml https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/golangci.yml
       - name: GolangCILint Check
-        if: steps.get-language.outputs.lang == 'Go'
+        if: steps.get-primary-language.outputs.primary_language == 'Go'
         uses: golangci/golangci-lint-action@v6
         with:
           version: v1.58
       - name: Static Check with C
-        if: steps.get-language.outputs.lang == 'C++'
+        if: steps.get-primary-language.outputs.primary_language == 'C++'
         uses: linuxdeepin/action-cppcheck@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
