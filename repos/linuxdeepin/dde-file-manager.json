@@ -93,7 +93,7 @@
     "branches": [
       "master"
     ],
-    "src": ".github/workflows/call-debian-check.yml",
+    "src": "workflow-templates/call-debian-check.yml",
     "dest": "linuxdeepin/dde-file-manager/.github/workflows/call-debian-check.yml"
   }
 ]
