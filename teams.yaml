@@ -89,6 +89,7 @@ teams:
         - dde-shell
         - dde-application-wizard
         - ddm
+        - deepin-network-displays
   - name: am-maintainer
     parent_team: Maintainers
     members:
