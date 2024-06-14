@@ -3,6 +3,7 @@ settings:
   - repositories:
       - deepin-pc-manager
       - dtk6systemsettings
+      - deepin-network-displays
       - dde-launchpad
       - dde-shell
       - ddm

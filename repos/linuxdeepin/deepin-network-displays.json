@@ -1,0 +1,73 @@
+[
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
+    ],
+    "src": "workflow-templates/backup-to-gitlab.yml",
+    "dest": "linuxdeepin/deepin-network-displays/.github/workflows/backup-to-gitlab.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/deepin-network-displays/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/deepin-network-displays/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
+    ],
+    "src": "workflow-templates/cppcheck.yml",
+    "dest": "linuxdeepin/deepin-network-displays/.github/workflows/cppcheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/deepin-network-displays/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/deepin-network-displays/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/deepin-network-displays/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "deletelist": [
+      ".github/workflows/call-tag-build.yml"
+    ],
+    "dest": "linuxdeepin/deepin-network-displays/.github/workflows/call-tag-build.yml"
+  }
+]
