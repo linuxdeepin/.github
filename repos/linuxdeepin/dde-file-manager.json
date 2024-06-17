@@ -95,5 +95,12 @@
     ],
     "src": "workflow-templates/call-debian-check.yml",
     "dest": "linuxdeepin/dde-file-manager/.github/workflows/call-debian-check.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-api-check.yml",
+    "dest": "linuxdeepin/dde-file-manager/.github/workflows/call-api-check.yml"
   }
 ]

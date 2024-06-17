@@ -1,0 +1,48 @@
+name: Api Check
+on: workflow_call
+
+jobs:
+  Check-Api-Change:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install tools
+        run: |
+          sudo apt-get install quilt -y
+          sudo curl -o /usr/bin/deepin-abigail https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/deepin-abigail
+          sudo chmod +x /usr/bin/deepin-abigail
+          sudo apt-get install universal-ctags -y || true
+      - name: download lastest code
+        uses: actions/checkout@v4
+        with:
+          path: baseCodeDir
+      - working-directory: ./baseCodeDir
+        run: |
+          if [ -d "debian/patches" ];then
+            if [ "`ls -A debian/patches`" != "" ];then
+                cp debian/patches . -fr
+                quilt push -a || true
+            fi
+          fi
+      - name: download new code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: currentCodeDir
+      - working-directory: ./currentCodeDir
+        run: |
+          if [ -d "debian/patches" ];then
+              if [ "`ls -A debian/patches`" != "" ];then
+                  cp debian/patches . -fr
+                  quilt push -a  || true
+              fi
+          fi
+      - name: check api
+        run: |
+          wget https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/fastFilesCompare.json
+          deepin-abigail -c fastFilesCompare.json | tee api_check.txt
+          if [ -e 'api_check.txt' ];then
+            if [ `cat api_check.txt | grep -c '\[Del_export_fun'` != '0' ];then
+              echo "api检测失败,存在接口删除"
+              exit 1
+            fi
+          fi
