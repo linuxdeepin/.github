@@ -1,0 +1,24 @@
+{
+    "mode": "api-fast-compare",
+    "api-fast-compare": {
+        "baseDir": "baseCodeDir",
+        "compareDir": "currentCodeDir",
+        "languages": "all",
+        "exDirs":[".git", ".pc", "patches"],
+        "macros": []
+    },
+    "api-generate": {
+        "dir": "baseCodeDir",
+        "output": "api-standard.json",
+        "is_contain_include": "1",
+        "is_go": "0",
+        "macros": []
+    },
+    "api-compare": {
+        "standard_api_json": "api-standard.json",
+        "current_api_json": "api-current.json",
+        "src": "currentCodeDir",
+        "is_contain_include": "1",
+        "is_go": "0"
+    }
+}

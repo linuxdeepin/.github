@@ -35,7 +35,7 @@ jobs:
             debian/compat
             debian/source/format
       - name: List all changed files
-        if: ${{ steps.changed-files.outputs.all_changed_files != '' }}
+        if: steps.changed-files.outputs.all_changed_files
         env:
           DEBIAN_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
@@ -43,27 +43,67 @@ jobs:
             echo "list all debian files that have changed: $DEBIAN_CHANGED_FILES"
             exit 1
           fi
+  Check-Version-Check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: 'debian/changelog'
+      - name: Check Version
+        if: steps.changed-files.outputs.all_changed_files
+        run: |
+          result=$(echo ${repository} | grep "/" || true)
+          project_tmp=${repository}
+          if [[ "$result" != "" ]]; then
+              project_tmp=$(echo ${repository} | awk -F'/' '{print $2}' || true)
+          fi
+          version_str=$(dpkg-parsechangelog -l debian/changelog -n 2|grep ${project_tmp}|awk -F'[()]' '{print $2}'|grep -v '^$\|^Task\|^Bug\|^Influence'|tr '\n' ' '|| true)
+          version_num=$(echo $version_str|awk '{print NF}' || true)
+          echo "version_str is ${version_str}"
+          echo "version_num is ${version_num}"
+          if [[ "$version_num" == "2" ]]; then
+              version0=$(echo $version_str|awk '{print $1}' || true)
+              version1=$(echo $version_str|awk '{print $2}' || true)
+              check_result=$(dpkg --compare-versions ${version0} gt ${version1} && echo true || echo false)
+              if [[ "$check_result" == "false" ]];then
+                  echo $version_str
+                  exit 1
+              fi
+          fi
   Check-Specical-Words:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Specical Words
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 2
+      - id: git-full-diff
+        uses: fernandosmither/git-full-diff@v1.0.2
+      - name: filter keys and display
         env:
-          FILTER_KEYS: "getcap,setcap,lshw,dmidecode"
+          diff_patch: ${{ steps.git-full-diff.outputs.diff }}
+          check_keys: "getcap setcap lshw dmidecode"
         run: |
-          wget -O debian-check.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/debian-check.py
-          wget -O getGithubChangeInfo.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/getGithubChangeInfo.py
-          python3 debian-check.py --type keys-check --keys $FILTER_KEYS --log keys.json
-      - name: Publish reports
-        if: always() && hashFiles('keys.json')
-        uses: actions/upload-artifact@v4
-        with:
-          name: specical-keys-check-artifact
-          path: keys.json
-      - name: Comment PR
-        if: always() && hashFiles('comment.txt')
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          filePath: comment.txt
+          echo "$diff_patch" | while IFS= read -r line
+          do
+            for key in $check_keys
+            do
+              if [[ $line == *"$key"* ]]; then
+                echo "处理行: $line; 敏感词: $key" >> diff.txt
+              fi
+            done
+          done
+          if [ -s "diff.txt" ]; then
+            echo "=============================="
+            echo "检测到存在敏感词:"
+            cat diff.txt
+            exit 1
+          fi
   Check-Env-Set-Words:
       runs-on: ubuntu-latest
       steps:
