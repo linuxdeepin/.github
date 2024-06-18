@@ -8,9 +8,12 @@ jobs:
       - name: install tools
         run: |
           sudo apt-get install quilt -y
-          sudo curl -o /usr/bin/deepin-abigail https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/deepin-abigail
-          sudo chmod +x /usr/bin/deepin-abigail
-          sudo apt-get install universal-ctags -y || true
+          sudo apt-get install universal-ctags -y
+      - uses: actions/checkout@v4
+        with:
+          repository: kuchune/check-tools
+          sparse-checkout: deepin-abigail
+          sparse-checkout-cone-mode: false
       - name: download lastest code
         uses: actions/checkout@v4
         with:
@@ -39,7 +42,7 @@ jobs:
       - name: check api
         run: |
           wget https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/fastFilesCompare.json
-          deepin-abigail -c fastFilesCompare.json | tee api_check.txt
+          ./deepin-abigail -c fastFilesCompare.json | tee api_check.txt
           if [ -e 'api_check.txt' ];then
             if [ `cat api_check.txt | grep -c '\[Del_export_fun'` != '0' ];then
               echo "api检测失败,存在接口删除"
