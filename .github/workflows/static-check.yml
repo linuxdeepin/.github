@@ -41,3 +41,17 @@ jobs:
           repository: ${{ github.repository }}
           pull_request_id: ${{ github.event.pull_request.number }}
           allow_approve: false
+      - name: Get Shell Files
+        id: changed-shell-files
+        uses: SkyHighGrowth/gha-changed-files@v1.0.1
+        with:
+          files: |
+            **.sh
+            **.bash
+      - name: Static Check with sh
+        if: steps.changed-shell-files.outputs.all_changed_files
+        uses: ludeeus/action-shellcheck@master
+        with:
+          additional_files: ${{ steps.changed-shell-files.outputs.all_changed_files }}
+          severity: error
+          format: tty
