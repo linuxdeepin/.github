@@ -90,6 +90,7 @@ teams:
         - dde-application-wizard
         - ddm
         - deepin-network-displays
+        - dde-tray-loader
   - name: am-maintainer
     parent_team: Maintainers
     members:
