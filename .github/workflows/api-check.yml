@@ -12,8 +12,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: kuchune/check-tools
-          sparse-checkout: deepin-abigail
+          sparse-checkout: |
+            apiCheck/deepin-abigail
+            apiCheck/fastFilesCompare.json
           sparse-checkout-cone-mode: false
+      - run: mv apiCheck/* .
       - name: download lastest code
         uses: actions/checkout@v4
         with:
@@ -41,7 +44,6 @@ jobs:
           fi
       - name: check api
         run: |
-          wget https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/fastFilesCompare.json
           ./deepin-abigail -c fastFilesCompare.json | tee api_check.txt
           if [ -e 'api_check.txt' ];then
             if [ `cat api_check.txt | grep -c '\[Del_export_fun'` != '0' ];then

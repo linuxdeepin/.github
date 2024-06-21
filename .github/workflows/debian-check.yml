@@ -1,19 +1,6 @@
 name: Debian Check
-on: 
-  workflow_call:
-    inputs:
-      job_name:
-        required: false
-        type: string
+on: workflow_call
 
-env:
-  repository: ${{ github.repository }}
-  access_token: ${{ secrets.GITHUB_TOKEN }}
-  job_name: ${{ inputs.job_name }}
-  pull_number: ${{ github.event.pull_request.number }}
-  ref_type: ${{ github.ref_type }}
-  head_ref: ${{ github.head_ref }}
-  
 jobs:
   Check-Debian-Prefix:
     runs-on: ubuntu-latest
@@ -88,9 +75,8 @@ jobs:
           repository: kuchune/check-tools
           sparse-checkout: debianCheck/do-with-data.py
           sparse-checkout-cone-mode: false
-          path: debianCheck
       - run: |
-          python3 debianCheck/debianCheck/do-with-data.py ${check_type} ${check_keys} fetch-api-data-action/data.json
+          python3 debianCheck/do-with-data.py ${check_type} ${check_keys} fetch-api-data-action/data.json
         env:
           check_type: modify
           check_keys: getcap,setcap,lshw,dmidecode
@@ -98,26 +84,29 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: response-log
+          name: specical-words-check-report
           path: result.json
   Check-Env-Set-Words:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Check Env Set Words
-          env:
-            FILTER_KEYS: "export,unset"
-          run: |
-            wget -O debian-check.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/debian-check.py
-            wget -O getGithubChangeInfo.py https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/getGithubChangeInfo.py
-            python3 debian-check.py --type keys-check --keys $FILTER_KEYS --log env-keys.json
-        - name: Publish reports
-          if: always() && hashFiles('env-keys.json')
-          uses: actions/upload-artifact@v4
-          with:
-            name: env-set-words-check-artifact
-            path: env-keys.json
-        - name: Comment PR
-          if: always() && hashFiles('comment.txt')
-          uses: thollander/actions-comment-pull-request@v2
-          with:
-            filePath: comment.txt
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch API Data
+        uses: JamesIves/fetch-api-data-action@v2
+        with:
+          endpoint: https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files
+          configuration: '{ "method": "GET", "headers": {"Authorization": "Bearer ${{ secrets.GITHUB_TOKEN }}","X-GitHub-Api-Version": "2022-11-28","Accept": "application/vnd.github+json"} }'
+      - uses: actions/checkout@v4
+        with:
+          repository: kuchune/check-tools
+          sparse-checkout: debianCheck/do-with-data.py
+          sparse-checkout-cone-mode: false
+      - run: |
+          python3 debianCheck/do-with-data.py ${check_type} ${check_keys} fetch-api-data-action/data.json
+        env:
+          check_type: all
+          check_keys: export,unset
+      - name: Publish reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: env-set-words-check-report
+          path: result.json
