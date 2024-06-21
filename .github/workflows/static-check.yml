@@ -27,7 +27,12 @@ jobs:
           go mod tidy
       - name: Config check
         if: steps.get-primary-language.outputs.primary_language == 'Go' && hashFiles('.golangci.yml') == ''
-        run: wget -O .golangci.yml https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/tools/golangci.yml
+        uses: actions/checkout@v4
+        with:
+          repository: kuchune/check-tools
+          sparse-checkout: staticCheck/golangci.yml
+          sparse-checkout-cone-mode: false
+      - run: mv staticCheck/golangci.yml .golangci.yml
       - name: GolangCILint Check
         if: steps.get-primary-language.outputs.primary_language == 'Go'
         uses: golangci/golangci-lint-action@v6
