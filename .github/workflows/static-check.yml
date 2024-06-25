@@ -32,7 +32,8 @@ jobs:
           repository: kuchune/check-tools
           sparse-checkout: staticCheck/golangci.yml
           sparse-checkout-cone-mode: false
-      - run: mv staticCheck/golangci.yml .golangci.yml
+      - if: steps.get-primary-language.outputs.primary_language == 'Go' && hashFiles('.golangci.yml') == ''
+        run: mv staticCheck/golangci.yml .golangci.yml
       - name: GolangCILint Check
         if: steps.get-primary-language.outputs.primary_language == 'Go'
         uses: golangci/golangci-lint-action@v6
