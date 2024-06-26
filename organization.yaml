@@ -6,6 +6,7 @@ settings:
       - deepin-network-displays
       - dde-launchpad
       - dde-shell
+      - dde-tray-loader
       - ddm
       - treeland
       - linglong
