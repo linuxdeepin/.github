@@ -884,3 +884,12 @@ teams:
     respositories_permissions:
       triage:
         - developer-center
+
+  - name: deepin-sbom-tools
+    members:
+      - kyrie-z
+    repositories_permissions:
+      triage:
+        - deepin-sbom-tools
+      push:
+        - deepin-sbom-tools
