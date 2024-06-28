@@ -1,0 +1,49 @@
+name: Debian Check Version
+on: workflow_call
+
+jobs:
+  debian-check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: 'debian/changelog'
+      - name: Check Version
+        id: check-version
+        if: steps.changed-files.outputs.all_changed_files
+        env:
+          repository: ${{ github.repository }}
+        run: |
+          result=$(echo ${repository} | grep "/" || true)
+          project_tmp=${repository}
+          if [[ "$result" != "" ]]; then
+              project_tmp=$(echo ${repository} | awk -F'/' '{print $2}' || true)
+          fi
+          version_str=$(dpkg-parsechangelog -l debian/changelog -n 2|grep ${project_tmp}|awk -F'[()]' '{print $2}'|grep -v '^$\|^Task\|^Bug\|^Influence'|tr '\n' ' '|| true)
+          version_num=$(echo $version_str|awk '{print NF}' || true)
+          echo "version_str is ${version_str}"
+          echo "version_num is ${version_num}"
+          if [[ "$version_num" == "2" ]]; then
+              version0=$(echo $version_str|awk '{print $1}' || true)
+              version1=$(echo $version_str|awk '{print $2}' || true)
+              check_result=$(dpkg --compare-versions ${version0} gt ${version1} && echo true || echo false)
+          fi
+          echo "CHECK_RESULT=$check_result" >> $GITHUB_ENV
+          echo "VERSION_STR=$version_str" >> $GITHUB_ENV
+      - name: Comment PR
+        if: github.env.CHECK_RESULT == 'false'
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            检测到debian/changelog版本变动异常: ${{github.env.VERSION_STR}}
+      - if: github.env.CHECK_RESULT == 'false'
+        run: |
+          if [[ "$CHECK_RESULT" == "false" ]];then
+            echo "debian/changelog版本变动异常:$VERSION_STR"
+            exit 1
+          fi
