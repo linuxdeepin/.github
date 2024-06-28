@@ -362,12 +362,14 @@ teams:
       push:
         - dtk
         - dtkcommon
+        - dtklog
         - dtkcore
         - dtkdeclarative
         - dtkgui
         - dtkwidget
         - qt5integration
         - qt5platform-plugins
+        - dtk6log
         - dtk6core
         - dtk6declarative
         - dtk6gui
@@ -770,6 +772,7 @@ teams:
       push:
         - dtk
         - dtkcommon
+        - dtklog
         - dtkcore
         - dtkgui
         - dtkwidget
