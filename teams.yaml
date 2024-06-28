@@ -893,3 +893,12 @@ teams:
         - deepin-sbom-tools
       push:
         - deepin-sbom-tools
+  - name: Package-admins
+    members:
+      - liujianqiang-niu
+      - lzyprime
+      - heysion
+      - mangosteens
+    repositories_permissions:
+      triage:
+        - "*"
