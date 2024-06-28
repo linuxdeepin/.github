@@ -1,0 +1,38 @@
+name: Debian Check Prefix
+on: workflow_call
+
+jobs:
+  debian-check-prefix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: 'debian/**'
+          files_ignore: |
+            debian/patches/*
+            debian/manpage.*
+            debian/*.manpages
+            debian/changelog
+            debian/copyright
+            debian/compat
+            debian/source/format
+      - name: Comment PR
+        if: steps.changed-files.outputs.all_changed_files
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            检测到debian目录文件有变更: **${{steps.changed-files.outputs.all_changed_files}}**
+      - name: List all changed files
+        if: steps.changed-files.outputs.all_changed_files
+        env:
+          DEBIAN_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          if [ ! -z ${DEBIAN_CHANGED_FILES} ]; then
+            echo "debian目录变动文件: $DEBIAN_CHANGED_FILES"
+            exit 1
+          fi
