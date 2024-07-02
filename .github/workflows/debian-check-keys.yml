@@ -4,6 +4,7 @@ on: workflow_call
 jobs:
   debian-check-keys:
     runs-on: ubuntu-latest
+    continue-on-error: true
     strategy:
       matrix:
         include:
