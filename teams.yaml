@@ -813,6 +813,19 @@ teams:
     repositories_permissions:
       push:
         - treeland
+  - name: treeland-member
+    parent_team: Projects
+    members:
+      - justforlxz
+      - wineee
+      - groveer
+      - asterwyx
+      - lbwtw
+      - zorowk
+      - Dami-star
+    repositories_permissions:
+      triage:
+        - treeland
   - name: deepin-osconfig
     parent_team: Projects
     members:
