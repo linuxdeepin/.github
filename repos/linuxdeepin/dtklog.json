@@ -68,5 +68,5 @@
     ],
     "src": "issue-templates/unit-test-report.md",
     "dest": "linuxdeepin/dtklog/.github/ISSUE_TEMPLATE/unit-test-report.md"
-  },
+  }
 ]
