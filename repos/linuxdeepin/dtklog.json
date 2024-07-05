@@ -1,0 +1,72 @@
+[
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/dtklog/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/dtklog/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/cppcheck.yml",
+    "dest": "linuxdeepin/dtklog/.github/workflows/cppcheck.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/dtklog/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/dtklog/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-doc-check.yml",
+    "dest": "linuxdeepin/dtklog/.github/workflows/call-doc-check.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/dtklog/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-deploy-dev-doc.yml",
+    "dest": "linuxdeepin/dtklog/.github/workflows/call-deploy-dev-doc.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "issue-templates/empty-issue.md",
+    "dest": "linuxdeepin/dtklog/.github/ISSUE_TEMPLATE/empty-issue.md"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "issue-templates/unit-test-report.md",
+    "dest": "linuxdeepin/dtklog/.github/ISSUE_TEMPLATE/unit-test-report.md"
+  },
+]
