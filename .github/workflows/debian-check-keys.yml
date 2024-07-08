@@ -1,9 +1,28 @@
 name: Debian Check Keys
-on: workflow_call
+on: 
+  workflow_call:
+    outputs:
+      check_msg_env:
+        description: "output comment msg"
+        value: ${{ jobs.debian-check-keys.outputs.check_msg_all }}
+      check_status_env:
+        description: "check status"
+        value: ${{ jobs.debian-check-keys.outputs.check_status_all }}
+      check_msg:
+        description: "output comment msg for env"
+        value: ${{ jobs.debian-check-keys.outputs.check_msg_modify }}
+      check_status:
+        description: "check status for env"
+        value: ${{ jobs.debian-check-keys.outputs.check_status_modify }}
 
 jobs:
   debian-check-keys:
     runs-on: ubuntu-latest
+    outputs:
+      check_msg_all: ${{ steps.get-output.outputs.check_msg_all }}
+      check_status_all: ${{ steps.get-output.outputs.check_status_all }}
+      check_msg_modify: ${{ steps.get-output.outputs.check_msg_modify }}
+      check_status_modify: ${{ steps.get-output.outputs.check_status_modify }}
     continue-on-error: true
     strategy:
       matrix:
@@ -28,24 +47,34 @@ jobs:
       - id: check-keys
         run: |
           check_result=$(python3 debianCheck/debianCheck/do-with-data.py ${check_type} ${check_keys} fetch-api-data-action/data.json)
-          echo "CHECK_RESULT=$check_result" >> $GITHUB_ENV
+          echo "check_result=$check_result" >> "$GITHUB_OUTPUT"
         env:
           check_type: ${{ matrix.check_type }}
           check_keys: ${{ matrix.check_keys }}
       - name: Publish reports
         id: artifact-upload-step
-        if: env.CHECK_RESULT == 'False'
+        if: steps.check-keys.outputs.check_result == 'False'
         uses: actions/upload-artifact@v4
         with:
           name: words-check-report-${{ matrix.check_type }}
           path: result.json
-      - name: Comment PR
-        if: env.CHECK_RESULT == 'False'
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          message: |
-            检测到敏感词${{matrix.check_keys}}变动:https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}/artifacts/${{steps.artifact-upload-step.outputs.artifact-id}}
-      - if: env.CHECK_RESULT == 'False'
+      - if: steps.check-keys.outputs.check_result == 'False'
+        id: get-result
         run: |
           echo "敏感词${{matrix.check_keys}}检查不通过"
           exit 1
+      - name: Get Output
+        id: get-output
+        if: always()
+        env:
+          check_msg: |
+            检测到敏感词${{matrix.check_keys}}变动:
+            https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}/artifacts/${{steps.artifact-upload-step.outputs.artifact-id}}
+          check_status: ${{ steps.get-result.outcome}}
+        run: |
+          {
+            echo "check_msg_${{ matrix.check_type }}<<EOF"
+            echo "$check_msg"
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+          echo "check_status_${{ matrix.check_type }}=$check_status" >> "$GITHUB_OUTPUT"

@@ -1,0 +1,59 @@
+name: Debian Check Post
+on: 
+  workflow_call:
+    inputs:
+      debian-check-prefix-status:
+        required: true
+        type: string
+      debian-check-prefix-msg:
+        required: true
+        type: string
+      debian-check-version-status:
+        required: true
+        type: string
+      debian-check-version-msg:
+        required: true
+        type: string
+      debian-check-key-status-env:
+        required: true
+        type: string
+      debian-check-key-msg-env:
+        required: true
+        type: string
+      debian-check-key-status:
+        required: true
+        type: string
+      debian-check-key-msg:
+        required: true
+        type: string
+
+jobs:
+  debian-check-post:
+    runs-on: ubuntu-latest
+    steps:
+      - id: get-comment-file
+        run: |
+          if [ ${{ inputs.debian-check-prefix-status }} == 'failure' ];then
+            echo "${{ inputs.debian-check-prefix-msg }}" >> comment.txt
+          fi
+          if [ ${{ inputs.debian-check-version-status }} == 'failure' ];then
+            echo "${{ inputs.debian-check-version-msg }}" >> comment.txt
+          fi
+          if [ ${{ inputs.debian-check-key-status-env }} == 'failure' ];then
+            echo "${{ inputs.debian-check-key-msg-env }}" >> comment.txt
+          fi
+          if [ ${{ inputs.debian-check-key-status }} == 'failure' ];then
+            echo "${{ inputs.debian-check-key-msg }}" >> comment.txt
+          fi
+          if [ -e 'comment.txt' ];then
+            sed -i '1i [Debian检查]:' comment.txt
+          fi
+      - name: Comment PR
+        if: hashFiles('comment.txt')
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: comment.txt
+      - uses: ryaugusta/pr-add-reviewers-action@v1
+        with:
+          token: ${{ secrets.BRIDGETOKEN }}
+          team_reviewers: Package-admins
