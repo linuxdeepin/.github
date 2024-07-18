@@ -87,15 +87,17 @@ jobs:
               installationId: app_installation.data.id
             });
             core.setOutput('app_token', token)
-      - id: get-reviewer
-        run: |
-          reviewer_list=("liujianqiang-niu" "lzyprime" "heysion" "mangosteens")
-          random_index=$(($RANDOM % ${#reviewer_list[@]}))
-          random_value=${reviewer_list[$random_index]}
-          echo "reviewer=$random_value" >> "$GITHUB_OUTPUT"
       - name: Run assignment of reviewer team
+        id: add-reviewer-team
+        continue-on-error: true
         if: hashFiles('comment.txt')
         uses: ryaugusta/pr-add-reviewers-action@v1
         with:
           token: ${{ steps.get-token.outputs.app_token }}
-          reviewers: ${{ steps.get-reviewer.outputs.reviewer }}
+          team_reviewers: Package-admins
+      - name: Run assignment of reviewers
+        if: ${{ hashFiles('comment.txt') && steps.add-reviewer-team.outcome == 'failure' }}
+        uses: ryaugusta/pr-add-reviewers-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          reviewers: liujianqiang-niu
