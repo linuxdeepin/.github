@@ -27,6 +27,7 @@ teams:
       - ssk-wh
       - yixinshark
       - mhduiy
+      - fly602
     repositories_permissions:
       triage:
         - developer-center
