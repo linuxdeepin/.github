@@ -827,6 +827,7 @@ teams:
     repositories_permissions:
       triage:
         - treeland
+        - developer-center
   - name: deepin-osconfig
     parent_team: Projects
     members:
