@@ -11,7 +11,7 @@ jobs:
   call-debian-check-keys:
     uses: linuxdeepin/.github/.github/workflows/debian-check-keys.yml@master
   post-debian-check:
-    if: failure()
+    if: always()
     needs: [call-debian-check-prefix, call-debian-check-version, call-debian-check-keys]
     uses: linuxdeepin/.github/.github/workflows/debian-check-post.yml@master
     secrets: inherit
