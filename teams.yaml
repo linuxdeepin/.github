@@ -29,6 +29,9 @@ teams:
       - mhduiy
       - fly602
       - swq11
+      - xionglinlin
+      - caixr23
+      - ECQZXC
     repositories_permissions:
       triage:
         - developer-center
@@ -891,17 +894,6 @@ teams:
     repositories_permissions:
       push:
         - pkgs-categorizer
-
-  - name: dde-professional-member
-    members:
-      - xionglinlin
-      - fly602
-      - caixr23
-      - swq11
-      - ECQZXC
-    respositories_permissions:
-      triage:
-        - developer-center
 
   - name: deepin-sbom-tools
     members:
