@@ -792,12 +792,19 @@ teams:
   - name: deepin-ai-daemon
     parent_team: Maintainers
     members:
-      - deepin-mozart
       - toberyan
-      - Kakueeen
       - Clauszy
     repositories_permissions:
       push:
+        - deepin-ai-daemon
+  - name: deepin-ai-daemon-members
+    parent_team: Maintainers
+    members:
+      - N0rthHXD
+      - jdhlh
+      - lichaofan2008
+    repositories_permissions:
+      triage:
         - deepin-ai-daemon
   - name: letmego
     parent_team: Maintainers
