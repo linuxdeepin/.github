@@ -66,8 +66,7 @@ jobs:
         if: always()
         env:
           check_msg: |
-            检测到敏感词${{matrix.check_keys}}变动:
-            https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}/artifacts/${{steps.artifact-upload-step.outputs.artifact-id}}
+            [检测到敏感词${{matrix.check_keys}}变动](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}/artifacts/${{steps.artifact-upload-step.outputs.artifact-id}});
           check_status: ${{ steps.get-result.outcome}}
         run: |
           {
