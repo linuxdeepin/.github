@@ -337,6 +337,7 @@ teams:
         - dtkbluetooth
         - dtkcrypt
         - dtkio
+        - dtkai
         - dtkmultimedia
         - dtknetworkmanager
         - dtkaudiomanager
@@ -754,6 +755,23 @@ teams:
     repositories_permissions:
       triage:
         - deepin-ai-daemon
+  - name: dtkai
+    parent_team: Maintainers
+    members:
+      - toberyan
+      - Clauszy
+    repositories_permissions:
+      push:
+        - dtkai
+  - name: dtkai-members
+    parent_team: Maintainers
+    members:
+      - N0rthHXD
+      - jdhlh
+      - lichaofan2008
+    repositories_permissions:
+      triage:
+        - dtkai
   - name: letmego
     parent_team: Maintainers
     members:
