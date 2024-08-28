@@ -5,15 +5,6 @@
       "dev/.+",
       "maintain/.+"
     ],
-    "src": "workflow-templates/backup-to-gitlab.yml",
-    "dest": "linuxdeepin/deepin-terminal/.github/workflows/backup-to-gitlab.yml"
-  },
-  {
-    "branches": [
-      "master",
-      "dev/.+",
-      "maintain/.+"
-    ],
     "src": "workflow-templates/call-commitlint.yml",
     "dest": "linuxdeepin/deepin-terminal/.github/workflows/call-commitlint.yml"
   },
@@ -64,15 +55,6 @@
     ],
     "src": "workflow-templates/call-license-check.yml",
     "dest": "linuxdeepin/deepin-terminal/.github/workflows/call-license-check.yml"
-  },
-  {
-    "branches": [
-      "master",
-      "dev/.+",
-      "maintain/.+"
-    ],
-    "src": "workflow-templates/call-build-distribution.yml",
-    "dest": "linuxdeepin/deepin-terminal/.github/workflows/call-build-distribution.yml"
   },
   {
     "branch": [
