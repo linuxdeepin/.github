@@ -76,12 +76,14 @@ jobs:
           repository: kuchune/check-tools
           sparse-checkout: staticCheck/golangci.yml
           sparse-checkout-cone-mode: false
+          path: staticCheck
       - if: hashFiles('.golangci.yml') == ''
-        run: mv staticCheck/golangci.yml .golangci.yml
+        run: mv staticCheck/staticCheck/golangci.yml .golangci.yml
       - name: GolangCILint Check
         uses: golangci/golangci-lint-action@v6
         with:
           version: v1.58
+          only-new-issues: true
   Call-CppCheck:
     runs-on: ubuntu-latest
     needs: Get-Config
