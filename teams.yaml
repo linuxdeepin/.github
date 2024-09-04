@@ -509,6 +509,8 @@ teams:
       - wanjian1
       - Fire-dtx
     repositories_permissions:
+      triage:
+        - developer-center
       push:
         - deepin-boot-maker
   - name: dde-control-center
