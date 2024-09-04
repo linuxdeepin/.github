@@ -4,6 +4,8 @@ on: workflow_call
 jobs:
   Check-Api-Change:
     runs-on: ubuntu-latest
+    outputs:
+      isFail: ${{ steps.check-api.outputs.isFail }}
     steps:
       - name: install tools
         run: |
@@ -43,18 +45,40 @@ jobs:
               fi
           fi
       - name: check api
+        id: check-api
         run: |
           ./deepin-abigail -c fastFilesCompare.json | tee api_check.txt
           if [ -e 'api_check.txt' ];then
             check_num=$(cat api_check.txt | grep -c '\[Chg_exprort_fun\|\[Del_export_fun' || true)
-            echo "CHECK_NUM=$check_num" >> $GITHUB_ENV
             if [ $check_num -gt 0 ];then
-              sed -i '1i API接口检查检测到存在对外接口删除:' api_check.txt
+              echo "isFail=true" >> $GITHUB_OUTPUT
+              sed -i '1i API接口检查检测到存在对外接口删除和修改:' api_check.txt
+              sed -i '1i [API接口检查]' api_check.txt
               exit 1
             fi
           fi
+      - name: upload artifact
+        if: always() && steps.check-api.outputs.isFail == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-check-report
+          path: api_check.txt
+  Post-Check:
+    runs-on: ubuntu-latest
+    needs: Check-Api-Change
+    continue-on-error: true
+    if: needs.Check-Api-Change.outputs.isFail == 'true' && failure()
+    steps:
+      - name: download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: api-check-report
       - name: Comment PR
-        if: always() && env.CHECK_NUM > 0
         uses: thollander/actions-comment-pull-request@v2
         with:
           filePath: api_check.txt
+      - name: Add Reviewers to Pull Request
+        uses: ryaugusta/pr-add-reviewers-action@v1
+        with:
+            token: ${{ github.token }}
+            reviewers: liujianqiang-niu
