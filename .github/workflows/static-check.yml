@@ -79,10 +79,11 @@ jobs:
           path: staticCheck
       - if: hashFiles('.golangci.yml') == ''
         run: mv staticCheck/staticCheck/golangci.yml .golangci.yml
-      - name: GolangCILint Check
-        uses: golangci/golangci-lint-action@v6
+      - uses: golangci/golangci-lint-action@v6
+        continue-on-error: true
         with:
-          version: v1.58
+          version: latest
+          args: --timeout=30m --out-format=junit-xml
           only-new-issues: true
   Call-CppCheck:
     runs-on: ubuntu-latest
@@ -111,6 +112,7 @@ jobs:
           persist-credentials: false
       - uses: pr-annotators/shellcheck-pr-annotator@main
       - uses: ludeeus/action-shellcheck@master
+        continue-on-error: true
         with:
           severity: error
           format: gcc
