@@ -4,6 +4,7 @@ on: workflow_call
 jobs:
   Get-Config:
     runs-on: ubuntu-latest
+    continue-on-error: true
     outputs:
       isGo: ${{ steps.get-check-flag.outputs.isGo }}
       isC: ${{ steps.get-check-flag.outputs.isC }}
@@ -54,6 +55,7 @@ jobs:
           fi
   Call-GolangCiLint:
     runs-on: ubuntu-latest
+    continue-on-error: true
     needs: Get-Config
     if: needs.Get-Config.outputs.isGo == 'true'
     steps:
@@ -80,13 +82,13 @@ jobs:
       - if: hashFiles('.golangci.yml') == ''
         run: mv staticCheck/staticCheck/golangci.yml .golangci.yml
       - uses: golangci/golangci-lint-action@v6
-        continue-on-error: true
         with:
           version: latest
           args: --timeout=30m --out-format=junit-xml
           only-new-issues: true
   Call-CppCheck:
     runs-on: ubuntu-latest
+    continue-on-error: true
     needs: Get-Config
     if: needs.Get-Config.outputs.isC == 'true'
     steps:
@@ -103,6 +105,7 @@ jobs:
           allow_approve: false
   Call-ShellCheck:
     runs-on: ubuntu-latest
+    continue-on-error: true
     needs: Get-Config
     if: needs.Get-Config.outputs.isShell == 'true'
     steps:      
@@ -112,7 +115,65 @@ jobs:
           persist-credentials: false
       - uses: pr-annotators/shellcheck-pr-annotator@main
       - uses: ludeeus/action-shellcheck@master
-        continue-on-error: true
         with:
           severity: error
           format: gcc
+  Call-DbusApiCheck:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: download code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Set up Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
+      - name: install tools
+        run: |
+          sudo apt install python3-pip golang -y
+          sudo pip3 install clang
+      - name: download tools
+        uses: actions/checkout@v4
+        with:
+          repository: reviews-team-test/ci_dbus_check
+          path: check-tools
+      - name: start check
+        run: |
+          commit_info='
+          {
+              "repo_name": "${{github.repository}}",
+              "branch": "${{github.ref_name}}",
+              "committer": "${{github.actor}}",
+              "commit_event": "${{github.server_url}}/${{github.repository}}/pull/${{github.event.pull_request.number}}",
+              "commit_hash": "${{github.sha}}",
+              "commit_event_id": "${{github.event.pull_request.number}}",
+              "jenkins_url": "${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}",
+              "email": "test@test.com"
+          }'
+          python3 check-tools/main.py --source_directory="." --commit_info_str="${commit_info}" || true
+      - name: get specified property result
+        id: repository_type
+        uses: ActionsTools/read-json-action@main
+        with:
+          file_path: "result.json"
+          prop_path: "scan_result"
+      - name: Publish reports
+        id: artifact-upload-step
+        if: steps.repository_type.outputs.value == 'unpassed'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbusApi-check-report
+          path: dbus_check.log
+      - if: steps.repository_type.outputs.value == 'unpassed'
+        run: |
+          echo "[DBUS接口安全检查检测失败](https://github.com/${{github.repository}}/actions/runs/${{ github.run_id }}/artifacts/${{steps.artifact-upload-step.outputs.artifact-id}})" >> comment.txt
+          exit 1
+      - name: Comment PR
+        if: always() && hashFiles('comment.txt')
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: comment.txt
