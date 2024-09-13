@@ -7,7 +7,7 @@ on:
 
 jobs:
   backup-to-gitlabwh:
-    if: github.repository_owner == 'linuxdeepin'
+    if: false
     name: backup-to-gitlab
     runs-on: ubuntu-latest
     steps:
