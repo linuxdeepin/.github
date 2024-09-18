@@ -32,7 +32,6 @@ teams:
       - xionglinlin
       - caixr23
       - ECQZXC
-      - archiemeng
     repositories_permissions:
       triage:
         - developer-center
