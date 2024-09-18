@@ -1,179 +1,21 @@
-name: Static Check
+name: staticCheck
 on: workflow_call
 
+
 jobs:
-  Get-Config:
+  static-check:
     runs-on: ubuntu-latest
-    continue-on-error: true
-    outputs:
-      isGo: ${{ steps.get-check-flag.outputs.isGo }}
-      isC: ${{ steps.get-check-flag.outputs.isC }}
-      isShell: ${{ steps.get-check-flag.outputs.isShell}}
     steps:
-      - uses: actions/checkout@v3
+      - id: static-check
+        continue-on-error: true
+        uses: reviews-team-test/ci-check-action@static-check
+      - if: always()
+        continue-on-error: true
+        uses: reviews-team-test/ci-check-action@send-data
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
-      - name: Get Go Files
-        id: get-go-files
-        uses: SkyHighGrowth/gha-changed-files@v1.0.1
-        with:
-          files: |
-            **.go
-      - name: Get C Files
-        id: get-c-files
-        uses: SkyHighGrowth/gha-changed-files@v1.0.1
-        with:
-          files: |
-            **.cpp
-            **.cxx
-            **.cc
-            **.c++
-            **.c
-            **.ipp
-            **.ixx
-            **.tpp
-            **.txx
-      - name: Get Shell Files
-        id: get-shell-files
-        uses: SkyHighGrowth/gha-changed-files@v1.0.1
-        with:
-          files: |
-            **.sh
-            **.bash
-      - name: get-check-flag
-        id: get-check-flag
-        run: |
-          if [ "${{steps.get-go-files.outputs.all_changed_files}}" ];then
-            echo "isGo=true" >> $GITHUB_OUTPUT
-          fi
-          if [ "${{steps.get-c-files.outputs.all_changed_files}}" ];then
-            echo "isC=true" >> $GITHUB_OUTPUT
-          fi
-          if [ "${{steps.get-shell-files.outputs.all_changed_files}}" ];then
-            echo "isShell=true" >> $GITHUB_OUTPUT
-          fi
-  Call-GolangCiLint:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    needs: Get-Config
-    if: needs.Get-Config.outputs.isGo == 'true'
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
-      - uses: actions/setup-go@v5
-        with:
-          go-version: stable
-      - name: Mod Check
-        if: hashFiles('go.mod') == ''
-        run: |
-          go mod init ${{ github.repository }}
-          go mod tidy
-      - name: Config check
-        if: hashFiles('.golangci.yml') == ''
-        uses: actions/checkout@v4
-        with:
-          repository: kuchune/check-tools
-          sparse-checkout: staticCheck/golangci.yml
-          sparse-checkout-cone-mode: false
-          path: staticCheck
-      - if: hashFiles('.golangci.yml') == ''
-        run: mv staticCheck/staticCheck/golangci.yml .golangci.yml
-      - uses: golangci/golangci-lint-action@v6
-        with:
-          version: latest
-          args: --timeout=30m --out-format=junit-xml
-          only-new-issues: true
-  Call-CppCheck:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    needs: Get-Config
-    if: needs.Get-Config.outputs.isC == 'true'
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
-      - name: Static Check with C
-        uses: linuxdeepin/action-cppcheck@main
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          pull_request_id: ${{ github.event.pull_request.number }}
-          allow_approve: false
-  Call-ShellCheck:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    needs: Get-Config
-    if: needs.Get-Config.outputs.isShell == 'true'
-    steps:      
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
-      - uses: pr-annotators/shellcheck-pr-annotator@main
-      - uses: ludeeus/action-shellcheck@master
-        with:
-          severity: error
-          format: gcc
-  Call-DbusApiCheck:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - name: download code
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
-      - name: Set up Clang
-        uses: egor-tensin/setup-clang@v1
-        with:
-          version: latest
-          platform: x64
-      - name: install tools
-        run: |
-          sudo apt install python3-pip golang -y
-          sudo pip3 install clang
-      - name: download tools
-        uses: actions/checkout@v4
-        with:
-          repository: reviews-team-test/ci_dbus_check
-          path: check-tools
-      - name: start check
-        run: |
-          commit_info='
-          {
-              "repo_name": "${{github.repository}}",
-              "branch": "${{github.ref_name}}",
-              "committer": "${{github.actor}}",
-              "commit_event": "${{github.server_url}}/${{github.repository}}/pull/${{github.event.pull_request.number}}",
-              "commit_hash": "${{github.sha}}",
-              "commit_event_id": "${{github.event.pull_request.number}}",
-              "jenkins_url": "${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}",
-              "email": "test@test.com"
-          }'
-          python3 check-tools/main.py --source_directory="." --commit_info_str="${commit_info}" || true
-      - name: get specified property result
-        id: repository_type
-        uses: ActionsTools/read-json-action@main
-        with:
-          file_path: "result.json"
-          prop_path: "scan_result"
-      - name: Publish reports
-        id: artifact-upload-step
-        if: steps.repository_type.outputs.value == 'unpassed'
-        uses: actions/upload-artifact@v4
-        with:
-          name: dbusApi-check-report
-          path: dbus_check.log
-      - if: steps.repository_type.outputs.value == 'unpassed'
-        run: |
-          echo "[DBUS接口安全检查检测失败](https://github.com/${{github.repository}}/actions/runs/${{ github.run_id }}/artifacts/${{steps.artifact-upload-step.outputs.artifact-id}})" >> comment.txt
-          exit 1
-      - name: Comment PR
-        if: always() && hashFiles('comment.txt')
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          filePath: comment.txt
+          testtype: "staticCheck"
+          status: ${{ contains(fromJSON(steps.static-check.outputs.summary-status), 'true') && '否' || '是' }}
+          result: ${{ steps.static-check.outputs.summary-result }}
+      - if: always()
+        continue-on-error: true
+        uses: reviews-team-test/ci-check-action@dbusapi-check

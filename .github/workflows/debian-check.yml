@@ -1,26 +1,26 @@
-name: Debian Check
+name: debianCheck
 on: workflow_call
 
-permissions: write-all
 
 jobs:
-  call-debian-check-prefix:
-    uses: linuxdeepin/.github/.github/workflows/debian-check-prefix.yml@master
-  call-debian-check-version:
-    uses: linuxdeepin/.github/.github/workflows/debian-check-version.yml@master
-  call-debian-check-keys:
-    uses: linuxdeepin/.github/.github/workflows/debian-check-keys.yml@master
-  post-debian-check:
-    if: always()
-    needs: [call-debian-check-prefix, call-debian-check-version, call-debian-check-keys]
-    uses: linuxdeepin/.github/.github/workflows/debian-check-post.yml@master
-    secrets: inherit
-    with:
-      debian-check-prefix-status: ${{ needs.call-debian-check-prefix.outputs.check_status }}
-      debian-check-prefix-msg: ${{ needs.call-debian-check-prefix.outputs.check_msg }}
-      debian-check-version-status: ${{ needs.call-debian-check-version.outputs.check_status }}
-      debian-check-version-msg: ${{ needs.call-debian-check-version.outputs.check_msg }}
-      debian-check-key-status-env: ${{ needs.call-debian-check-keys.outputs.check_status_env }}
-      debian-check-key-msg-env: ${{ needs.call-debian-check-keys.outputs.check_msg_env}}
-      debian-check-key-status: ${{ needs.call-debian-check-keys.outputs.check_status }}
-      debian-check-key-msg: ${{ needs.call-debian-check-keys.outputs.check_msg }}
+  debian-check:
+    runs-on: ubuntu-latest
+    steps:
+      - id: debian-check
+        continue-on-error: true
+        uses: reviews-team-test/ci-check-action@debian-check
+      - if: always() && steps.debian-check.outputs.summary-status == '否'
+        continue-on-error: true
+        uses: reviews-team-test/ci-check-action@post-check
+        with:
+          comment-file: summary-comment.txt
+          reviewers: liujianqiang-niu
+      - if: always()
+        continue-on-error: true
+        uses: reviews-team-test/ci-check-action@send-data
+        with:
+          testtype: "debianCheck"
+          status: ${{ steps.debian-check.outputs.summary-status }}
+          result: ${{ steps.debian-check.outputs.summary-result }}
+      - if: always() && steps.debian-check.outputs.summary-status == '否'
+        run: exit 1
