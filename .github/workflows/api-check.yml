@@ -1,96 +1,26 @@
-name: Api Check
+name: apiCheck
 on: workflow_call
 
+
 jobs:
-  Check-Api-Change:
+  api-check:
     runs-on: ubuntu-latest
-    outputs:
-      isFail: ${{ steps.check-api.outputs.isFail }}
     steps:
-      - name: install tools
-        run: |
-          sudo apt-get install quilt -y
-          sudo apt-get install universal-ctags -y
-      - uses: actions/checkout@v4
+      - id: api-check
+        continue-on-error: true
+        uses: reviews-team-test/ci-check-action@api-check
+      - if: always() && hashFiles('comment.txt')
+        continue-on-error: true
+        uses: reviews-team-test/ci-check-action@post-check
         with:
-          repository: kuchune/check-tools
-          sparse-checkout: |
-            apiCheck/deepin-abigail
-            apiCheck/fastFilesCompare.json
-          sparse-checkout-cone-mode: false
-      - run: mv apiCheck/* .
-      - name: download lastest code
-        uses: actions/checkout@v4
+          comment-file: comment.txt
+          reviewers: liujianqiang-niu
+      - if: always()
+        continue-on-error: true
+        uses: reviews-team-test/ci-check-action@send-data
         with:
-          path: baseCodeDir
-      - working-directory: ./baseCodeDir
-        run: |
-          if [ -d "debian/patches" ];then
-            if [ "`ls -A debian/patches`" != "" ];then
-                cp debian/patches . -fr
-                quilt push -a || true
-            fi
-          fi
-      - name: download new code
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          path: currentCodeDir
-      - working-directory: ./currentCodeDir
-        run: |
-          if [ -d "debian/patches" ];then
-              if [ "`ls -A debian/patches`" != "" ];then
-                  cp debian/patches . -fr
-                  quilt push -a  || true
-              fi
-          fi
-      - name: check api
-        id: check-api
-        run: |
-          ./deepin-abigail -c fastFilesCompare.json | tee api_check.txt
-          logMsg1='''
-          <details>
-            <summary>详情</summary>
-          
-          ```ruby
-          '''
-          logMsg2='''
-          ``` 
-          </details>
-          '''
-          resultInfoMsg=$(cat api_check.txt)
-          detailUrl="https://github.com/reviews-team-test/infra-settings/blob/master/services/prow/config/jobs/images/api-check/readme.md"
-          logMsgHead="> [!WARNING]\n> [[API接口检查]]($detailUrl)\n- 检测到存在对外接口删除和修改;"
-          if [ -e 'api_check.txt' ];then
-            check_num=$(cat api_check.txt | grep -c '\[Chg_exprort_fun\|\[Del_export_fun' || true)
-            if [ $check_num -gt 0 ];then
-              echo "isFail=true" >> $GITHUB_OUTPUT
-              echo -e "${logMsgHead}${logMsg1}${resultInfoMsg}${logMsg2}" | tee comment.txt
-              exit 1
-            fi
-          fi
-      - name: upload artifact
-        if: always() && steps.check-api.outputs.isFail == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-check-comment
-          path: comment.txt
-  Post-Check:
-    runs-on: ubuntu-latest
-    needs: Check-Api-Change
-    continue-on-error: true
-    if: needs.Check-Api-Change.outputs.isFail == 'true' && failure()
-    steps:
-      - name: download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: api-check-comment
-      - name: Comment PR
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          filePath: comment.txt
-      - name: Add Reviewers to Pull Request
-        uses: ryaugusta/pr-add-reviewers-action@v1
-        with:
-            token: ${{ github.token }}
-            reviewers: liujianqiang-niu
+          testtype: "apiCheck"
+          status: ${{ steps.api-check.outputs.isFail == 'true' && '否' || '是' }}
+          result: ${{ steps.api-check.outputs.isFail == 'true' && '1' || '0' }}
+      - if: always() && steps.api-check.outputs.isFail == 'true'
+        run: exit 1
