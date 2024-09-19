@@ -20,7 +20,7 @@ jobs:
         uses: reviews-team-test/ci-check-action@send-data
         with:
           testtype: "apiCheck"
-          status: ${{ steps.api-check.outputs.isFail == 'true' && '否' || '是' }}
-          result: ${{ steps.api-check.outputs.isFail == 'true' && '1' || '0' }}
+          status: ${{ steps.api-check.outputs.summary-status }}
+          result: ${{ steps.api-check.outputs.summary-result }}
       - if: always() && steps.api-check.outputs.isFail == 'true'
         run: exit 1

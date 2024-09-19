@@ -14,7 +14,7 @@ jobs:
         uses: reviews-team-test/ci-check-action@send-data
         with:
           testtype: "staticCheck"
-          status: ${{ contains(fromJSON(steps.static-check.outputs.summary-status), 'true') && '否' || '是' }}
+          status: ${{ steps.static-check.outputs.summary-status }}
           result: ${{ steps.static-check.outputs.summary-result }}
       - if: always()
         continue-on-error: true
