@@ -9,6 +9,11 @@ jobs:
       - id: static-check
         continue-on-error: true
         uses: reviews-team-test/ci-check-action@static-check
+      - if: always() && steps.static-check.outputs.summary-status == '否'
+        continue-on-error: true
+        uses: reviews-team-test/ci-check-action@post-check
+        with:
+          comment-file: comment.txt
       - if: always()
         continue-on-error: true
         uses: reviews-team-test/ci-check-action@send-data
@@ -16,6 +21,3 @@ jobs:
           testtype: "staticCheck"
           status: ${{ steps.static-check.outputs.summary-status }}
           result: ${{ steps.static-check.outputs.summary-result }}
-      - if: always()
-        continue-on-error: true
-        uses: reviews-team-test/ci-check-action@dbusapi-check
