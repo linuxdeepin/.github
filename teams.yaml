@@ -67,6 +67,7 @@ teams:
         - dde-network-core
         - dde-launchpad
         - dde-launcher
+        - deepin-dummyapps
         - dde-manual-content
         - dde-wallpapers
         - deepin-wallpapers
