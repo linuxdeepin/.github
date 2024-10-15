@@ -9,11 +9,7 @@ settings:
       - dde-tray-loader
       - ddm
       - treeland
-      - linglong
-      - linglong-box
-      - linglong-loader
-      - linglong-dbus-proxy
-      - linglong-hub
+      - deepin-dummyapps
       - deepin-deepinid-client
       - deepin-deepinid-plugin
       - deepin-system-upgrade
