@@ -796,6 +796,7 @@ teams:
     repositories_permissions:
       push:
         - treeland
+        - treeland-protocols
   - name: treeland-member
     parent_team: Projects
     members:
@@ -809,6 +810,7 @@ teams:
     repositories_permissions:
       triage:
         - treeland
+        - treeland-protocols
         - developer-center
   - name: deepin-osconfig
     parent_team: Projects
