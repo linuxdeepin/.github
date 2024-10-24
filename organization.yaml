@@ -17,6 +17,7 @@ settings:
       - deepin-pdfium
       - xdg-desktop-portal-dde
       - deepin-service-manager
+      - deepin-service-plugins
       - deepin-upgrade-manager
       - deepin-unioncode
       - dtksystemsettings
