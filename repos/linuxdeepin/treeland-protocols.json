@@ -1,0 +1,64 @@
+[
+  {
+    "branch": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/treeland-protocols/.github/workflows/call-clacheck.yml"
+  },
+  {
+    "branche": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/treeland-protocols/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/treeland-protocols/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-license-check.yml",
+    "dest": "linuxdeepin/treeland-protocols/.github/workflows/call-license-check.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-auto-tag.yml",
+    "dest": "linuxdeepin/treeland-protocols/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-tag-build.yml",
+    "deletelist": [
+      ".github/workflows/call-tag-build.yml"
+    ],
+    "dest": "linuxdeepin/treeland-protocols/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/cppcheck.yml",
+    "dest": "linuxdeepin/treeland-protocols/.github/workflows/cppcheck.yml"
+  }
+]
+
+
