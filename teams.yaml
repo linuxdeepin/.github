@@ -454,6 +454,7 @@ teams:
       - yang233000
       - yoho0623
       - Tw1012
+      - dengzhongyuan365-dev
     repositories_permissions:
       triage:
         - dde-file-manager
