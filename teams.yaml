@@ -581,6 +581,8 @@ teams:
       - SuperZhangxueming
       - zsien
       - dengbo11
+      - Johnson-zs
+      - wyu71
     repositories_permissions:
       push:
         - deepin-fcitxconfigtool-plugin
