@@ -40,8 +40,21 @@ jobs:
             echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/CI:/topics:/${trimedBranch}/deepin_develop/ ./" >> /etc/apt/sources.list
             echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/CI:/topics:/${trimedBranch}/deepin_develop/ ./" >> /etc/apt/sources.list
           fi
-          apt-get update && apt-get install -y --force-yes ca-certificates apt-transport-https sudo
-          sudo apt-get install -y --force-yes python3-pip python3-coverxygen
+          retries=3
+          for i in $(seq 1 $retries); do
+            apt-get update && apt-get install -y --force-yes ca-certificates apt-transport-https sudo && sudo apt-get install -y --force-yes python3-pip python3-coverxygen
+            status=$?
+            if [ $status -eq 0 ]; then
+              echo "Init succeeded after $i attempt(s)"
+              exit 0
+            fi
+            if [ $i -lt $retries ]; then
+              echo "Init failed. Attempt $i of $retries. Retrying in 5 seconds..."
+              sleep 5
+            fi
+          done
+          echo "Init failed after $retries attempts. Giving up."
+          exit 1
 
       - uses: actions/checkout@v3
         with:
