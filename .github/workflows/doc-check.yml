@@ -65,6 +65,7 @@ jobs:
         with:
           pullRequestId: ${{ github.event.pull_request.number }}
           installDepends: true
+          installCoverxygen: false
           setFailed: false
           checkScope: "public"
           checkedSuffix: ".h,.hpp,.hxx"
