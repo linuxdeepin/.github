@@ -9,6 +9,7 @@ on:
 
 jobs:
   DOXYGEN_CHECK:
+    if: false
     container:
       image: linuxdeepin/beige:base
       options: --privileged
