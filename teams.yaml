@@ -91,7 +91,7 @@ teams:
         - dde-display
         - deepin-system-upgrade
         - deepin-service-manager
-        - deepin-service-plugins
+        - dde-services
         - deepin-upgrade-manager
         - deepin-im
         - dde-shell
