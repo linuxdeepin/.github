@@ -687,6 +687,7 @@ teams:
         - developer-center
         - default-settings
         - deepin-desktop-base
+        - deepin-global-translation
   - name: deepin-unioncode
     parent_team: Maintainers
     members:
