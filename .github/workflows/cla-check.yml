@@ -32,7 +32,7 @@ jobs:
           path-to-document: 'https://github.com/linuxdeepin/cla/blob/master/cla.md' # e.g. a CLA or a DCO document
           # branch should not be protected
           branch: master
-          allowlist: deepin-bot[bot],renovate[bot],dependabot[bot],Hosted Weblate,transifex-integration[bot]
+          allowlist: deepin-bot[bot],renovate[bot],dependabot[bot],Hosted Weblate,transifex-integration[bot],deepin-ci-robot
 
          #below are the optional inputs - If the optional inputs are not given, then default values will be taken
           remote-organization-name: linuxdeepin
