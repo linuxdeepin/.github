@@ -178,23 +178,21 @@ teams:
         - deepin-devicemanager
         - deepin-downloader
         - deepin-boot-maker
+        - dde-calendar
   - name: Multimedia-audio-video-member
     parent_team: Projects
     members:
       - lzwind
       - pengfeixx
       - wyu71
-      - starhcq
       - rb-union
-      - feeengli
-      - jeffshuai
-      - hundundadi
       - myk1343
       - lJxDabab
       - add-uos
       - yang233000
       - yoho0623
       - Tw1012
+      - JWWTSL
     repositories_permissions:
       triage:
         - deepin-camera
@@ -213,6 +211,7 @@ teams:
         - deepin-devicemanager
         - deepin-downloader
         - deepin-boot-maker
+        - dde-calendar
   - name: Multimedia-graphics
     parent_team: Maintainers
     members:
@@ -241,19 +240,16 @@ teams:
     parent_team: Projects
     members:
       - lzwind
-      - starhcq
       - rb-union
       - pengfeixx
       - wyu71
-      - feeengli
-      - jeffshuai
-      - hundundadi
       - myk1343
       - lJxDabab
       - add-uos
       - yang233000
       - yoho0623
       - Tw1012
+      - JWWTSL
     repositories_permissions:
       triage:
         - deepin-draw
@@ -417,6 +413,7 @@ teams:
       - max-lvs
       - toberyan
       - re2zero
+      - lzwind
     repositories_permissions:
       push:
         - dde-file-manager
@@ -436,6 +433,7 @@ teams:
         - deepin-diskmanager
         - dde-cooperation
         - dtkio
+        - udisks2-qt6
   - name: dde-file-manager-member
     parent_team: Projects
     members:
@@ -475,6 +473,7 @@ teams:
         - deepin-diskmanager
         - dde-cooperation
         - dtkio
+        - udisks2-qt6
   - name: deepin-face
     parent_team: Maintainers
     members:
