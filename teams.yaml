@@ -899,3 +899,13 @@ teams:
     repositories_permissions:
       triage:
         - "*"
+  - name: linyaps-tools
+    parent_team: Projects
+    members:
+      - ComixHe
+      - myml
+      - dengbo11
+      - black-desk
+    repositories_permissions:
+      push:
+        - linyaps-tools
