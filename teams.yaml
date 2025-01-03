@@ -158,7 +158,6 @@ teams:
       - pengfeixx
       - wyu71
       - myk1343
-      - starhcq
       - max-lvs
     repositories_permissions:
       push:
@@ -179,6 +178,7 @@ teams:
         - deepin-downloader
         - deepin-boot-maker
         - dde-calendar
+        - libqapt-qt6
   - name: Multimedia-audio-video-member
     parent_team: Projects
     members:
@@ -212,11 +212,11 @@ teams:
         - deepin-downloader
         - deepin-boot-maker
         - dde-calendar
+        - libqapt-qt6
   - name: Multimedia-graphics
     parent_team: Maintainers
     members:
       - lzwind
-      - starhcq
       - wyu71
       - rb-union
       - pengfeixx
@@ -270,7 +270,6 @@ teams:
     members:
       - lzwind
       - wyu71
-      - starhcq
     repositories_permissions:
       push:
         - dtkdevice
@@ -280,9 +279,7 @@ teams:
     members:
       - lzwind
       - wyu71
-      - starhcq
       - rb-union
-      - jeffshuai
       - myk1343
     repositories_permissions:
       triage:
