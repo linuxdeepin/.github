@@ -136,6 +136,7 @@ teams:
       - chenchongbiao
       - ComixHe
       - MingcongBai
+      - zengwei00
     repositories_permissions:
       maintain:
         - open-source-students
