@@ -100,6 +100,7 @@ teams:
         - deepin-network-displays
         - dde-tray-loader
         - deepin-update-manager
+        - dde-dialog
   - name: am-maintainer
     parent_team: Maintainers
     members:
