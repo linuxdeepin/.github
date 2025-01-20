@@ -745,6 +745,8 @@ teams:
     parent_team: Maintainers
     members:
       - mikigo
+      - wangp-h
+      - lyf0601
     repositories_permissions:
       push:
         - youqu
@@ -786,6 +788,8 @@ teams:
     parent_team: Maintainers
     members:
       - mikigo
+      - wangp-h
+      - lyf0601
     repositories_permissions:
       push:
         - letmego
