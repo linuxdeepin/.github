@@ -679,6 +679,7 @@ teams:
       - xzl01
       - yukarichiba
       - hudeng-go
+      - Cherrling
     repositories_permissions:
       push:
         - deepin-upgrade-manager
