@@ -6,7 +6,7 @@
       "release/.+"
     ],
     "src": "workflow-templates/call-commitlint.yml",
-    "dest": "linuxdeepin/dde-application-wizard/.github/workflows/call-commitlint.yml"
+    "dest": "linuxdeepin/deepin-update-manager/.github/workflows/call-commitlint.yml"
   },
   {
     "branches": [
@@ -15,7 +15,7 @@
       "release/.+"
     ],
     "src": "workflow-templates/call-chatOps.yml",
-    "dest": "linuxdeepin/dde-application-wizard/.github/workflows/call-chatOps.yml"
+    "dest": "linuxdeepin/deepin-update-manager/.github/workflows/call-chatOps.yml"
   },
   {
     "branches": [
@@ -24,7 +24,7 @@
       "release/.+"
     ],
     "src": "workflow-templates/cppcheck.yml",
-    "dest": "linuxdeepin/dde-application-wizard/.github/workflows/cppcheck.yml"
+    "dest": "linuxdeepin/deepin-update-manager/.github/workflows/cppcheck.yml"
   },
   {
     "branches": [
@@ -33,7 +33,7 @@
       "release/.+"
     ],
     "src": "workflow-templates/call-clacheck.yml",
-    "dest": "linuxdeepin/dde-application-wizard/.github/workflows/call-clacheck.yml"
+    "dest": "linuxdeepin/deepin-update-manager/.github/workflows/call-clacheck.yml"
   },
   {
     "branches": [
@@ -42,14 +42,14 @@
       "release/.+"
     ],
     "src": "workflow-templates/call-license-check.yml",
-    "dest": "linuxdeepin/dde-application-wizard/.github/workflows/call-license-check.yml"
+    "dest": "linuxdeepin/deepin-update-manager/.github/workflows/call-license-check.yml"
   },
   {
     "branch": [
       "master"
     ],
     "src": "workflow-templates/call-auto-tag.yml",
-    "dest": "linuxdeepin/dde-application-wizard/.github/workflows/call-auto-tag.yml"
+    "dest": "linuxdeepin/deepin-update-manager/.github/workflows/call-auto-tag.yml"
   },
   {
     "branch": [
@@ -59,6 +59,6 @@
     "deletelist": [
       ".github/workflows/call-tag-build.yml"
     ],
-    "dest": "linuxdeepin/dde-application-wizard/.github/workflows/call-tag-build.yml"
+    "dest": "linuxdeepin/deepin-update-manager/.github/workflows/call-tag-build.yml"
   }
 ]
