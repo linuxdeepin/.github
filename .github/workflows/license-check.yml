@@ -8,23 +8,27 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: Install reuse
-        run: |
-          sudo sed -i 's/azure.archive.ubuntu.com/mirrors.layeronline.com/g' /etc/apt/sources.list
-          sudo apt update
-          sudo apt install reuse
-      - name: License Check
+      - name: Setup Python
+        id: python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run REUSE lint via pipx
         id: lcheck
-        run: reuse lint
+        run: pipx run reuse==5.0.2 lint
         continue-on-error: true
+        env:
+          PIPX_DEFAULT_PYTHON: ${{ steps.python.outputs.python-path }}
       - name: Generate Reports
         if: steps.lcheck.outcome != 'success'
         run: |
-          printf "## License: REUSE Compliance Check failed\n" >> $GITHUB_STEP_SUMMARY || true
+          printf "## License: REUSE Compliance Check failed\n\n" >> $GITHUB_STEP_SUMMARY || true
           echo "<details>" >> $GITHUB_STEP_SUMMARY || true
-          reuse lint >> $GITHUB_STEP_SUMMARY || true
+          pipx run reuse==5.0.2 lint >> $GITHUB_STEP_SUMMARY || true
           echo "</details>" >> $GITHUB_STEP_SUMMARY || true
           exit 1
+        env:
+          PIPX_DEFAULT_PYTHON: ${{ steps.python.outputs.python-path }}
   Check-README:
     runs-on: ubuntu-latest
     steps:
