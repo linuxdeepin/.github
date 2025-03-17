@@ -584,6 +584,7 @@ teams:
       - dengbo11
       - Johnson-zs
       - wyu71
+      - lzwind
     repositories_permissions:
       push:
         - deepin-fcitxconfigtool-plugin
