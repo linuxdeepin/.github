@@ -923,3 +923,9 @@ teams:
         - deepin-prime
       push:
         - deepin-prime
+  - name: summer-ospp
+    members:
+      - UTsweetyfish
+    repositories_permissions:
+      admin:
+        - summer-ospp
