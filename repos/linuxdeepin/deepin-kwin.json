@@ -36,18 +36,6 @@
     "dest": "linuxdeepin/deepin-kwin/.github/workflows/cppcheck.yml"
   },
   {
-    "branches": [
-      "master",
-      "develop/.+",
-      "release/.+"
-    ],
-    "src": "workflow-templates/call-build-deb.yml",
-    "deletelist": [
-      ".github/workflows/call-build-deb.yml"
-    ],
-    "dest": "linuxdeepin/deepin-kwin/.github/workflows/call-build-deb.yml"
-  },
-  {
     "branch": [
       "master",
       "develop/.+",
@@ -71,22 +59,5 @@
     ],
     "src": "workflow-templates/call-auto-tag.yml",
     "dest": "linuxdeepin/deepin-kwin/.github/workflows/call-auto-tag.yml"
-  },
-  {
-    "branch": [
-      "master"
-    ],
-    "src": "workflow-templates/call-tag-build.yml",
-    "deletelist": [
-      ".github/workflows/call-tag-build.yml"
-    ],
-    "dest": "linuxdeepin/deepin-kwin/.github/workflows/call-tag-build.yml"
-  },
-  {
-    "branches": [
-      "master"
-    ],
-    "src": "workflow-templates/call-build-distribution.yml",
-    "dest": "linuxdeepin/deepin-kwin/.github/workflows/call-build-distribution.yml"
   }
 ]
