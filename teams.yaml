@@ -138,6 +138,7 @@ teams:
       - ComixHe
       - MingcongBai
       - zengwei00
+      - Cryolitia
     repositories_permissions:
       maintain:
         - open-source-students
