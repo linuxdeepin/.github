@@ -149,7 +149,6 @@ teams:
     parent_team: Maintainers
     members:
       - black-desk
-      - zsien
     repositories_permissions:
       push:
         - deepin-network-proxy
@@ -483,7 +482,6 @@ teams:
       - robertkill
       - zccrs
       - dengbo11
-      - zsien
     repositories_permissions:
       push:
         - deepin-face
@@ -582,7 +580,6 @@ teams:
       - caimc123456
       - Fire-dtx
       - SuperZhangxueming
-      - zsien
       - dengbo11
       - Johnson-zs
       - wyu71
