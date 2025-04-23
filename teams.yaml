@@ -181,6 +181,7 @@ teams:
         - deepin-boot-maker
         - dde-calendar
         - libqapt-qt6
+        - deepin-scanner
   - name: Multimedia-audio-video-member
     parent_team: Projects
     members:
@@ -215,6 +216,7 @@ teams:
         - deepin-boot-maker
         - dde-calendar
         - libqapt-qt6
+        - deepin-scanner
   - name: Multimedia-graphics
     parent_team: Maintainers
     members:
