@@ -138,6 +138,7 @@ teams:
       - MingcongBai
       - zengwei00
       - Cryolitia
+      - jianhope
     repositories_permissions:
       maintain:
         - open-source-students
