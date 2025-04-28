@@ -916,14 +916,16 @@ teams:
     repositories_permissions:
       push:
         - linyaps-tools
-  - name: deepin-prime
+  - name: xzl01
     members:
       - xzl01
     repositories_permissions:
       triage:
         - deepin-prime
+        - fcitx5-theme-deepin
       push:
         - deepin-prime
+        - fcitx5-theme-deepin
   - name: summer-ospp
     members:
       - UTsweetyfish
