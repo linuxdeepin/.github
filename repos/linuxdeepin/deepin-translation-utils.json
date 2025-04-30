@@ -1,0 +1,29 @@
+[
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-commitlint.yml",
+    "dest": "linuxdeepin/deepin-translation-utils/.github/workflows/call-commitlint.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-chatOps.yml",
+    "dest": "linuxdeepin/deepin-translation-utils/.github/workflows/call-chatOps.yml"
+  },
+  {
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
+    ],
+    "src": "workflow-templates/call-clacheck.yml",
+    "dest": "linuxdeepin/deepin-translation-utils/.github/workflows/call-clacheck.yml"
+  }
+]
