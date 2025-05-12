@@ -100,6 +100,7 @@ teams:
         - deepin-update-manager
         - dde-dialog
         - deepin-update-ui
+        - deepin-icon-theme
   - name: am-maintainer
     parent_team: Maintainers
     members:
