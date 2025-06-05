@@ -1,0 +1,236 @@
+name: Auto Release
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: 'Release version (e.g., 1.0.0)'
+        required: true
+        type: string
+      name:
+        description: 'The name of the person to release the version'
+        required: false
+        type: string
+      email:
+        description: 'The email of the person to release the version'
+        required: false
+        type: string
+      timezone:
+        description: 'The timezone in the debian changelog file'
+        required: false
+        type: string
+        default: 'Asia/Shanghai'
+
+jobs:
+  # 生成变更日志
+  create_changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 验证语义化版本号
+        id: validate_version
+        run: |
+          version="${{ github.event.inputs.version }}"
+          if [[ ! "$version" =~ ^v?(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))?$ ]]; then
+            echo "无效的版本号格式，请使用语义化版本号: $version" >&2
+            exit 1
+          fi
+          version=${version#v}
+          echo "version=${version}" >> $GITHUB_OUTPUT
+      
+      - name: 使用 GitHub App 进行身份验证
+        id: auth
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID}}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: 获取触发者的 GitHub 邮箱
+        id: get_email
+        uses: evvanErb/get-github-email-by-username-action@v1.25
+        with:
+          github-username: ${{ github.actor }}
+          token: ${{ steps.auth.outputs.token }}
+
+      - name: 检查并设置用户信息
+        id: setup_user_info
+        run: |
+          # 检查是否提供了用户名和邮箱
+          input_name="${{ github.event.inputs.name }}"
+          input_email="${{ github.event.inputs.email }}"
+          
+          # 设置用户名
+          if [ -z "$input_name" ]; then
+            author_name="${{ github.actor }}"
+            echo "未提供用户名，使用 GitHub 用户名: $author_name"
+          else
+            author_name="$input_name"
+            echo "使用提供的用户名: $author_name"
+          fi
+          
+          # 设置邮箱
+          if [ -z "$input_email" ]; then
+            # 尝试从 GitHub API 获取邮箱
+            github_email="${{ steps.get_email.outputs.email }}"
+            if [ -n "$github_email" ] && [ "$github_email" != "null" ] && [ "$github_email" != "" ]; then
+              author_email="$github_email"
+              echo "从 GitHub API 获取到邮箱: $author_email"
+            else
+              echo "无法获取 GitHub 邮箱！"
+              exit 1
+            fi
+          else
+            author_email="$input_email"
+            echo "使用提供的邮箱: $author_email"
+          fi
+          
+          # 输出到 GITHUB_OUTPUT
+          echo "author_name=${author_name}" >> $GITHUB_OUTPUT
+          echo "author_email=${author_email}" >> $GITHUB_OUTPUT
+          
+          echo "最终用户信息: $author_name <$author_email>"
+
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ steps.auth.outputs.token }}
+
+      - name: Install git-cliff from crates.io
+        uses: baptiste0928/cargo-install@v3
+        with:
+          crate: git-cliff
+
+      - name: 生成变更日志
+        run: |
+
+            version=${{ steps.validate_version.outputs.version }}
+
+            # 获取发布者名称和邮箱
+            author_name="${{ steps.setup_user_info.outputs.author_name }}"
+            author_email="${{ steps.setup_user_info.outputs.author_email }}"
+
+            # 获取仓库名 (GitHub Actions 环境)
+            if [ -n "$GITHUB_REPOSITORY" ]; then
+                repo_name=$(basename "$GITHUB_REPOSITORY")
+            else
+                # 本地环境回退方案
+                repo_name=$(basename "$(git rev-parse --show-toplevel)")
+            fi
+
+            # 配置git
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+            echo "正在更新源代码信息……"
+            find . -maxdepth 1 -name "*.in" -type f | while read -r file; do
+                if [ -f "$file" ]; then
+                    echo "处理文件: $file"
+                    # 替换 @version@ 为实际版本号
+                    sed "s/@version@/${version}/g" "$file" > "${file%.in}"
+                    echo "生成文件: ${file%.in}"
+                fi
+            done
+
+            git add .
+            git commit -m "chore: release ${version}"
+            git show -s
+
+            echo "正在生成 Changelog.md ……"
+            if [ -f "Changelog.md" ]; then
+                git cliff --use-branch-tags --unreleased --tag "${version}" \
+                  --github-repo "${GITHUB_REPOSITORY}" \
+                  --github-token "${{ secrets.GITHUB_TOKEN }}" \
+                  --config keepachangelog \
+                  --prepend "Changelog.md"
+            else
+                git cliff --use-branch-tags --unreleased --tag "${version}" \
+                --github-repo "${GITHUB_REPOSITORY}" \
+                --github-token "${{ secrets.GITHUB_TOKEN }}" \
+                --config keepachangelog \
+                -o "Changelog.md"
+            fi
+
+            git cliff --use-branch-tags --unreleased --tag "${version}" \
+                --github-repo "${GITHUB_REPOSITORY}" \
+                --github-token "${{ secrets.GITHUB_TOKEN }}" \
+                --config keepachangelog \
+                -o "../Changelog.md"
+
+            git add .
+            git commit -m "docs: Update Changelog.md"
+            git show -s
+
+            echo -e "\n"
+
+            if [ -d "debian" ]; then
+                echo "为Debian生成版本更新……"
+                
+                # 获取当前日期时间
+                current_date=$(TZ=${{ inputs.timezone }} date -R)
+                
+                # 创建新的changelog条目
+                new_entry="${repo_name} (${version}) unstable; urgency=medium
+
+              * Release ${version}
+
+             -- ${author_name} <${author_email}>  ${current_date}
+            "
+                
+                # 将新条目添加到changelog开头
+                echo "${new_entry}" > debian/changelog.tmp
+                cat debian/changelog >> debian/changelog.tmp
+                mv debian/changelog.tmp debian/changelog
+                
+                git add .
+                git commit -m "chore(debian): New release ${version}"
+                git show -s
+
+                echo -e "\n"
+            fi
+
+            if [ -f "archlinux/PKGBUILD" ]; then
+                echo "正在更新 PKGBUILD 版本号……"
+                
+                # 更新版本号
+                sed -i "s/^pkgver=.*/pkgver=${version}/" archlinux/PKGBUILD
+                
+                # 重置 pkgrel 为 1
+                sed -i "s/^pkgrel=.*/pkgrel=1/" archlinux/PKGBUILD
+                
+                git add .
+                git commit -m "chore(archlinux): New release ${version}"
+                git show -s
+
+                echo -e "\n"
+            fi
+
+            if [ -f "rpm/${repo_name}.spec" ]; then
+                echo "正在更新 RPM spec 文件版本号……"
+                
+                # 更新版本号
+                sed -i "s/^Version:.*/Version: ${version}/" rpm/"${repo_name}".spec
+                
+                # 重置 Release 为 1
+                sed -i "s/^Release:.*/Release: 1/" rpm/"${repo_name}".spec
+                
+                git add .
+                git commit -m "chore(rpm): New release ${version}"
+                git show -s
+                
+                echo -e "\n"
+            fi
+
+      - name: 创建PR
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.auth.outputs.token }}
+          title: "Release ${{ steps.validate_version.outputs.version }}"
+          body-path: "../Changelog.md"
+          branch: "release-${{ steps.validate_version.outputs.version }}"
+
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
