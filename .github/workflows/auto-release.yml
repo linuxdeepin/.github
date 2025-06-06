@@ -131,36 +131,26 @@ jobs:
                 fi
             done
 
-            git add .
-            git commit -m "chore: release ${version}"
-            git show -s
-
-            echo "正在生成 Changelog.md ……"
-            if [ -f "Changelog.md" ]; then
+            echo "正在生成 CHANGELOG.md ……"
+            if [ -f "CHANGELOG.md" ]; then
                 git cliff --use-branch-tags --unreleased --tag "${version}" \
                   --github-repo "${GITHUB_REPOSITORY}" \
                   --github-token "${{ secrets.GITHUB_TOKEN }}" \
                   --config keepachangelog \
-                  --prepend "Changelog.md"
+                  --prepend "CHANGELOG.md"
             else
                 git cliff --use-branch-tags --unreleased --tag "${version}" \
                 --github-repo "${GITHUB_REPOSITORY}" \
                 --github-token "${{ secrets.GITHUB_TOKEN }}" \
                 --config keepachangelog \
-                -o "Changelog.md"
+                -o "CHANGELOG.md"
             fi
 
             git cliff --use-branch-tags --unreleased --tag "${version}" \
                 --github-repo "${GITHUB_REPOSITORY}" \
                 --github-token "${{ secrets.GITHUB_TOKEN }}" \
                 --config keepachangelog \
-                -o "../Changelog.md"
-
-            git add .
-            git commit -m "docs: Update Changelog.md"
-            git show -s
-
-            echo -e "\n"
+                -o "../CHANGELOG.md"
 
             if [ -d "debian" ]; then
                 echo "为Debian生成版本更新……"
@@ -180,12 +170,6 @@ jobs:
                 echo "${new_entry}" > debian/changelog.tmp
                 cat debian/changelog >> debian/changelog.tmp
                 mv debian/changelog.tmp debian/changelog
-                
-                git add .
-                git commit -m "chore(debian): New release ${version}"
-                git show -s
-
-                echo -e "\n"
             fi
 
             if [ -f "archlinux/PKGBUILD" ]; then
@@ -196,12 +180,6 @@ jobs:
                 
                 # 重置 pkgrel 为 1
                 sed -i "s/^pkgrel=.*/pkgrel=1/" archlinux/PKGBUILD
-                
-                git add .
-                git commit -m "chore(archlinux): New release ${version}"
-                git show -s
-
-                echo -e "\n"
             fi
 
             if [ -f "rpm/${repo_name}.spec" ]; then
@@ -212,13 +190,13 @@ jobs:
                 
                 # 重置 Release 为 1
                 sed -i "s/^Release:.*/Release: 1/" rpm/"${repo_name}".spec
-                
-                git add .
-                git commit -m "chore(rpm): New release ${version}"
-                git show -s
-                
-                echo -e "\n"
             fi
+                            
+            git add .
+            git commit -m "chore(rpm): New release ${version}
+            
+            Log:"
+            git show -s
 
       - name: 创建PR
         id: cpr
@@ -226,7 +204,7 @@ jobs:
         with:
           token: ${{ steps.auth.outputs.token }}
           title: "Release ${{ steps.validate_version.outputs.version }}"
-          body-path: "../Changelog.md"
+          body-path: "../CHANGELOG.md"
           branch: "release-${{ steps.validate_version.outputs.version }}"
 
       - name: Check outputs
