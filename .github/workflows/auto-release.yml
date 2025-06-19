@@ -3,8 +3,8 @@ on:
   workflow_call:
     inputs:
       version:
-        description: 'Release version (e.g., 1.0.0)'
-        required: true
+        description: 'Release version (e.g., 1.0.0), keep empty to auto-increment from VERSION file'
+        required: false
         type: string
       name:
         description: 'The name of the person to release the version'
@@ -16,7 +16,7 @@ on:
         type: string
       timezone:
         description: 'The timezone in the debian changelog file'
-        required: false
+        required: true
         type: string
         default: 'Asia/Shanghai'
 
@@ -25,17 +25,6 @@ jobs:
   create_changelog:
     runs-on: ubuntu-latest
     steps:
-      - name: 验证语义化版本号
-        id: validate_version
-        run: |
-          version="${{ github.event.inputs.version }}"
-          if [[ ! "$version" =~ ^v?(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))?$ ]]; then
-            echo "无效的版本号格式，请使用语义化版本号: $version" >&2
-            exit 1
-          fi
-          version=${version#v}
-          echo "version=${version}" >> $GITHUB_OUTPUT
-      
       - name: 使用 GitHub App 进行身份验证
         id: auth
         uses: actions/create-github-app-token@v1
@@ -44,7 +33,56 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
 
-      - name: 获取触发者的昵称
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ steps.auth.outputs.token }}
+
+      - name: 验证语义化版本号
+        id: validate_version
+        run: |
+          version="${{ github.event.inputs.version }}"
+
+          # 如果没有提供版本号，尝试从 VERSION 文件读取并自动递增
+          if [ -z "$version" ]; then
+            if [ -f "VERSION" ]; then
+              current_version=$(cat VERSION | tr -d '\n\r')
+              echo "从 VERSION 文件读取到版本号: $current_version"
+              
+              # 验证现有版本号格式
+              if [[ ! "$current_version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+                echo "VERSION 文件中的版本号无法自动递增，请手动输入: $current_version" >&2
+                exit 1
+              fi
+              
+              # 移除 v 前缀并分割版本号
+              IFS='.' read -ra version_parts <<< "${current_version%%-*}"  # 移除预发布标识
+              major=${version_parts[0]}
+              minor=${version_parts[1]}
+              patch=${version_parts[2]}
+              
+              # 递增补丁版本号
+              patch=$((patch + 1))
+              version="${major}.${minor}.${patch}"
+              echo "自动递增版本号为: $version"
+            else
+              echo "未提供版本号且未找到 VERSION 文件" >&2
+              exit 1
+            fi
+          else
+            if [[ ! "$version" =~ ^v?(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))?$ ]]; then
+              echo "无效的版本号格式，请使用语义化版本号: $version" >&2
+              exit 1
+            fi
+          fi
+
+          echo "新版本号: $version"
+          version=${version#v}
+
+          echo "version=${version}" >> $GITHUB_OUTPUT
+
+      - name: 获取 actor 的昵称
         id: actor_name
         uses: actions/github-script@v7
         with:
@@ -57,6 +95,7 @@ jobs:
       - name: 获取触发者的 GitHub 邮箱
         id: get_email
         uses: evvanErb/get-github-email-by-username-action@v1.25
+        continue-on-error: true
         with:
           github-username: ${{ github.actor }}
           token: ${{ steps.auth.outputs.token }}
@@ -71,6 +110,9 @@ jobs:
           # 设置用户名
           if [ -z "$input_name" ]; then
             author_name="${{ steps.actor_name.outputs.name }}"
+            if [ -z "$author_name" ]; then
+              author_name="${{ github.actor }}"
+            fi
             echo "未提供用户名，使用 GitHub 用户名: $author_name"
           else
             author_name="$input_name"
@@ -99,12 +141,6 @@ jobs:
           
           echo "最终用户信息: $author_name <$author_email>"
 
-      - name: 检出代码
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ steps.auth.outputs.token }}
-
       - name: Install git-cliff from crates.io
         uses: baptiste0928/cargo-install@v3
         with:
@@ -132,14 +168,7 @@ jobs:
             git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
             echo "正在更新源代码信息……"
-            find . -maxdepth 1 -name "*.in" -type f | while read -r file; do
-                if [ -f "$file" ]; then
-                    echo "处理文件: $file"
-                    # 替换 @version@ 为实际版本号
-                    sed "s/@version@/${version}/g" "$file" > "${file%.in}"
-                    echo "生成文件: ${file%.in}"
-                fi
-            done
+            echo ${version} > VERSION
 
             echo "正在生成 CHANGELOG.md ……"
             if [ -f "CHANGELOG.md" ]; then
@@ -165,21 +194,12 @@ jobs:
             if [ -d "debian" ]; then
                 echo "为Debian生成版本更新……"
                 
-                # 获取当前日期时间
-                current_date=$(TZ=${{ inputs.timezone }} date -R)
+                sudo apt-get update && sudo apt-get install -y devscripts
+                export TZ="${{ github.event.inputs.timezone }}"
+                export DEBFULLNAME="${author_name}"
+                export DEBEMAIL="${author_email}"
                 
-                # 创建新的changelog条目
-                new_entry="${repo_name} (${version}) unstable; urgency=medium
-
-              * Release ${version}
-
-             -- ${author_name} <${author_email}>  ${current_date}
-            "
-                
-                # 将新条目添加到changelog开头
-                echo "${new_entry}" > debian/changelog.tmp
-                cat debian/changelog >> debian/changelog.tmp
-                mv debian/changelog.tmp debian/changelog
+                dch --newversion "${version}" --distribution unstable "Release ${version}"
             fi
 
             if [ -f "archlinux/PKGBUILD" ]; then
@@ -192,18 +212,31 @@ jobs:
                 sed -i "s/^pkgrel=.*/pkgrel=1/" archlinux/PKGBUILD
             fi
 
-            if [ -f "rpm/${repo_name}.spec" ]; then
-                echo "正在更新 RPM spec 文件版本号……"
-                
-                # 更新版本号
-                sed -i "s/^Version:.*/Version: ${version}/" rpm/"${repo_name}".spec
-                
-                # 重置 Release 为 1
-                sed -i "s/^Release:.*/Release: 1/" rpm/"${repo_name}".spec
+            if [ -d "rpm" ]; then
+                echo "正在更新 RPM 版本号……"
+                pushd rpm
+                find . -maxdepth 1 -name "*.spec" -type f | while read -r file; do
+                    if [ -f "$file" ]; then
+                        echo "处理文件: $file"
+                        sed -i -E "s/^(Version:[[:space:]]*)[0-9].*/\1${version}/" "$file"
+                        echo "生成文件: ${file}"
+                    fi
+                done
+                popd
             fi
+
+            if [ -f "version.sh" ]; then
+                echo "发现自定义 version.sh 文件，正在执行……"
+                chmod +x version.sh
+                ./version.sh ${version}
+            fi
+
+            echo "
+            ---
+            This PR is triggered by @${{ github.actor }}" >> ../CHANGELOG.md
                             
             git add .
-            git commit -m "chore(rpm): New release ${version}
+            git commit -m "chore: New release ${version}
             
             Log:"
             git show -s
