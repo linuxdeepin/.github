@@ -924,9 +924,13 @@ teams:
       triage:
         - deepin-prime
         - fcitx5-theme-deepin
+        - deepin-settings-default
+        - dde-settings-default
       push:
         - deepin-prime
         - fcitx5-theme-deepin
+        - deepin-settings-default
+        - dde-settings-default
   - name: summer-ospp
     members:
       - UTsweetyfish
