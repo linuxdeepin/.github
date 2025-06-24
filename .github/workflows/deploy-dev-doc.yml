@@ -38,7 +38,7 @@ jobs:
           echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
           echo "deb-src [trusted=yes] https://ci.deepin.com/repo/obs/deepin:/Develop:/main/standard/ ./" >> /etc/apt/sources.list
           apt-get update && apt-get install -y --force-yes ca-certificates apt-transport-https sudo
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref }}
           persist-credentials: false
@@ -89,7 +89,7 @@ jobs:
         uses: actions/deploy-pages@v1
 
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         if: github.event_name == 'workflow_dispatch'
         with:
           name: github-pages

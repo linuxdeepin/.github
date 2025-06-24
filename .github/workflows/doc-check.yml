@@ -57,7 +57,7 @@ jobs:
           echo "Init failed after $retries attempts. Giving up."
           exit 1
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
