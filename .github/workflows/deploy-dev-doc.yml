@@ -86,7 +86,7 @@ jobs:
       - name: Deploy to GitHub Pages
         if: github.event_name == 'push'
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
 
       - name: Download artifact
         uses: actions/download-artifact@v4
