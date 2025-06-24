@@ -95,7 +95,7 @@ jobs:
           echo "EXISTS=$(if [ $(git tag -l ${{ steps.get-tag.outputs.TAG }}) ]; then echo yes; else echo no; fi)" >> $GITHUB_OUTPUT
 
       - name: create comment
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ github.token }}
           script: |
@@ -140,7 +140,7 @@ jobs:
       - name: Get token using github-script
         id: get-token
         if: github.event.pull_request.merged
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             global["fetch"] = fetch
@@ -173,7 +173,7 @@ jobs:
 
       - name: Create tag
         if: github.event.pull_request.merged
-        uses: actions/github-script@v5
+        uses: actions/github-script@v7
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
           script: |

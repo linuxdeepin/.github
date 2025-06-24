@@ -56,7 +56,7 @@ jobs:
 
       - name: Get integration app token
         id: integration_token
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             global["fetch"] = fetch
@@ -80,7 +80,7 @@ jobs:
             core.setOutput('app_token', token)
 
       - name: Integration config
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         id: integration-config
         # workflow_dispatch event used for manual trigger workflow
         if: startsWith(github.event.comment.body, '/integrate') || github.event_name == 'workflow_dispatch'
@@ -210,7 +210,7 @@ jobs:
           delete-branch: true
 
       - name: Link integration pr
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const BOT_NAME = "AutoIntegrationPr Bot"
