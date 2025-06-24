@@ -22,11 +22,11 @@ jobs:
     outputs:
       result: ${{ steps.result.outputs.RESULT }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         if: ${{ github.event.pull_request.head.sha }}
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         if: ${{ github.event_name == 'push' }}
         with:
           fetch-depth: 0
@@ -62,11 +62,11 @@ jobs:
           ssh-private-key: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
       - run: git config --global user.email "ci@deepin.org"
       - run: git config --global user.name "deepin-ci"
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         if: ${{ github.event.pull_request.head.sha }}
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         if: ${{ github.event_name == 'push' }}
         with:
           fetch-depth: 0
@@ -157,11 +157,11 @@ jobs:
     needs: [debian-setup]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         if: ${{ github.event.pull_request.head.sha }}
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         if: ${{ github.event_name == 'push' }}
         with:
           fetch-depth: 0
@@ -297,7 +297,7 @@ jobs:
           done
           echo "exit_code=0" >> $GITHUB_OUTPUT
       - name: Download all packages
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Debian
           path: ./deb
@@ -361,11 +361,11 @@ jobs:
     continue-on-error: true
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         if: ${{ github.event.pull_request.head.sha }}
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         if: ${{ github.event_name == 'push' }}
         with:
           fetch-depth: 0
@@ -501,7 +501,7 @@ jobs:
           done
           echo "exit_code=0" >> $GITHUB_OUTPUT
       - name: Download all packages
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Deepin
           path: ./deb
