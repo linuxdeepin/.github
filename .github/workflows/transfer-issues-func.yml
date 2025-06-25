@@ -24,7 +24,7 @@ jobs:
           npm install @octokit/auth-app@6.1.1
       - name: Get token using github-script
         id: get-token
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             global["fetch"] = fetch
@@ -47,7 +47,7 @@ jobs:
             });
             core.setOutput('app_token', token)
       - name: transfer issues
-        uses: actions/github-script@v5
+        uses: actions/github-script@v7
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
           script: |
