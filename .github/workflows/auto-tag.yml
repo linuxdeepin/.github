@@ -25,12 +25,12 @@ jobs:
           persist-credentials: false
       - name: Check .tx/config
         id: check_files
-        uses: andstor/file-existence-action@v1
+        uses: andstor/file-existence-action@v3
         with:
           files: ".tx/config"
       - name: Check .tx/deepin.conf
         id: check_deepin
-        uses: andstor/file-existence-action@v1
+        uses: andstor/file-existence-action@v3
         with:
           files: ".tx/deepin.conf"
       - name: Check translations config
