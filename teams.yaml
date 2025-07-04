@@ -123,12 +123,7 @@ teams:
       - Zeno-sole
       - yxsos
       - tsic404
-      - SuperEffie
-      - meiyixiang
-      - deepin-mq
       - yx288
-      - vivianxf
-      - luodeepin
       - janeaaaa
       - zimo-liu
       - UTsweetyfish
@@ -140,6 +135,7 @@ teams:
       - zengwei00
       - Cryolitia
       - jianhope
+      - lovezin4ever
     repositories_permissions:
       maintain:
         - open-source-students
