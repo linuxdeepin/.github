@@ -17,7 +17,6 @@ teams:
       - asterwyx
       - 18202781743
       - Groveer
-      - kegechen
       - FeiWang1119
       - wineee
       - chenchongbiao
@@ -30,7 +29,6 @@ teams:
       - xionglinlin
       - caixr23
       - ECQZXC
-      - archiemeng
     repositories_permissions:
       triage:
         - developer-center
@@ -101,14 +99,6 @@ teams:
         - dde-dialog
         - deepin-update-ui
         - deepin-icon-theme
-  - name: am-maintainer
-    parent_team: Maintainers
-    members:
-      - black-desk
-      - xzl01
-    repositories_permissions:
-      push:
-        - dde-application-manager
   - name: deepin
     members:
       - felixonmars
@@ -127,11 +117,9 @@ teams:
       - janeaaaa
       - zimo-liu
       - UTsweetyfish
-      - black-desk
       - FeiWang1119
       - chenchongbiao
       - ComixHe
-      - MingcongBai
       - zengwei00
       - Cryolitia
       - jianhope
@@ -143,13 +131,6 @@ teams:
         - developer-center
       triage:
         - "*"
-  - name: network-proxy
-    parent_team: Maintainers
-    members:
-      - black-desk
-    repositories_permissions:
-      push:
-        - deepin-network-proxy
   - name: Multimedia-audio-video
     parent_team: Maintainers
     members:
@@ -475,8 +456,6 @@ teams:
   - name: deepin-face
     parent_team: Maintainers
     members:
-      - black-desk
-      - kegechen
       - robertkill
       - zccrs
       - dengbo11
@@ -629,7 +608,6 @@ teams:
     members:
       - electricface
       - Iceyer
-      - black-desk
     repositories_permissions:
       push:
         - warm-sched
@@ -866,14 +844,6 @@ teams:
       push:
         - migration-tools
 
-  - name: deepin-terminal
-    parent_team: Maintainers
-    members:
-      - ArchieMeng
-    repositories_permissions:
-      push:
-        - deepin-terminal
-
   - name: pkgs-categorizer
     parent_team: Maintainers
     members:
@@ -909,7 +879,6 @@ teams:
       - ComixHe
       - myml
       - dengbo11
-      - black-desk
     repositories_permissions:
       push:
         - linyaps-tools
@@ -927,6 +896,7 @@ teams:
         - fcitx5-theme-deepin
         - deepin-settings-default
         - dde-settings-default
+        - dde-application-manager
   - name: summer-ospp
     members:
       - UTsweetyfish
