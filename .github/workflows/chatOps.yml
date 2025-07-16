@@ -13,7 +13,7 @@ jobs:
     steps:
       # assign to someone
       - name: assign
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: startsWith(github.event.comment.body, '/assign')
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
@@ -29,7 +29,7 @@ jobs:
             })
       # request someone to review
       - name: review
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: startsWith(github.event.comment.body, '/review')
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
@@ -52,7 +52,7 @@ jobs:
             });
       # !deprecated add approve label
       - name: "approve"
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: startsWith(github.event.comment.body, '/+1')
         with:
           script: |
@@ -74,7 +74,7 @@ jobs:
 
       # retrigger checks
       - name: check
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: startsWith(github.event.comment.body, '/check')
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
@@ -121,7 +121,7 @@ jobs:
           startsWith(github.event.comment.body, '/merge') || startsWith(github.event.comment.body, '/check') ||
           startsWith(github.event.comment.body, '/forcemerge')
         id: get-token
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             global["fetch"] = fetch
@@ -146,7 +146,7 @@ jobs:
 
       # retrigger obs build webhook
       - name: check obs
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: startsWith(github.event.comment.body, '/check')
         id: check-obs
         env:
@@ -247,7 +247,7 @@ jobs:
             }
 
       - name: check obs comment
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: |
           startsWith(github.event.comment.body, '/check obs') && steps.check-obs.outputs.retriggered == 'true'
         with:
@@ -284,7 +284,7 @@ jobs:
             }
 
       - name: disable merge
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: startsWith(github.event.comment.body, '/merge') && github.repository_owner != 'linuxdeepin'
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
@@ -297,7 +297,7 @@ jobs:
             })
 
       - name: merge
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: startsWith(github.event.comment.body, '/merge') && github.repository_owner == 'linuxdeepin'
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
@@ -343,7 +343,7 @@ jobs:
             });
 
       - name: forcemerge
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: startsWith(github.event.comment.body, '/forcemerge') && github.repository_owner == 'linuxdeepin'
         with:
           github-token: ${{ steps.get-token.outputs.app_token }}
@@ -395,7 +395,7 @@ jobs:
       - name: Get integration app token
         id: pr
         if: startsWith(github.event.comment.body, '/integrate')
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const response = await github.rest.pulls.get({
