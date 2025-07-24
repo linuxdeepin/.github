@@ -9,7 +9,7 @@ jobs:
     if: github.repository_owner == 'linuxdeepin'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           repository: "linuxdeepin/jenkins-bridge-client"
           path: jenkins-bridge-client
@@ -18,5 +18,5 @@ jobs:
           cd $GITHUB_WORKSPACE/jenkins-bridge-client
           go build .
           sudo install -Dvm755 jenkins-bridge-client -t /usr/bin/
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: bash ".github/workflows/backup-all-repos-to-gitlabwh.bash" linuxdeepin ${{ secrets.BridgeToken }}
