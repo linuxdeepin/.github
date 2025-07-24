@@ -84,7 +84,6 @@ teams:
         - deepin-desktop-theme
         - deepin-fcitxconfigtool-plugin
         - deepin-fcitx5configtool-plugin
-        - dde-display
         - deepin-system-upgrade
         - deepin-service-manager
         - dde-services
