@@ -907,6 +907,7 @@ teams:
     parent_team: Maintainers
     members:
       - zhaohuiw42
+      - guonafu
     repositories_permissions:
       push:
         - lastore-daemon
