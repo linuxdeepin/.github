@@ -19,7 +19,7 @@ jobs:
       - name: Print Environment
         run: export
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
         with:
           repository: "linuxdeepin/jenkins-bridge-client"
           path: jenkins-bridge-client

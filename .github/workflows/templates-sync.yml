@@ -17,7 +17,7 @@ jobs:
     if: github.repository == 'linuxdeepin/.github' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
