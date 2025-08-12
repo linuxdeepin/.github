@@ -38,7 +38,7 @@ jobs:
           echo "deb [trusted=yes] https://ci.deepin.com/repo/deepin/deepin-community/stable/ beige main community commercial" >> /etc/apt/sources.list
           echo "deb-src [trusted=yes] https://ci.deepin.com/repo/deepin/deepin-community/stable/ beige main community commercial" >> /etc/apt/sources.list
           apt-get update && apt-get install -y --force-yes ca-certificates apt-transport-https sudo
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ inputs.ref }}
           persist-credentials: false
