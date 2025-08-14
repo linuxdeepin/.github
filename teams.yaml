@@ -908,6 +908,9 @@ teams:
     members:
       - zhaohuiw42
       - guonafu
+      - electricface
+      - qiuzhiqian
+      - Fire-dtx
     repositories_permissions:
       push:
         - lastore-daemon
