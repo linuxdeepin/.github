@@ -165,13 +165,13 @@ jobs:
             await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: '${{ steps.get-version.outputs.TAG }}',
+              tag_name: '${{ steps.get-tag.outputs.TAG }}',
             })
 
             // Add a reminder for needed rebase to PR in open state
             const BOT_NAME = "TAG Bot"
             const COMMENT_HEAD = "**" + BOT_NAME + "**\n\n"
-            const COMMENT_BODY = "New tag: ${{ steps.get-version.outputs.TAG }}\nDISTRIBUTION: ${{ steps.get-version.outputs.DISTRIBUTION }}\nSuggest: synchronizing this PR through rebase #" + context.issue.number
+            const COMMENT_BODY = "New tag: ${{ steps.get-tag.outputs.TAG }}\nDISTRIBUTION: ${{ steps.get-version.outputs.DISTRIBUTION }}\nSuggest: synchronizing this PR through rebase #" + context.issue.number
             for await (const prsResp of github.paginate.iterator(
               github.rest.pulls.list,
               {
