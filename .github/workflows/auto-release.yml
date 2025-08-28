@@ -34,7 +34,7 @@ jobs:
           owner: ${{ github.repository_owner }}
 
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           token: ${{ steps.auth.outputs.token }}
