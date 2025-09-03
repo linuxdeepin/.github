@@ -880,9 +880,14 @@ teams:
       - ComixHe
       - myml
       - dengbo11
+      - reddevillg
+      - ziggy1030
     repositories_permissions:
       push:
         - linyaps-tools
+        - linglong-pica
+        - linglong-repo
+        - linglong-builder-demo
   - name: xzl01
     members:
       - xzl01
