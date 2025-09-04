@@ -30,6 +30,7 @@ teams:
       - caixr23
       - ECQZXC
       - wjyrich
+      - waterlovemelon
     repositories_permissions:
       triage:
         - developer-center
