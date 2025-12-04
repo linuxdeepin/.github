@@ -535,6 +535,7 @@ teams:
       - guokaka
       - san-Hei
       - wineee
+      - Shining-N
     repositories_permissions:
       triage:
         - dwayland
