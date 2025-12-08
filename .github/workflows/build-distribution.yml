@@ -55,7 +55,7 @@ jobs:
         uses: crazy-max/ghaction-import-gpg@v4
         with:
           gpg_private_key: ${{ secrets.BUILD_GPG_PRIVATE_KEY }}
-      - uses: webfactory/ssh-agent@v0.5.4
+      - uses: webfactory/ssh-agent@v0.9.1
         if: ${{ github.repository_owner == 'linuxdeepin' && github.event_name == 'push' }}
         name: Import SSH key
         with:
@@ -265,7 +265,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-      - uses: webfactory/ssh-agent@v0.5.4
+      - uses: webfactory/ssh-agent@v0.9.1
         name: Import SSH key
         with:
           ssh-private-key: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
@@ -469,7 +469,7 @@ jobs:
     needs: [deepin-build]
     runs-on: ubuntu-latest
     steps:
-      - uses: webfactory/ssh-agent@v0.5.4
+      - uses: webfactory/ssh-agent@v0.9.1
         name: Import SSH key
         with:
           ssh-private-key: ${{ secrets.BUILD_SSH_PRIVATE_KEY }}
