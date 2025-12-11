@@ -26,15 +26,7 @@
     "src": "workflow-templates/call-chatOps.yml",
     "dest": "linuxdeepin/dde-kwin/.github/workflows/call-chatOps.yml"
   },
-  {
-    "branches": [
-      "master",
-      "develop/.+",
-      "release/.+"
-    ],
-    "src": "workflow-templates/cppcheck.yml",
-    "dest": "linuxdeepin/dde-kwin/.github/workflows/cppcheck.yml"
-  },
+
   {
     "branches": [
       "master",
