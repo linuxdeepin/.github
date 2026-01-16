@@ -2,6 +2,7 @@ name: SPDX Header Check
 
 on:
   pull_request:
+    types: [opened, synchronize]
     branches: [main]
 
 jobs:
