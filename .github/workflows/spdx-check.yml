@@ -1,0 +1,14 @@
+name: SPDX Header Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  spdx-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: zccrs/github-actions-spdx-checker@main
+        with:
+          base: origin/main
+          exclude: 'vendor/**,node_modules/**,3rdparty/**,*.json'
