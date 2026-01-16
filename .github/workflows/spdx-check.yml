@@ -8,6 +8,9 @@ jobs:
   spdx-check:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: zccrs/github-actions-spdx-checker@v1
         with:
           base: origin/main
