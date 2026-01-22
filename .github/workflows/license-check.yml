@@ -7,25 +7,70 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
+          # fetch-depth: 0 必不可少，否则 git diff 找不到对比基准
+          fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
+
       - name: Setup Python
         id: python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run REUSE lint via pipx
+
+      - name: Run REUSE lint
         id: lcheck
-        run: pipx run reuse==5.0.2 lint
+        run: pipx run reuse==6.2.0 lint
         continue-on-error: true
         env:
           PIPX_DEFAULT_PYTHON: ${{ steps.python.outputs.python-path }}
-      - name: Generate Reports
-        if: steps.lcheck.outcome != 'success'
+
+      - name: Download Copyright Check Script
         run: |
-          printf "## License: REUSE Compliance Check failed\n\n" >> $GITHUB_STEP_SUMMARY || true
-          echo "<details>" >> $GITHUB_STEP_SUMMARY || true
-          pipx run reuse==5.0.2 lint >> $GITHUB_STEP_SUMMARY || true
-          echo "</details>" >> $GITHUB_STEP_SUMMARY || true
+          mkdir -p .github/scripts
+          curl -sSfL https://raw.githubusercontent.com/linuxdeepin/.github/master/.github/scripts/check_copyright.py -o .github/scripts/check_copyright.py
+
+      - name: Check Copyright Year for Changed Files
+        id: year_check
+        # 暂时灰度启用，只对 dde 和 dtk 项目生效
+        if: contains(github.event.repository.name, 'dde') || contains(github.event.repository.name, 'dtk')
+        env:
+          PIPX_DEFAULT_PYTHON: ${{ steps.python.outputs.python-path }}
+          # 配置需要检查的关键字，用分号隔开
+          TARGET_COMPANY: "UnionTech Software;Deepin Technology"
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          # 获取 PR 变动的文件列表
+          CHANGED_FILES=$(git diff --name-only $BASE_SHA...$HEAD_SHA | tr '\n' ' ')
+          
+          # 执行 Python 脚本，如果失败则记录 output 变量
+          if ! pipx run reuse==6.2.0 spdx | python3 .github/scripts/check_copyright.py $CHANGED_FILES > year_check_report.md 2>&1; then
+            echo "failed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate Reports
+        # 使用 outcome 和 outputs 来规避静态检查警告
+        if: steps.lcheck.outcome != 'success' || steps.year_check.outputs.failed == 'true'
+        run: |
+          printf "## License & Copyright Check Report\n\n" >> $GITHUB_STEP_SUMMARY
+          
+          # 1. 处理 REUSE lint 错误
+          if [ "${{ steps.lcheck.outcome }}" != "success" ]; then
+            echo "### ❌ REUSE Compliance Check Failed" >> $GITHUB_STEP_SUMMARY
+            echo "<details><summary>Click to view lint details</summary>" >> $GITHUB_STEP_SUMMARY
+            echo -e "\n\`\`\`" >> $GITHUB_STEP_SUMMARY
+            pipx run reuse==6.2.0 lint >> $GITHUB_STEP_SUMMARY || true
+            echo -e "\`\`\`\n" >> $GITHUB_STEP_SUMMARY
+            echo "</details>" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          # 2. 处理年份检查错误
+          if [ -f year_check_report.md ]; then
+            echo -e "\n---\n" >> $GITHUB_STEP_SUMMARY
+            cat year_check_report.md >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          # 最后强制退出，使整个 Job 状态为失败
           exit 1
         env:
           PIPX_DEFAULT_PYTHON: ${{ steps.python.outputs.python-path }}
