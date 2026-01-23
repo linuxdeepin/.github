@@ -7,13 +7,10 @@ on:
         required: true
       APP_PRIVATE_KEY:
         required: true
-      TRANSIFEX_API_TOKEN:
-        required: true
 
 env:
   APP_ID: ${{ secrets.APP_ID }}
   APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
-  TRANSIFEX_API_TOKEN: ${{ secrets.TRANSIFEX_API_TOKEN }}
 
 jobs:
   auto_tag:
@@ -136,22 +133,30 @@ jobs:
               core.info("UNRELEASED will not create tag")
               return
             }
-            const { data } = await github.rest.git.createTag({
-              repo: context.repo.repo,
-              owner: context.repo.owner,
-              message: "Release " + context.repo.repo + " ${{ steps.get-tag.outputs.TAG }}\n",
-              type: 'commit',
-              object: context.sha,
-              tag: "${{ steps.get-tag.outputs.TAG }}",
-              tagger: {
-                name: "${{ github.event.pull_request.user.login }}",
-                email: "${{ steps.get-email.outputs.email }}",
-                date: (() => {
-                  const date = new Date();
-                  return date.toISOString();
-                })(),
-              },
-            })
+            let data
+            const mergeCommitSha = context.payload.pull_request.head.sha
+            try {
+              const tagResult = await github.rest.git.createTag({
+                repo: context.repo.repo,
+                owner: context.repo.owner,
+                message: "Release " + context.repo.repo + " ${{ steps.get-tag.outputs.TAG }}\n",
+                type: 'commit',
+                object: mergeCommitSha,
+                tag: "${{ steps.get-tag.outputs.TAG }}",
+                tagger: {
+                  name: "${{ github.event.pull_request.user.login }}",
+                  email: "${{ steps.get-email.outputs.email }}",
+                  date: (() => {
+                    const date = new Date();
+                    return date.toISOString();
+                  })(),
+                },
+              })
+              data = tagResult.data
+            } catch (error) {
+              core.setFailed(`Failed to create tag: ${error.message}`)
+              throw error
+            }
 
             const res = await github.rest.git.createRef({
               owner: context.repo.owner,
@@ -165,6 +170,31 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag_name: '${{ steps.get-tag.outputs.TAG }}',
+            })
+
+            // Comment tag creation status on PR
+            const tag_body = "**TAG Bot**\n\n" +
+              "✅ **Tag created successfully**\n\n" +
+              "<details>\n" +
+              "<summary>📋 Tag Details</summary>\n" +
+              "\n" +
+              "- **Tag Name**: `" + data.tag + "`\n" +
+              "- **Tag SHA**: `" + data.sha + "`\n" +
+              "- **Commit SHA**: `" + mergeCommitSha + "`\n" +
+              "- **Tag Message**:\n" +
+              "  ```\n" +
+              "  " + data.message + "\n" +
+              "  ```\n" +
+              "- **Tagger**:\n" +
+              "  - Name: " + data.tagger.name + "\n" +
+              "- **Distribution**: " + distribution + "\n" +
+              "</details>"
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: tag_body
             })
 
             // Add a reminder for needed rebase to PR in open state
@@ -195,3 +225,4 @@ jobs:
                 }
               }
             }
+
