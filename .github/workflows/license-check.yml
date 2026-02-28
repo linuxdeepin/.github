@@ -31,6 +31,8 @@ jobs:
 
       - name: Check Copyright Year for Changed Files
         id: year_check
+        # 暂时灰度启用，只对 dde 和 dtk 项目生效
+        if: contains(github.event.repository.name, 'dde') || contains(github.event.repository.name, 'dtk')
         env:
           PIPX_DEFAULT_PYTHON: ${{ steps.python.outputs.python-path }}
           # 配置需要检查的关键字，用分号隔开
