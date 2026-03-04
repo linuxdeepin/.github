@@ -13,9 +13,9 @@ jobs:
 
       - name: Setup Python
         id: python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: "3.13"
 
       - name: Run REUSE lint
         id: lcheck
@@ -44,7 +44,7 @@ jobs:
           CHANGED_FILES=$(git diff --name-only $BASE_SHA...$HEAD_SHA | tr '\n' ' ')
           
           # 执行 Python 脚本，如果失败则记录 output 变量
-          if ! pipx run reuse==6.2.0 spdx | python3 .github/scripts/check_copyright.py $CHANGED_FILES > year_check_report.md 2>&1; then
+          if ! pipx run reuse==5.1.1 spdx | python3 .github/scripts/check_copyright.py $CHANGED_FILES > year_check_report.md 2>&1; then
             echo "failed=true" >> $GITHUB_OUTPUT
           fi
 
@@ -59,7 +59,7 @@ jobs:
             echo "### ❌ REUSE Compliance Check Failed" >> $GITHUB_STEP_SUMMARY
             echo "<details><summary>Click to view lint details</summary>" >> $GITHUB_STEP_SUMMARY
             echo -e "\n\`\`\`" >> $GITHUB_STEP_SUMMARY
-            pipx run reuse==6.2.0 lint >> $GITHUB_STEP_SUMMARY || true
+            pipx run reuse==5.1.1 lint >> $GITHUB_STEP_SUMMARY || true
             echo -e "\`\`\`\n" >> $GITHUB_STEP_SUMMARY
             echo "</details>" >> $GITHUB_STEP_SUMMARY
           fi
@@ -67,7 +67,7 @@ jobs:
           # 2. 处理年份检查错误
           if [ -f year_check_report.md ]; then
             echo -e "\n---\n" >> $GITHUB_STEP_SUMMARY
-            echo -e "\n*⚠️此处年份问题的警告不影响运行结果，仅供参考。请优先处理前述 REUSE lint 问题！⚠️*\n\n" >> $GITHUB_STEP_SUMMARY
+            echo -e "\n*⚠️此处若有年份问题的警告，也不影响运行结果，仅供参考。请优先处理前述 REUSE lint 问题！⚠️*\n\n" >> $GITHUB_STEP_SUMMARY
             cat year_check_report.md >> $GITHUB_STEP_SUMMARY
           fi
           
