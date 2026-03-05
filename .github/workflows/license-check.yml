@@ -31,7 +31,7 @@ jobs:
           
           # lint 失败，获取 JSON 输出进行详细检查
           echo "⚠️ REUSE lint failed with exit code $LINT_EXIT_CODE, checking JSON output for actual issues..."
-          JSON_OUTPUT=$(pipx run reuse==6.2.0 lint --json 2>&1 || true)
+          JSON_OUTPUT=$(pipx run reuse==6.2.0 lint --json 2>/dev/null || true)
           
           # 检查 non_compliant 字段中是否有任何非空数组
           # 逻辑：提取所有数组类型的字段值，筛选出长度>0的，如果存在则说明有真实问题
