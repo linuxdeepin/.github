@@ -145,7 +145,6 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: zccrs/github-actions-spdx-checker@main
-        if: contains(github.event.repository.name, 'dde') || contains(github.event.repository.name, 'dtk')
         with:
           include: '*.py,*.js,*.jsx,*.tsx,*.java,*.cpp,*.c,*.h,*.hpp,*.go,*.rs,*.rb,*.php,*.sh,*.xml,*.yaml,*.yml,*.qml,CMakeLists.txt,Makefile'
           exclude: 'vendor/**,node_modules/**'
