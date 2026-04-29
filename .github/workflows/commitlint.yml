@@ -12,5 +12,30 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
+      - name: check PR description for AI co-author pattern
+        shell: bash
+        run: |
+          BLOCKED_PATTERN='Co-authored-by:.*ai|Co-authored-by:.*agent|Co-authored-by:.*copilot|Co-authored-by:.*llm|Co-authored-by:.*gpt'
+          PR_BODY="${{ github.event.pull_request.body }}"
+          if echo "${PR_BODY}" | grep -Eiq "${BLOCKED_PATTERN}"; then
+            echo "FAIL: PR description contains blocked co-author AI pattern." >&2
+            echo "Blocked pattern: ${BLOCKED_PATTERN}" >&2
+            echo "Please remove AI-generated co-author lines from PR description." >&2
+            exit 1
+          fi
+          echo "PASS: PR description does not contain blocked AI co-author pattern."
+
+      - name: check commit messages for AI co-author pattern
+        shell: bash
+        run: |
+          BLOCKED_PATTERN='Co-authored-by:.*ai|Co-authored-by:.*agent|Co-authored-by:.*copilot|Co-authored-by:.*llm|Co-authored-by:.*gpt'
+          COMMIT_MSGS=$(git log --format=%B ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} 2>/dev/null || true)
+          if [[ -n "${COMMIT_MSGS}" ]] && echo "${COMMIT_MSGS}" | grep -Eiq "${BLOCKED_PATTERN}"; then
+            echo "FAIL: Commit messages contain blocked co-author AI pattern." >&2
+            echo "Blocked pattern: ${BLOCKED_PATTERN}" >&2
+            exit 1
+          fi
+          echo "PASS: Commit messages do not contain blocked AI co-author pattern."
+
       - name: Call Conventional Commits Checker
         uses: linuxdeepin/action-conventionalcommits-checker@master
