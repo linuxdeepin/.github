@@ -14,9 +14,10 @@ jobs:
 
       - name: check PR description for AI co-author pattern
         shell: bash
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
         run: |
           BLOCKED_PATTERN='Co-authored-by:.*ai|Co-authored-by:.*agent|Co-authored-by:.*copilot|Co-authored-by:.*llm|Co-authored-by:.*gpt'
-          PR_BODY="${{ github.event.pull_request.body }}"
           if echo "${PR_BODY}" | grep -Eiq "${BLOCKED_PATTERN}"; then
             echo "FAIL: PR description contains blocked co-author AI pattern." >&2
             echo "Blocked pattern: ${BLOCKED_PATTERN}" >&2
