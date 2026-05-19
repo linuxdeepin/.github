@@ -142,7 +142,6 @@ teams:
       - lzwind
       - pengfeixx
       - wyu71
-      - myk1343
       - max-lvs
     repositories_permissions:
       push:
@@ -171,14 +170,14 @@ teams:
       - lzwind
       - pengfeixx
       - wyu71
-      - rb-union
-      - myk1343
       - lJxDabab
       - add-uos
       - yang233000
       - yoho0623
       - Tw1012
       - JWWTSL
+      - Resurgamz
+      - tianming-1996
     repositories_permissions:
       triage:
         - deepin-camera
@@ -205,7 +204,6 @@ teams:
     members:
       - lzwind
       - wyu71
-      - rb-union
       - pengfeixx
       - max-lvs
     repositories_permissions:
@@ -227,16 +225,16 @@ teams:
     parent_team: Projects
     members:
       - lzwind
-      - rb-union
       - pengfeixx
       - wyu71
-      - myk1343
       - lJxDabab
       - add-uos
       - yang233000
       - yoho0623
       - Tw1012
       - JWWTSL
+      - Resurgamz
+      - tianming-1996
     repositories_permissions:
       triage:
         - deepin-draw
@@ -266,8 +264,6 @@ teams:
     members:
       - lzwind
       - wyu71
-      - rb-union
-      - myk1343
     repositories_permissions:
       triage:
         - dtkdevice
@@ -438,6 +434,8 @@ teams:
       - yoho0623
       - Tw1012
       - dengzhongyuan365-dev
+      - Resurgamz
+      - tianming-1996
     repositories_permissions:
       triage:
         - dde-file-manager
