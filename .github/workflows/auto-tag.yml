@@ -134,7 +134,7 @@ jobs:
               return
             }
             let data
-            const mergeCommitSha = context.payload.pull_request.head.sha
+            const mergeCommitSha = context.payload.pull_request.merge_commit_sha
             try {
               const tagResult = await github.rest.git.createTag({
                 repo: context.repo.repo,
