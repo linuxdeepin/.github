@@ -243,7 +243,7 @@ jobs:
 
       - name: 创建PR
         id: cpr
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v7.0.8
         with:
           token: ${{ steps.auth.outputs.token }}
           title: "Release ${{ steps.validate_version.outputs.version }}"
