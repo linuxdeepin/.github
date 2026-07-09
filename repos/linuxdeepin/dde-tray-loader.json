@@ -50,5 +50,12 @@
     ],
     "src": "workflow-templates/call-auto-tag.yml",
     "dest": "linuxdeepin/dde-tray-loader/.github/workflows/call-auto-tag.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/dde-tray-loader/.github/workflows/call-update-changelog.yml"
   }
 ]

@@ -62,6 +62,13 @@
     "branch": [
       "master"
     ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/go-dbus-factory/.github/workflows/call-update-changelog.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
     "src": "workflow-templates/call-tag-build.yml",
     "deletelist": [
       ".github/workflows/call-tag-build.yml"
