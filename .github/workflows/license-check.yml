@@ -5,11 +5,12 @@ jobs:
   Check-License:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # fetch-depth: 0 必不可少，否则 git diff 找不到对比基准
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Setup Python
         id: python
@@ -113,9 +114,10 @@ jobs:
   Check-README:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: Install zsh
         run: |
           sudo sed -i 's/azure.archive.ubuntu.com/mirrors.layeronline.com/g' /etc/apt/sources.list
@@ -143,10 +145,11 @@ jobs:
   Check-SPDX-Copyright:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
       - uses: zccrs/github-actions-spdx-checker@main
         with:
           include: '*.py,*.js,*.jsx,*.tsx,*.java,*.cpp,*.c,*.h,*.hpp,*.go,*.rs,*.rb,*.php,*.sh,*.xml,*.yaml,*.yml,*.qml,CMakeLists.txt,Makefile'

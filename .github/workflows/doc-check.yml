@@ -57,9 +57,10 @@ jobs:
           echo "Init failed after $retries attempts. Giving up."
           exit 1
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
           persist-credentials: false
 
       - uses: linuxdeepin/action-doxygencheck@master

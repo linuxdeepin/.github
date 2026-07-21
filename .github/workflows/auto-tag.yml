@@ -16,9 +16,10 @@ jobs:
   auto_tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
           persist-credentials: false
       - name: get changelog version
         id: get-version
