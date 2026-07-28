@@ -153,6 +153,11 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           allow-unsafe-pr-checkout: true
+      - name: Fetch base ref and test refs
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.sha }}
+          git cat-file -e ${{ github.event.pull_request.base.sha }} || echo "Base SHA 不存在！"
+          git cat-file -e ${{ github.event.pull_request.head.sha }} || echo "Head SHA 不存在！"
       - uses: zccrs/github-actions-spdx-checker@main
         with:
           include: '*.py,*.js,*.jsx,*.tsx,*.java,*.cpp,*.c,*.h,*.hpp,*.go,*.rs,*.rb,*.php,*.sh,*.xml,*.yaml,*.yml,*.qml,CMakeLists.txt,Makefile'
