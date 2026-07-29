@@ -9,7 +9,7 @@ jobs:
         with:
           # fetch-depth: 0 必不可少，否则 git diff 找不到对比基准
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: refs/heads/${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           allow-unsafe-pr-checkout: true
 
@@ -117,7 +117,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: refs/heads/${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           allow-unsafe-pr-checkout: true
       - name: Install zsh
@@ -150,7 +150,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: refs/heads/${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           allow-unsafe-pr-checkout: true
       - name: Fetch base ref and test refs
