@@ -14,6 +14,12 @@ jobs:
           allow-unsafe-pr-checkout: true
           fetch-depth: 0
 
+      - name: Fetch base ref and test refs
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.sha }}
+          git cat-file -e ${{ github.event.pull_request.base.sha }} || echo "Base SHA 不存在！"
+          git cat-file -e ${{ github.event.pull_request.head.sha }} || echo "Head SHA 不存在！"
+
       - name: check PR description for AI co-author pattern
         shell: bash
         env:
