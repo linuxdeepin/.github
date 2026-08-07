@@ -14,7 +14,7 @@
     "dest": "linuxdeepin/linglong-pica/.github/workflows/call-clacheck.yml"
   },
   {
-    "branche": [
+    "branch": [
       "master"
     ],
     "src": "workflow-templates/call-commitlint.yml",
