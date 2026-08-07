@@ -18,7 +18,7 @@
     "dest": "linuxdeepin/linglong-loader/.github/workflows/call-clacheck.yml"
   },
   {
-    "branche": [
+    "branches": [
       "master",
       "develop/snipe",
       "release/snipe"
