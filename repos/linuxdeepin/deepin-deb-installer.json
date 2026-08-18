@@ -91,5 +91,13 @@
       ".github/workflows/call-tag-build.yml"
     ],
     "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "release/eagle"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/deepin-deb-installer/.github/workflows/call-update-changelog.yml"
   }
 ]

@@ -81,5 +81,15 @@
       ".github/workflows/call-tag-build.yml"
     ],
     "dest": "linuxdeepin/dde-grand-search/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "develop/snipe",
+      "release/snipe",
+      "release/eagle"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/dde-grand-search/.github/workflows/call-update-changelog.yml"
   }
 ]

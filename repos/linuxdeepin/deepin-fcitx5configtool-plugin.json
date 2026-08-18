@@ -81,5 +81,12 @@
       ".github/workflows/call-tag-build.yml"
     ],
     "dest": "linuxdeepin/deepin-fcitx5configtool-plugin/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/deepin-fcitx5configtool-plugin/.github/workflows/call-update-changelog.yml"
   }
 ]

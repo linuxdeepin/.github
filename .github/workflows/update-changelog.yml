@@ -232,6 +232,7 @@ jobs:
           safe_version = re.sub(r"[^A-Za-z0-9._-]+", "-", version).strip("-")
 
           output_line("version", version)
+          output_line("current_version", current_version)
           output_line("safe_version", safe_version)
           output_line("distribution", distribution)
           output_line("base_branch", base_branch)
@@ -266,16 +267,104 @@ jobs:
           for title in titles[1:]:
               subprocess.run(["dch", "-a", title], check=True)
 
+      - name: Sync linglong.yaml version
+        id: sync_linglong
+        shell: python
+        env:
+          VERSION: ${{ steps.prepare.outputs.version }}
+          CURRENT_VERSION: ${{ steps.prepare.outputs.current_version }}
+        run: |
+          import os
+          import pathlib
+          import re
+
+          version = os.environ["VERSION"].strip()
+          current_version = os.environ["CURRENT_VERSION"].strip()
+          repo_root = pathlib.Path(os.environ["GITHUB_WORKSPACE"])
+
+          def write_output(files):
+              if len(files) == 1:
+                  with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+                      fh.write(f"files={files[0]}\n")
+              else:
+                  delimiter = "CHANGELOGFILES"
+                  with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+                      fh.write(f"files<<{delimiter}\n")
+                      for item in files:
+                          fh.write(item + "\n")
+                      fh.write(delimiter + "\n")
+
+          def strip_epoch(value):
+              if ":" in value:
+                  _, value = value.split(":", 1)
+              return value
+
+          current_base = strip_epoch(current_version)
+
+          targets = sorted(repo_root.glob("linglong*.yaml"))
+          if not targets:
+              print("no linglong*.yaml found, skip")
+              write_output(["debian/changelog"])
+              raise SystemExit(0)
+
+          changed = []
+          for path in targets:
+              lines = path.read_text(encoding="utf-8").splitlines()
+              package_start = next(
+                  (i for i, line in enumerate(lines) if re.match(r"^package:\s*$", line)),
+                  None,
+              )
+              if package_start is None:
+                  print(f"skip {path}: no package block")
+                  continue
+
+              updated = False
+              for i, line in enumerate(lines):
+                  if i <= package_start:
+                      continue
+                  if re.match(r"^\S", line):
+                      break
+                  m = re.match(r"^(\s*version:\s*)(\S+)\s*$", line)
+                  if not m:
+                      continue
+                  old = m.group(2).strip()
+                  old_base = strip_epoch(old)
+                  parts = old_base.split(".")
+                  new_val = old
+                  if (
+                      len(parts) > 1
+                      and parts[-1].isdigit()
+                      and ".".join(parts[:-1]) == current_base
+                  ):
+                      new_val = f"{version}.{parts[-1]}"
+                  elif old_base == current_base:
+                      new_val = version
+                  if new_val != old:
+                      lines[i] = m.group(1) + new_val
+                      updated = True
+                      print(f"bump {path} version: {old} -> {new_val}")
+
+              if updated:
+                  path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+                  changed.append(path.name)
+
+          if changed:
+              write_output(["debian/changelog"] + changed)
+          else:
+              write_output(["debian/changelog"])
+
       - name: Show changelog diff
         if: ${{ !inputs.create_pr }}
-        run: git diff -- debian/changelog
+        run: git diff -- debian/changelog linglong*.yaml
 
       - name: Upload generated changelog
         if: ${{ !inputs.create_pr }}
         uses: actions/upload-artifact@v4
         with:
           name: generated-changelog
-          path: debian/changelog
+          path: |
+            debian/changelog
+            linglong*.yaml
 
       - name: Create pull request
         id: create_pr
@@ -298,8 +387,7 @@ jobs:
             - Base branch: `${{ steps.prepare.outputs.base_branch }}`
             - Base changelog commit: `${{ steps.prepare.outputs.base_sha }}`
             - Head commit: `${{ steps.prepare.outputs.head_sha }}`
-          add-paths: |
-            debian/changelog
+          add-paths: ${{ steps.sync_linglong.outputs.files }}
           delete-branch: true
 
       - name: Show pull request result

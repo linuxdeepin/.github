@@ -81,5 +81,14 @@
       ".github/workflows/call-tag-build.yml"
     ],
     "dest": "linuxdeepin/deepin-screen-recorder/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "release/snipe",
+      "release/eagle"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/deepin-screen-recorder/.github/workflows/call-update-changelog.yml"
   }
 ]
