@@ -1,0 +1,9 @@
+[
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/udisks2-qt6/.github/workflows/call-update-changelog.yml"
+  }
+]

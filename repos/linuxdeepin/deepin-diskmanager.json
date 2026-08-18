@@ -90,5 +90,13 @@
       ".github/workflows/call-tag-build.yml"
     ],
     "dest": "linuxdeepin/deepin-diskmanager/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "develop/snipe"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/deepin-diskmanager/.github/workflows/call-update-changelog.yml"
   }
 ]

@@ -90,5 +90,12 @@
       ".github/workflows/call-tag-build.yml"
     ],
     "dest": "linuxdeepin/docparser/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/docparser/.github/workflows/call-update-changelog.yml"
   }
 ]

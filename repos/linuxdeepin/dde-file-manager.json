@@ -109,5 +109,13 @@
     ],
     "src": "workflow-templates/call-static-check.yml",
     "dest": "linuxdeepin/dde-file-manager/.github/workflows/call-static-check.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/dde-file-manager/.github/workflows/call-update-changelog.yml"
   }
 ]

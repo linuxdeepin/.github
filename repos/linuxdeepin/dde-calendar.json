@@ -90,5 +90,13 @@
       ".github/workflows/call-tag-build.yml"
     ],
     "dest": "linuxdeepin/dde-calendar/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/dde-calendar/.github/workflows/call-update-changelog.yml"
   }
 ]

@@ -74,5 +74,14 @@
       ".github/workflows/call-tag-build.yml"
     ],
     "dest": "linuxdeepin/deepin-anything/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branch": [
+      "master",
+      "develop/snipe",
+      "release/snipe"
+    ],
+    "src": "workflow-templates/call-update-changelog.yml",
+    "dest": "linuxdeepin/deepin-anything/.github/workflows/call-update-changelog.yml"
   }
 ]
