@@ -2,7 +2,7 @@ name: License and README Check
 on: workflow_call
 
 jobs:
-  Check-License:
+  Check-License-n-README:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
@@ -12,7 +12,23 @@ jobs:
           ref: refs/heads/${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           allow-unsafe-pr-checkout: true
+      #region SPDX header year check begin
+      - name: Fetch base ref and test refs
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.sha }}
+          git cat-file -e ${{ github.event.pull_request.base.sha }} || echo "Base SHA 不存在！"
+          git cat-file -e ${{ github.event.pull_request.head.sha }} || echo "Head SHA 不存在！"
+      - name: SPDX Year Range Checker
+        uses: zccrs/github-actions-spdx-checker@main
+        with:
+          include: '*.py,*.js,*.jsx,*.tsx,*.java,*.cpp,*.c,*.h,*.hpp,*.go,*.rs,*.rb,*.php,*.sh,*.xml,*.yaml,*.yml,*.qml,CMakeLists.txt,Makefile'
+          exclude: 'vendor/**,node_modules/**'
+          holder: '*UnionTech*'
+          base: ${{ github.event.pull_request.base.sha }}
+          head: ${{ github.event.pull_request.head.sha }}
+      #endregion
 
+      #region REUSE check
       - name: Setup Python
         id: python
         uses: actions/setup-python@v6
@@ -112,14 +128,9 @@ jobs:
           exit 1
         env:
           PIPX_DEFAULT_PYTHON: ${{ steps.python.outputs.python-path }}
-  Check-README:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: refs/heads/${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          allow-unsafe-pr-checkout: true
+      #endregion
+
+      #region README check
       - name: Install zsh
         run: |
           sudo sed -i 's/azure.archive.ubuntu.com/mirrors.layeronline.com/g' /etc/apt/sources.list
@@ -144,24 +155,4 @@ jobs:
       - name: Check and Reflect Status
         if: steps.rcheck.outcome != 'success' || steps.zhrcheck.outcome != 'success'
         run: exit 1
-  Check-SPDX-Copyright:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          ref: refs/heads/${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          allow-unsafe-pr-checkout: true
-      - name: Fetch base ref and test refs
-        run: |
-          git fetch origin ${{ github.event.pull_request.base.sha }}
-          git cat-file -e ${{ github.event.pull_request.base.sha }} || echo "Base SHA 不存在！"
-          git cat-file -e ${{ github.event.pull_request.head.sha }} || echo "Head SHA 不存在！"
-      - uses: zccrs/github-actions-spdx-checker@main
-        with:
-          include: '*.py,*.js,*.jsx,*.tsx,*.java,*.cpp,*.c,*.h,*.hpp,*.go,*.rs,*.rb,*.php,*.sh,*.xml,*.yaml,*.yml,*.qml,CMakeLists.txt,Makefile'
-          exclude: 'vendor/**,node_modules/**'
-          holder: '*UnionTech*'
-          base: ${{ github.event.pull_request.base.sha }}
-          head: ${{ github.event.pull_request.head.sha }}
+      #endregion
