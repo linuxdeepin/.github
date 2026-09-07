@@ -836,9 +836,12 @@ teams:
       - xzl01
       - zccrs
       - Zeno-sole
+      - dongert
+      - f-jye
     repositories_permissions:
       push:
         - deepin-lkrg
+        - asterinas
   - name: migration-tools
     parent_team: Maintainers
     members:
