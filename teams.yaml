@@ -667,6 +667,7 @@ teams:
       - yukarichiba
       - hudeng-go
       - Cherrling
+      - wxphaha
     repositories_permissions:
       push:
         - deepin-upgrade-manager
@@ -674,6 +675,7 @@ teams:
         - default-settings
         - deepin-desktop-base
         - deepin-global-translation
+        - deepin-power-control
   - name: deepin-unioncode
     parent_team: Maintainers
     members:
