@@ -167,6 +167,7 @@ teams:
         - dde-calendar
         - libqapt-qt6
         - deepin-scanner
+        - rofd
   - name: Multimedia-audio-video-member
     parent_team: Projects
     members:
@@ -202,6 +203,7 @@ teams:
         - dde-calendar
         - libqapt-qt6
         - deepin-scanner
+        - rofd
   - name: Multimedia-graphics
     parent_team: Maintainers
     members:
