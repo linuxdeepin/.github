@@ -106,6 +106,7 @@ teams:
         - deepin-screensaver
         - deepin-face
         - deepin-skills
+        - deepin-home
   - name: deepin
     members:
       - felixonmars
