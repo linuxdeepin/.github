@@ -107,6 +107,7 @@ teams:
         - deepin-face
         - deepin-skills
         - deepin-home
+        - dcc-insider-plugin
   - name: deepin
     members:
       - felixonmars
