@@ -84,7 +84,7 @@ jobs:
 
       - name: 获取 actor 的昵称
         id: actor_name
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { data: user } = await github.rest.users.getByUsername({
