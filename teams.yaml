@@ -35,6 +35,7 @@ teams:
       - ut005973
       - 52cyb
       - xujin177
+      - MyLeeJiEun
     repositories_permissions:
       triage:
         - developer-center
