@@ -173,6 +173,7 @@ teams:
         - libqapt-qt6
         - deepin-scanner
         - rofd
+        - deepin-echoflow
   - name: Multimedia-audio-video-member
     parent_team: Projects
     members:
@@ -209,6 +210,7 @@ teams:
         - libqapt-qt6
         - deepin-scanner
         - rofd
+        - deepin-echoflow
   - name: Multimedia-graphics
     parent_team: Maintainers
     members:
