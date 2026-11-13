@@ -113,5 +113,12 @@
       ".github/ISSUE_TEMPLATE/unit-test-report.md"
     ],
     "dest": "linuxdeepin/dtkwidget/.github/ISSUE_TEMPLATE/config.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-verify-group-version.yml",
+    "dest": "linuxdeepin/dtkwidget/.github/workflows/call-verify-group-version.yml"
   }
 ]
