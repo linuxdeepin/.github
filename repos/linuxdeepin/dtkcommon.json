@@ -74,5 +74,12 @@
     ],
     "src": "issue-templates/dtk-config.yml",
     "dest": "linuxdeepin/dtkcommon/.github/ISSUE_TEMPLATE/config.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-verify-group-version.yml",
+    "dest": "linuxdeepin/dtkcommon/.github/workflows/call-verify-group-version.yml"
   }
 ]

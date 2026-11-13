@@ -1,0 +1,226 @@
+name: Verify group version
+
+on: workflow_call
+
+permissions:
+  contents: read
+  pull-requests: read
+  statuses: write
+
+jobs:
+  verify:
+    name: Verify group version
+    runs-on: ubuntu-latest
+    concurrency:
+      group: group-version-guard-${{ github.event.pull_request.head.sha }}
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - name: Mark version check pending
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/statuses/$PR_HEAD_SHA" --method POST \
+            -f state=pending -f context=group-version-guard \
+            -f description='正在检查成员版本与本轮发布记录' \
+            -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" > /dev/null
+
+      - name: Install deps
+        run: pip install --quiet pyyaml
+
+      - name: Verify changelog version
+        id: verify
+        run: |
+          python3 - <<'PY'
+          import base64
+          import json
+          import os
+          import re
+          import subprocess
+          import tempfile
+          from pathlib import Path
+          from urllib.parse import urlencode
+
+          import yaml
+
+          MARKER = "<!-- group-release\n"
+
+          def api(path, paginate=False):
+              args = ["gh", "api", path]
+              if paginate:
+                  args += ["--paginate", "--slurp"]
+              result = subprocess.run(args, capture_output=True, text=True)
+              if result.returncode:
+                  raise RuntimeError(f"GitHub API 失败: {path}: {result.stderr.strip()}")
+              value = json.loads(result.stdout)
+              return [item for page in value for item in page] if paginate else value
+
+          def content(repo, path, sha):
+              value = api(f"repos/{repo}/contents/{path}?{urlencode({'ref': sha})}")
+              return base64.b64decode(value["content"]).decode("utf-8")
+
+          def head_version(repo, sha):
+              with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8") as f:
+                  f.write(content(repo, "debian/changelog", sha))
+                  f.flush()
+                  result = subprocess.run(["dpkg-parsechangelog", "-l", f.name, "-S", "Version"],
+                                          capture_output=True, text=True)
+              if result.returncode or not result.stdout.strip():
+                  raise RuntimeError(f"无法读取 {repo}@{sha} 的 changelog: {result.stderr.strip()}")
+              return result.stdout.strip()
+
+          def repo_names(cfg, group, owner):
+              overrides = cfg.get("repo_overrides", {})
+              return [f"{owner}/{overrides.get(m, m)}" for m in cfg["groups"][group]["members"]]
+
+          def release_record(repo, sha, group):
+              commit = api(f"repos/{repo}/git/commits/{sha}")
+              for hops in range(101):
+                  if MARKER in commit["message"]:
+                      release = json.loads(commit["message"].split(MARKER, 1)[1].split("\n-->", 1)[0])
+                      if release["group"] != group or [p["sha"] for p in commit["parents"]] != [release["base_sha"]]:
+                          raise RuntimeError("DDE 发布记录已改变，请先修复原基线 PR")
+                      return release
+                  if hops == 100 or len(commit["parents"]) != 2:
+                      break
+                  commit = api(f"repos/{repo}/git/commits/{commit['parents'][0]['sha']}")
+              raise RuntimeError("DDE 基线 PR 缺少原始发布记录，请先核实")
+
+          def check(repo, pr):
+              before = head_version(repo, pr["base"]["sha"])
+              source = pr["head"]["repo"]
+              if not source:
+                  raise RuntimeError("PR 来源仓库已删除，无法校验")
+              after = head_version(source["full_name"], pr["head"]["sha"])
+              if before == after:
+                  return "changelog 版本未变化"
+              if subprocess.run(["dpkg", "--compare-versions", after, "gt", before]).returncode:
+                  raise RuntimeError(f"成员版本只能升版: {before} -> {after}")
+
+              owner = repo.split("/", 1)[0]
+              baseline = f"{owner}/dde"
+              default = api(f"repos/{baseline}")["default_branch"]
+              cfg = yaml.safe_load(content(baseline, "groups.yaml", default))
+              groups = [g for g in cfg["groups"] if repo in repo_names(cfg, g, owner)]
+              if len(groups) != 1:
+                  raise RuntimeError(f"{repo} 不属于唯一的 DDE 版本组，请核实分组配置")
+              group = groups[0]
+              query = urlencode({"state": "all", "head": f"{owner}:baseline/{group}",
+                                 "sort": "created", "direction": "desc", "per_page": 1})
+              prs = api(f"repos/{baseline}/pulls?{query}")
+              if not prs:
+                  raise RuntimeError(f"{group} 没有统一发布记录，请从 DDE Release group 发起，不能单独改版")
+              baseline_pr = prs[0]
+              if (not baseline_pr["head"]["repo"] or baseline_pr["head"]["repo"]["full_name"] != baseline
+                      or baseline_pr["head"]["ref"] != f"baseline/{group}"
+                      or baseline_pr["base"]["ref"] != default):
+                  raise RuntimeError("DDE 基线 PR 的来源或目标分支不符")
+              release = release_record(baseline, baseline_pr["head"]["sha"], group)
+              if (release["base_branch"] != default
+                      or [m["repo"] for m in release["members"]] != repo_names(cfg, group, owner)):
+                  raise RuntimeError("DDE 本轮成员或目标分支已改变，请先核实原发布")
+              member = next(m for m in release["members"] if m["repo"] == repo)
+              baseline_version = cfg["groups"][group]["version"]
+              if "version" in member:
+                  baseline_version = baseline_version.split(":", 1)[-1]
+              if subprocess.run(["dpkg", "--compare-versions", release["version"], "ge", baseline_version]).returncode:
+                  raise RuntimeError("DDE 发布记录已过期，不能继续旧版本")
+              target = member.get("version", release["version"])
+              if subprocess.run(["dpkg", "--validate-version", target]).returncode:
+                  raise RuntimeError(f"无效成员目标版本: {target}")
+              if "version" in member and target.split(":", 1)[-1] != release["version"]:
+                  raise RuntimeError("成员目标版本与组版本不符")
+              safe = re.sub(r"[^A-Za-z0-9._-]+", "-", target).strip("-")
+              branch = f"release-{target}" if group == "G1" else f"automation/update-changelog/{safe}"
+              if (after != target or source["full_name"] != repo or pr["head"]["ref"] != branch
+                      or pr["base"]["ref"] != member["base"] or pr["created_at"] < release["started_at"]):
+                  raise RuntimeError(f"{repo} 的改版 PR 不属于 {group} 本轮 {target}，请从 DDE Release group 发起")
+              return f"{group} 本轮发布 {target}，成员 PR 与发布记录一致"
+
+          def identity(pr):
+              source = pr["head"]["repo"] or {}
+              return {"number": pr["number"], "head_sha": pr["head"]["sha"],
+                      "head_repo": source.get("full_name"), "head_ref": pr["head"]["ref"],
+                      "base_ref": pr["base"]["ref"]}
+
+          def main():
+              repo = os.environ["GITHUB_REPOSITORY"]
+              with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as f:
+                  event = json.load(f)
+              pr = api(f"repos/{repo}/pulls/{event['number']}")
+              if pr["head"]["sha"] != os.environ["PR_HEAD_SHA"]:
+                  raise RuntimeError("PR 提交已变化，请等待新提交的检查")
+              query = urlencode({"state": "open", "per_page": 100})
+              related = api(f"repos/{repo}/pulls?{query}", paginate=True)
+              open_prs = [p for p in related
+                          if p["state"] == "open" and p["head"]["sha"] == os.environ["PR_HEAD_SHA"]]
+              if not any(p["number"] == pr["number"] for p in open_prs) and pr["state"] == "open":
+                  open_prs.append(pr)
+              for item in open_prs:
+                  check(repo, item)
+              Path(os.environ["RUNNER_TEMP"], "verified-prs.json").write_text(
+                  json.dumps(sorted((identity(pr) for pr in open_prs), key=lambda pr: pr["number"])) + "\n",
+                  encoding="utf-8")
+              print(f"同提交开放 PR 校验通过: {len(open_prs)}")
+
+          if __name__ == "__main__":
+              main()
+          PY
+
+      - name: Publish version check result
+        if: always()
+        env:
+          VERIFY_OUTCOME: ${{ steps.verify.outcome }}
+        run: |
+          set -euo pipefail
+          current_state=success
+          if [ "$VERIFY_OUTCOME" != "success" ]; then
+            current_state=failure
+          fi
+          if [ "$current_state" = success ]; then
+            if ! gh api "repos/$GITHUB_REPOSITORY/pulls?state=open&per_page=100" --paginate --slurp \
+                > "$RUNNER_TEMP/current-prs.json"; then
+              echo '::error::无法刷新关联 PR，成员版本校验不能通过' >&2
+              current_state=failure
+            elif ! python3 - "$RUNNER_TEMP/verified-prs.json" "$RUNNER_TEMP/current-prs.json" "$PR_HEAD_SHA" <<'PY'
+          import json
+          import sys
+
+          expected_file, current_file, head_sha = sys.argv[1:]
+          with open(expected_file, encoding="utf-8") as f:
+              expected = json.load(f)
+          with open(current_file, encoding="utf-8") as f:
+              pages = json.load(f)
+          if pages and isinstance(pages[0], dict):
+              pages = [pages]
+          current = [item for page in pages for item in page]
+
+          def identity(pr):
+              source = pr["head"]["repo"] or {}
+              return {"number": pr["number"], "head_sha": pr["head"]["sha"],
+                      "head_repo": source.get("full_name"), "head_ref": pr["head"]["ref"],
+                      "base_ref": pr["base"]["ref"]}
+
+          current = sorted((identity(pr) for pr in current
+                            if pr["state"] == "open" and pr["head"]["sha"] == head_sha),
+                           key=lambda pr: pr["number"])
+          if current != expected:
+              print("::error::校验期间 PR 的目标、提交或开放集合发生变化，需要重新检查", file=sys.stderr)
+              raise SystemExit(1)
+          PY
+            then
+              current_state=failure
+            fi
+          fi
+          if [ "$current_state" = "success" ]; then
+            state=success
+            description='成员版本校验通过'
+          else
+            state=failure
+            description='成员版本校验失败，详见工作流日志'
+          fi
+          gh api "repos/$GITHUB_REPOSITORY/statuses/$PR_HEAD_SHA" --method POST \
+            -f state="$state" -f context=group-version-guard \
+            -f description="$description" \
+            -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" > /dev/null
+          test "$current_state" = success

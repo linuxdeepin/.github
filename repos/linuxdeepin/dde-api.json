@@ -74,5 +74,12 @@
     ],
     "src": "workflow-templates/call-update-changelog.yml",
     "dest": "linuxdeepin/dde-api/.github/workflows/call-update-changelog.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-verify-group-version.yml",
+    "dest": "linuxdeepin/dde-api/.github/workflows/call-verify-group-version.yml"
   }
 ]

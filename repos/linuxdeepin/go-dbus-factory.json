@@ -74,5 +74,12 @@
       ".github/workflows/call-tag-build.yml"
     ],
     "dest": "linuxdeepin/go-dbus-factory/.github/workflows/call-tag-build.yml"
+  },
+  {
+    "branches": [
+      "master"
+    ],
+    "src": "workflow-templates/call-verify-group-version.yml",
+    "dest": "linuxdeepin/go-dbus-factory/.github/workflows/call-verify-group-version.yml"
   }
 ]
