@@ -1,14 +1,18 @@
 [
   {
-    "branch": [
-      "master"
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-update-changelog.yml",
     "dest": "linuxdeepin/dde-session-shell-snipe/.github/workflows/call-update-changelog.yml"
   },
   {
     "branches": [
-      "master"
+      "master",
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-verify-group-version.yml",
     "dest": "linuxdeepin/dde-session-shell-snipe/.github/workflows/call-verify-group-version.yml"

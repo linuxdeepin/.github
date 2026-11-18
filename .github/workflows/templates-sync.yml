@@ -14,7 +14,7 @@ concurrency:
 jobs:
   templates-sync:
     # limit push on linuxdeepin/.github master branch
-    if: github.repository == 'linuxdeepin/.github' && github.ref == 'refs/heads/master'
+    if: github.repository == 'linuxdeepin/.github' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -37,7 +37,6 @@ jobs:
           separator: " "
           files: |
             workflow-templates/*.yml
-            .github/workflows/templates-sync.yml
 
       # Install ssh key and known_hosts
       - name: Git config
@@ -54,7 +53,7 @@ jobs:
 
       - name: Sync changed configs
         uses: linuxdeepin/action-sync@main
-        if: steps.changed-configs.outputs.any_changed == 'true'
+        if: steps.changed-configs.outputs.any_changed == 'true' && steps.changed-files.outputs.any_changed != 'true'
         with:
           files: "${{ steps.changed-configs.outputs.all_changed_files }}"
           message: |
@@ -67,20 +66,71 @@ jobs:
 
       - name: Get all configs
         id: all-configs
-        if: steps.changed-files.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
+        if: github.event_name != 'workflow_dispatch' && steps.changed-files.outputs.any_changed == 'true' && steps.changed-configs.outputs.any_changed != 'true'
         run: |
           all_configs=`find repos -type f | grep json | xargs`
           echo all configs $all_configs
           echo "ALL_CONFIGS=$all_configs" >> $GITHUB_OUTPUT
       - name: Sync all files
         uses: linuxdeepin/action-sync@main
-        if: steps.changed-files.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
+        if: github.event_name != 'workflow_dispatch' && steps.changed-files.outputs.any_changed == 'true' && steps.changed-configs.outputs.any_changed != 'true'
         with:
           files: "${{ steps.all-configs.outputs.ALL_CONFIGS }}"
           message: |
             chore: Sync by ${{ github.event.head_commit.url }}
 
             sync by github workflow
+
+            Log: none
+            Influence: none
+
+      - name: Prepare release-line sync configs
+        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && steps.changed-configs.outputs.any_changed == 'true')
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          owner = os.environ["GITHUB_REPOSITORY_OWNER"]
+          names = {
+              "call-update-changelog.yml": Path(".github/release-line-update.json"),
+              "call-verify-group-version.yml": Path(".github/release-line-guard.json"),
+          }
+          output = {name: [] for name in names}
+          for path in Path("repos", owner).glob("*.json"):
+              found = {}
+              for entry in json.loads(path.read_text(encoding="utf-8")):
+                  name = Path(entry.get("src", "")).name
+                  if name in names and entry.get("dest", "").startswith(f"{owner}/"):
+                      found[name] = entry
+              if set(found) == set(names):
+                  for name, entry in found.items():
+                      output[name].append(entry)
+          for name, entries in output.items():
+              if not entries:
+                  raise RuntimeError(f"missing release-line config: {name}")
+              names[name].write_text(json.dumps(entries, ensure_ascii=False), encoding="utf-8")
+          PY
+
+      - name: Sync release-line update template
+        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && steps.changed-configs.outputs.any_changed == 'true')
+        uses: linuxdeepin/action-sync@main
+        with:
+          files: .github/release-line-update.json
+          message: |
+            chore: Sync release-line update template
+
+            Log: none
+            Influence: none
+
+      - name: Sync release-line guard template
+        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && steps.changed-configs.outputs.any_changed == 'true')
+        uses: linuxdeepin/action-sync@main
+        with:
+          files: .github/release-line-guard.json
+          message: |
+            chore: Sync release-line guard template
 
             Log: none
             Influence: none

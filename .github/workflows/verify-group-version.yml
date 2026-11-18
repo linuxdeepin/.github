@@ -1,11 +1,18 @@
+# SPDX-FileCopyrightText: 2026 UnionTech Software Technology Co., Ltd.
+# SPDX-License-Identifier: GPL-3.0-or-later
 name: Verify group version
 
-on: workflow_call
+on:
+  workflow_call:
+    secrets:
+      APP_ID:
+        required: true
+      APP_PRIVATE_KEY:
+        required: true
 
 permissions:
   contents: read
   pull-requests: read
-  statuses: write
 
 jobs:
   verify:
@@ -15,10 +22,22 @@ jobs:
       group: group-version-guard-${{ github.event.pull_request.head.sha }}
       cancel-in-progress: false
     env:
-      GH_TOKEN: ${{ github.token }}
       PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
     steps:
+      - name: Create release App token
+        id: release_token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          permission-contents: read
+          permission-pull-requests: read
+          permission-statuses: write
+
       - name: Mark version check pending
+        env:
+          GH_TOKEN: ${{ steps.release_token.outputs.token }}
         run: |
           gh api "repos/$GITHUB_REPOSITORY/statuses/$PR_HEAD_SHA" --method POST \
             -f state=pending -f context=group-version-guard \
@@ -33,6 +52,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import base64
+          import datetime
           import json
           import os
           import re
@@ -73,13 +93,69 @@ jobs:
               overrides = cfg.get("repo_overrides", {})
               return [f"{owner}/{overrides.get(m, m)}" for m in cfg["groups"][group]["members"]]
 
-          def release_record(repo, sha, group):
+          def linglong_versions(repo, sha):
+              tree = api(f"repos/{repo}/git/trees/{sha}")
+              if tree.get("truncated") is not False or not isinstance(tree.get("tree"), list):
+                  raise RuntimeError(f"无法完整检测 {repo}@{sha} 的 Linglong 版本文件")
+              versions = {}
+              for entry in tree["tree"]:
+                  path = entry["path"]
+                  if not re.fullmatch(r"linglong[^/]*\.yaml", path):
+                      continue
+                  if entry["type"] != "blob" or entry["mode"] not in ("100644", "100755"):
+                      raise RuntimeError(f"{repo}@{sha} 的 {path} 不是普通版本文件")
+                  try:
+                      recipe = yaml.safe_load(content(repo, path, sha))
+                      version = recipe["package"]["version"]
+                  except (yaml.YAMLError, KeyError, TypeError) as error:
+                      raise RuntimeError(f"无法读取 {repo}@{sha} 的 {path} package.version") from error
+                  if (not isinstance(version, str) or not version.strip()
+                          or subprocess.run(["dpkg", "--validate-version", version]).returncode):
+                      raise RuntimeError(f"{repo}@{sha} 的 {path} version 无效")
+                  versions[path] = version
+              return versions
+
+          def release_line(cfg, base):
+              versions = cfg["groups"]["G2"]["versions"]
+              lines = cfg.get("release_lines")
+              if not isinstance(versions, dict) or not versions or not isinstance(lines, dict):
+                  raise RuntimeError("G2 发布线配置缺失或异常")
+              branches = []
+              for line, value in lines.items():
+                  branch = value.get("member_branch") if isinstance(value, dict) else None
+                  if (not isinstance(line, str) or not re.fullmatch(r"[A-Za-z0-9._-]+", line)
+                          or not isinstance(branch, str) or not branch
+                          or (line == "master" and branch != "master")
+                          or (line != "master" and not branch.startswith("develop/"))
+                          or subprocess.run(["git", "check-ref-format", "--branch", branch],
+                                            capture_output=True).returncode
+                          or subprocess.run(["git", "check-ref-format", f"refs/heads/baseline/{line}/G2"],
+                                            capture_output=True).returncode):
+                      raise RuntimeError("G2 发布线 ID 或成员分支无效")
+                  branches.append(branch)
+              if len(branches) != len(set(branches)) or set(versions) != set(lines):
+                  raise RuntimeError("G2 发布线成员分支映射不唯一或版本集合不符")
+              matches = [line for line, value in lines.items() if value["member_branch"] == base]
+              if len(matches) != 1 or matches[0] not in versions:
+                  raise RuntimeError(f"G2 PR 目标分支 {base} 不属于唯一的发布线")
+              return matches[0]
+
+          def release_record(repo, sha, group, line=None):
               commit = api(f"repos/{repo}/git/commits/{sha}")
               for hops in range(101):
                   if MARKER in commit["message"]:
                       release = json.loads(commit["message"].split(MARKER, 1)[1].split("\n-->", 1)[0])
-                      if release["group"] != group or [p["sha"] for p in commit["parents"]] != [release["base_sha"]]:
+                      if (release["group"] != group
+                              or (line is not None and release.get("release_line") != line)
+                              or [p["sha"] for p in commit["parents"]] != [release["base_sha"]]):
                           raise RuntimeError("DDE 发布记录已改变，请先修复原基线 PR")
+                      if group == "G2":
+                          try:
+                              started = datetime.datetime.strptime(release["started_at"], "%Y-%m-%dT%H:%M:%SZ")
+                          except (KeyError, TypeError, ValueError) as error:
+                              raise RuntimeError("DDE 本轮发布 started_at 缺失或无效") from error
+                          if started.strftime("%Y-%m-%dT%H:%M:%SZ") != release["started_at"]:
+                              raise RuntimeError("DDE 本轮发布 started_at 格式不符")
                       return release
                   if hops == 100 or len(commit["parents"]) != 2:
                       break
@@ -92,9 +168,7 @@ jobs:
               if not source:
                   raise RuntimeError("PR 来源仓库已删除，无法校验")
               after = head_version(source["full_name"], pr["head"]["sha"])
-              if before == after:
-                  return "changelog 版本未变化"
-              if subprocess.run(["dpkg", "--compare-versions", after, "gt", before]).returncode:
+              if before != after and subprocess.run(["dpkg", "--compare-versions", after, "gt", before]).returncode:
                   raise RuntimeError(f"成员版本只能升版: {before} -> {after}")
 
               owner = repo.split("/", 1)[0]
@@ -102,25 +176,48 @@ jobs:
               default = api(f"repos/{baseline}")["default_branch"]
               cfg = yaml.safe_load(content(baseline, "groups.yaml", default))
               groups = [g for g in cfg["groups"] if repo in repo_names(cfg, g, owner)]
+              if before == after and "G2" not in groups:
+                  return "changelog 版本未变化"
               if len(groups) != 1:
                   raise RuntimeError(f"{repo} 不属于唯一的 DDE 版本组，请核实分组配置")
               group = groups[0]
-              query = urlencode({"state": "all", "head": f"{owner}:baseline/{group}",
+              recipes = {}
+              line = None
+              branch = f"baseline/{group}"
+              baseline_version = cfg["groups"][group].get("version")
+              if group == "G2":
+                  if "versions" in cfg["groups"][group]:
+                      line = release_line(cfg, pr["base"]["ref"])
+                      branch = f"baseline/{line}/G2"
+                      baseline_version = cfg["groups"][group]["versions"][line]
+                  previous = linglong_versions(repo, pr["base"]["sha"])
+                  recipes = linglong_versions(source["full_name"], pr["head"]["sha"])
+                  removed = previous.keys() - recipes.keys()
+                  if removed:
+                      raise RuntimeError(f"G2 版本文件不能删除: {', '.join(sorted(removed))}")
+                  for path, version in recipes.items():
+                      if (path in previous and version != previous[path]
+                              and subprocess.run(["dpkg", "--compare-versions", version, "gt",
+                                                  previous[path]]).returncode):
+                          raise RuntimeError(f"G2 {path} 版本只能升版: {previous[path]} -> {version}")
+                  if before == after and previous == recipes:
+                      return "版本信息未变化"
+              query = urlencode({"state": "all", "head": f"{owner}:{branch}",
                                  "sort": "created", "direction": "desc", "per_page": 1})
               prs = api(f"repos/{baseline}/pulls?{query}")
               if not prs:
                   raise RuntimeError(f"{group} 没有统一发布记录，请从 DDE Release group 发起，不能单独改版")
               baseline_pr = prs[0]
               if (not baseline_pr["head"]["repo"] or baseline_pr["head"]["repo"]["full_name"] != baseline
-                      or baseline_pr["head"]["ref"] != f"baseline/{group}"
+                      or baseline_pr["head"]["ref"] != branch
                       or baseline_pr["base"]["ref"] != default):
                   raise RuntimeError("DDE 基线 PR 的来源或目标分支不符")
-              release = release_record(baseline, baseline_pr["head"]["sha"], group)
+              release = release_record(baseline, baseline_pr["head"]["sha"], group, line)
               if (release["base_branch"] != default
-                      or [m["repo"] for m in release["members"]] != repo_names(cfg, group, owner)):
+                      or [m["repo"] for m in release["members"]] != repo_names(cfg, group, owner)
+                      or (line is not None and any(m["base"] != pr["base"]["ref"] for m in release["members"]))):
                   raise RuntimeError("DDE 本轮成员或目标分支已改变，请先核实原发布")
               member = next(m for m in release["members"] if m["repo"] == repo)
-              baseline_version = cfg["groups"][group]["version"]
               if "version" in member:
                   baseline_version = baseline_version.split(":", 1)[-1]
               if subprocess.run(["dpkg", "--compare-versions", release["version"], "ge", baseline_version]).returncode:
@@ -135,6 +232,10 @@ jobs:
               if (after != target or source["full_name"] != repo or pr["head"]["ref"] != branch
                       or pr["base"]["ref"] != member["base"] or pr["created_at"] < release["started_at"]):
                   raise RuntimeError(f"{repo} 的改版 PR 不属于 {group} 本轮 {target}，请从 DDE Release group 发起")
+              for path, version in recipes.items():
+                  # Update changelog 保留 Linglong 版本末尾的一个数字段。
+                  if not re.fullmatch(re.escape(target) + r"(?:\.[0-9]+)?", version):
+                      raise RuntimeError(f"G2 {path} 版本 {version} 与本轮成员目标 {target} 不符")
               return f"{group} 本轮发布 {target}，成员 PR 与发布记录一致"
 
           def identity(pr):
@@ -170,6 +271,7 @@ jobs:
       - name: Publish version check result
         if: always()
         env:
+          GH_TOKEN: ${{ steps.release_token.outputs.token }}
           VERIFY_OUTCOME: ${{ steps.verify.outcome }}
         run: |
           set -euo pipefail
