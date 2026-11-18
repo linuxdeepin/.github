@@ -85,15 +85,19 @@
     "dest": "linuxdeepin/dde-control-center/.github/workflows/call-deploy-dev-doc.yml"
   },
   {
-    "branch": [
-      "master"
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-update-changelog.yml",
     "dest": "linuxdeepin/dde-control-center/.github/workflows/call-update-changelog.yml"
   },
   {
     "branches": [
-      "master"
+      "master",
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-verify-group-version.yml",
     "dest": "linuxdeepin/dde-control-center/.github/workflows/call-verify-group-version.yml"

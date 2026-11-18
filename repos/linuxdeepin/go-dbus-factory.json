@@ -59,8 +59,10 @@
     "dest": "linuxdeepin/go-dbus-factory/.github/workflows/call-auto-tag.yml"
   },
   {
-    "branch": [
-      "master"
+    "branches": [
+      "master",
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-update-changelog.yml",
     "dest": "linuxdeepin/go-dbus-factory/.github/workflows/call-update-changelog.yml"
@@ -77,7 +79,9 @@
   },
   {
     "branches": [
-      "master"
+      "master",
+      "develop/.+",
+      "release/.+"
     ],
     "src": "workflow-templates/call-verify-group-version.yml",
     "dest": "linuxdeepin/go-dbus-factory/.github/workflows/call-verify-group-version.yml"
