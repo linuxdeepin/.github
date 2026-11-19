@@ -26,4 +26,4 @@ jobs:
           repo=${repo#"."}
           git remote set-url origin https://myml:${{ secrets.GITEE_SYNC_TOKEN }}@gitee.com/deepin-community/${repo}.git
           git push -f --all --prune origin
-          git push --tags origin
+          git push -f --tags origin
