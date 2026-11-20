@@ -49,6 +49,8 @@ jobs:
 
       - name: Verify changelog version
         id: verify
+        env:
+          GH_TOKEN: ${{ steps.release_token.outputs.token }}
         run: |
           python3 - <<'PY'
           import base64
