@@ -137,6 +137,8 @@ settings:
       - deepin-editor
       - dde-file-manager-extensions
       - dde-file-manager-external
+      - dde-seatd
+      - dde-wlroots
     features:
       issues:
         enable: true
