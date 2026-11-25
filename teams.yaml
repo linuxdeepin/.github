@@ -803,6 +803,8 @@ teams:
       push:
         - treeland
         - treeland-protocols
+        - dde-seatd
+        - dde-wlroots
   - name: treeland-member
     parent_team: Projects
     members:
@@ -818,6 +820,8 @@ teams:
         - treeland
         - treeland-protocols
         - developer-center
+        - dde-seatd
+        - dde-wlroots
   - name: deepin-osconfig
     parent_team: Projects
     members:
